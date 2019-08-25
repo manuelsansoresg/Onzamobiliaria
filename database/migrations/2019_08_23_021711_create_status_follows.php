@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatusSeguimiento extends Migration
+class CreateStatusFollows extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateStatusSeguimiento extends Migration
      */
     public function up()
     {
-        Schema::create('status_seguimientos', function (Blueprint $table) {
+        Schema::create('status_follows', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('description')->comment('Descripcion del los estatus seguimiento(En Espera del Cliente,En Espera,etc)');
             $table->smallInteger('status')->comment('Estatus si anda activo, cancelado');
@@ -28,6 +28,6 @@ class CreateStatusSeguimiento extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_seguimientos');
+        Schema::dropIfExists('status_follows');
     }
 }
