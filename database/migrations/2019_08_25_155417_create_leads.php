@@ -16,7 +16,7 @@ class CreateLeads extends Migration
         Schema::create('leads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date')->nullable()->comment('Fecha de Asignacion');
-            $table->bigInteger('furniture_id')->unsigned()->comment('Clasificacion como se mueve el los prospecto');
+            $table->bigInteger('realstate_id')->unsigned()->comment('Clasificacion como se mueve el los prospecto');
             $table->bigInteger('operation_id')->unsigned()->comment('id de operacion(renta,venta,etc)');
             $table->string('phone')->nullable()->comment('Telefono');
             $table->string('mobile')->nullable()->comment('celular');
@@ -41,7 +41,7 @@ class CreateLeads extends Migration
             $table->text('obseration3')->comment('obsevaciones')->nullable();
 
             
-            $table->foreign('furniture_id')->references('id')->on('furnitures')
+            $table->foreign('realstate_id')->references('id')->on('realstates')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('state_id')->references('id')->on('states')
                 ->onUpdate('cascade')->onDelete('cascade');

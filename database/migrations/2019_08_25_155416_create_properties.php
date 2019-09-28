@@ -15,7 +15,7 @@ class CreateProperties extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('furniture_id')->unsigned();
+            $table->bigInteger('realstate_id')->unsigned();
             $table->smallInteger('Avaluo')->comment('Si esta Valuado o no')->nullable();
             $table->bigInteger('operation_id')->unsigned();
             $table->decimal('price',18,4);
@@ -49,7 +49,7 @@ class CreateProperties extends Migration
             $table->integer('bathrooms')->nullable()->comment('Numero de Baños');
             $table->string('pass_easy_broker')->nullable()->comment('Numero de Baños');
 
-            $table->foreign('furniture_id')->references('id')->on('furnitures')
+            $table->foreign('realstate_id')->references('id')->on('realstates')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('operation_id')->references('id')->on('operations')
                 ->onUpdate('cascade')->onDelete('cascade');

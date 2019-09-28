@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OperationRequest;
+use App\Operation;
 use Illuminate\Http\Request;
 
 class OperationController extends Controller
@@ -13,7 +15,8 @@ class OperationController extends Controller
      */
     public function index()
     {
-        //
+        $operations = Operation::all();
+        return view('operaciones.index', compact('operations'));
     }
 
     /**
@@ -23,7 +26,7 @@ class OperationController extends Controller
      */
     public function create()
     {
-        //
+        return view('operaciones.create');
     }
 
     /**
@@ -32,9 +35,12 @@ class OperationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OperationRequest $request)
     {
-        //
+        $operation = new Operation($request->except('_token'));
+        $operation->save();
+        flash('Elemento guardado');
+        return redirect('/admin/operaciones');
     }
 
     /**
@@ -56,7 +62,8 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $operation = Operation::find($id);
+        return view('operaciones.edit', compact('operation'));
     }
 
     /**
@@ -66,9 +73,13 @@ class OperationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OperationRequest $request, $id)
     {
-        //
+        $operation = Operation::find($id);
+        $operation->fill($request->except('_token'));
+        $operation->update();
+        flash('Elemento guardado');
+        return redirect('/admin/operaciones');
     }
 
     /**
@@ -79,6 +90,9 @@ class OperationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $operation = Operation::find($id);
+        $operation->delete();
+        flash('Elemento guardado');
+        return redirect('/admin/operaciones');
     }
 }

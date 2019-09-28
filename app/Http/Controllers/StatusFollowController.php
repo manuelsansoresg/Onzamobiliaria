@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeguimientoRequest;
+use App\StatusFollow;
 use Illuminate\Http\Request;
 
 class StatusFollowController extends Controller
@@ -13,7 +15,8 @@ class StatusFollowController extends Controller
      */
     public function index()
     {
-        //
+        $status_follows = StatusFollow::all();
+        return view('seguimiento.index', compact('status_follows'));
     }
 
     /**
@@ -23,7 +26,7 @@ class StatusFollowController extends Controller
      */
     public function create()
     {
-        //
+        return view('seguimiento.create');
     }
 
     /**
@@ -32,9 +35,12 @@ class StatusFollowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SeguimientoRequest $request)
     {
-        //
+        $status_follow = new StatusFollow($request->except('_token'));
+        $status_follow->save();
+        flash('Elemento guardado');
+        return redirect('/admin/seguimiento');
     }
 
     /**
@@ -56,7 +62,8 @@ class StatusFollowController extends Controller
      */
     public function edit($id)
     {
-        //
+        $status_follow = StatusFollow::find($id);
+        return view('seguimiento.edit', compact('status_follow'));
     }
 
     /**
@@ -66,9 +73,21 @@ class StatusFollowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SeguimientoRequest $request, $id)
     {
-        //
+        $status_follow = StatusFollow::find($id);
+        $status_follow->fill($request->except('_token'));
+        $status_follow->update();
+        flash('Elemento guardado');
+        return redirect('/admin/seguimiento');
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $status_follow = StatusFollow::find($id);
+        $status_follow->status = $status;
+        $status_follow->update();
+        return redirect('/admin/seguimiento');
     }
 
     /**
@@ -79,6 +98,9 @@ class StatusFollowController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $status_follow = StatusFollow::find($id);
+        $status_follow->delete();
+        flash('Elemento guardado');
+        return redirect('/admin/seguimiento');
     }
 }

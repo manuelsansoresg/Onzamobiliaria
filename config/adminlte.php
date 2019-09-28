@@ -107,24 +107,51 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => true,
-        ],
-        ['header' => 'main_navigation'],
+       
+        ['header' => 'Menu navegacion'],
         [
             'text' => 'blog',
-            'url'  => 'admin/blog',
+            'url'  => 'admin/mobiliaria',
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text' => 'mobiliaria',
+            'url'  => 'admin/mobiliaria',
+            'icon' => 'fas fa-home',
         ],
-        ['header' => 'account_settings'],
+        [
+            'text' => 'portales',
+            'url'  => 'admin/portales',
+            'icon' => 'fas fa-store-alt',
+        ],
+        [
+            'text' => 'operaciones',
+            'url'  => 'admin/operaciones',
+            'icon' => 'fas fa-store-alt',
+        ],
+        [
+            'text' => 'clasificación',
+            'url'  => 'admin/clasificacion',
+            'icon' => 'fas fa-clipboard-list',
+        ],
+        [
+            'text' => 'seguimiento',
+            'url'  => 'admin/seguimiento',
+            'icon' => 'fas fa-clipboard-check',
+        ],
+        [
+            'text' => 'pago',
+            'url'  => 'admin/pago',
+            'icon' => 'fas fa-money-bill-wave',
+        ],
+        // [
+        //     'text'        => 'pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'far fa-file',
+        //     'label'       => 4,
+        //     'label_color' => 'success',
+        // ],
+        /* ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
@@ -185,7 +212,7 @@ return [
         [
             'text'       => 'information',
             'icon_color' => 'aqua',
-        ],
+        ], */
     ],
 
     /*

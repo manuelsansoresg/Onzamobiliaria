@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
+use App\Http\Requests\AdRequest;
 use Illuminate\Http\Request;
 
 class AdController extends Controller
@@ -13,7 +15,8 @@ class AdController extends Controller
      */
     public function index()
     {
-        //
+        $ads = Ad::all();
+        return view('portales.index', compact('ads'));
     }
 
     /**
@@ -23,7 +26,7 @@ class AdController extends Controller
      */
     public function create()
     {
-        //
+        return view('portales.create');
     }
 
     /**
@@ -32,9 +35,12 @@ class AdController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdRequest $request)
     {
-        //
+        $ad = new Ad($request->except('_token'));
+        $ad->save();
+        flash('Elemento guardado');
+        return redirect('/admin/portales');
     }
 
     /**
@@ -56,7 +62,8 @@ class AdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ad = Ad::find($id);
+        return view('portales.edit', compact('ad'));
     }
 
     /**
@@ -66,9 +73,21 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdRequest $request, $id)
     {
-        //
+        $ad = Ad::find($id);
+        $ad->fill($request->except('_token'));
+        $ad->update();
+        flash('Elemento guardado');
+        return redirect('/admin/portales');
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $ad = Ad::find($id);
+        $ad->status = $status;
+        $ad->update();
+        return redirect('/admin/portales');
     }
 
     /**
@@ -79,6 +98,9 @@ class AdController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ad = Ad::find($id);
+        $ad->delete();
+        flash('Elemento guardado');
+        return redirect('/admin/portales');
     }
 }

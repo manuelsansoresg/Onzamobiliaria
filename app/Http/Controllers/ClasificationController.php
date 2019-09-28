@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Clasification;
+use App\Http\Requests\ClasificationRequest;
 use Illuminate\Http\Request;
 
 class ClasificationController extends Controller
@@ -13,7 +15,8 @@ class ClasificationController extends Controller
      */
     public function index()
     {
-        //
+        $clasifications = Clasification::all();
+        return view('clasificacion.index', compact('clasifications'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ClasificationController extends Controller
      */
     public function create()
     {
-        //
+        return view('clasificacion.create');
     }
 
     /**
@@ -32,9 +35,12 @@ class ClasificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClasificationRequest $request)
     {
-        //
+        $clasification = new Clasification($request->except('_token'));
+        $clasification->save();
+        flash('Elemento guardado');
+        return redirect('/admin/clasificacion');
     }
 
     /**
@@ -56,7 +62,8 @@ class ClasificationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $clasification = Clasification::find($id);
+        return view('clasificacion.edit', compact('clasification'));
     }
 
     /**
@@ -66,9 +73,22 @@ class ClasificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClasificationRequest $request, $id)
     {
-        //
+        $clasification = Clasification::find($id);
+        $clasification->fill($request->except('_token'));
+        $clasification->update();
+        flash('Elemento guardado');
+        return redirect('/admin/clasificacion');
+
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $clasification = Clasification::find($id);
+        $clasification->status = $status;
+        $clasification->update();
+        return redirect('/admin/clasificacion');
     }
 
     /**
@@ -79,6 +99,9 @@ class ClasificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $clasification = Clasification::find($id);
+        $clasification->delete();
+        flash('Elemento guardado');
+        return redirect('/admin/clasificacion');
     }
 }

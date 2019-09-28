@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\FormPayment;
+use App\Http\Requests\PaymentRequest;
 use Illuminate\Http\Request;
 
 class FormPaymentController extends Controller
@@ -13,7 +15,8 @@ class FormPaymentController extends Controller
      */
     public function index()
     {
-        //
+        $form_payments = FormPayment::all();
+        return view('pago.index', compact('form_payments'));
     }
 
     /**
@@ -23,7 +26,7 @@ class FormPaymentController extends Controller
      */
     public function create()
     {
-        //
+        return view('pago.create');
     }
 
     /**
@@ -32,9 +35,12 @@ class FormPaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PaymentRequest $request)
     {
-        //
+        $form_payment = new FormPayment($request->except('_token'));
+        $form_payment->save();
+        flash('Elemento guardado');
+        return redirect('/admin/pago');
     }
 
     /**
@@ -56,7 +62,8 @@ class FormPaymentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $form_payment = FormPayment::find($id);
+        return view('pago.edit', compact('form_payment'));
     }
 
     /**
@@ -68,9 +75,18 @@ class FormPaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $form_payment = FormPayment::find($id);
+        $form_payment->fill($request->except('_token'));
+        $form_payment->update();
+        flash('Elemento guardado');
+        return redirect('/admin/pago');
     }
-
+    public function changeStatus($id, $status){
+        $form_payment = FormPayment::find($id);
+        $form_payment->status = $status;
+        $form_payment->update();
+        return redirect('/admin/pago');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -79,6 +95,9 @@ class FormPaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $form_payment = FormPayment::find($id);
+        $form_payment->delete();
+        flash('Elemento guardado');
+        return redirect('/admin/pago');
     }
 }
