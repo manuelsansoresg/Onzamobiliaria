@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Onza mobiliaria',
+    'title' => 'Onza inmobiliaria',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Onza Mobiliaria</b>',
+    'logo' => '<b>Onza Inmobiliaria</b>',
 
-    'logo_mini' => '<b>O</b>M',
+    'logo_mini' => '<b>O</b>I',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'blue-light',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,7 +115,7 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text' => 'mobiliaria',
+            'text' => 'inmobiliaria',
             'url'  => 'admin/mobiliaria',
             'icon' => 'fas fa-home',
         ],
@@ -143,6 +143,11 @@ return [
             'text' => 'pago',
             'url'  => 'admin/pago',
             'icon' => 'fas fa-money-bill-wave',
+        ],
+        [
+            'text' => 'propiedad',
+            'url'  => 'admin/propiedad',
+            'icon' => 'fas fa-home',
         ],
         // [
         //     'text'        => 'pages',

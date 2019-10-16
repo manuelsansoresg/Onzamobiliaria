@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMunicipalities extends Migration
+class CreatePostal extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateMunicipalities extends Migration
      */
     public function up()
     {
-        Schema::create('municipalities', function (Blueprint $table) {
+        Schema::create('postal', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('municipality');
+            $table->integer('codigo')->nullable();
+            $table->string('colonia')->nullable();
+            $table->string('municipio')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateMunicipalities extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('municipalities');
+        Schema::dropIfExists('postal');
     }
 }

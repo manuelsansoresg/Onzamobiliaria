@@ -39,6 +39,9 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::resource('/pago', 'FormPaymentController');
     Route::get('/pago/status/{id}/{status}', 'FormPaymentController@changeStatus');
+    
+    Route::resource('/propiedad', 'PropertyController');
+    Route::get('/propiedad/status/{id}/{status}', 'PropertyController@changeStatus');
 });
 
 Auth::routes();

@@ -21,14 +21,10 @@ class CreateLeads extends Migration
             $table->string('phone')->nullable()->comment('Telefono');
             $table->string('mobile')->nullable()->comment('celular');
             $table->smallInteger('share')->nullable()->comment('Compartida si es compartido con otro mobiliria');
-            $table->bigInteger('state_id')->unsigned();
-            $table->bigInteger('municipality_id')->unsigned();
-            $table->bigInteger('location_id')->unsigned();
-            $table->string('neighborhood')->nullable()->comment('Colonia');
+            $table->bigInteger('postal_id')->unsigned();
             $table->string('street')->nullable()->comment('Calle');
             $table->integer('n_in')->nullable()->comment('No interior');
             $table->integer('n_out')->nullable()->comment('No Exterior');
-            $table->integer('cp')->nullable()->comment('Codigo Postal');
             $table->text('observation')->nullable()->comment('Observaciones');
             $table->smallInteger('status')->comment('Estatus si anda activo, cancelado');
             $table->dateTime('date_write')->nullable()->comment('Fecha de captura');
@@ -43,12 +39,10 @@ class CreateLeads extends Migration
             
             $table->foreign('realstate_id')->references('id')->on('realstates')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('state_id')->references('id')->on('states')
+            $table->foreign('postal_id')->references('id')->on('postal')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('municipality_id')->references('id')->on('municipalities')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('location_id')->references('id')->on('locations')
-                ->onUpdate('cascade')->onDelete('cascade');
+
+
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id_cancel')->references('id')->on('users')

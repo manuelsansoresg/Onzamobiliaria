@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'mobiliria')
+@section('title', 'Inmobiliaria')
 
 @section('content_header')
 <section class="content-header">
@@ -10,7 +10,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="/admin/mobiliaria"><i class="fa fa-dashboard"></i> Mobiliaria</a></li>
+        <li><a href="/admin/mobiliaria"><i class="fa fa-dashboard"></i> Inmobiliaria</a></li>
         <li class="active">Editar</li>
     </ol>
 </section>
@@ -20,7 +20,7 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Editar Mobiliaria</h3>
+                <h3 class="box-title">Editar Inmobiliaria</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

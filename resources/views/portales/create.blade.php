@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'mobiliria')
+@section('title', 'Portales')
 
 @section('content_header')
 <section class="content-header">
     <h1>
-        portales
+        Portales
         <small>Nuevo</small>
     </h1>
     <ol class="breadcrumb">

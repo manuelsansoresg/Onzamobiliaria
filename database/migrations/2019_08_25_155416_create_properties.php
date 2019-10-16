@@ -19,9 +19,7 @@ class CreateProperties extends Migration
             $table->smallInteger('Avaluo')->comment('Si esta Valuado o no')->nullable();
             $table->bigInteger('operation_id')->unsigned();
             $table->decimal('price',18,4);
-            $table->bigInteger('state_id')->unsigned();
-            $table->bigInteger('municipality_id')->unsigned();
-            $table->bigInteger('location_id')->unsigned();
+            $table->bigInteger('postal_id')->unsigned();
             $table->string('street', 200)->comment('Calle')->nullable();
             $table->string('noInt', 200)->comment('No interior')->nullable();
             $table->string('noExt', 200)->comment('No Exterior')->nullable();
@@ -53,11 +51,7 @@ class CreateProperties extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('operation_id')->references('id')->on('operations')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('state_id')->references('id')->on('states')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('municipality_id')->references('id')->on('municipalities')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('location_id')->references('id')->on('locations')
+            $table->foreign('postal_id')->references('id')->on('postal')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('form_pay_id')->references('id')->on('form_payments')
                 ->onUpdate('cascade')->onDelete('cascade');

@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Forma de pago')
+@section('title', 'Propiedad')
 
 @section('content_header')
 <section class="content-header">
     <h1>
-        Forma de pago
-        <small>Editar</small>
+        Propiedad
+        <small>Nuevo</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="/admin/pago"><i class="fa fa-dashboard"></i> Forma de pago</a></li>
-        <li class="active">Editar</li>
+        <li><a href="/admin/propiedad"><i class="fa fa-dashboard"></i> Propiedad</a></li>
+        <li class="active">Nuevo</li>
     </ol>
 </section>
 @stop
@@ -20,18 +20,18 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Editar Forma de pago</h3>
+                <h3 class="box-title">Nueva Propiedad</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                {{ Form::open(['route' => ['pago.update', $form_payment->id], 'method' => 'PUT', 'files' => true]) }}
+                {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST', 'files' => true]) }}
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Descripción</label>
-                                <input type="text" name="description" value="{{ $form_payment->description }}" class="form-control">
-                                <input type="hidden" name="status" value="{{ $form_payment->status }}">
+                                <input type="text" name="description" class="form-control">
+                                <input type="hidden" name="status" value="1">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('description')}}</span>
                                 @endif
