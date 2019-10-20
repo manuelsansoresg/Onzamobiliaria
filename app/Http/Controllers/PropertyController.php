@@ -27,7 +27,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties = Property::all();
+        $properties = Property::getAll();
         return view('propiedad.index', compact('properties'));
     }
 
@@ -77,7 +77,12 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $real_states   = Realstate::where('status', 1)->get();
+        $operations    = Operation::where('status', 1)->get();
+        $form_payments = FormPayment::where('status', 1)->get();
+        $property      = Property::getById($id);
+
+        return view('propiedad.edit', compact('real_states', 'operations', 'form_payments') );
     }
 
     /**

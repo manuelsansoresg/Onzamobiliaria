@@ -35,7 +35,13 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Descripción</th>
+                            <th>Inmobiliaria</th>
+                            <th>Operación</th>
+                            <th>Pago</th>
+                            <th>Avaluo</th>
+                            <th>Gravamenes</th>
+                            <th>Habitar</th>
+                            <th>Propietario</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -44,7 +50,37 @@
                     <tbody>
                         <tr>
                             <td>{{ $property->id  }}</td>
-                            <td>{{ $property->description  }}</td>
+                            <td>{{ $property->realstate_description  }}</td>
+                            <td>{{ $property->operations_description  }}</td>
+                            <td>{{ $property->form_payment_description  }}</td>
+                            <td>
+                                @if ($property->Avaluo == 1)
+                                    <span class="badge bg-green">Sí</span>
+                                    @else
+                                    <span class="badge bg-red">No</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($property->assessment == 1)
+                                    <span class="badge bg-green">Sí</span>
+                                    @else
+                                    <span class="badge bg-red">No</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($property->habitar == 1)
+                                    <span class="badge bg-green">Sí</span>
+                                    @else
+                                    <span class="badge bg-red">No</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($property->is_property == 1)
+                                    <span class="badge bg-green">Sí</span>
+                                    @else
+                                    <span class="badge bg-red">No</span>
+                                @endif
+                            </td>
                             <td>
                                 @if($property->status == 0)
                                 <i class="fas fa-ban text-danger"></i>
@@ -57,6 +93,7 @@
                             </td>
                             <td>
                                 {{ Form::open(['route' => ['propiedad.destroy', $property->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                 <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary">
                                     <i class="far fa-edit"></i>
                                 </a>
