@@ -154,6 +154,11 @@ return [
             'url'  => 'admin/prospecto',
             'icon' => 'fas fa-running',
         ],
+        [
+            'text' => 'Asignacion Asesores',
+            'url'  => 'admin/Seguimiento-Asesores',
+            'icon' => 'fas fa-address-book',
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',

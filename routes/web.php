@@ -47,6 +47,11 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('/prospecto', 'LeadController');
     Route::get('/prospecto/status/{id}/{status}', 'LeadController@changeStatus');
+
+    Route::resource('/Seguimiento-Asesores', 'PropertyAssigmentController');
+    Route::get('/Seguimiento-Asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
+
+
 });
 
 Auth::routes();
