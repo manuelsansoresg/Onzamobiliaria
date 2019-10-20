@@ -26,7 +26,7 @@ class CreateProperties extends Migration
             $table->smallInteger('assessment')->comment('Gravenes si o no')->nullable();
             $table->smallInteger('predial')->comment('predial')->nullable();
             $table->smallInteger('habitar')->comment('Si esta Habitada')->nullable();
-            $table->text('document')->comment('Cuenta con documento')->nullable();
+            $table->string('document')->comment('Cuenta con documento')->nullable();
             $table->bigInteger('form_pay_id')->unsigned();
             $table->string('institution')->nullable();
             $table->string('name')->comment('Nombre del Cliente')->nullable();
@@ -39,13 +39,15 @@ class CreateProperties extends Migration
             $table->text('observation2')->comment('Observaciones')->nullable();
             $table->text('observation3')->comment('Observaciones')->nullable();
             $table->smallInteger('status')->comment('Estatus si anda activo, cancelado');
-            $table->bigInteger('user_id')->unsigned()->comment('Estatus si esta activo o cancelado');
+            $table->bigInteger('user_id')->unsigned()->comment('Id del usuario que lo da de alta');
             $table->bigInteger('user_id_cancel')->unsigned()->comment('usuario de quien cancela');
+            $table->bigInteger('user_id_capture')->unsigned()->comment('usuario que captura');
+            $table->dateTime('date_assignment')->nullable()->comment('Fecha de asignacion');
             $table->dateTime('date_write')->nullable()->comment('Fecha de captura');
-            $table->dateTime('date_cancel')->nullable()->comment('Fecha de captura');
+            $table->dateTime('date_cancel')->nullable()->comment('Fecha de la cancelacion');
             $table->integer('rooms')->nullable()->comment('Numero de Habitacion');
             $table->integer('bathrooms')->nullable()->comment('Numero de Baños');
-            $table->string('pass_easy_broker')->nullable()->comment('Numero de Baños');
+            $table->string('pass_easy_broker')->nullable()->comment('Clave de EasyBroke');
 
             $table->foreign('realstate_id')->references('id')->on('realstates')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -56,6 +58,8 @@ class CreateProperties extends Migration
             $table->foreign('form_pay_id')->references('id')->on('form_payments')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id_capture')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id_cancel')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');

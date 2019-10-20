@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\FormPayment;
+use App\Http\Requests\PropertyRequest;
+use App\Operation;
 use App\Property;
+use App\Realstate;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
+    protected $path_document;
+    
+    public function __construct()
+    {
+        $this->path_document = '/propiedades';
+        
+    }
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +38,11 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('propiedad.create');
+        $real_states   = Realstate::where('status', 1)->get();
+        $operations    = Operation::where('status', 1)->get();
+        $form_payments = FormPayment::where('status', 1)->get();
+
+        return view('propiedad.create', compact('real_states', 'operations', 'form_payments') );
     }
 
     /**
@@ -34,9 +51,9 @@ class PropertyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PropertyRequest $request)
     {
-        //
+        $property = Property::createProperty($request, $this->path_document );
     }
 
     /**

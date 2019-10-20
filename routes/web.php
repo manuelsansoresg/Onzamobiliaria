@@ -42,6 +42,11 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::resource('/propiedad', 'PropertyController');
     Route::get('/propiedad/status/{id}/{status}', 'PropertyController@changeStatus');
+
+    Route::resource('/postal', 'PostalController');
+
+    Route::resource('/prospecto', 'LeadController');
+    Route::get('/prospecto/status/{id}/{status}', 'LeadController@changeStatus');
 });
 
 Auth::routes();

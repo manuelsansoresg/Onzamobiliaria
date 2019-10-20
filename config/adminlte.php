@@ -115,39 +115,44 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text' => 'inmobiliaria',
+            'text' => 'Inmobiliaria',
             'url'  => 'admin/mobiliaria',
             'icon' => 'fas fa-home',
         ],
         [
-            'text' => 'portales',
+            'text' => 'Portales',
             'url'  => 'admin/portales',
             'icon' => 'fas fa-store-alt',
         ],
         [
-            'text' => 'operaciones',
+            'text' => 'Operaciones',
             'url'  => 'admin/operaciones',
             'icon' => 'fas fa-store-alt',
         ],
         [
-            'text' => 'clasificación',
+            'text' => 'Clasificación',
             'url'  => 'admin/clasificacion',
             'icon' => 'fas fa-clipboard-list',
         ],
         [
-            'text' => 'seguimiento',
+            'text' => 'Seguimiento',
             'url'  => 'admin/seguimiento',
             'icon' => 'fas fa-clipboard-check',
         ],
         [
-            'text' => 'pago',
+            'text' => 'Pago',
             'url'  => 'admin/pago',
             'icon' => 'fas fa-money-bill-wave',
         ],
         [
-            'text' => 'propiedad',
+            'text' => 'Propiedad',
             'url'  => 'admin/propiedad',
             'icon' => 'fas fa-home',
+        ],
+        [
+            'text' => 'Prospecto',
+            'url'  => 'admin/prospecto',
+            'icon' => 'fas fa-running',
         ],
         // [
         //     'text'        => 'pages',
@@ -327,5 +332,7 @@ return [
                 ],
             ],
         ],
+       
+       
     ],
 ];

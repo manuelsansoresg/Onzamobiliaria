@@ -5,4 +5,11 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+
+
+@import './components/step.scss';
+
+
+.red{
+    color: red;
+}

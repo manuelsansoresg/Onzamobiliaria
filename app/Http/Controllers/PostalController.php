@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Lead;
+use App\Postal;
 use Illuminate\Http\Request;
 
-class LeadController extends Controller
+class PostalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $leads = Lead::all();
-        return view('prospecto.index', compact('leads'));
+       
     }
 
     /**
@@ -45,9 +44,12 @@ class LeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cp)
     {
-        //
+
+        $postal = Postal::where('codigo', $cp)->get();
+        $data = array('data' => $postal, 'total' => count($postal) );
+        return response()->json($data);
     }
 
     /**

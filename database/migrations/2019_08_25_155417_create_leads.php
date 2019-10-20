@@ -30,7 +30,7 @@ class CreateLeads extends Migration
             $table->dateTime('date_write')->nullable()->comment('Fecha de captura');
             $table->bigInteger('user_id')->unsigned()->comment('Estatus si esta activo o cancelado');
             $table->bigInteger('user_id_cancel')->unsigned()->comment('usuario de quien cancela');
-            $table->dateTime('date_cancel')->nullable()->comment('Fecha de captura');
+            $table->dateTime('date_cancel')->nullable()->comment('Fecha de cancelacion');
             $table->bigInteger('clasification_id')->unsigned()->comment('Id mobiliria(Casa,Departamento)');
             $table->text('obseration1')->comment('obsevaciones')->nullable();
             $table->text('obseration2')->comment('obsevaciones')->nullable();
