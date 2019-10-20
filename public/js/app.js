@@ -41658,7 +41658,7 @@ window.searchPostal = function () {
         $('#colonia').removeAttr("disabled");
         $('#nextOne').removeAttr("disabled");
         result.forEach(function (row) {
-          $('#colonia').append(new Option(row.colonia, row.codigo));
+          $('#colonia').append(new Option(row.colonia, row.id));
         });
       } else {
         Swal.fire({

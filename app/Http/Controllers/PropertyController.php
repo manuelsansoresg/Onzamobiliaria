@@ -54,6 +54,8 @@ class PropertyController extends Controller
     public function store(PropertyRequest $request)
     {
         $property = Property::createProperty($request, $this->path_document );
+        flash('Elemento guardado');
+        return redirect('/admin/propiedad');
     }
 
     /**

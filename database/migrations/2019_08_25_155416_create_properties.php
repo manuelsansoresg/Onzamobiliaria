@@ -18,7 +18,7 @@ class CreateProperties extends Migration
             $table->bigInteger('realstate_id')->unsigned();
             $table->smallInteger('Avaluo')->comment('Si esta Valuado o no')->nullable();
             $table->bigInteger('operation_id')->unsigned();
-            $table->decimal('price',18,4);
+            $table->decimal('price',18,4)->nullable();
             $table->bigInteger('postal_id')->unsigned();
             $table->string('street', 200)->comment('Calle')->nullable();
             $table->string('noInt', 200)->comment('No interior')->nullable();
@@ -38,10 +38,10 @@ class CreateProperties extends Migration
             $table->text('observation1')->comment('Observaciones')->nullable();
             $table->text('observation2')->comment('Observaciones')->nullable();
             $table->text('observation3')->comment('Observaciones')->nullable();
-            $table->smallInteger('status')->comment('Estatus si anda activo, cancelado');
-            $table->bigInteger('user_id')->unsigned()->comment('Id del usuario que lo da de alta');
-            $table->bigInteger('user_id_cancel')->unsigned()->comment('usuario de quien cancela');
-            $table->bigInteger('user_id_capture')->unsigned()->comment('usuario que captura');
+            $table->smallInteger('status')->default(1)->comment('Estatus si anda activo, cancelado');
+            $table->bigInteger('user_id')->nullable()->unsigned()->comment('Id del usuario que lo da de alta');
+            $table->bigInteger('user_id_cancel')->nullable()->unsigned()->comment('usuario de quien cancela');
+            $table->bigInteger('user_id_capture')->nullable() ->unsigned()->comment('usuario que captura');
             $table->dateTime('date_assignment')->nullable()->comment('Fecha de asignacion');
             $table->dateTime('date_write')->nullable()->comment('Fecha de captura');
             $table->dateTime('date_cancel')->nullable()->comment('Fecha de la cancelacion');

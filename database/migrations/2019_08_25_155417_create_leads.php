@@ -16,20 +16,20 @@ class CreateLeads extends Migration
         Schema::create('leads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date')->nullable()->comment('Fecha de Asignacion');
-            $table->bigInteger('realstate_id')->unsigned()->comment('Clasificacion como se mueve el los prospecto');
-            $table->bigInteger('operation_id')->unsigned()->comment('id de operacion(renta,venta,etc)');
+            $table->bigInteger('realstate_id')->nullable()->unsigned()->comment('Clasificacion como se mueve el los prospecto');
+            $table->bigInteger('operation_id')->nullable()->unsigned()->comment('id de operacion(renta,venta,etc)');
             $table->string('phone')->nullable()->comment('Telefono');
             $table->string('mobile')->nullable()->comment('celular');
             $table->smallInteger('share')->nullable()->comment('Compartida si es compartido con otro mobiliria');
-            $table->bigInteger('postal_id')->unsigned();
+            $table->bigInteger('postal_id')->nullable()->unsigned();
             $table->string('street')->nullable()->comment('Calle');
             $table->integer('n_in')->nullable()->comment('No interior');
             $table->integer('n_out')->nullable()->comment('No Exterior');
             $table->text('observation')->nullable()->comment('Observaciones');
             $table->smallInteger('status')->comment('Estatus si anda activo, cancelado');
             $table->dateTime('date_write')->nullable()->comment('Fecha de captura');
-            $table->bigInteger('user_id')->unsigned()->comment('Estatus si esta activo o cancelado');
-            $table->bigInteger('user_id_cancel')->unsigned()->comment('usuario de quien cancela');
+            $table->bigInteger('user_id')->nullable() ->unsigned()->comment('Estatus si esta activo o cancelado');
+            $table->bigInteger('user_id_cancel')->nullable()->unsigned()->comment('usuario de quien cancela');
             $table->dateTime('date_cancel')->nullable()->comment('Fecha de cancelacion');
             $table->bigInteger('clasification_id')->unsigned()->comment('Id mobiliria(Casa,Departamento)');
             $table->text('obseration1')->comment('obsevaciones')->nullable();

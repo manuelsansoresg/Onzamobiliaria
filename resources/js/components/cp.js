@@ -22,7 +22,7 @@ window.searchPostal = function(){
                     $('#nextOne').removeAttr("disabled");
 
                     result.forEach(row => {
-                        $('#colonia').append(new Option(row.colonia, row.codigo ))
+                        $('#colonia').append(new Option(row.colonia, row.id ))
                     });
 
                    
