@@ -55,30 +55,30 @@
                             <td>{{ $property->form_payment_description  }}</td>
                             <td>
                                 @if ($property->Avaluo == 1)
-                                    <span class="badge bg-green">Sí</span>
-                                    @else
-                                    <span class="badge bg-red">No</span>
+                                <span class="badge bg-green">Sí</span>
+                                @else
+                                <span class="badge bg-red">No</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($property->assessment == 1)
-                                    <span class="badge bg-green">Sí</span>
-                                    @else
-                                    <span class="badge bg-red">No</span>
+                                <span class="badge bg-green">Sí</span>
+                                @else
+                                <span class="badge bg-red">No</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($property->habitar == 1)
-                                    <span class="badge bg-green">Sí</span>
-                                    @else
-                                    <span class="badge bg-red">No</span>
+                                <span class="badge bg-green">Sí</span>
+                                @else
+                                <span class="badge bg-red">No</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($property->is_property == 1)
-                                    <span class="badge bg-green">Sí</span>
-                                    @else
-                                    <span class="badge bg-red">No</span>
+                                <span class="badge bg-green">Sí</span>
+                                @else
+                                <span class="badge bg-red">No</span>
                                 @endif
                             </td>
                             <td>
@@ -106,9 +106,11 @@
                                     <i class="fas fa-ban"></i>
                                 </a>
                                 @endif
+                                @role('admin')
                                 <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
+                                @endrole
                                 {{ Form::close() }}
                             </td>
                         </tr>

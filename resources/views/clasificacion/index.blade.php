@@ -69,9 +69,11 @@
                                     <i class="fas fa-ban"></i>
                                 </a>
                                 @endif
+                                @role('admin')
                                 <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
+                                @endrole                               
                                 {{ Form::close() }}
                             </td>
                         </tr>

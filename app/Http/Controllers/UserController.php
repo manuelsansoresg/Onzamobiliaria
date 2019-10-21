@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -89,7 +90,7 @@ class UserController extends Controller
         $user->fill($request->except('_token', 'password', 'role'));
         
         if($request->password != ''){
-            $user->password = $request->password;
+            $user->password = Hash::make($request->password);
         }
         
         $user->assignRole($request->role);

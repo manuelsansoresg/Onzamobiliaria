@@ -36,6 +36,9 @@ class Property extends Model
 
     static function getAll()
     {
+        $user      = User::find(Auth::id());
+        $user_role = $user->getRoleNames()->first();
+
         $property = Property::select('realstates.description as realstate_description',
                                     'properties.id',
                                     'operations.description as operations_description',
@@ -48,8 +51,13 @@ class Property extends Model
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
                         ->join('operations', 'operations.id', '=', 'properties.operation_id')
-                        ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id')
-                        ->get();
+                        ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id');
+
+        if($user_role != 'admin'){
+            $property = $property->where('properties.user_id', $user->id);
+        }
+        
+        $property = $property->get();
         return $property;
     }
 
