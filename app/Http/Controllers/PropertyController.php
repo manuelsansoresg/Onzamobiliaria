@@ -9,6 +9,7 @@ use App\Postal;
 use App\Property;
 use App\Realstate;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class PropertyController extends Controller
 {
@@ -67,7 +68,10 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        //
+        $property = Property::getById($id);
+        $pdf = PDF::loadView('propiedad.show', compact('property'));
+
+        return $pdf->stream();
     }
 
     /**

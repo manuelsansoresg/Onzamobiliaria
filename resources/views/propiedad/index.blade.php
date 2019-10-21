@@ -93,7 +93,9 @@
                             </td>
                             <td>
                                 {{ Form::open(['route' => ['propiedad.destroy', $property->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                               <!--  <a href="/admin/propiedad/{{ $property->id }}" class="btn btn-info">
+                                    <i class="fas fa-file-pdf"></i>
+                                </a> -->
                                 <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary">
                                     <i class="far fa-edit"></i>
                                 </a>

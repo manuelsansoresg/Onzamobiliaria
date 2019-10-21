@@ -23,11 +23,13 @@ class Property extends Model
             'phone_contact',  'celular' , 'celular2',
             'observation1', 'observation2', 'observation3',
             'rooms', 'bathrooms', 'pass_easy_broker',
-            'document'
+            'document',
+            'postal.codigo as codigo', 'colonia'
         )
             ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
             ->join('operations', 'operations.id', '=', 'properties.operation_id')
             ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id')
+            ->join('postal', 'postal.id', '=', 'properties.postal_id')
             ->where('properties.id', $id )
             ->first();
         return $property;
