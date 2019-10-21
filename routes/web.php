@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::resource('/propiedad', 'PropertyController');
     Route::get('/propiedad/status/{id}/{status}', 'PropertyController@changeStatus');
+    Route::get('/propiedad/destroy-document/{id}', 'PropertyController@destroyDocument');
 
     Route::resource('/postal', 'PostalController');
 
