@@ -52,6 +52,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/Seguimiento-Asesores', 'PropertyAssigmentController');
     Route::get('/Seguimiento-Asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
 
+    Route::resource('/usuarios', 'UserController');
 
 });
 

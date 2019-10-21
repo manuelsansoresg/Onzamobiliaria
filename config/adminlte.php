@@ -159,6 +159,12 @@ return [
             'url'  => 'admin/Seguimiento-Asesores',
             'icon' => 'fas fa-address-book',
         ],
+       /*  ['header' => 'Perfíles'], */
+       /*  [
+            'text' => 'Usuarios',
+            'url'  => 'admin/Seguimiento-Asesores',
+            'icon' => 'fas fa-user',
+        ], */
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
