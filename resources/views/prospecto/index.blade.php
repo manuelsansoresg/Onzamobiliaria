@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Forma de pago')
+@section('title', 'Prospecto')
 
 @section('content_header')
 <section class="content-header">
     <h1>
-        Forma de pago
+        Prospecto
         <small>Lista</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Forma de pago</li>
+        <li class="active">Prospecto</li>
     </ol>
 </section>
 @stop
@@ -19,12 +19,12 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Forma de pago</h3>
+                <h3 class="box-title">Prospecto</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div>
-                    <a href="/admin/pago/create" class="btn btn-app pull-right">
+                    <a href="/admin/prospecto/create" class="btn btn-app pull-right">
                         <i class="fa fa-plus"></i> Nuevo
                     </a>
                 </div>

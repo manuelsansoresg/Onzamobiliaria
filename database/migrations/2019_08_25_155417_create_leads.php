@@ -16,7 +16,7 @@ class CreateLeads extends Migration
         Schema::create('leads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date')->nullable()->comment('Fecha de Asignacion');
-            $table->bigInteger('realstate_id')->nullable()->unsigned()->comment('Clasificacion como se mueve el los prospecto');
+            $table->bigInteger('realstate_id')->nullable()->unsigned()->comment('Id mobiliria(Casa,Departamento)');
             $table->bigInteger('operation_id')->nullable()->unsigned()->comment('id de operacion(renta,venta,etc)');
             $table->string('phone')->nullable()->comment('Telefono');
             $table->string('mobile')->nullable()->comment('celular');

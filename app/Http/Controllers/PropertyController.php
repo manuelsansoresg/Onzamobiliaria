@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\FormPayment;
 use App\Http\Requests\PropertyRequest;
 use App\Operation;
 use App\Postal;
@@ -10,6 +9,7 @@ use App\Property;
 use App\Realstate;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -123,6 +123,19 @@ class PropertyController extends Controller
         return redirect('/admin/propiedad/'.$id. '/edit');
     }
 
+    public function changeStatus($id, $status)
+    {
+        
+        $form_payment = Property::find($id);
+        $form_payment->status = $status;
+        if($status == 0){
+            $form_payment->user_id_cancel = Auth::id();
+        }
+        $form_payment->update();
+        return redirect('/admin/propiedad');
+    }
+    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -131,6 +144,15 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $property = Property::find($id);
+
+        if ($property) {
+            $document = $property->document;
+            @unlink('.' . $this->path_document . '/' . $document);
+            $property->delete();
+
+        }
+        flash('Elemento borrado');
+        return redirect('/admin/propiedad/');
     }
 }

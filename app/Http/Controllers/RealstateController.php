@@ -101,7 +101,7 @@ class RealstateController extends Controller
     {
         $real_state  =  Realstate::find($id);
         $real_state->delete();
-        flash('Elemento guardado');
+        flash('Elemento borrado');
         return redirect('/admin/mobiliaria');
     }
 }

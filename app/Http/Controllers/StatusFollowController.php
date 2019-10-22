@@ -100,7 +100,7 @@ class StatusFollowController extends Controller
     {
         $status_follow = StatusFollow::find($id);
         $status_follow->delete();
-        flash('Elemento guardado');
+        flash('Elemento borrado');
         return redirect('/admin/seguimiento');
     }
 }

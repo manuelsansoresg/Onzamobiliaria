@@ -101,7 +101,7 @@ class ClasificationController extends Controller
     {
         $clasification = Clasification::find($id);
         $clasification->delete();
-        flash('Elemento guardado');
+        flash('Elemento borrado');
         return redirect('/admin/clasificacion');
     }
 }

@@ -92,7 +92,7 @@ class OperationController extends Controller
     {
         $operation = Operation::find($id);
         $operation->delete();
-        flash('Elemento guardado');
+        flash('Elemento borrado');
         return redirect('/admin/operaciones');
     }
 }

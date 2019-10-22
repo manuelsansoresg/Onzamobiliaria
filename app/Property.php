@@ -49,7 +49,7 @@ class Property extends Model
                                     'assessment',
                                     'habitar',
                                     'is_property',
-                                    'properties.status'
+                                    'properties.status as status'
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
                         ->join('operations', 'operations.id', '=', 'properties.operation_id')
