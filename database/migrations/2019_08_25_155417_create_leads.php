@@ -23,8 +23,8 @@ class CreateLeads extends Migration
             $table->smallInteger('share')->nullable()->comment('Compartida si es compartido con otro mobiliria');
             $table->bigInteger('postal_id')->nullable()->unsigned();
             $table->string('street')->nullable()->comment('Calle');
-            $table->integer('n_in')->nullable()->comment('No interior');
-            $table->integer('n_out')->nullable()->comment('No Exterior');
+            $table->string('n_in')->nullable()->comment('No interior');
+            $table->string('n_out')->nullable()->comment('No Exterior');
             $table->smallInteger('status')->default(1)->comment('Estatus si anda activo, cancelado');
             $table->dateTime('date_write')->nullable()->comment('Fecha de captura');
             $table->bigInteger('user_id')->nullable() ->unsigned()->comment('Estatus si esta activo o cancelado');

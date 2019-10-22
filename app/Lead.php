@@ -21,7 +21,8 @@ class Lead extends Model
             'realstate_id',
             'operation_id',
             'clasification_id' ,
-            'share'
+            'share' ,
+            'mobile'
                             )
             ->join('realstates', 'realstates.id', '=', 'leads.realstate_id')
             ->join('operations', 'operations.id', '=', 'leads.operation_id')
