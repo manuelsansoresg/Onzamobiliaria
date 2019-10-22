@@ -29,7 +29,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 {{ Form::open(['route' => ['propiedad.update', $property->id], 'method' => 'PUT', 'id' => 'frm-property', 'files' => true]) }}
-
+                <input type="hidden" name="status" value="{{ $property->status }}">
                 <div class="container">
 
                     <!-- pasos -->
@@ -76,17 +76,17 @@
                                     </div>
                                 </div>
 
-                               
+
 
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>*Colonia</label>
-                                    <select name="colonia" id="colonia" class="form-control" >
+                                    <select name="colonia" id="colonia" class="form-control">
                                         @foreach ($postals['postals'] as $postal)
-                                            <option value="{{ $postal->id }}" {{ ( $postal->id == $property->postal_id)? 'selected' : '' }} >{{ $postal->colonia }}</option>
-                                            
+                                        <option value="{{ $postal->id }}" {{ ( $postal->id == $property->postal_id)? 'selected' : '' }}>{{ $postal->colonia }}</option>
+
                                         @endforeach
                                     </select>
                                     @if($errors)
@@ -114,7 +114,7 @@
                                     <label>Inmobiliaria</label>
                                     <select name="inmobiliaria" class="form-control">
                                         @foreach ($real_states as $real_state)
-                                        <option value="{{ $real_state->id }}" {{ ( $property->realstate_id == $real_state->id )? 'selected' : ''  }} > {{ $real_state->description }} </option>
+                                        <option value="{{ $real_state->id }}" {{ ( $property->realstate_id == $real_state->id )? 'selected' : ''  }}> {{ $real_state->description }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -126,7 +126,7 @@
                                     <label>Operacion</label>
                                     <select name="operacion" class="form-control">
                                         @foreach ($operations as $operation)
-                                        <option value="{{ $operation->id }}" {{ ($property->operation_id == $operation->id)? 'selected' : '' }} > {{ $operation->description }} </option>
+                                        <option value="{{ $operation->id }}" {{ ($property->operation_id == $operation->id)? 'selected' : '' }}> {{ $operation->description }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -138,7 +138,7 @@
                                     <label>Pago</label>
                                     <select name="pago" class="form-control">
                                         @foreach ($form_payments as $form_payment)
-                                        <option value="{{ $form_payment->id }}" {{ ($property->form_pay_id == $form_payment->id ) ? 'selected' : '' }} > {{ $form_payment->description }} </option>
+                                        <option value="{{ $form_payment->id }}" {{ ($property->form_pay_id == $form_payment->id ) ? 'selected' : '' }}> {{ $form_payment->description }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -170,14 +170,14 @@
                                 <div class="form-group">
                                     <label> Documento </label>
                                     @if ($property->document == '')
-                                        <input type="file" name="documento" class="form-control">
+                                    <input type="file" name="documento" class="form-control">
                                     @else
-                                       <p class="">
-                                           <span><i class="fas fa-file  fa-2x"></i></span>
-                                       </p>
-                                       <p>
-                                           <a href="/admin/propiedad/destroy-document/{{ $property->id }}" class="btn btn-danger">Borrar</a>
-                                       </p>
+                                    <p class="">
+                                        <span><i class="fas fa-file  fa-2x"></i></span>
+                                    </p>
+                                    <p>
+                                        <a href="/admin/propiedad/destroy-document/{{ $property->id }}" class="btn btn-danger">Borrar</a>
+                                    </p>
                                     @endif
                                 </div>
                             </div>
@@ -193,14 +193,14 @@
                             <div class="col-xs-12 col-md-3">
                                 <div class="form-group">
                                     <label>Gravamenes</label> &nbsp;
-                                    <input type="checkbox" name="gravamenes" value="1" {{ ($property->assessment == 1)? 'checked' : '' }} >
+                                    <input type="checkbox" name="gravamenes" value="1" {{ ($property->assessment == 1)? 'checked' : '' }}>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-md-3">
                                 <div class="form-group">
                                     <label>Habitar</label> &nbsp;
-                                    <input type="checkbox" name="habitar" value="1" {{ ($property->habitar == 1)? 'checked' : '' }} >
+                                    <input type="checkbox" name="habitar" value="1" {{ ($property->habitar == 1)? 'checked' : '' }}>
                                 </div>
                             </div>
 

@@ -13,6 +13,7 @@ class Property extends Model
         $property = Property::select(
             'realstates.description as realstate_description',
             'properties.id',
+            'properties.status as status',
             'operations.description as operations_description',
             'form_payments.description as form_payment_description',
             'Avaluo',  'assessment', 'habitar', 'is_property',
@@ -86,7 +87,7 @@ class Property extends Model
         $property->assessment   = $request->gravamenes;
         $property->predial      = $request->predial;
         $property->habitar      = $request->habitar;
-        $property->status       = 1;
+        $property->status       = $request->status;
         
         if ($request->hasFile('documento') != false) {
             

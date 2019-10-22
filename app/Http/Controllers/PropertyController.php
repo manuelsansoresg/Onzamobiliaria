@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FormPayment;
 use App\Http\Requests\PropertyRequest;
 use App\Operation;
 use App\Postal;

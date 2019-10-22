@@ -3,7 +3,7 @@
 @section('title', 'Propiedad')
 
 @section('adminlte_css')
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
 
 @section('content_header')
@@ -29,6 +29,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST', 'id' => 'frm-property',  'files' => true]) }}
+                <input type="hidden" name="status" value="1">
                 <div class="container">
 
                     <!-- pasos -->
@@ -48,26 +49,26 @@
                             </div>
                         </div>
                     </div>
-                        <!-- pasos -->
+                    <!-- pasos -->
                     <div class="row setup-content" id="step-1">
                         <div class="col-xs-12 col-md-6 col-md-offset-3">
                             <div class="col-md-12">
                                 <h3> Paso 1 / 3</h3>
                                 <p class="margin"> <br> </p>
-                              
+
                             </div>
 
-                          <p class="text-yellow">Los campos marcados con * son obligatorios</p>
-                            
+                            <p class="text-yellow">Los campos marcados con * son obligatorios</p>
+
                             <div class="col-md-12">
-                        
-                               <label>*CP</label>
+
+                                <label>*CP</label>
 
                                 <div class="row">
                                     <div class="col-xs-9 col-md-6">
-                                        <input type="text" name="cp" id="cp" class="form-control">  
+                                        <input type="text" name="cp" id="cp" class="form-control">
                                         @if($errors)
-                                            <span class="text-danger"> {{$errors->first('cp')}}</span>
+                                        <span class="text-danger"> {{$errors->first('cp')}}</span>
                                         @endif
                                     </div>
                                     <div class="col-xs-3 col-md-2 btn-cp">
@@ -75,13 +76,13 @@
                                     </div>
                                 </div>
 
-                              {{--   <div class="input-group input-group-sm">
+                                {{-- <div class="input-group input-group-sm">
                                     
                                     <span class="input-group-btn">
                                         
                                     </span>
                                 </div> --}}
-                                
+
                             </div>
 
                             <div class="col-md-12">
@@ -94,8 +95,8 @@
                                     @endif
                                 </div>
                                 <p class="margin"> <br> </p>
-                                <button id="nextOne"  class="btn btn-primary nextBtn pull-right" type="button" disabled>Siguiente</button>
-                            </div>  
+                                <button id="nextOne" class="btn btn-primary nextBtn pull-right" type="button" disabled>Siguiente</button>
+                            </div>
 
                         </div>
                     </div>
@@ -106,19 +107,19 @@
                             <div class="col-md-12">
                                 <h3> Paso 2 / 3</h3>
                                 <p class="margin"> <br> </p>
-                    
+
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Inmobiliaria</label>
-                                    <select name="inmobiliaria"  class="form-control">
+                                    <select name="inmobiliaria" class="form-control">
                                         @foreach ($real_states as $real_state)
-                                            <option value="{{ $real_state->id }}"> {{ $real_state->description }} </option>
+                                        <option value="{{ $real_state->id }}"> {{ $real_state->description }} </option>
                                         @endforeach
                                     </select>
                                 </div>
-                               
+
                             </div>
 
                             <div class="col-md-12">
@@ -130,7 +131,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            
+
                             </div>
 
                             <div class="col-md-12">
@@ -142,7 +143,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            
+
                             </div>
 
 
@@ -151,9 +152,9 @@
                                 <button class="btn btn-primary prevBtn  pull-left" type="button">Anterior</button>
                                 <button id="nextOne" class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
                             </div>
-                            
+
                         </div>
-                    </div>  
+                    </div>
                     {{-- paso 2 --}}
 
                     {{-- paso 3 --}}
@@ -161,9 +162,9 @@
                         <div class="col-xs-12 col-md-6 col-md-offset-3">
                             <div class="col-md-12">
                                 <h3> Paso 3 / 3</h3>
-                                
+
                                 <p class="margin"> <br> </p>
-                    
+
                             </div>
 
                             <div class="col-xs-12 col-md-12">
@@ -187,7 +188,7 @@
                                     <input type="checkbox" name="gravamenes" value="1">
                                 </div>
                             </div>
-                            
+
                             <div class="col-xs-12 col-md-3">
                                 <div class="form-group">
                                     <label>Habitar</label> &nbsp;
@@ -204,66 +205,66 @@
 
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label>Calle</label> 
+                                    <label>Calle</label>
                                     <input type="text" class="form-control" name="calle">
                                 </div>
                             </div>
-                           
+
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label>No interior</label> 
+                                    <label>No interior</label>
                                     <input type="text" class="form-control" name="no_interior">
                                 </div>
                             </div>
-                           
+
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label>No exterior</label> 
+                                    <label>No exterior</label>
                                     <input type="text" class="form-control" name="no_exterior">
                                 </div>
                             </div>
 
-                           
+
 
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label>Precio</label>
                                     <input name="precio" class="form-control" type="text">
                                 </div>
-                            
+
                             </div>
-                            
+
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label>Predial</label>
                                     <input name="predial" class="form-control" type="text">
                                 </div>
-                            
+
                             </div>
-                            
-                            
+
+
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label>Institución</label>
                                     <input name="institucion" class="form-control" type="text">
                                 </div>
-                            
+
                             </div>
 
-                           
+
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label>Nombre</label>
                                     <input name="nombre" class="form-control" type="text">
                                 </div>
-                            
+
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input name="email" class="form-control" type="text">
                                 </div>
-                            
+
                             </div>
 
                             <div class="col-xs-12 col-md-4">
@@ -271,7 +272,7 @@
                                     <label>Teléfono</label>
                                     <input name="telefono" class="form-control" type="text">
                                 </div>
-                            
+
                             </div>
 
                             <div class="col-xs-12 col-md-4">
@@ -279,7 +280,7 @@
                                     <label>Celular</label>
                                     <input name="celular" class="form-control" type="text">
                                 </div>
-                            
+
                             </div>
 
                             <div class="col-xs-12 col-md-4">
@@ -291,8 +292,8 @@
 
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
-                                    <label> Observación </label> 
-                                    <textarea name="observacion" class="form-control"  cols="30" rows="10"></textarea>
+                                    <label> Observación </label>
+                                    <textarea name="observacion" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
 
@@ -336,28 +337,28 @@
                             
                             </div> --}}
 
-                           
+
                             <div class="col-md-12">
                                 <p class="margin"> <br> </p>
                                 <button class="btn btn-primary prevBtn  pull-left" type="button">Anterior</button>
-                                <button id="property_save"  class="btn btn-primary  pull-right" type="button">Guardar</button>
+                                <button id="property_save" class="btn btn-primary  pull-right" type="button">Guardar</button>
                             </div>
 
                         </div>
                     </div>
                     {{-- paso 3 --}}
-                        
-                        
+
+
                 </div>
-                    {{ Form::close() }}
+                {{ Form::close() }}
             </div>
         </div>
     </div>
 </div>
-    @stop
+@stop
 
-    @section('adminlte_js')
-        <script src="{{ asset('vendor_assets/typeahead/typeahead.min.js') }}"></script>
-        <script src="{{ asset('js/app.js') }}"></script>
-        
-    @endsection
+@section('adminlte_js')
+<script src="{{ asset('vendor_assets/typeahead/typeahead.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+
+@endsection

@@ -35,7 +35,11 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Descripción</th>
+                            <th>Calle</th>
+                            <th>No int</th>
+                            <th>No ext</th>
+                            <th>Telefono</th>
+                            <th>Fecha de Asignacion</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -44,7 +48,11 @@
                     <tbody>
                         <tr>
                             <td>{{ $lead->id  }}</td>
-                            <td>{{ $lead->description  }}</td>
+                            <td>{{ $lead->street  }}</td>
+                            <td>{{ $lead->n_in  }}</td>
+                            <td>{{ $lead->n_out  }}</td>
+                            <td>{{ $lead->phone  }}</td>
+                            <td>{{ substr($lead->date,0,10)  }}</td>
                             <td>
                                 @if($lead->status == 0)
                                 <i class="fas fa-ban text-danger"></i>

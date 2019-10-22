@@ -25,8 +25,7 @@ class CreateLeads extends Migration
             $table->string('street')->nullable()->comment('Calle');
             $table->integer('n_in')->nullable()->comment('No interior');
             $table->integer('n_out')->nullable()->comment('No Exterior');
-            $table->text('observation')->nullable()->comment('Observaciones');
-            $table->smallInteger('status')->comment('Estatus si anda activo, cancelado');
+            $table->smallInteger('status')->default(1)->comment('Estatus si anda activo, cancelado');
             $table->dateTime('date_write')->nullable()->comment('Fecha de captura');
             $table->bigInteger('user_id')->nullable() ->unsigned()->comment('Estatus si esta activo o cancelado');
             $table->bigInteger('user_id_cancel')->nullable()->unsigned()->comment('usuario de quien cancela');
