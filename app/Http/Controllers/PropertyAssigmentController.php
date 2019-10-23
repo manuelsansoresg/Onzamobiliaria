@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Property_assigment;
 use Illuminate\Http\Request;
 
 class PropertyAssigmentController extends Controller
@@ -14,6 +14,9 @@ class PropertyAssigmentController extends Controller
     public function index()
     {
         //
+        $Statusasesores = Property_assigment::getall();
+        
+        return view('Seguimiento-Asesores.index', compact('Statusasesores'));
     }
 
     /**

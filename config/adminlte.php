@@ -155,7 +155,7 @@ return [
             'icon' => 'fas fa-running',
         ],
         [
-            'text' => 'Asignacion Asesores',
+            'text' => 'Asignación Asesores',
             'url'  => 'admin/Seguimiento-Asesores',
             'icon' => 'fas fa-address-book',
         ],
