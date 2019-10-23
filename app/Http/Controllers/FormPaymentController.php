@@ -97,7 +97,7 @@ class FormPaymentController extends Controller
     {
         $form_payment = FormPayment::find($id);
         $form_payment->delete();
-        flash('Elemento guardado');
+        flash('Elemento borrado');
         return redirect('/admin/pago');
     }
 }

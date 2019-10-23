@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\FormPayment;
 use App\Http\Requests\PropertyRequest;
 use App\Operation;
+use App\Postal;
 use App\Property;
 use App\Realstate;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -53,7 +56,7 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
-        $property = Property::createProperty($request, $this->path_document );
+        $property = Property::createUpdateProperty($request, $this->path_document );
         flash('Elemento guardado');
         return redirect('/admin/propiedad');
     }
@@ -66,7 +69,10 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        //
+        $property = Property::getById($id);
+        $pdf = PDF::loadView('propiedad.show', compact('property'));
+
+        return $pdf->stream();
     }
 
     /**
@@ -77,12 +83,16 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
+         
+        $property      = Property::getById($id);
         $real_states   = Realstate::where('status', 1)->get();
         $operations    = Operation::where('status', 1)->get();
         $form_payments = FormPayment::where('status', 1)->get();
-        $property      = Property::getById($id);
 
-        return view('propiedad.edit', compact('real_states', 'operations', 'form_payments') );
+        $postals = Postal::getById($property->postal_id);
+        
+
+        return view('propiedad.edit', compact('real_states', 'operations', 'form_payments', 'postals', 'property') );
     }
 
     /**
@@ -92,10 +102,40 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PropertyRequest $request, $id)
     {
-        //
+        $property = Property::createUpdateProperty($request, $this->path_document, true, $id);
+        
+        flash('Elemento guardado');
+        return redirect('/admin/propiedad');
     }
+
+    public function destroyDocument($id)
+    {
+        $property = Property::find($id);
+        
+        if($property){
+            
+            $document = $property->document;
+            @unlink('.'.$this->path_document.'/'.$document);
+            $property->document = '';
+            $property->update();
+        }
+        return redirect('/admin/propiedad/'.$id. '/edit');
+    }
+
+    public function changeStatus($id, $status)
+    {
+        
+        $form_payment = Property::find($id);
+        $form_payment->status = $status;
+        if($status == 0){
+            $form_payment->user_id_cancel = Auth::id();
+        }
+        $form_payment->update();
+        return redirect('/admin/propiedad');
+    }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -105,6 +145,15 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $property = Property::find($id);
+
+        if ($property) {
+            $document = $property->document;
+            @unlink('.' . $this->path_document . '/' . $document);
+            $property->delete();
+
+        }
+        flash('Elemento borrado');
+        return redirect('/admin/propiedad/');
     }
 }

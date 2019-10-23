@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Clasification;
+use App\Http\Requests\LeadRequest;
 use App\Lead;
+use App\Operation;
+use App\Postal;
+use App\Realstate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
 {
@@ -14,7 +20,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $leads = Lead::all();
+        $leads = Lead::getAll();
         return view('prospecto.index', compact('leads'));
     }
 
@@ -25,7 +31,11 @@ class LeadController extends Controller
      */
     public function create()
     {
-        //
+        $real_states    = Realstate::where('status', 1)->get();
+        $operations     = Operation::where('status', 1)->get();
+        $clasifications = Clasification::where('status', 1)->get();
+
+        return view('prospecto.create', compact('real_states', 'operations', 'clasifications' ));
     }
 
     /**
@@ -34,9 +44,11 @@ class LeadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LeadRequest $request)
     {
-        //
+        Lead::createUpdate($request);
+        flash('Elemento guardado');
+        return redirect('/admin/prospecto');
     }
 
     /**
@@ -58,7 +70,13 @@ class LeadController extends Controller
      */
     public function edit($id)
     {
-        //
+        $real_states    = Realstate::where('status', 1)->get();
+        $operations     = Operation::where('status', 1)->get();
+        $clasifications = Clasification::where('status', 1)->get();
+        $lead           = Lead::getById($id);
+        $postals        = Postal::getById($lead->postal_id);
+
+        return view('prospecto.edit', compact('real_states', 'operations', 'clasifications', 'lead', 'postals'));
     }
 
     /**
@@ -68,9 +86,23 @@ class LeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LeadRequest $request, $id)
     {
-        //
+        $lead = Lead::createUpdate($request, true, $id);
+        flash('Elemento guardado');
+        return redirect('/admin/prospecto');
+    }
+
+    public function changeStatus($id, $status)
+    {
+
+        $lead = Lead::find($id);
+        $lead->status = $status;
+        if ($status == 0) {
+            $lead->user_id_cancel = Auth::id();
+        }
+        $lead->update();
+        return redirect('/admin/prospecto');
     }
 
     /**
@@ -81,6 +113,9 @@ class LeadController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lead = Lead::find($id);
+        $lead->delete();
+        flash('Elemento borrado');
+        return redirect('/admin/prospecto');
     }
 }

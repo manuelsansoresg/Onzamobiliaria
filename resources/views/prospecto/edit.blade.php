@@ -1,35 +1,41 @@
 @extends('adminlte::page')
 
-@section('title', 'Propiedad')
+@section('title', 'Prospecto')
 
 @section('adminlte_css')
+<link rel="stylesheet" href="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
 
 @section('content_header')
 <section class="content-header">
     <h1>
-        Propiedad
+        Prospecto
         <small>Nuevo</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="/admin/propiedad"><i class="fa fa-dashboard"></i> Propiedad</a></li>
+        <li><a href="/admin/prospecto"><i class="fa fa-dashboard"></i> Prospecto</a></li>
         <li class="active">Nuevo</li>
     </ol>
 </section>
 @stop
+
+
+
 @section('content')
 <div class="content">
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Nueva Propiedad</h3>
+                <h3 class="box-title">Editar Prospecto</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST', 'id' => 'frm-property',  'files' => true]) }}
-                <input type="hidden" name="status" value="1">
+
+                {{ Form::open(['route' => ['prospecto.update', $lead->id], 'method' => 'PUT', 'id' => 'frm-property']) }}
+
+                <input type="hidden" name="status" value="{{ $lead->status }}">
                 <div class="container">
 
                     <!-- pasos -->
@@ -66,7 +72,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-9 col-md-6">
-                                        <input type="text" name="cp" id="cp" class="form-control">
+                                        <input type="text" name="cp" id="cp" class="form-control" value="{{ $lead->codigo }}">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('cp')}}</span>
                                         @endif
@@ -76,26 +82,24 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="input-group input-group-sm">
-                                    
-                                    <span class="input-group-btn">
-                                        
-                                    </span>
-                                </div> --}}
-
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>*Colonia</label>
-                                    <select name="colonia" id="colonia" class="form-control" disabled>
+                                    <select name="colonia" id="colonia" class="form-control" >
+                                        @foreach ($postals['postals'] as $postal)
+                                        <option value="{{ $postal->id }}" {{ ( $postal->id == $lead->postal_id)? 'selected' : '' }}>{{ $postal->colonia }}
+                                        </option>
+                                        
+                                        @endforeach
                                     </select>
                                     @if($errors)
                                     <span class="text-danger"> {{$errors->first('colonia')}}</span>
                                     @endif
                                 </div>
                                 <p class="margin"> <br> </p>
-                                <button id="nextOne" class="btn btn-primary nextBtn pull-right" type="button" disabled>Siguiente</button>
+                                <button id="nextOne" class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
                             </div>
 
                         </div>
@@ -113,9 +117,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Inmobiliaria</label>
-                                    <select name="inmobiliaria" class="form-control">
+                                    <select name="realstate_id" class="form-control">
                                         @foreach ($real_states as $real_state)
-                                        <option value="{{ $real_state->id }}"> {{ $real_state->description }} </option>
+                                        <option value="{{ $real_state->id }}" {{ ( $lead->realstate_id == $real_state->id )? 'selected' : ''  }}> {{ $real_state->description }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -125,26 +129,30 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Operacion</label>
-                                    <select name="operacion" class="form-control">
+                                    <select name="operation_id" class="form-control">
                                         @foreach ($operations as $operation)
-                                        <option value="{{ $operation->id }}"> {{ $operation->description }} </option>
+                                        <option value="{{ $operation->id }}" {{ ($lead->operation_id == $operation->id)? 'selected' : '' }}> {{ $operation->description }} </option>
                                         @endforeach
                                     </select>
                                 </div>
 
                             </div>
+
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Pago</label>
-                                    <select name="pago" class="form-control">
-                                        @foreach ($form_payments as $form_payment)
-                                        <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
+                                    <label>Clasificación</label>
+                                    <select name="clasification_id" class="form-control">
+                                        @foreach ($clasifications as $clasification)
+                                        <option value="{{ $clasification->id }}" {{ ($lead->clasification_id == $clasification->id)? 'selected' : '' }}> {{ $clasification->description }}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
 
                             </div>
+
+
 
 
                             <div class="col-md-12">
@@ -167,175 +175,84 @@
 
                             </div>
 
-                            <div class="col-xs-12 col-md-12">
+                            <div class="col-xs-12 col-md-3">
                                 <div class="form-group">
-                                    <label> Documento </label>
-                                    <input type="file" name="documento" class="form-control">
+                                    <label>Compartida</label> &nbsp;
+                                    <input type="checkbox" name="share" value="1" {{ ($lead->share == 1)? 'checked' : '' }}>
                                 </div>
+                            </div>
+                            <div class="col-xs-12 col-md-12"> </div>
+                            <div class="col-md-4">
+                                <label for="exampleInputEmail1">Fecha de asignación</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" name="date" value="{{ substr($lead->date, 0, 10) }}" autocomplete="off" class="form-control pull-right" id="datepicker">
+                                </div>
+
+
                             </div>
 
 
-                            <div class="col-xs-12 col-md-3">
+                            <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
-                                    <label>Avaluo</label> &nbsp;
-                                    <input type="checkbox" name="avaluo" value="1">
+                                    <label>Teléfono</label>
+                                    <input name="phone" value="{{ $lead->phone }}" class="form-control" type="text">
                                 </div>
-                            </div>
 
-                            <div class="col-xs-12 col-md-3">
-                                <div class="form-group">
-                                    <label>Gravamenes</label> &nbsp;
-                                    <input type="checkbox" name="gravamenes" value="1">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-md-3">
-                                <div class="form-group">
-                                    <label>Habitar</label> &nbsp;
-                                    <input type="checkbox" name="habitar" value="1">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-md-3">
-                                <div class="form-group">
-                                    <label>Propietario</label> &nbsp;
-                                    <input type="checkbox" name="propietario" value="1">
-                                </div>
                             </div>
 
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
+                                    <label>Celular </label>
+                                    <input name="mobile" value="{{ $lead->mobile }}" class="form-control" type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-12"> </div>
+
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
                                     <label>Calle</label>
-                                    <input type="text" class="form-control" name="calle">
+                                    <input type="text" value="{{ $lead->street }}" class="form-control" name="street">
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label>No interior</label>
-                                    <input type="text" class="form-control" name="no_interior">
+                                    <input type="text" value="{{ $lead->n_in }}" class="form-control" name="n_in">
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <label>No exterior</label>
-                                    <input type="text" class="form-control" name="no_exterior">
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Precio</label>
-                                    <input name="precio" class="form-control" type="text">
-                                </div>
-
-                            </div>
-
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Predial</label>
-                                    <input name="predial" class="form-control" type="text">
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Institución</label>
-                                    <input name="institucion" class="form-control" type="text">
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input name="nombre" class="form-control" type="text">
-                                </div>
-
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input name="email" class="form-control" type="text">
-                                </div>
-
-                            </div>
-
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Teléfono</label>
-                                    <input name="telefono" class="form-control" type="text">
-                                </div>
-
-                            </div>
-
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Celular</label>
-                                    <input name="celular" class="form-control" type="text">
-                                </div>
-
-                            </div>
-
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Celular 2 </label>
-                                    <input name="celular2" class="form-control" type="text">
+                                    <input type="text" value="{{ $lead->n_out }}" class="form-control" name="n_out">
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <label> Observación </label>
-                                    <textarea name="observacion" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea name="obseration1" value="{{ $lead->obseration1 }}" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <label> Observación 2 </label>
-                                    <textarea name="observacion2" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea name="observacion2" value="{{ $lead->obseration2 }}" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <label> Observación 3 </label>
-                                    <textarea name="observacion3" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea name="observacion3" value="{{ $lead->obseration3 }}" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
-
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label> Habitaciones </label>
-                                    <input name="habitacion" class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label> Baños </label>
-                                    <input name="banios" class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label> Clave easybroke </label>
-                                    <input name="clave_easybroke" class="form-control" type="text">
-                                </div>
-                            </div>
-                            {{-- <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input name="email" class="form-control" type="text">
-                                </div>
-                            
-                            </div> --}}
 
 
                             <div class="col-md-12">
@@ -358,7 +275,17 @@
 @stop
 
 @section('adminlte_js')
-<script src="{{ asset('vendor_assets/typeahead/typeahead.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script>
+    $(function() {
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        })
+    })
+</script>
+<script src="{{ asset('vendor_assets/typeahead/typeahead.min.js') }}"></script>
+
 
 @endsection

@@ -100,7 +100,7 @@ class AdController extends Controller
     {
         $ad = Ad::find($id);
         $ad->delete();
-        flash('Elemento guardado');
+        flash('Elemento borrado');
         return redirect('/admin/portales');
     }
 }

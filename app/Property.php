@@ -13,24 +13,35 @@ class Property extends Model
         $property = Property::select(
             'realstates.description as realstate_description',
             'properties.id',
+            'properties.status as status',
             'operations.description as operations_description',
             'form_payments.description as form_payment_description',
-            'Avaluo',
-            'assessment',
-            'habitar',
-            'is_property'
+            'Avaluo',  'assessment', 'habitar', 'is_property',
+            'postal_id',  'realstate_id', 'operation_id', 'form_pay_id',
+            'street', 'noInt', 'noExt',
+            'price',  'predial' , 'institution',
+            'name', 'email',
+            'phone_contact',  'celular' , 'celular2',
+            'observation1', 'observation2', 'observation3',
+            'rooms', 'bathrooms', 'pass_easy_broker',
+            'document',
+            'postal.codigo as codigo', 'colonia'
         )
             ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
             ->join('operations', 'operations.id', '=', 'properties.operation_id')
             ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id')
+            ->join('postal', 'postal.id', '=', 'properties.postal_id')
             ->where('properties.id', $id )
-            ->get();
+            ->first();
         return $property;
     }
 
 
     static function getAll()
     {
+        $user      = User::find(Auth::id());
+        $user_role = $user->getRoleNames()->first();
+
         $property = Property::select('realstates.description as realstate_description',
                                     'properties.id',
                                     'operations.description as operations_description',
@@ -38,22 +49,33 @@ class Property extends Model
                                     'Avaluo',
                                     'assessment',
                                     'habitar',
-                                    'is_property'
+                                    'is_property',
+                                    'properties.status as status'
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
                         ->join('operations', 'operations.id', '=', 'properties.operation_id')
-                        ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id')
-                        ->get();
+                        ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id');
+
+        if($user_role != 'admin'){
+            $property = $property->where('properties.user_id', $user->id);
+        }
+        
+        $property = $property->get();
         return $property;
     }
 
 
-    static function createProperty($request, $path)
+    static function createUpdateProperty($request, $path, $isUpdate = false, $property_id = null)
     {
      
         $get_cp = Postal::where('id', $request->colonia )->first();
-        
-        $property               = new Property();
+
+        if ($isUpdate == false) {
+            $property  = new Property();
+        }else{
+            $property = Property::find($property_id);
+        }
+
         $property->realstate_id = $request->inmobiliaria;
         $property->Avaluo       = $request->avaluo;
         $property->operation_id = $request->operacion;
@@ -65,7 +87,7 @@ class Property extends Model
         $property->assessment   = $request->gravamenes;
         $property->predial      = $request->predial;
         $property->habitar      = $request->habitar;
-        $property->status       = 1;
+        $property->status       = $request->status;
         
         if ($request->hasFile('documento') != false) {
             
@@ -94,7 +116,14 @@ class Property extends Model
         $property->rooms            = $request->habitacion;
         $property->bathrooms        = $request->banios;
         $property->pass_easy_broker = $request->clave_easybroke;
-        $property->save();
+        
+        if($isUpdate == false){
+            $property->save();
+        }else{
+            $property->update();
+        }
+
+        return $property;   
 
     }
 

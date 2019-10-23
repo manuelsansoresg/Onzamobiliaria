@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Forma de pago')
+@section('title', 'Prospecto')
 
 @section('content_header')
 <section class="content-header">
     <h1>
-        Forma de pago
+        Prospecto
         <small>Lista</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Forma de pago</li>
+        <li class="active">Prospecto</li>
     </ol>
 </section>
 @stop
@@ -19,12 +19,12 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Forma de pago</h3>
+                <h3 class="box-title">Prospecto</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div>
-                    <a href="/admin/pago/create" class="btn btn-app pull-right">
+                    <a href="/admin/prospecto/create" class="btn btn-app pull-right">
                         <i class="fa fa-plus"></i> Nuevo
                     </a>
                 </div>
@@ -35,7 +35,11 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Descripción</th>
+                            <th>Calle</th>
+                            <th>No int</th>
+                            <th>No ext</th>
+                            <th>Telefono</th>
+                            <th>Fecha de Asignacion</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -44,7 +48,11 @@
                     <tbody>
                         <tr>
                             <td>{{ $lead->id  }}</td>
-                            <td>{{ $lead->description  }}</td>
+                            <td>{{ $lead->street  }}</td>
+                            <td>{{ $lead->n_in  }}</td>
+                            <td>{{ $lead->n_out  }}</td>
+                            <td>{{ $lead->phone  }}</td>
+                            <td>{{ substr($lead->date,0,10)  }}</td>
                             <td>
                                 @if($lead->status == 0)
                                 <i class="fas fa-ban text-danger"></i>

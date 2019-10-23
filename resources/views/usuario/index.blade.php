@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Inmobiliaria')
+@section('title', 'Usuarios')
 
 @section('content_header')
 <section class="content-header">
     <h1>
-        Mobiliaria
+        Usuarios
         <small>Lista</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Mobiliaria</li>
+        <li class="active">Usuarios</li>
     </ol>
 </section>
 @stop
@@ -19,12 +19,12 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Mobiliarias</h3>
+                <h3 class="box-title">Usuarios</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div>
-                    <a href="/admin/mobiliaria/create" class="btn btn-app pull-right">
+                    <a href="/admin/usuarios/create" class="btn btn-app pull-right">
                         <i class="fa fa-plus"></i> Nuevo
                     </a>
                 </div>
@@ -35,46 +35,32 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Descripción</th>
-                            <th>Status</th>
+                            <th>Nombre</th>
+                            <th>Nick</th>
+                            <th>Correo</th>
+                            <th>Easy Broker</th>
                             <th></th>
                         </tr>
                     </thead>
-                    @foreach ($real_states as $real_state)
+                    @foreach ($users as $user)
                     <tbody>
                         <tr>
-                            <td>{{ $real_state->id  }}</td>
-                            <td>{{ $real_state->description  }}</td>
-                            <td>
-                                @if($real_state->status == 0)
-                                <i class="fas fa-ban text-danger"></i>
-                                <span>Inactivo</span>
-                                @else
-                                <i class="fas fa-ban text-success"></i>
-                                <span>Activo</span>
-                                @endif
+                            <td>{{ $user->id  }}</td>
+                            <td>{{ $user->name  }}</td>
+                            <td>{{ $user->username  }}</td>
+                            <td>{{ $user->email  }}</td>
+                            <td>{{ $user->easy_broker  }}</td>
 
-                            </td>
                             <td>
-                                {{ Form::open(['route' => ['mobiliaria.destroy', $real_state->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('mobiliaria.edit', $real_state->id)}}" class="btn btn-primary">
+                                {{ Form::open(['route' => ['usuarios.destroy', $user->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                <a href="{{route('usuarios.edit', $user->id)}}" class="btn btn-primary">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                @if($real_state->status == 0)
-                                <a href="/admin/mobiliaria/status/{{ $real_state->id }}/1" class="btn btn-success">
-                                    <i class="fas fa-ban text-white"></i>
-                                </a>
-                                @else
-                                <a href="/admin/mobiliaria/status/{{ $real_state->id }}/0" class="btn btn-warning">
-                                    <i class="fas fa-ban"></i>
-                                </a>
-                                @endif
-                                @role('admin')
+
                                 <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                                 {{ Form::close() }}
-                                @endrole
                             </td>
                         </tr>
                     </tbody>

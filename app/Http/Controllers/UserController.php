@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Clasification;
-use App\Http\Requests\ClasificationRequest;
+use App\Http\Requests\UserEditRequest;
+use App\Http\Requests\UserRequest;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class ClasificationController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +18,8 @@ class ClasificationController extends Controller
      */
     public function index()
     {
-        $clasifications = Clasification::all();
-        return view('clasificacion.index', compact('clasifications'));
+        $users = User::all();
+        return view('usuario.index', compact('users'));
     }
 
     /**
@@ -26,7 +29,8 @@ class ClasificationController extends Controller
      */
     public function create()
     {
-        return view('clasificacion.create');
+        $roles = Role::all();
+        return view('usuario.create', compact('roles'));
     }
 
     /**
@@ -35,12 +39,16 @@ class ClasificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClasificationRequest $request)
+    public function store(UserRequest $request)
     {
-        $clasification = new Clasification($request->except('_token'));
-        $clasification->save();
+        $user = new User($request->except('_token', 'role'));
+        $user->assignRole($request->role);
+        $user->save();
+
+
+
         flash('Elemento guardado');
-        return redirect('/admin/clasificacion');
+        return redirect('/admin/usuarios');
     }
 
     /**
@@ -62,8 +70,11 @@ class ClasificationController extends Controller
      */
     public function edit($id)
     {
-        $clasification = Clasification::find($id);
-        return view('clasificacion.edit', compact('clasification'));
+        $user      = User::find($id);
+        $roles     = Role::all();
+        $user_role = $user->getRoleNames()->first();
+        
+        return view('usuario.edit', compact('roles', 'user', 'user_role'));
     }
 
     /**
@@ -73,22 +84,22 @@ class ClasificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ClasificationRequest $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
-        $clasification = Clasification::find($id);
-        $clasification->fill($request->except('_token'));
-        $clasification->update();
+        $user = User::find($id);
+        $user->fill($request->except('_token', 'password', 'role'));
+        
+        if($request->password != ''){
+            $user->password = Hash::make($request->password);
+        }
+        
+        $user->assignRole($request->role);
+        $user->update();
+
         flash('Elemento guardado');
-        return redirect('/admin/clasificacion');
+        return redirect('/admin/usuarios');
+        
 
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $clasification = Clasification::find($id);
-        $clasification->status = $status;
-        $clasification->update();
-        return redirect('/admin/clasificacion');
     }
 
     /**
@@ -99,9 +110,9 @@ class ClasificationController extends Controller
      */
     public function destroy($id)
     {
-        $clasification = Clasification::find($id);
-        $clasification->delete();
+        $user = User::find($id);
+        $user->delete();
         flash('Elemento borrado');
-        return redirect('/admin/clasificacion');
+        return redirect('/admin/usuarios');
     }
 }
