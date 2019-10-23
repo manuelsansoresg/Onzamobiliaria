@@ -22,7 +22,10 @@ class Lead extends Model
             'operation_id',
             'clasification_id' ,
             'share' ,
-            'mobile'
+            'mobile' ,
+            'observation1',
+            'observation2',
+            'observation3'
                             )
             ->join('realstates', 'realstates.id', '=', 'leads.realstate_id')
             ->join('operations', 'operations.id', '=', 'leads.operation_id')
@@ -75,9 +78,9 @@ class Lead extends Model
         $lead->status           = $request->status;
         $lead->user_id          = Auth::id();
         $lead->clasification_id = $request->clasification_id;
-        $lead->obseration1      = $request->obseration1;
-        $lead->obseration2      = $request->obseration2;
-        $lead->obseration3      = $request->obseration3;
+        $lead->observation1      = $request->observation1;
+        $lead->observation2      = $request->observation2;
+        $lead->observation3      = $request->observation3;
         $lead->date_write       = date('Y-m-d H:i:s');
 
 

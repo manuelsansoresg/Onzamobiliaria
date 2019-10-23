@@ -31,9 +31,9 @@ class CreateLeads extends Migration
             $table->bigInteger('user_id_cancel')->nullable()->unsigned()->comment('usuario de quien cancela');
             $table->dateTime('date_cancel')->nullable()->comment('Fecha de cancelacion');
             $table->bigInteger('clasification_id')->unsigned()->comment('Id mobiliria(Casa,Departamento)');
-            $table->text('obseration1')->comment('obsevaciones')->nullable();
-            $table->text('obseration2')->comment('obsevaciones')->nullable();
-            $table->text('obseration3')->comment('obsevaciones')->nullable();
+            $table->text('observation1')->comment('obsevaciones')->nullable();
+            $table->text('observation2')->comment('obsevaciones')->nullable();
+            $table->text('observation3')->comment('obsevaciones')->nullable();
 
             
             $table->foreign('realstate_id')->references('id')->on('realstates')

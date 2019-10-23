@@ -2,6 +2,10 @@
 
 @section('title', 'Propiedad')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@stop
+
 @section('content_header')
 <section class="content-header">
     <h1>
@@ -138,18 +142,18 @@
     $(function() {
 
        $('#mobiliaria thead tr').clone(true).appendTo( '#mobiliaria thead' );
-        $('#mobiliaria thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-        
-        $( 'input', this ).on( 'keyup change', function () {
-        if ( table.column(i).search() !== this.value ) {
-        table
-        .column(i)
-        .search( this.value )
-        .draw();
-        }
-        } );
+            $('#mobiliaria thead tr:eq(1) th').each( function (i) {
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                
+                $( 'input', this ).on( 'keyup change', function () {
+                if ( table.column(i).search() !== this.value ) {
+                table
+                .column(i)
+                .search( this.value )
+                .draw();
+            }
+            } );
         } );
 
 

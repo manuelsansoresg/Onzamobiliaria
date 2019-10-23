@@ -2,6 +2,10 @@
 
 @section('title', 'Prospecto')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@stop
+
 @section('content_header')
 <section class="content-header">
     <h1>
@@ -28,6 +32,7 @@
                         <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
                 </div>
+                <br><br>
                 <div class="col-md-12">
                     @include('flash::message')
                 </div>
@@ -37,7 +42,6 @@
                 <table id="mobiliaria" class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
                             <th>Calle</th>
                             <th>No int</th>
                             <th>No ext</th>
@@ -50,7 +54,6 @@
                     @foreach ($leads as $lead)
                     <tbody>
                         <tr>
-                            <td>{{ $lead->id  }}</td>
                             <td>{{ $lead->street  }}</td>
                             <td>{{ $lead->n_in  }}</td>
                             <td>{{ $lead->n_out  }}</td>
@@ -106,10 +109,25 @@
 <script>
     $(function() {
 
+        $('#mobiliaria thead tr').clone(true).appendTo('#mobiliaria thead');
+        $('#mobiliaria thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+
+            $('input', this).on('keyup change', function() {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
         $('#mobiliaria').DataTable({
             'paging': true,
             'lengthChange': false,
-            'searching': true,
+            'searching': false,
             'ordering': true,
             'info': true,
             'autoWidth': false,

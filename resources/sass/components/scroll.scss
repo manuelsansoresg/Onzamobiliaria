@@ -1,0 +1,25 @@
+.dataTables_scrollBody{
+    cursor: pointer;
+}
+
+
+.dataTables_scrollBody::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+
+    }
+
+    
+    .dataTables_scrollBody::-webkit-scrollbar
+    {
+        width: 6px;
+        background-color: #F5F5F5;
+        height: 5px;
+    }
+
+    
+    .dataTables_scrollBody::-webkit-scrollbar-thumb
+    {
+        background-color: $blue;
+    }
