@@ -24,13 +24,16 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div>
-                    <a href="/admin/pago/create" class="btn btn-app pull-right">
-                        <i class="fa fa-plus"></i> Nuevo
+                    <a href="/admin/pago/create" class="btn btn-success  pull-right">
+                        <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
                 </div>
                 <div class="col-md-12">
                     @include('flash::message')
                 </div>
+                <br>
+                <br>
+                <br>
                 <table id="mobiliaria" class="table table-bordered table-responsive">
                     <thead>
                         <tr>
@@ -73,7 +76,7 @@
                                 <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-                                @endrole                                
+                                @endrole
                                 {{ Form::close() }}
                             </td>
                         </tr>

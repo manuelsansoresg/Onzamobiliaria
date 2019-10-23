@@ -24,66 +24,67 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div>
-                    <a href="/admin/operaciones/create" class="btn btn-app pull-right">
-                        <i class="fa fa-plus"></i> Nuevo
+                    <a href="/admin/operaciones/create" class="btn btn-success pull-right">
+                        <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
                 </div>
                 <div class="col-md-12">
                     @include('flash::message')
                 </div>
-                <table id="mobiliaria" class="table table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Descripción</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    @foreach ($operations as $operation)
-                    <tbody>
-                        <tr>
-                            <td>{{ $operation->id  }}</td>
-                            <td>{{ $operation->description  }}</td>
-                            <td>
-                                @if($operation->status == 0)
-                                <i class="fas fa-ban text-danger"></i>
-                                <span>Inactivo</span>
-                                @else
-                                <i class="fas fa-ban text-success"></i>
-                                <span>Activo</span>
-                                @endif
+                <br><br><br>
+                    <table id="mobiliaria" class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Descripción</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach ($operations as $operation)
+                        <tbody>
+                            <tr>
+                                <td>{{ $operation->id  }}</td>
+                                <td>{{ $operation->description  }}</td>
+                                <td>
+                                    @if($operation->status == 0)
+                                    <i class="fas fa-ban text-danger"></i>
+                                    <span>Inactivo</span>
+                                    @else
+                                    <i class="fas fa-ban text-success"></i>
+                                    <span>Activo</span>
+                                    @endif
 
-                            </td>
-                            <td>
-                                {{ Form::open(['route' => ['operaciones.destroy', $operation->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('operaciones.edit', $operation->id)}}" class="btn btn-primary">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                @if($operation->status == 0)
-                                <a href="/admin/operaciones/status/{{ $operation->id }}/1" class="btn btn-success">
-                                    <i class="fas fa-ban text-white"></i>
-                                </a>
-                                @else
-                                <a href="/admin/operaciones/status/{{ $operation->id }}/0" class="btn btn-warning">
-                                    <i class="fas fa-ban"></i>
-                                </a>
-                                @endif
-                                @role('admin')
-                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                                @endrole                               
-                                {{ Form::close() }}
-                            </td>
-                        </tr>
-                    </tbody>
-                    @endforeach
+                                </td>
+                                <td>
+                                    {{ Form::open(['route' => ['operaciones.destroy', $operation->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                    <a href="{{route('operaciones.edit', $operation->id)}}" class="btn btn-primary">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    @if($operation->status == 0)
+                                    <a href="/admin/operaciones/status/{{ $operation->id }}/1" class="btn btn-success">
+                                        <i class="fas fa-ban text-white"></i>
+                                    </a>
+                                    @else
+                                    <a href="/admin/operaciones/status/{{ $operation->id }}/0" class="btn btn-warning">
+                                        <i class="fas fa-ban"></i>
+                                    </a>
+                                    @endif
+                                    @role('admin')
+                                    <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                    @endrole
+                                    {{ Form::close() }}
+                                </td>
+                            </tr>
+                        </tbody>
+                        @endforeach
 
-                </table>
-                <div class="col-md-12 text-center">
+                    </table>
+                    <div class="col-md-12 text-center">
 
-                </div>
+                    </div>
             </div>
 
         </div>

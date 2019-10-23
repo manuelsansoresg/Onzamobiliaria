@@ -15,6 +15,7 @@
 </section>
 @stop
 @section('content')
+
 <div class="content">
     <div class="row">
         <div class="box">
@@ -24,17 +25,17 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div>
-                    <a href="/admin/propiedad/create" class="btn btn-app pull-right">
-                        <i class="fa fa-plus"></i> Nuevo
+                    <a href="/admin/propiedad/create" class="btn btn-success  pull-right">
+                        <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
                 </div>
                 <div class="col-md-12">
                     @include('flash::message')
                 </div>
+                <br><br><br>
                 <table id="mobiliaria" class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
                             <th>Inmobiliaria</th>
                             <th>Operación</th>
                             <th>Pago</th>
@@ -49,7 +50,6 @@
                     @foreach ($properties as $property)
                     <tbody>
                         <tr>
-                            <td>{{ $property->id  }}</td>
                             <td>{{ $property->realstate_description  }}</td>
                             <td>{{ $property->operations_description  }}</td>
                             <td>{{ $property->form_payment_description  }}</td>
@@ -136,10 +136,29 @@
 <script>
     $(function() {
 
-        $('#mobiliaria').DataTable({
+       $('#mobiliaria thead tr').clone(true).appendTo( '#mobiliaria thead' );
+        $('#mobiliaria thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        
+        $( 'input', this ).on( 'keyup change', function () {
+        if ( table.column(i).search() !== this.value ) {
+        table
+        .column(i)
+        .search( this.value )
+        .draw();
+        }
+        } );
+        } );
+
+
+
+
+        var table = $('#mobiliaria').DataTable({
+            'fixedHeader': true,
             'paging': true,
             'lengthChange': false,
-            'searching': true,
+            'searching': false,
             'ordering': true,
             'info': true,
             'autoWidth': false,
@@ -165,6 +184,10 @@
                 }
             },
         })
+
+        
+
+
     })
 </script>
 @stop
