@@ -11,9 +11,11 @@ $(document).ready(function () {
 
    form.validate({
        
-
+       submitHandler: function (form) {
+           alert('aqui');
+       },
         lang: 'es', 
-       errorClass: "text-danger",
+        errorClass: "text-danger",
         errorLabelContainer: "legend",
         rules: {
             cp: {
@@ -22,7 +24,7 @@ $(document).ready(function () {
                 maxlength: 5,
                 minlength: 4
             },
-            email: {
+            /* email: {
                 email: true,
             },
             celular: {
@@ -39,16 +41,17 @@ $(document).ready(function () {
             },
             banios: {
                 number: true,
-            }
+            } */
         },
+       
        
     }); 
 
-    $("#property_save").click(function () {
-        
+    /* $("#property_save").click(function () {
+        console.log(form.valid());
         if (form.valid() == true){
             document.getElementById("frm-property").submit();
         }
-    });
+    }); */
 
 });

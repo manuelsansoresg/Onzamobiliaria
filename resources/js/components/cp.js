@@ -19,7 +19,6 @@ window.searchPostal = function(){
                     
                     var result = response.data.data;
                     $('#colonia').removeAttr("disabled");
-                    $('#nextOne').removeAttr("disabled");
 
                     result.forEach(row => {
                         $('#colonia').append(new Option(row.colonia, row.id ))
@@ -36,7 +35,6 @@ window.searchPostal = function(){
                     });
                    
                     $('#colonia').addAttr("disabled");
-                    $('#nextOne').addAttr("disabled");
                 }
 
                 //$('.spinner-contacto').hide();
@@ -46,7 +44,7 @@ window.searchPostal = function(){
 
                 var result = error.response.data;
 
-                $('.spinner-contacto').hide();
+                /* $('.spinner-contacto').hide(); */
 
 
 

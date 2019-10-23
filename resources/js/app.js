@@ -31,6 +31,6 @@ window.Vue = require('vue'); */
     el: '#app',
 }); */
 require('./bootstrap');
-require('./components/step.js');
+//require('./components/step.js');
 require('./components/cp.js');
-require('./components/property.js');
+//require('./components/property.js');

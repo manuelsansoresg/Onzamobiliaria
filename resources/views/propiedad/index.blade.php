@@ -29,6 +29,7 @@
                         <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
                 </div>
+                <br><br>
                 <div class="col-md-12">
                     @include('flash::message')
                 </div>
