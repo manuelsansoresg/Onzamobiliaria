@@ -153,15 +153,30 @@
                         <label>*CP</label>
 
                         <div class="row">
-                            <div class="col-xs-9 col-md-10">
-                                <input type="text" name="cp" id="cp" value="{{ $postals['postal']->codigo }}" class="form-control">
+
+                            <div class="col-xs-9 col-md-12">
+
+                                <div class="input-group input-group-sm">
+                                    <input type="text" name="cp" id="cp" value="{{ $postals['postal']->codigo }}" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="button" onclick="searchPostal()" class="btn btn-info btn-flat ">Buscar</button>
+                                    </span>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="col-xs-12 col-md-12">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cp')}}</span>
                                 @endif
                             </div>
-                            <div class="col-xs-3 col-md-2 btn-cp">
-                                <button type="button" onclick="searchPostal()" class="btn btn-info btn-flat ">Buscar</button>
-                            </div>
+
+
+
+                           
                         </div>
                     </div>
 

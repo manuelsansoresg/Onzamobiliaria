@@ -14,9 +14,9 @@ class PropertyAssigmentController extends Controller
     public function index()
     {
         //
-        $Statusasesores = Property_assigment::getall();
+        $property_assignments = Property_assigment::getall();
         
-        return view('Seguimiento-Asesores.index', compact('Statusasesores'));
+        return view('Seguimiento-Asesores.index', compact('property_assignments'));
     }
 
     /**

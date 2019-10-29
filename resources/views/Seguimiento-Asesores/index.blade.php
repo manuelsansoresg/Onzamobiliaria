@@ -40,13 +40,13 @@
                             <th></th>
                         </tr>
                     </thead>
-                    @foreach ($operations as $operation)
+                    @foreach ($property_assignments as $property_assignment)
                     <tbody>
                         <tr>
-                            <td>{{ $operation->id  }}</td>
-                            <td>{{ $operation->description  }}</td>
+                            <td>{{ $property_assignment->id  }}</td>
+                            <td>{{ $property_assignment->observation1  }}</td>
                             <td>
-                                @if($operation->status == 0)
+                                @if($property_assignment->status == 0)
                                 <i class="fas fa-ban text-danger"></i>
                                 <span>Inactivo</span>
                                 @else
@@ -56,16 +56,16 @@
 
                             </td>
                             <td>
-                                {{ Form::open(['route' => ['operaciones.destroy', $operation->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('operaciones.edit', $operation->id)}}" class="btn btn-primary">
+                                {{ Form::open(['route' => ['operaciones.destroy', $property_assignment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                <a href="{{route('operaciones.edit', $property_assignment->id)}}" class="btn btn-primary">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                @if($operation->status == 0)
-                                <a href="/admin/Seguimiento-Asesores/status/{{ $operation->id }}/1" class="btn btn-success">
+                                @if($property_assignment->status == 0)
+                                <a href="/admin/Seguimiento-Asesores/status/{{ $property_assignment->id }}/1" class="btn btn-success">
                                     <i class="fas fa-ban text-white"></i>
                                 </a>
                                 @else
-                                <a href="/admin/Seguimiento-Asesores/status/{{ $operation->id }}/0" class="btn btn-warning">
+                                <a href="/admin/Seguimiento-Asesores/status/{{ $property_assignment->id }}/0" class="btn btn-warning">
                                     <i class="fas fa-ban"></i>
                                 </a>
                                 @endif

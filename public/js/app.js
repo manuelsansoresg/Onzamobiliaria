@@ -39861,7 +39861,7 @@ window.Vue = require('vue'); */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //require('./components/step.js');
 
 
-__webpack_require__(/*! ./components/cp.js */ "./resources/js/components/cp.js"); //require('./components/property.js');
+__webpack_require__(/*! ./components/cp.js */ "./resources/js/components/cp.js");
 
 /***/ }),
 

@@ -127,4 +127,11 @@ class Property extends Model
 
     }
 
+    static function addUserProperty($property_id, $user_id)
+    {
+        $property = Property::find($property_id);
+        $property->user_id_capture = $user_id;
+        $property->update();
+    }
+
 }

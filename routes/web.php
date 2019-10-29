@@ -43,14 +43,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/propiedad', 'PropertyController');
     Route::get('/propiedad/status/{id}/{status}', 'PropertyController@changeStatus');
     Route::get('/propiedad/destroy-document/{id}', 'PropertyController@destroyDocument');
+    Route::get('/property/addUser/{id}/{user_id}', 'PropertyController@addUser');
 
     Route::resource('/postal', 'PostalController');
 
     Route::resource('/prospecto', 'LeadController');
     Route::get('/prospecto/status/{id}/{status}', 'LeadController@changeStatus');
 
-    Route::resource('/Seguimiento-Asesores', 'PropertyAssigmentController');
-    Route::get('/Seguimiento-Asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
+    Route::resource('/seguimiento-asesores', 'PropertyAssigmentController');
+    Route::get('/seguimiento-asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
+    
+    
 
     Route::resource('/usuarios', 'UserController');
 

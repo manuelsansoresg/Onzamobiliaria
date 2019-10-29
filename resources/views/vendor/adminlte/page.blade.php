@@ -92,18 +92,18 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
-               @role('admin')
-                    <li class="header">Cuentas</li>
-                    <li class="">
-                        <a href="/admin/usuarios">
-                            <i class="fas fa-user"></i>
-                            <span>
-                                Usuario
-                            </span>
-                    
-                        </a>
-                    </li>
-               @endrole
+                @role('admin')
+                <li class="header">Cuentas</li>
+                <li class="">
+                    <a href="/admin/usuarios">
+                        <i class="fas fa-user"></i>
+                        <span>
+                            Usuario
+                        </span>
+
+                    </a>
+                </li>
+                @endrole
             </ul>
             <!-- /.sidebar-menu -->
         </section>

@@ -37,7 +37,7 @@
 
                     </div>
 
-                  
+
 
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
@@ -76,10 +76,10 @@
                             <input name="celular2" class="form-control" type="text">
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="col-xs-12 col-md-11">
-                        <h4 class="page-header">  </h4>    
+                        <h4 class="page-header"> </h4>
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
@@ -87,14 +87,14 @@
                             <input type="text" class="form-control" name="calle">
                         </div>
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-2">
                         <div class="form-group">
                             <label>No interior</label>
                             <input type="text" class="form-control" name="no_interior">
                         </div>
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-2">
                         <div class="form-group">
                             <label>No exterior</label>
@@ -107,15 +107,15 @@
                             <label>Predial</label>
                             <input name="predial" class="form-control" type="text">
                         </div>
-                    
+
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
                             <label>Institución</label>
                             <input name="institucion" class="form-control" type="text">
                         </div>
-                    
+
                     </div>
 
                     <div class="col-xs-12 col-md-2">
@@ -123,7 +123,7 @@
                             <label>Precio</label>
                             <input name="precio" class="form-control" type="text">
                         </div>
-                    
+
                     </div>
 
                     <div class="col-xs-12 col-md-2">
@@ -144,27 +144,36 @@
                             <input name="clave_easybroke" class="form-control" type="text">
                         </div>
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-11">
                         <h4 class="page-header"> </h4>
                     </div>
 
                     <div class="col-xs-12 col-md-4">
-                    
+
                         <label>*CP</label>
-                    
+
                         <div class="row">
-                            <div class="col-xs-9 col-md-10">
-                                <input type="text" name="cp" id="cp" class="form-control">
+                            <div class="col-xs-9 col-md-12">
+
+                                <div class="input-group input-group-sm">
+                                    <input type="text" name="cp" id="cp" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="button" onclick="searchPostal()" class="btn btn-info btn-flat ">Buscar</button>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12 col-md-12">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cp')}}</span>
                                 @endif
                             </div>
-                            <div class="col-xs-3 col-md-2 btn-cp">
-                                <button type="button" onclick="searchPostal()" class="btn btn-info btn-flat ">Buscar</button>
-                            </div>
+
                         </div>
                     </div>
+
 
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
@@ -175,12 +184,12 @@
                             <span class="text-danger"> {{$errors->first('colonia')}}</span>
                             @endif
                         </div>
-                        
+
                     </div>
 
                     <div class="col-xs-12 col-md-12"> </div>
 
-                   
+
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
                             <label>Inmobiliaria</label>
@@ -190,9 +199,9 @@
                                 @endforeach
                             </select>
                         </div>
-                    
+
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
                             <label>Operacion</label>
@@ -202,9 +211,9 @@
                                 @endforeach
                             </select>
                         </div>
-                    
+
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-3">
                         <div class="form-group">
                             <label>Pago</label>
@@ -214,7 +223,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    
+
                     </div>
 
 
@@ -224,21 +233,21 @@
                             <input type="checkbox" name="avaluo" value="1">
                         </div>
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-3">
                         <div class="form-group">
                             <label>Gravamenes</label> &nbsp;
                             <input type="checkbox" name="gravamenes" value="1">
                         </div>
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-3">
                         <div class="form-group">
                             <label>Habitar</label> &nbsp;
                             <input type="checkbox" name="habitar" value="1">
                         </div>
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-3">
                         <div class="form-group">
                             <label>Propietario</label> &nbsp;
@@ -249,14 +258,14 @@
                     <div class="col-xs-12 col-md-11">
                         <h4 class="page-header"> </h4>
                     </div>
-                    
+
                     <div class="col-xs-12 col-md-11">
                         <div class="form-group">
                             <label> Documento </label>
                             <input type="file" name="documento" class="form-control">
                         </div>
                     </div>
-                   
+
 
 
                     <div class="col-xs-12 col-md-11">
@@ -281,23 +290,24 @@
                     </div>
 
 
-                    
 
-                    
+
+
                     <div class="col-md-11">
-                        <p class="margin">  </p>
+                        <p class="margin"> </p>
 
-                        <button  class="btn btn-primary pull-right " type="submit">Guardar</button>
+                        <button class="btn btn-primary pull-right " type="submit">Guardar</button>
                     </div>
 
                 </div>
-                
+
                 {{ Form::close() }}
             </div>
-            
+
         </div>
     </div>
 </div>
+
 @stop
 
 @section('adminlte_js')

@@ -8,6 +8,7 @@ use App\Operation;
 use App\Postal;
 use App\Property;
 use App\Realstate;
+use App\User;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,15 @@ class PropertyController extends Controller
     public function index()
     {
         $properties = Property::getAll();
-        return view('propiedad.index', compact('properties'));
+        $users      = User::all();
+
+        return view('propiedad.index', compact('properties', 'users'));
+    }
+
+    public function addUser($property_id, $user_id)
+    {
+        $property = Property::addUserProperty($property_id, $user_id);
+        return response()->json($property);
     }
 
     /**
