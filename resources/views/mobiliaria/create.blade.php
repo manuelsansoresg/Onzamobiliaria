@@ -40,7 +40,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group  pull-right">
                                 <button class="btn btn-primary">Guardar</button>
                             </div>
                         </div>

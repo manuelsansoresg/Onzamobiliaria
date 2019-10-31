@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Property extends Model
 {
@@ -41,6 +42,8 @@ class Property extends Model
     {
         $user      = User::find(Auth::id());
         $user_role = $user->getRoleNames()->first();
+        
+        DB::enableQueryLog();
 
         $property = Property::select('realstates.description as realstate_description',
                                     'properties.id',
@@ -50,10 +53,12 @@ class Property extends Model
                                     'assessment',
                                     'habitar',
                                     'is_property',
-                                    'properties.status as status'
+                                    'properties.status as status',
+                                    'username'
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
                         ->join('operations', 'operations.id', '=', 'properties.operation_id')
+                        ->leftJoin('users', 'users.id', '=', 'properties.user_id_capture')
                         ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id');
 
         if($user_role != 'admin'){
@@ -61,6 +66,7 @@ class Property extends Model
         }
         
         $property = $property->get();
+        
         return $property;
     }
 
@@ -131,6 +137,7 @@ class Property extends Model
     {
         $property = Property::find($property_id);
         $property->user_id_capture = $user_id;
+        $property->date_assignment = date('Y-m-d H:i:s');
         $property->update();
     }
 

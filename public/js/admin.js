@@ -4998,11 +4998,7 @@ window.userModal = function (property_id) {
 window.addUser = function (user_id) {
   var property_id = $('#property_id').val();
   axios.get('/admin/property/addUser/' + property_id + '/' + user_id).then(function (response) {
-    Swal.fire({
-      title: 'OK',
-      text: 'Usiario asignado',
-      type: 'success'
-    });
+    location.reload();
   })["catch"](function (error) {
     var result = error.response.data;
     /* $('.spinner-contacto').hide(); */

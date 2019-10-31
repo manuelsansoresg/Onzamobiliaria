@@ -138,9 +138,12 @@ class PropertyController extends Controller
         
         $form_payment = Property::find($id);
         $form_payment->status = $status;
+        
         if($status == 0){
             $form_payment->user_id_cancel = Auth::id();
+            $form_payment->date_cancel    = date('Y-m-d H:i:s');
         }
+        
         $form_payment->update();
         return redirect('/admin/propiedad');
     }

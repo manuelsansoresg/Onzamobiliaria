@@ -14,11 +14,8 @@ window.addUser = function (user_id) {
     axios.get
         ('/admin/property/addUser/' + property_id + '/' + user_id)
         .then(function (response) {
-            Swal.fire({
-                title: 'OK',
-                text: 'Usiario asignado',
-                type: 'success',
-            });
+           
+            location.reload(); 
          })
         .catch(function (error) {
 

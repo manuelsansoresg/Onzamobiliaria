@@ -1,16 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuarios')
+@section('title', 'Asignación de Asesores')
 
 @section('content_header')
 <section class="content-header">
     <h1>
-        Usuarios
+        Seguimiento de asesores
         <small>Lista</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Usuarios</li>
+        <li><a href="/admin/seguimiento-asesores"><i class="fa fa-dashboard"></i> Seguimiento de asesores</a></li>
+        <li class="active">lista de llamadas</li>
     </ol>
 </section>
 @stop
@@ -19,12 +20,12 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Usuarios</h3>
+                <h3 class="box-title">lista de llamadas</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div>
-                    <a href="/admin/usuarios/create" class="btn btn-success pull-right">
+                    <a href="/admin/seguimiento-asesores/{{ $property_id }}/create" class="btn btn-success pull-right">
                         <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
                 </div>
@@ -32,38 +33,49 @@
                 <div class="col-md-12">
                     @include('flash::message')
                 </div>
-                <br>
-                <br>
-                <br>
                 <table id="mobiliaria" class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
+                            
+                            <th> Fecha </th>
                             <th>Nombre</th>
-                            <th>Nick</th>
-                            <th>Correo</th>
-                            <th>Easy Broker</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
-                    @foreach ($users as $user)
+                    @foreach ($property_assignments as $property_assignment)
                     <tbody>
                         <tr>
-                            <td>{{ $user->id  }}</td>
-                            <td>{{ $user->name  }}</td>
-                            <td>{{ $user->username  }}</td>
-                            <td>{{ $user->email  }}</td>
-                            <td>{{ $user->easy_broker  }}</td>
-
                             <td>
-                                {{ Form::open(['route' => ['usuarios.destroy', $user->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('usuarios.edit', $user->id)}}" class="btn btn-primary">
+                            {{ date('Y-m-d', strtotime($property_assignment->date) ) }}
+                            </td>
+                            <td>
+                                {{ $property_assignment->name }}
+                            </td>
+                            
+                            <td>
+                                {{ $property_assignment->description }}
+                            </td>
+                            
+                            <td>
+                                {{ Form::open(['route' => ['seguimiento-asesores.destroy', $property_assignment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                <a href="{{route('seguimiento-asesores.edit', $property_assignment->id)}}" class="btn btn-primary">
                                     <i class="far fa-edit"></i>
                                 </a>
-
+                                @if($property_assignment->status == 0)
+                                <a href="/admin/seguimiento-asesores/status/{{ $property_assignment->id }}/1" class="btn btn-success">
+                                    <i class="fas fa-ban text-white"></i>
+                                </a>
+                                @else
+                                <a href="/admin/seguimiento-asesores/status/{{ $property_assignment->id }}/0" class="btn btn-warning">
+                                    <i class="fas fa-ban"></i>
+                                </a>
+                                @endif
                                 <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
+
+
                                 {{ Form::close() }}
                             </td>
                         </tr>

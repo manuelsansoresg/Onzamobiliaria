@@ -10,7 +10,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Asignacion de Asesores</li>
+        <li class="active">Seguimiento de Asesores</li>
     </ol>
 </section>
 @stop
@@ -19,15 +19,16 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Asignacion de Asesores</h3>
+                <h3 class="box-title">Seguimiento de Asesores</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <div>
-                    <a href="/admin/Seguimiento-Asesores/create" class="btn btn-app pull-right">
-                        <i class="fa fa-plus"></i> Nuevo
+               {{--  <div>
+                    <a href="/admin/seguimiento-asesores/create" class="btn btn-success pull-right">
+                        <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
-                </div>
+                </div> --}}
+                <br><br>
                 <div class="col-md-12">
                     @include('flash::message')
                 </div>
@@ -35,8 +36,8 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Descripción</th>
-                            <th>Status</th>
+                            <th>Dirección</th>
+                            <th> Easybroker </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -44,34 +45,20 @@
                     <tbody>
                         <tr>
                             <td>{{ $property_assignment->id  }}</td>
-                            <td>{{ $property_assignment->observation1  }}</td>
                             <td>
-                                @if($property_assignment->status == 0)
-                                <i class="fas fa-ban text-danger"></i>
-                                <span>Inactivo</span>
-                                @else
-                                <i class="fas fa-ban text-success"></i>
-                                <span>Activo</span>
-                                @endif
-
+                                Calle: {{ $property_assignment->street  }} No int: {{ $property_assignment->noInt  }} No ext: {{ $property_assignment->noExt  }}
+                                Colonia: {{  $property_assignment->colonia }}
                             </td>
                             <td>
-                                {{ Form::open(['route' => ['operaciones.destroy', $property_assignment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('operaciones.edit', $property_assignment->id)}}" class="btn btn-primary">
-                                    <i class="far fa-edit"></i>
+                                {{ $property_assignment->pass_easy_broker }}
+                            </td>
+                            <td>
+                                {{ Form::open(['route' => ['seguimiento-asesores.destroy', $property_assignment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                <a href="/admin/seguimiento-asesores/lista/{{ $property_assignment->id }}" class="btn btn-primary">
+                                   <i class="fas fa-phone-volume"></i>
                                 </a>
-                                @if($property_assignment->status == 0)
-                                <a href="/admin/Seguimiento-Asesores/status/{{ $property_assignment->id }}/1" class="btn btn-success">
-                                    <i class="fas fa-ban text-white"></i>
-                                </a>
-                                @else
-                                <a href="/admin/Seguimiento-Asesores/status/{{ $property_assignment->id }}/0" class="btn btn-warning">
-                                    <i class="fas fa-ban"></i>
-                                </a>
-                                @endif
-                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
+                               
+                               
                                 {{ Form::close() }}
                             </td>
                         </tr>

@@ -42,6 +42,7 @@
                     <thead>
                         <tr>
                             <th>Inmobiliaria</th>
+                            <th>Usuario asignado</th>
                             <th>Operación</th>
                             <th>Pago</th>
                             <th>Avaluo</th>
@@ -57,6 +58,7 @@
                         @foreach ($properties as $property)
                         <tr>
                             <td>{{ $property->realstate_description  }}</td>
+                            <td> {{ $property->username }} </td>
                             <td>{{ $property->operations_description  }}</td>
                             <td>{{ $property->form_payment_description  }}</td>
                             <td>

@@ -32,7 +32,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                {{ Form::open(['route' => 'prospecto.store', 'method' => 'POST', 'id' => 'frm-property',  'files' => true]) }}
+                {{ Form::open(['route' => 'seguimiento-asesores.store', 'method' => 'POST', 'id' => 'frm-property',  'files' => true]) }}
                 <input type="hidden" name="status" value="1">
                 <div class="container">
                     <p class="text-yellow">Los campos marcados con * son obligatorios</p>
