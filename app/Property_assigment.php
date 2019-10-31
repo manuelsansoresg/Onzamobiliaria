@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,4 +38,29 @@ class Property_assigment extends Model
                     ->get();
         return $property;
     }
+
+    static function countCalls($property_id)
+    {
+        $property = Property_assigment::select('property_id')->where('property_id', $property_id)->count();
+        return $property;
+    }
+
+    static function getAlert($property_id)
+    {
+        #saber si se puso en contacto
+        $property     = Property::select('date_assignment')->find($property_id);
+        
+        $date1        = new DateTime(date('Y-m-d H:i:s', strtotime($property->date_assignment)));
+        $date2        = new DateTime("now");
+        $diff         = $date1->diff($date2);
+        $dias         = $diff->format('%d');
+        $class_danger = '';
+
+        if($dias > 0){
+            $class_danger = 'danger';
+        }
+        
+        return $class_danger;
+    }
+
 }

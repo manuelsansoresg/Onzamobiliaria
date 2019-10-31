@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-               {{--  <div>
+                {{-- <div>
                     <a href="/admin/seguimiento-asesores/create" class="btn btn-success pull-right">
                         <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
                     </a>
@@ -38,27 +38,32 @@
                             <th style="width: 10px">#</th>
                             <th>Dirección</th>
                             <th> Easybroker </th>
+                            <th>Numero de llamadas</th>
                             <th></th>
                         </tr>
                     </thead>
                     @foreach ($property_assignments as $property_assignment)
                     <tbody>
-                        <tr>
+                        <tr class="{{ classAlert($property_assignment->id) }}">
                             <td>{{ $property_assignment->id  }}</td>
                             <td>
                                 Calle: {{ $property_assignment->street  }} No int: {{ $property_assignment->noInt  }} No ext: {{ $property_assignment->noExt  }}
-                                Colonia: {{  $property_assignment->colonia }}
+                                Colonia: {{ $property_assignment->colonia }}
                             </td>
                             <td>
                                 {{ $property_assignment->pass_easy_broker }}
                             </td>
                             <td>
+                                {{ countCalls($property_assignment->id) }}
+                              
+                            </td>
+                            <td>
                                 {{ Form::open(['route' => ['seguimiento-asesores.destroy', $property_assignment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
                                 <a href="/admin/seguimiento-asesores/lista/{{ $property_assignment->id }}" class="btn btn-primary">
-                                   <i class="fas fa-phone-volume"></i>
+                                    <i class="fas fa-phone-volume"></i>
                                 </a>
-                               
-                               
+
+
                                 {{ Form::close() }}
                             </td>
                         </tr>
