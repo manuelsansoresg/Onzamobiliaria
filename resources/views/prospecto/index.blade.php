@@ -48,7 +48,7 @@
                             <th>Telefono</th>
                             <th>Fecha de Asignacion</th>
                             <th>Status</th>
-                            <th></th>
+                            <th style="width: 120px"></th>
                         </tr>
                     </thead>
                     @foreach ($leads as $lead)

@@ -2,7 +2,7 @@
 
 @section('title', 'Prospecto')
 
-@section('adminlte_css')
+@section('css')
 <link rel="stylesheet" href="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
@@ -217,7 +217,7 @@
 </div>
 @stop
 
-@section('adminlte_js')
+@section('js')
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 <script>

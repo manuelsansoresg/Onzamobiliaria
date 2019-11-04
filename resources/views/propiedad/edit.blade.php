@@ -2,7 +2,7 @@
 
 @section('title', 'Propiedad')
 
-@section('adminlte_css')
+@section('css')
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
 
@@ -176,7 +176,7 @@
 
 
 
-                           
+
                         </div>
                     </div>
 
@@ -320,7 +320,7 @@
 </div>
 @stop
 
-@section('adminlte_js')
+@section('js')
 <script src="{{ asset('vendor_assets/typeahead/typeahead.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 

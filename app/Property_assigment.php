@@ -57,6 +57,7 @@ class Property_assigment extends Model
         $class_danger = '';
 
         if($dias > 0){
+            $property = Property_assigment::select('property_id')->where('property_id', $property_id)->count();
             $class_danger = 'danger';
         }
         

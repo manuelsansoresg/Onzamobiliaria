@@ -38,25 +38,34 @@
                             <th style="width: 10px">#</th>
                             <th>Dirección</th>
                             <th> Easybroker </th>
+                            @role('admin')
                             <th>Numero de llamadas</th>
+                            @endrole
                             <th></th>
                         </tr>
                     </thead>
                     @foreach ($property_assignments as $property_assignment)
                     <tbody>
-                        <tr class="{{ classAlert($property_assignment->id) }}">
+                        @role('admin')
+                            <tr class="{{ classAlert($property_assignment->id) }}">
+                            @else
+                            <tr >
+                        @endrole
                             <td>{{ $property_assignment->id  }}</td>
                             <td>
                                 Calle: {{ $property_assignment->street  }} No int: {{ $property_assignment->noInt  }} No ext: {{ $property_assignment->noExt  }}
                                 Colonia: {{ $property_assignment->colonia }}
                             </td>
+                            @role('admin')
                             <td>
                                 {{ $property_assignment->pass_easy_broker }}
                             </td>
+                            @endrole
                             <td>
                                 {{ countCalls($property_assignment->id) }}
                               
                             </td>
+                           
                             <td>
                                 {{ Form::open(['route' => ['seguimiento-asesores.destroy', $property_assignment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
                                 <a href="/admin/seguimiento-asesores/lista/{{ $property_assignment->id }}" class="btn btn-primary">
@@ -66,6 +75,7 @@
 
                                 {{ Form::close() }}
                             </td>
+                            
                         </tr>
                     </tbody>
                     @endforeach
