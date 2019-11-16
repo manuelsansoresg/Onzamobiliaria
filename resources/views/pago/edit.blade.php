@@ -14,28 +14,24 @@
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => ['pago.update', $form_payment->id], 'method' => 'PUT', 'files' => true]) }}
-            <div class="row">
-                <div class="col-12">
-                    <h5>Nuevo Metodo Pago</h5>
+            <div class="card">
+                <div class="card-header">
+                    EDITAR METODO PAGO
                 </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Descripción</label>
+                <div class="card-body">
+                    <h5 class="card-title">DESCRIPCION</h5>
+                    <div class="form-group">                        
                         <input type="text" name="description" value="{{ $form_payment->description }}" class="form-control">
                         <input type="hidden" name="status" value="{{ $form_payment->status }}">
                         @if($errors)
                         <span class="text-danger"> {{$errors->first('description')}}</span>
                         @endif
                     </div>
+                    <div class="col-12 text-right">
+                        <button class="btn btn-primary">Guardar</button>
+                    </div>    
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 text-right">
-                    <button class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
+            </div>           
             {{ Form::close() }}
         </div>
     </div>

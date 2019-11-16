@@ -62,7 +62,7 @@ class Property extends Model
             'metros_construccion',
             'metros_terreno',
             'frente',
-            'fondo',
+            'fondo'
                                     
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
