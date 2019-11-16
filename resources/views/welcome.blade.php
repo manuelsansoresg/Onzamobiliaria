@@ -47,7 +47,7 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="" class="text-body">
-                            Propiedad
+                        <span class="h6">PROPIEDADES</span>
                         </a>
                     </h5>
 
@@ -63,7 +63,7 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="" class="text-body">
-                            Seguimiento
+                        <span class="h6">SEGUIMIENTOS</span>
                         </a>
                     </h5>
 

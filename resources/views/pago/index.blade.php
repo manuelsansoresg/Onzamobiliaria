@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Clientes')
+@section('title', 'Metodo Pago')
 
 @section('content')
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-12 text-right">
-            <a href="/admin/clientes/create" class="btn btn-success btn-sm  pull-right">
+            <a href="/admin/pago/create" class="btn btn-success btn-sm  pull-right">
                 <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
             </a>
         </div>
