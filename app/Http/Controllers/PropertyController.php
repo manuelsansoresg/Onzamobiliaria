@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\FormPayment;
 use App\Http\Requests\PropertyRequest;
 use App\Operation;
@@ -19,7 +20,7 @@ class PropertyController extends Controller
     
     public function __construct()
     {
-        $this->path_document = '/propiedades';
+        $this->path_document = '/propiedades/documentos';
         
     }
     
@@ -53,8 +54,9 @@ class PropertyController extends Controller
         $real_states   = Realstate::where('status', 1)->get();
         $operations    = Operation::where('status', 1)->get();
         $form_payments = FormPayment::where('status', 1)->get();
+        $clients       = Client::all();
 
-        return view('propiedad.create', compact('real_states', 'operations', 'form_payments') );
+        return view('propiedad.create', compact('real_states', 'operations', 'form_payments', 'clients') );
     }
 
     /**
@@ -65,6 +67,7 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
+//        dd($request->all());
         $property = Property::createUpdateProperty($request, $this->path_document );
         flash('Elemento guardado');
         return redirect('/admin/propiedad');

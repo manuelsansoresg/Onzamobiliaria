@@ -28,3 +28,8 @@ window.addUser = function (user_id) {
         })
 
 }
+ 
+window.addClient = function(cve){
+    $('#cve_int_cliente').val(cve);
+    $('#clientModal').modal('hide');
+}

@@ -39863,6 +39863,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //require
 
 __webpack_require__(/*! ./components/cp.js */ "./resources/js/components/cp.js");
 
+__webpack_require__(/*! ./components/property */ "./resources/js/components/property.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -39964,6 +39966,41 @@ window.searchPostal = function () {
       /* $('.spinner-contacto').hide(); */
     });
   }
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/property.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/property.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* var validate = require('jquery-validation');
+import 'jquery-validation/dist/localization/messages_es'; */
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+
+window.userModal = function (property_id) {
+  $('#userModal').modal('show');
+  $('#property_id').val(property_id);
+};
+
+window.addUser = function (user_id) {
+  var property_id = $('#property_id').val();
+  axios.get('/admin/property/addUser/' + property_id + '/' + user_id).then(function (response) {
+    location.reload();
+  })["catch"](function (error) {
+    var result = error.response.data;
+    /* $('.spinner-contacto').hide(); */
+  });
+};
+
+window.addClient = function (cve) {
+  $('#cve_int_cliente').val(cve);
+  $('#clientModal').modal('hide');
 };
 
 /***/ }),

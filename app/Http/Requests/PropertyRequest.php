@@ -24,8 +24,9 @@ class PropertyRequest extends FormRequest
     public function rules()
     {
         return [
-            'cp' => 'required',
-            'colonia' => 'required',
+            
+            'address' => 'required',
+            'cve_int_cliente' => 'exists:clients,clave_interna',
         ];
     }
 }

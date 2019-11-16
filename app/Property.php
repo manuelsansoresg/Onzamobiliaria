@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class Property extends Model
 {
-
+    protected $fillable = [
+        'realstate_id', 'operation_id', 'postal_id', 'form_pay_id',
+        'inmobiliaria','operacion', 'avaluo', 'address', 'small', 'gravamenes', 'precio', 'saldo', 'is_predial', 'habitar', 'document',
+        'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
+        'cve_int_cliente', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
     static function getById($id)
     {
         $property = Property::select(
@@ -88,12 +92,30 @@ class Property extends Model
         $get_cp = Postal::where('id', $request->colonia )->first();
 
         if ($isUpdate == false) {
-            $property  = new Property();
+            $client   = Client::where('clave_interna', $request->cve_int_cliente)->first();
+            $property = new Property($request->except('_token', 'cve_int_cliente', 'identificacion',
+            'curp','rfc','acta_nacimiento','acta_matrimonio','predial','no_adeudo_agua','no_adeudo_predial','cedula_plano_catastral','copia_escritura','reglamento_condominios_no_adeudo' ));
+            $property->client_id = $client->id;
         }else{
             $property = Property::find($property_id);
+            $property->fill($request->except(
+                '_token',
+                'cve_int_cliente',
+                'identificacion',
+                'curp',
+                'rfc',
+                'acta_nacimiento',
+                'acta_matrimonio',
+                'predial',
+                'no_adeudo_agua',
+                'no_adeudo_predial',
+                'cedula_plano_catastral',
+                'copia_escritura',
+                'reglamento_condominios_no_adeudo'
+            ) );
         }
-
-        $property->realstate_id = $request->inmobiliaria; //departamento-local-terreno
+       
+       /*  $property->realstate_id = $request->inmobiliaria; //departamento-local-terreno
         $property->Avaluo       = $request->avaluo;
         $property->operation_id = $request->operacion; //preventa-venta-renta
         $property->price        = $request->precio;
@@ -104,9 +126,9 @@ class Property extends Model
         $property->assessment   = $request->gravamenes;
         $property->predial      = $request->predial; // si o no
         $property->habitar      = $request->habitar;
-        $property->status       = $request->status;
+        $property->status       = $request->status; */
         
-        if ($request->hasFile('documento') != false) {
+       /*  if ($request->hasFile('documento') != false) {
             
             $documnet_file = $request->file('documento');
             $extension = $documnet_file->getClientOriginalExtension();
@@ -115,9 +137,9 @@ class Property extends Model
             $documnet_file->move('.'.$path, $name_full);
 
             $property->document     = $name_full;
-        }
+        } */
 
-        $property->form_pay_id      = $request->pago;
+        /* $property->form_pay_id      = $request->pago;
         $property->institution      = $request->institucion;
         $property->name             = $request->nombre;
         $property->email            = $request->email;
@@ -132,16 +154,65 @@ class Property extends Model
         $property->date_write       = date('Y-m-d H:i:s');
         $property->rooms            = $request->habitacion;
         $property->bathrooms        = $request->banios;
-        $property->pass_easy_broker = $request->clave_easybroke;
-        
+        $property->pass_easy_broker = $request->clave_easybroke; */
+       
         if($isUpdate == false){
             $property->save();
         }else{
             $property->update();
         }
+        
+        $path_file = $path . '/' . $property->id.'/';
+
+        
+        if ($request->hasFile('cve_int_cliente') != false) {
+            self::copyFie($request, 'cve_int_cliente', $path_file);
+        }
+        if ($request->hasFile('identificacion') != false) {
+            self::copyFie($request, 'identificacion', $path_file);
+        }
+        if ($request->hasFile('curp') != false) {
+            self::copyFie($request, 'curp', $path_file);
+        }
+        if ($request->hasFile('rfc') != false) {
+            self::copyFie($request, 'rfc', $path_file);
+        }
+        if ($request->hasFile('acta_nacimiento') != false) {
+            self::copyFie($request, 'acta_nacimiento', $path_file);
+        }
+        if ($request->hasFile('acta_matrimonio') != false) {
+            self::copyFie($request, 'acta_matrimonio', $path_file);
+        }
+        if ($request->hasFile('predial') != false) {
+            self::copyFie($request, 'predial', $path_file);
+        }
+        if ($request->hasFile('no_adeudo_agua') != false) {
+            self::copyFie($request, 'no_adeudo_agua', $path_file);
+        }
+        if ($request->hasFile('no_adeudo_predial') != false) {
+            self::copyFie($request, 'no_adeudo_predial', $path_file);
+        }
+        if ($request->hasFile('cedula_plano_catastral') != false) {
+            self::copyFie($request, 'cedula_plano_catastral', $path_file);
+        }
+        if ($request->hasFile('copia_escritura') != false) {
+            self::copyFie($request, 'copia_escritura', $path_file);
+        }
+        if ($request->hasFile('reglamento_condominios_no_adeudo') != false) {
+            self::copyFie($request, 'reglamento_condominios_no_adeudo', $path_file);
+        }
 
         return $property;   
 
+    }
+
+    static function copyFie($request, $name, $path)
+    {
+        $documnet_file = $request->file($name);
+        $extension = $documnet_file->getClientOriginalExtension();
+        $name_full = 'document_' . time() . rand(1,9999).  '.' . $extension;
+
+        $documnet_file->move('.' . $path, $name_full);
     }
 
     static function addUserProperty($property_id, $user_id)
