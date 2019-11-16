@@ -87,6 +87,7 @@
         var table = $('#mobiliaria').DataTable({
 
             responsive: true,
+            "pageLength": 5,
 
             language: {
                 "decimal": "",
