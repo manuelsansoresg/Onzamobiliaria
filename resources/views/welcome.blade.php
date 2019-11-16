@@ -6,6 +6,23 @@
 <div class="container">
     <div class="row mt-5 justify-content-center">
         @role('admin')
+
+        <div class="col-12 col-md-2">
+            <div class="card text-center">
+                <a href="/admin/pago">
+                    <i class="fas fa-hand-holding-usd fa-3x mt-3"></i>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="" class="text-body">
+                            <span class="h6">METODO PAGO</span>
+                        </a>
+                    </h5>
+
+                </div>
+            </div>
+        </div>
+
         <div class="col-12 col-md-2">
             <div class="card text-center">
                 <a href="/admin/clientes">
@@ -14,7 +31,7 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="/admin/clientes" class="text-body">
-                            Clientes
+                            <span class="h6">CLIENTES</span>
                         </a>
                     </h5>
 
