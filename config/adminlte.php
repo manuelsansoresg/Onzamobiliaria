@@ -114,11 +114,13 @@ return [
             'url'  => 'admin/mobiliaria',
             'can'  => 'manage-blog',
         ],
+        
         [
             'text' => 'Inmobiliaria',
             'url'  => 'admin/mobiliaria',
             'icon' => 'fas fa-home',
         ],
+        
         [
             'text' => 'Portales',
             'url'  => 'admin/portales',

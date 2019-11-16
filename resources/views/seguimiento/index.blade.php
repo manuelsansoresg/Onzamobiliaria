@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.master')
 
 @section('title', 'Seguimiento')
 
-@section('content_header')
+<!-- @section('content_header')
 <section class="content-header">
     <h1>
         Seguimiento
@@ -13,88 +13,74 @@
         <li class="active">Seguimiento</li>
     </ol>
 </section>
-@stop
+@stop -->
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Seguimiento</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div>
-                    <a href="/admin/seguimiento/create" class="btn btn-success pull-right">
-                        <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
-                    </a>
-                </div>
-                <br><br>
-                <div class="col-md-12">
-                    @include('flash::message')
-                </div>
-                <br>
-                <br>
-                <br>
-                <table id="mobiliaria" class="table table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Descripción</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    @foreach ($status_follows as $status_follow)
-                    <tbody>
-                        <tr>
-                            <td>{{ $status_follow->id  }}</td>
-                            <td>{{ $status_follow->description  }}</td>
-                            <td>
-                                @if($status_follow->status == 0)
-                                <i class="fas fa-ban text-danger"></i>
-                                <span>Inactivo</span>
-                                @else
-                                <i class="fas fa-ban text-success"></i>
-                                <span>Activo</span>
-                                @endif
-
-                            </td>
-                            <td>
-                                {{ Form::open(['route' => ['seguimiento.destroy', $status_follow->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('seguimiento.edit', $status_follow->id)}}" class="btn btn-primary">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                @if($status_follow->status == 0)
-                                <a href="/admin/seguimiento/status/{{ $status_follow->id }}/1" class="btn btn-success">
-                                    <i class="fas fa-ban text-white"></i>
-                                </a>
-                                @else
-                                <a href="/admin/seguimiento/status/{{ $status_follow->id }}/0" class="btn btn-warning">
-                                    <i class="fas fa-ban"></i>
-                                </a>
-                                @endif
-                                @role('admin')
-                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                                @endrole
-                                {{ Form::close() }}
-                            </td>
-                        </tr>
-                    </tbody>
-                    @endforeach
-
-                </table>
-                <div class="col-md-12 text-center">
-
-                </div>
-            </div>
-
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-12 text-right">
+            <a href="/admin/clientes/create" class="btn btn-success btn-sm  pull-right">
+                <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
+            </a>
         </div>
+        <div class="col-12 mt-3">
+            @include('flash::message')
+        </div>
+        <!-- /.box-header -->
+        <div class="col-12 mt-3">
+            <table id="mobiliaria" class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>STATUS</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach ($status_follows as $status_follow)
+                <tbody>
+                    <tr>
+                        <td>{{ $status_follow->id  }}</td>
+                        <td>{{ $status_follow->description  }}</td>
+                        <td>
+                            @if($status_follow->status == 0)
+                            <i class="fas fa-ban text-danger"></i>
+                            <span>Inactivo</span>
+                            @else
+                            <i class="fas fa-ban text-success"></i>
+                            <span>Activo</span>
+                            @endif
 
+                        </td>
+                        <td>
+                            {{ Form::open(['route' => ['seguimiento.destroy', $status_follow->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                            <a href="{{route('seguimiento.edit', $status_follow->id)}}" class="btn btn-primary btn-sm">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            @if($status_follow->status == 0)
+                            <a href="/admin/seguimiento/status/{{ $status_follow->id }}/1" class="btn btn-success btn-sm">
+                                <i class="fas fa-ban text-white"></i>
+                            </a>
+                            @else
+                            <a href="/admin/seguimiento/status/{{ $status_follow->id }}/0" class="btn btn-warning btn-sm">
+                                <i class="fas fa-ban"></i>
+                            </a>
+                            @endif
+                            @role('admin')
+                            <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                            @endrole
+                            {{ Form::close() }}
+                        </td>
+                    </tr>
+                </tbody>
+                @endforeach
+
+            </table>
+        </div>
     </div>
 </div>
-@stop
+@endsection
 
 @section('js')
 <script src="{{ asset('vendor/adminlte/plugins/datatable/js/responsive.js') }}"></script>

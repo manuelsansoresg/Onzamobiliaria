@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+
+Route::redirect('/', '/login', 301);
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('/mobiliaria','RealstateController');
@@ -44,6 +46,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/propiedad/status/{id}/{status}', 'PropertyController@changeStatus');
     Route::get('/propiedad/destroy-document/{id}', 'PropertyController@destroyDocument');
     Route::get('/property/addUser/{id}/{user_id}', 'PropertyController@addUser');
+    
+
 
     Route::resource('/postal', 'PostalController');
 
@@ -54,13 +58,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/seguimiento-asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
     Route::get('/seguimiento-asesores/lista/{property_id}', 'PropertyAssigmentController@lista');
     Route::get('/seguimiento-asesores/{property_id}/create', 'PropertyAssigmentController@create');
+
+    Route::get('/property/getAll', 'PropertyAssigmentController@getAll');
     
     
 
     Route::resource('/usuarios', 'UserController');
+    Route::resource('/clientes', 'ClientController');
 
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

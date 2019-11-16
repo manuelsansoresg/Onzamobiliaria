@@ -52,13 +52,22 @@ class Property extends Model
                                     'Avaluo',
                                     'assessment',
                                     'habitar',
+                                    'pass_easy_broker',
+                                    'properties.clave_interna',
+                                    'is_titulo',
+                                    'price',
+                                    'address',
                                     'is_property',
                                     'properties.status as status',
-                                    'username'
+            'metros_construccion',
+            'metros_terreno',
+            'frente',
+            'fondo',
+                                    
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
                         ->join('operations', 'operations.id', '=', 'properties.operation_id')
-                        ->leftJoin('users', 'users.id', '=', 'properties.user_id_capture')
+                        ->leftJoin('clients', 'clients.id', '=', 'properties.client_id')
                         ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id');
 
         if($user_role != 'admin'){
@@ -69,6 +78,8 @@ class Property extends Model
         
         return $property;
     }
+
+    
 
 
     static function createUpdateProperty($request, $path, $isUpdate = false, $property_id = null)
@@ -82,16 +93,16 @@ class Property extends Model
             $property = Property::find($property_id);
         }
 
-        $property->realstate_id = $request->inmobiliaria;
+        $property->realstate_id = $request->inmobiliaria; //departamento-local-terreno
         $property->Avaluo       = $request->avaluo;
-        $property->operation_id = $request->operacion;
+        $property->operation_id = $request->operacion; //preventa-venta-renta
         $property->price        = $request->precio;
         $property->postal_id    = $get_cp->id;
         $property->street       = $request->calle;
         $property->noInt        = $request->no_interior;
         $property->noExt        = $request->no_exterior;
         $property->assessment   = $request->gravamenes;
-        $property->predial      = $request->predial;
+        $property->predial      = $request->predial; // si o no
         $property->habitar      = $request->habitar;
         $property->status       = $request->status;
         

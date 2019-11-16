@@ -33,7 +33,7 @@ class PropertyController extends Controller
     {
         $properties = Property::getAll();
         $users      = User::all();
-
+        
         return view('propiedad.index', compact('properties', 'users'));
     }
 
@@ -132,6 +132,9 @@ class PropertyController extends Controller
         }
         return redirect('/admin/propiedad/'.$id. '/edit');
     }
+
+
+    
 
     public function changeStatus($id, $status)
     {

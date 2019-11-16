@@ -42,12 +42,12 @@
                 <table id="mobiliaria" class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th>Calle</th>
-                            <th>No int</th>
-                            <th>No ext</th>
-                            <th>Telefono</th>
-                            <th>Fecha de Asignacion</th>
-                            <th>Status</th>
+                            <th>CALLE</th>
+                            <th>NO INT</th>
+                            <th>NO EXT</th>
+                            <th>TELÉFONO</th>
+                            <th>FECHA DE ASIGNACIÓN</th>
+                            <th>STATUS</th>
                             <th style="width: 120px"></th>
                         </tr>
                     </thead>
@@ -143,7 +143,7 @@
                 "lengthMenu": "Mostrar _MENU_ Entradas",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
-                "search": "Buscar:",
+                "search": "BUSCAR:",
                 "zeroRecords": "Sin resultados encontrados",
                 "paginate": {
                     "first": "Primero",

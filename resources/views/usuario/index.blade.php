@@ -39,10 +39,10 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Nombre</th>
-                            <th>Nick</th>
-                            <th>Correo</th>
-                            <th>Easy Broker</th>
+                            <th>NOMBRE</th>
+                            <th>NICK</th>
+                            <th>CORREO</th>
+                            <th>EASY BROKER</th>
                             <th></th>
                         </tr>
                     </thead>

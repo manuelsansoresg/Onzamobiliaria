@@ -36,11 +36,11 @@
                 <table id="mobiliaria" class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            
-                            <th> Fecha </th>
-                            <th>Nombre</th>
-                            <th>Status</th>
-                           
+
+                            <th> FECHA </th>
+                            <th>NOMBRE CONTACTO</th>
+                            <th>STATUS</th>
+
                             <th></th>
                         </tr>
                     </thead>
@@ -48,16 +48,16 @@
                     <tbody>
                         <tr>
                             <td>
-                            {{ date('Y-m-d', strtotime($property_assignment->date) ) }}
+                                {{ date('Y-m-d', strtotime($property_assignment->date) ) }}
                             </td>
                             <td>
                                 {{ $property_assignment->name }}
                             </td>
-                            
+
                             <td>
                                 {{ $property_assignment->description }}
                             </td>
-                            
+
                             <td>
                                 {{ Form::open(['route' => ['seguimiento-asesores.destroy', $property_assignment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
                                 <a href="{{route('seguimiento-asesores.edit', $property_assignment->id)}}" class="btn btn-primary">

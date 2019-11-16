@@ -37,8 +37,8 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Descripción</th>
-                            <th>Status</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>STATUS</th>
                             <th></th>
                         </tr>
                     </thead>

@@ -29,6 +29,12 @@ class PropertyAssigmentController extends Controller
         return view('Seguimiento-Asesores.list.index', compact('property_assignments', 'property_id'));
     }
 
+    public function getAll()
+    {
+        $properties = Property_assigment::getAllTable();
+        return response()->json($properties);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

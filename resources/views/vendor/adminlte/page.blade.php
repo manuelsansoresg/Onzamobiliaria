@@ -91,7 +91,92 @@
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
-                @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
+                {{-- @each('adminlte::partials.menu-item', $adminlte->menu(), 'item') --}}
+                <li class="header">Menu navegación</li>
+                @role('admin')
+                <li class="">
+                    <a href="/admin/mobiliaria">
+                        <i class="fas fa-home"></i>
+                        <span>
+                            Inmobiliaria
+                        </span>
+                
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/portales">
+                        <i class="fas fa-store-alt"></i>
+                        <span>
+                            Portales
+                        </span>
+                
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/operaciones">
+                        <i class="fas fa-store-alt"></i>
+                        <span>
+                            Operaciones
+                        </span>
+                
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/clasificacion">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>
+                            Clasificación
+                        </span>
+                
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/seguimiento">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>
+                            Seguimiento
+                        </span>
+                
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/pago">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>
+                            Pago
+                        </span>
+                
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/propiedad">
+                        <i class="fas fa-home"></i>
+                        <span>
+                            Propiedad
+                        </span>
+                
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/prospecto">
+                        <i class="fas fa-running"></i>
+                        <span>
+                            Prospecto
+                        </span>
+                
+                    </a>
+                </li>
+                @endrole
+
+                <li class="">
+                    <a href="/admin/seguimiento-asesores">
+                        <i class="fas fa-address-book"></i>
+                        <span>
+                            Seguimiento de Asesores
+                        </span>
+                
+                    </a>
+                </li>
                 @role('admin')
                 <li class="header">Cuentas</li>
                 <li class="">
