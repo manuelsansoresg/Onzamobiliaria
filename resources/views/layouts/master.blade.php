@@ -24,6 +24,12 @@
             @csrf
             <ul class="list-inline mt-2">
                 <li class="list-inline-item">
+                    <span class="text-white">
+                        <i class="fas fa-user"></i>
+                        {!! Auth::user()->name !!}
+                    </span>
+                </li>
+                <li class="list-inline-item">
                     <a href="/home" class="btn btn-outline-primary btn-sm text-white">
                         <i class="fas fa-home"></i>
                         Inicio
@@ -38,13 +44,7 @@
         </form>
     </nav>
 
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-12 text-right">
-                <span class="">Bienvenido</span> <span class="font-weight-bold">{!! Auth::user()->name !!}</span>
-            </div>
-        </div>
-    </div>
+   
 
 
     @yield('content')
