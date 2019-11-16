@@ -26,7 +26,7 @@
             <div class="row mt-3">
                 <div class="col-12 col-md-4">
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="CVE INT Cliente">
+                        <input type="text" class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="CLIENTE">
                         <div class="input-group-prepend">
                             <button class="btn btn-info btn-sm">Buscar</button>
                         </div>
