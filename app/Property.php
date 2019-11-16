@@ -210,7 +210,7 @@ class Property extends Model
     {
         $documnet_file = $request->file($name);
         $extension = $documnet_file->getClientOriginalExtension();
-        $name_full = 'document_' . time() . rand(1,9999).  '.' . $extension;
+        $name_full = 'document_' . time() . rand(1,10).  '.' . $extension;
 
         $documnet_file->move('.' . $path, $name_full);
     }
