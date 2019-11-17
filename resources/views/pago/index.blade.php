@@ -17,7 +17,7 @@
     </div>
     <div class="row justify-content-center">
             <div class="col-12 col-md-8  mt-3">
-                    <table id="mobiliaria" class="table table-bordered table-responsive">
+                    <table id="mobiliaria" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -78,7 +78,7 @@
 
         $('#mobiliaria').DataTable({
             responsive: true,
-            "pageLength": 5,
+            "pageLength": 525,
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
