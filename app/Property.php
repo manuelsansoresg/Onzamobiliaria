@@ -164,55 +164,60 @@ class Property extends Model
         
         $path_file = $path . '/' . $property->id.'/';
 
+        if ($isUpdate == false) {
+            $property = Property::find($property->id);
+        } 
         
         if ($request->hasFile('cve_int_cliente') != false) {
-            self::copyFie($request, 'cve_int_cliente', $path_file);
-            $property->cve_int_cliente = $request->cve_int_cliente;
+            $name_file = self::copyFie($request, 'cve_int_cliente', $path_file);
+            $property->cve_int_cliente = $name_file;
         }
         if ($request->hasFile('identificacion') != false) {
-            self::copyFie($request, 'identificacion', $path_file);
-            $property->identificacion = $request->identificacion;
+            $name_file = self::copyFie($request, 'identificacion', $path_file);
+            $property->identificacion = $name_file;
         }
         if ($request->hasFile('curp') != false) {
-            self::copyFie($request, 'curp', $path_file);
-            $property->curp = $request->curp;
+            $name_file = self::copyFie($request, 'curp', $path_file);
+            $property->curp = $name_file;
         }
         if ($request->hasFile('rfc') != false) {
-            self::copyFie($request, 'rfc', $path_file);
-            $property->rfc = $request->rfc;
+            $name_file = self::copyFie($request, 'rfc', $path_file);
+            $property->rfc = $name_file;
         }
         if ($request->hasFile('acta_nacimiento') != false) {
-            self::copyFie($request, 'acta_nacimiento', $path_file);
-            $property->acta_nacimiento = $request->acta_nacimiento;
+            $name_file = self::copyFie($request, 'acta_nacimiento', $path_file);
+            $property->acta_nacimiento = $name_file;
         }
         if ($request->hasFile('acta_matrimonio') != false) {
-            self::copyFie($request, 'acta_matrimonio', $path_file);
-            $property->acta_matrimonio = $request->acta_matrimonio;
+            $name_file = self::copyFie($request, 'acta_matrimonio', $path_file);
+            $property->acta_matrimonio = $name_file;
         }
         if ($request->hasFile('predial') != false) {
-            self::copyFie($request, 'predial', $path_file);
-            $property->predial = $request->predial;
+            $name_file = self::copyFie($request, 'predial', $path_file);
+            $property->predial = $name_file;
         }
         if ($request->hasFile('no_adeudo_agua') != false) {
-            self::copyFie($request, 'no_adeudo_agua', $path_file);
-            $property->no_adeudo_agua = $request->no_adeudo_agua;
+            $name_file = self::copyFie($request, 'no_adeudo_agua', $path_file);
+            $property->no_adeudo_agua = $name_file;
         }
         if ($request->hasFile('no_adeudo_predial') != false) {
-            self::copyFie($request, 'no_adeudo_predial', $path_file);
-            $property->no_adeudo_predial = $request->no_adeudo_predial;
+            $name_file = self::copyFie($request, 'no_adeudo_predial', $path_file);
+            $property->no_adeudo_predial = $name_file;
         }
         if ($request->hasFile('cedula_plano_catastral') != false) {
-            self::copyFie($request, 'cedula_plano_catastral', $path_file);
-            $property->cedula_plano_catastral = $request->cedula_plano_catastral;
+            $name_file = self::copyFie($request, 'cedula_plano_catastral', $path_file);
+            $property->cedula_plano_catastral = $name_file;
         }
         if ($request->hasFile('copia_escritura') != false) {
-            self::copyFie($request, 'copia_escritura', $path_file);
-            $property->copia_escritura = $request->copia_escritura;
+            $name_file = self::copyFie($request, 'copia_escritura', $path_file);
+            $property->copia_escritura = $name_file;
         }
         if ($request->hasFile('reglamento_condominios_no_adeudo') != false) {
-            self::copyFie($request, 'reglamento_condominios_no_adeudo', $path_file);
-            $property->reglamento_condominios_no_adeudo = $request->reglamento_condominios_no_adeudo;
+            $name_file = self::copyFie($request, 'reglamento_condominios_no_adeudo', $path_file);
+            $property->reglamento_condominios_no_adeudo = $name_file;
         }
+
+        $property->update();
 
         return $property;   
 
@@ -225,6 +230,7 @@ class Property extends Model
         $name_full = 'document_' . time() . rand(1,10).  '.' . $extension;
 
         $documnet_file->move('.' . $path, $name_full);
+        return $name_full;
     }
 
     static function addUserProperty($property_id, $user_id)
@@ -240,7 +246,7 @@ class Property extends Model
         
         $property = Property::find($id);
         
-        $path_file = $path . '/' . $property->id . '/';
+        $path_file = '.'.$path . '/' . $property->id . '/';
 
         @unlink($path_file . $property->cve_int_cliente);
         @unlink($path_file . $property->identificacion);
