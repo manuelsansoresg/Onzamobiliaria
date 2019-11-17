@@ -13,249 +13,301 @@
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
-            {{ Form::open(['route' => 'clientes.store', 'method' => 'POST']) }}
-            <div class="row">
-                <div class="col-12">
-                    <h5>Nueva Propiedad</h5>
-                </div>
-                <div class="col-12">
-                    <p class="text-yellow">Los campos marcados con * son obligatorios</p>
-                
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12 col-md-4">
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="CLIENTE">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-info btn-sm">Buscar</button>
+                        <div class="row mt-3">
+                            <div class="col-12 col-md-4">
+                                <div class="input-group mb-2">
+                                    <input type="text" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm" placeholder="CLIENTE">
+                                    <div class="input-group-prepend">
+                                        <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
+                                    </div>
+                                    @if($errors)
+                                    <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
+                                    @endif
+
+                                </div>
+                            </div>
                         </div>
-                    
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
-                </div>
-            </div>
-            <div class="row mt-3">
-               <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tipo de Propiedad</label>
-                        <select name="inmobiliaria" class="form-control form-control-sm">
-                            @foreach ($real_states as $real_state)
-                            <option value="{{ $real_state->id }}"> {{ $real_state->description }} </option>
-                            @endforeach
-                        </select>
-                       
-                    </div>
-                </div>
-               
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tipo de Operación</label>
-                        <select name="operacion" class="form-control">
-                            @foreach ($operations as $operation)
-                            <option value="{{ $operation->id }}"> {{ $operation->description }} </option>
-                            @endforeach
-                        </select>
-                       
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>Avaluo</label> &nbsp;
-                        <input type="checkbox" name="avaluo" value="1">
-                       
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>Dirección</label> &nbsp;
-                        <input type="text" name="address" class="form-control form-control-sm">
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('address')}}</span>
-                        @endif
-                       
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>Institución</label>
-                        <input name="institucion" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
+                            </div>
+                        </div>
 
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>Gravamenes</label> &nbsp;
-                        <input type="checkbox" name="gravamenes" value="1">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>Precio</label>
-                        <input name="precio" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-               
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>Saldo</label>
-                        <input name="saldo" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>Predial al día</label>
-                        <input name="is_predial"  type="checkbox">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>¿La casa se encuentra habitada?</label> &nbsp;
-                        <input type="checkbox" name="habitar" value="1">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label> ¿Cuentan con documento para exentar? </label>
-                       <input type="checkbox" name="habitar" value="1">
-                    </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>¿Formas de pago deseables?</label>
-                        <select name="pago" class="form-control">
-                            @foreach ($form_payments as $form_payment)
-                            <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>M<sup>2</sup> de construcción</label>
-                       <input name="metros_construccion" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>M<sup>2</sup> de Terreno</label>
-                       <input name="metros_terreno" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>Frente</label>
-                       <input name="frente" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>Fondo</label>
-                       <input name="fondo" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>Estado de conservación y antigüedad</label>
-                       <input name="estado_conservacion_antiguedad" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                       <label>Infraestructura de la zona</label>
-                       <input name="infraestructura_zona" class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-                
-                
+                        <div class="row mt-3">
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="small">Tipo de Propiedad</label>
+                                    <select name="realstate_id" class="form-control form-control-sm">
+                                        @foreach ($real_states as $real_state)
+                                        <option value="{{ $real_state->id }}"> {{ $real_state->description }} </option>
+                                        @endforeach
+                                    </select>
 
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="small">Tipo de Operación</label>
+                                    <select name="operation_id" class="form-control form-control-sm ">
+                                        @foreach ($operations as $operation)
+                                        <option value="{{ $operation->id }}"> {{ $operation->description }} </option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Avaluo</label> &nbsp;
+                                    <input type="checkbox" name="avaluo" value="1">
+                                    <input type="text" name="txtvaluo" class="form-control form-control-sm">
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Dirección</label> &nbsp;
+                                    <input type="text" name="address" class="form-control form-control-sm">
+                                    @if($errors)
+                                    <span class="text-danger"> {{$errors->first('address')}}</span>
+                                    @endif
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Institución</label>
+                                    <input name="institucion" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Gravamenes</label> &nbsp;
+                                    <input type="checkbox" name="assessment" value="1">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Precio</label>
+                                    <input name="price" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Saldo</label>
+                                    <input name="saldo" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Predial al día</label>
+                                    <input name="is_predial" type="checkbox" value="1">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">¿La casa se encuentra habitada?</label> &nbsp;
+                                    <input type="checkbox" name="habitar" value="1">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small"> ¿Cuentan con documento para exentar? </label>
+                                    <input type="checkbox" name="document" value="1">
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">¿Formas de pago deseables?</label>
+                                    <select name="form_pay_id" class="form-control">
+                                        @foreach ($form_payments as $form_payment)
+                                        <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">M<sup>2</sup> de construcción</label>
+                                    <input name="metros_construccion" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">M<sup>2</sup> de Terreno</label>
+                                    <input name="metros_terreno" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Frente</label>
+                                    <input name="frente" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Fondo</label>
+                                    <input name="fondo" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Estado de conservación y antigüedad</label>
+                                    <input name="estado_conservacion_antiguedad" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">Infraestructura de la zona</label>
+                                    <input name="infraestructura_zona" class="form-control form-control-sm" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="small font-weight-bold">DOCUMENTACIÓN</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">IDENTIFICACIÓN OFICIAL VIGENTE</label>
+                                    <input name="identificacion" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">CURP</label>
+                                    <input name="curp" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">RFC</label>
+                                    <input name="rfc" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">ACTA DE NACIMIENTO</label>
+                                    <input name="acta_nacimiento" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">ACTA DE MATRIMONIO</label>
+                                    <input name="acta_matrimonio" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">PREDIAL</label>
+                                    <input name="predial" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">NO ADEUDO DE AGUA</label>
+                                    <input name="no_adeudo_agua" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">NO ADEUDO DE PREDIAL</label>
+                                    <input name="no_adeudo_predial" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">CÉDULA Y PLANO CATASTRAL ACTUALIZADO</label>
+                                    <input name="cedula_plano_catastral" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="small">COPIA DE LA ESCRITURA</label>
+                                    <input name="copia_escritura" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <div class="form-group">
+                                    <label class="small">REGLAMENTO DE CONDOMINOS Y NO ADEUDO DE CUOTAS EN SU CASO</label>
+                                    <input name="reglamento_condominios_no_adeudo" class="form-control form-control-sm" type="file">
+                                </div>
+                            </div>
+                        </div>
+
+                    </blockquote>
+                </div>
             </div>
+
             <div class="row">
-                <div class="col-12">
-                    <span class="small font-weight-bold">DOCUMENTACIÓN</span>
+                <div class="col-12 text-right pb-4">
+                    <button class="btn btn-primary">Guardar</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>IDENTIFICACIÓN OFICIAL VIGENTE</label>
-                        <input name="identificacion" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
 
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>CURP</label>
-                        <input name="curp" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>RFC</label>
-                        <input name="rfc" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>ACTA DE NACIMIENTO</label>
-                        <input name="acta_nacimiento" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>ACTA DE MATRIMONIO</label>
-                        <input name="acta_matrimonio" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>PREDIAL</label>
-                        <input name="predial" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>NO ADEUDO DE AGUA</label>
-                        <input name="no_adeudo_agua" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>NO ADEUDO DE PREDIAL</label>
-                        <input name="no_adeudo_predial" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>CÉDULA Y PLANO CATASTRAL ACTUALIZADO</label>
-                        <input name="cedula_plano_catastral" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>COPIA DE LA ESCRITURA</label>
-                        <input name="copia_escritura" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label>REGLAMENTO DE CONDOMINOS Y NO ADEUDO DE CUOTAS EN SU CASO</label>
-                        <input name="reglamento_condominios_no_adeudo" class="form-control form-control-sm" type="file">
-                    </div>
-                </div>
-            </div>
+
+
+
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 text-right pb-4">
-            <button class="btn btn-primary">Guardar</button>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="clientModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="clientModalLabel">AGREGAR CLIENTE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="client" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><span class="small font-weight-bold"> CLAVE </span> </th>
+                                        <th><span class="small font-weight-bold"> NOMBRE </span> </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($clients as $client)
+                                    
+                                        <tr>
+                                            <td> <span class="small">{{ $client->clave_interna }}</span></td>
+                                            <td> <span class="small">{{ $client->nombre }}</span> </td>
+                                            <td>
+                                                <button type="button" onclick="addClient('{{ $client->clave_interna }}')" class="btn btn-info  btn-sm ">
+                                                    <i class="fas fa-plus-circle"></i> Agregar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -263,7 +315,38 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('vendor_assets/typeahead/typeahead.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+
+
+<script>
+    $(function() {
+        var table = $('#client').DataTable({
+
+            responsive: true,
+            "pageLength": 5,
+
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "BUSCAR:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+        });
+        $('.dataTables_filter input').addClass('form-control-sm');
+    })
+</script>   
 
 @endsection

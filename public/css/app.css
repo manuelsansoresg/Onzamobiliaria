@@ -10668,6 +10668,10 @@ a.text-dark:focus {
   color: white;
 }
 
+.dataTables_filter > label {
+  font-size: 12px;
+}
+
 .bg-dark {
   background-color: black !important;
 }

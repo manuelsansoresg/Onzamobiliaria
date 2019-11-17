@@ -5007,6 +5007,11 @@ window.addUser = function (user_id) {
   });
 };
 
+window.addClient = function (cve) {
+  $('#cve_int_cliente').val(cve);
+  $('#clientModal').modal('hide');
+};
+
 /***/ }),
 
 /***/ "./resources/js/components/property_assigment.js":
@@ -5024,11 +5029,12 @@ $(document).ready(function () {
     ajax: false,
     restartOnRequestAfter: false
   };
-  getProperties(false, false);
-  setInterval(reloadTable, 9000);
+  /* getProperties(false, false);
+  setInterval(reloadTable, 9000); */
+
   /*  setInterval(function () {
-       table.ajax.reload(null, false); 
-   }, 30000); */
+      table.ajax.reload(null, false); 
+  }, 30000); */
 
   /* miPrimeraPromise.then((successMessage) => { 
       setInterval(reloadTable(), 2000);
