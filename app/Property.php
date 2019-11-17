@@ -10,9 +10,9 @@ class Property extends Model
 {
     protected $fillable = [
         'realstate_id', 'operation_id', 'postal_id', 'form_pay_id',
-        'inmobiliaria','operacion', 'avaluo', 'address', 'small', 'gravamenes', 'precio', 'saldo', 'is_predial', 'habitar', 'document',
+        'inmobiliaria','operacion', 'avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
         'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
-        'cve_int_cliente', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
+        'pass_easy_broker', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
     static function getById($id)
     {
         $property = Property::select(
@@ -167,39 +167,51 @@ class Property extends Model
         
         if ($request->hasFile('cve_int_cliente') != false) {
             self::copyFie($request, 'cve_int_cliente', $path_file);
+            $property->cve_int_cliente = $request->cve_int_cliente;
         }
         if ($request->hasFile('identificacion') != false) {
             self::copyFie($request, 'identificacion', $path_file);
+            $property->identificacion = $request->identificacion;
         }
         if ($request->hasFile('curp') != false) {
             self::copyFie($request, 'curp', $path_file);
+            $property->curp = $request->curp;
         }
         if ($request->hasFile('rfc') != false) {
             self::copyFie($request, 'rfc', $path_file);
+            $property->rfc = $request->rfc;
         }
         if ($request->hasFile('acta_nacimiento') != false) {
             self::copyFie($request, 'acta_nacimiento', $path_file);
+            $property->acta_nacimiento = $request->acta_nacimiento;
         }
         if ($request->hasFile('acta_matrimonio') != false) {
             self::copyFie($request, 'acta_matrimonio', $path_file);
+            $property->acta_matrimonio = $request->acta_matrimonio;
         }
         if ($request->hasFile('predial') != false) {
             self::copyFie($request, 'predial', $path_file);
+            $property->predial = $request->predial;
         }
         if ($request->hasFile('no_adeudo_agua') != false) {
             self::copyFie($request, 'no_adeudo_agua', $path_file);
+            $property->no_adeudo_agua = $request->no_adeudo_agua;
         }
         if ($request->hasFile('no_adeudo_predial') != false) {
             self::copyFie($request, 'no_adeudo_predial', $path_file);
+            $property->no_adeudo_predial = $request->no_adeudo_predial;
         }
         if ($request->hasFile('cedula_plano_catastral') != false) {
             self::copyFie($request, 'cedula_plano_catastral', $path_file);
+            $property->cedula_plano_catastral = $request->cedula_plano_catastral;
         }
         if ($request->hasFile('copia_escritura') != false) {
             self::copyFie($request, 'copia_escritura', $path_file);
+            $property->copia_escritura = $request->copia_escritura;
         }
         if ($request->hasFile('reglamento_condominios_no_adeudo') != false) {
             self::copyFie($request, 'reglamento_condominios_no_adeudo', $path_file);
+            $property->reglamento_condominios_no_adeudo = $request->reglamento_condominios_no_adeudo;
         }
 
         return $property;   
@@ -221,6 +233,28 @@ class Property extends Model
         $property->user_id_capture = $user_id;
         $property->date_assignment = date('Y-m-d H:i:s');
         $property->update();
+    }
+
+    static function drop($path, $id)
+    {
+        
+        $property = Property::find($id);
+        
+        $path_file = $path . '/' . $property->id . '/';
+
+        @unlink($path_file . $property->cve_int_cliente);
+        @unlink($path_file . $property->identificacion);
+        @unlink($path_file . $property->curp);
+        @unlink($path_file . $property->rfc);
+        @unlink($path_file . $property->acta_nacimiento);
+        @unlink($path_file . $property->acta_matrimonio);
+        @unlink($path_file . $property->predial);
+        @unlink($path_file . $property->no_adeudo_agua);
+        @unlink($path_file . $property->no_adeudo_predial);
+        @unlink($path_file . $property->cedula_plano_catastral);
+        @unlink($path_file . $property->copia_escritura);
+        @unlink($path_file . $property->reglamento_condominios_no_adeudo);
+        $property->delete();
     }
 
 }

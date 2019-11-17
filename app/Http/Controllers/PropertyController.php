@@ -163,14 +163,7 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        $property = Property::find($id);
-
-        if ($property) {
-            $document = $property->document;
-            @unlink('.' . $this->path_document . '/' . $document);
-            $property->delete();
-
-        }
+        Property::drop( $this->path_document, $id);
         flash('Elemento borrado');
         return redirect('/admin/propiedad/');
     }

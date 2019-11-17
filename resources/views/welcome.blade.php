@@ -57,7 +57,7 @@
 
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/pago">
+                <a href="/admin/catalogos">
                     <i class="fas fa-hand-holding-usd fa-3x mt-3"></i>
                 </a>
                 <div class="card-body">

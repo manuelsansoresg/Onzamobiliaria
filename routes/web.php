@@ -66,6 +66,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/usuarios', 'UserController');
     Route::resource('/clientes', 'ClientController');
 
+    Route::get('/catalogos', function () {
+        return view('catalogos');
+    });
+
 });
 
 Auth::routes();
