@@ -1,327 +1,480 @@
-@extends('adminlte::page')
+@extends('layouts.master')
 
 @section('title', 'Propiedad')
 
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-@endsection
-
-@section('content_header')
-<section class="content-header">
-    <h1>
-        Propiedad
-        <small>Editar </small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="/admin/propiedad"><i class="fa fa-dashboard"></i> Propiedad</a></li>
-        <li class="active">Editar </li>
-    </ol>
-</section>
-@stop
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Editar Propiedad</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                {{ Form::open(['route' => ['propiedad.update', $property->id], 'method' => 'PUT', 'id' => 'frm-property', 'files' => true]) }}
-                <input type="hidden" name="status" value="{{ $property->status }}">
-                <div class="container">
-
-                    <div class="col-12">
-                        <p class="text-yellow">Los campos marcados con * son obligatorios</p>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <input name="nombre" class="form-control" type="text" value="{{ $property->name }}">
-                        </div>
-
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input name="email" class="form-control" type="text" value="{{ $property->email }}">
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-3">
-                        <div class="form-group">
-                            <label>Teléfono</label>
-                            <input name="telefono" class="form-control" type="text" value="{{ $property->phone_contact }}">
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Celular</label>
-                            <input name="celular" class="form-control" type="text" value="{{ $property->celular }}">
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Celular 2 </label>
-                            <input name="celular2" class="form-control" type="text" value="{{ $property->celular2 }}">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-11">
-                        <h4 class="page-header"> </h4>
-                    </div>
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Calle</label>
-                            <input type="text" class="form-control" name="calle" value="{{ $property->street }}">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-2">
-                        <div class="form-group">
-                            <label>No interior</label>
-                            <input type="text" class="form-control" name="no_interior" value="{{ $property->noInt }}">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-2">
-                        <div class="form-group">
-                            <label>No exterior</label>
-                            <input type="text" class="form-control" name="no_exterior" value="{{ $property->noExt }}">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-2">
-                        <div class="form-group">
-                            <label>Predial</label>
-                            <input name="predial" class="form-control" type="text" value="{{ $property->predial }}">
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Institución</label>
-                            <input name="institucion" class="form-control" type="text" value="{{ $property->institution }}">
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-2">
-                        <div class="form-group">
-                            <label>Precio</label>
-                            <input name="precio" class="form-control" type="text" value="{{ $property->price }}">
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-2">
-                        <div class="form-group">
-                            <label> Habitaciones </label>
-                            <input name="habitacion" class="form-control" type="text" value="{{ $property->rooms }}">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-2">
-                        <div class="form-group">
-                            <label> Baños </label>
-                            <input name="banios" class="form-control" type="text" value="{{ $property->bathrooms }}">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-3">
-                        <div class="form-group">
-                            <label> Clave easybroke </label>
-                            <input name="clave_easybroke" class="form-control" type="text" value="{{ $property->pass_easy_broker }}">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-11">
-                        <h4 class="page-header"> </h4>
-                    </div>
-
-                    <div class="col-xs-12 col-md-4">
-
-                        <label>*CP</label>
-
-                        <div class="row">
-
-                            <div class="col-xs-9 col-md-12">
-
-                                <div class="input-group input-group-sm">
-                                    <input type="text" name="cp" id="cp" value="{{ $postals['postal']->codigo }}" class="form-control">
-                                    <span class="input-group-btn">
-                                        <button type="button" onclick="searchPostal()" class="btn btn-info btn-flat ">Buscar</button>
-                                    </span>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-12 text-right">
+            <a href="/admin/propiedad" class="btn btn-success btn-sm  pull-right">
+                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
+            </a>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-12 col-md-12 ">
+            <div class="card">
+                {{ Form::open(['route' => ['propiedad.update', $property->id], 'method' => 'PUT', 'files' => true]) }}
+                <h5 class="card-header">NUEVA PROPIEDAD</h5>
+                <div class="card-body">
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-4">
+                            <div class="input-group mb-2">
+                                <input type="text" name="cve_int_cliente" value="{{ $property->cve_int_cliente }}" id="cve_int_cliente" class="form-control form-control-sm" placeholder="CLIENTE">
+                                <div class="input-group-prepend">
+                                    <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
-
-
-
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
+                                @endif
 
                             </div>
+                        </div>
 
-                            <div class="col-xs-12 col-md-12">
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="small">Tipo de Propiedad</label>
+                                <select name="realstate_id" class="form-control form-control-sm">
+                                    @foreach ($real_states as $real_state)
+                                    <option value="{{ $real_state->id }}" {{ ($property->realstate_id == $real_state->id )? 'selected' : ''  }}> {{ $real_state->description }} </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="small">Tipo de Operación</label>
+                                <select name="operation_id" class="form-control form-control-sm ">
+                                    @foreach ($operations as $operation)
+                                    <option value="{{ $operation->id }}" {{ ($property->operation_id == $operation->id)? 'selected' : '' }} > {{ $operation->description }} </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Avaluo</label> &nbsp;
+                                <input type="checkbox" name="avaluo" value="1" {{ ($property->Avaluo == 1)? 'checked' : '' }}>
+                                <input type="text" name="txtvaluo" class="form-control form-control-sm">
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Dirección</label> &nbsp;
+                                <input type="text" name="address" value="{{ $property->address }}" class="form-control form-control-sm">
                                 @if($errors)
-                                <span class="text-danger"> {{$errors->first('cp')}}</span>
+                                <span class="text-danger"> {{$errors->first('address')}}</span>
+                                @endif
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Institución</label>
+                                <input name="institution" value="{{ $property->institution }}" class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Gravamenes</label> &nbsp;
+                                <input type="checkbox" {{ ($property->assessment == 1)? 'checked' : ''}} name="assessment" value="1">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Precio</label>
+                                <input name="price" value="{{ $property->price }}" class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Saldo</label>
+                                <input name="saldo" value="{{ $property->saldo }}" class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Predial al día</label>
+                                <input name="is_predial" {{ ($property->is_predial == 1)? 'checked' : ''}} type="checkbox" value="1">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">¿La casa se encuentra habitada?</label> &nbsp;
+                                <input type="checkbox" {{ ($property->habitar == 1)? 'checked' : ''}} name="habitar" value="1">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small"> ¿Cuentan con documento para exentar? </label>
+                                <input type="checkbox" {{ ($property->document == 1)? 'checked' : ''}} name="document" value="1">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">¿Formas de pago deseables?</label>
+                                <select name="form_pay_id" class="form-control">
+                                    @foreach ($form_payments as $form_payment)
+                                    <option value="{{ $form_payment->id }}" {{ ($property->form_pay_id == $form_payment->id )? 'selected' : '' }}> {{ $form_payment->description }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">M<sup>2</sup> de construcción</label>
+                                <input name="metros_construccion" value="{{ $property->metros_construccion }}" class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DESCRIPCIÓN</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">M<sup>2</sup> de Terreno</label>
+                                <input name="metros_terreno" class="form-control form-control-sm" type="text" value="{{ $property->metros_terreno }}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Frente</label>
+                                <input name="frente" class="form-control form-control-sm" type="text" value="{{ $property->frente }}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Fondo</label>
+                                <input name="fondo" class="form-control form-control-sm" type="text" value="{{ $property->fondo }}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Estado de conservación y antigüedad</label>
+                                <input name="estado_conservacion_antiguedad" class="form-control form-control-sm" type="text" value="{{ $property->estado_conservacion_antiguedad }}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Infraestructura de la zona</label>
+                                <input name="infraestructura_zona" class="form-control form-control-sm" type="text" value="{{ $property->infraestructura_zona }}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Clave EASYBROKER</label>
+                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text" value="{{ $property->pass_easy_broker }}">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DOCUMENTACIÓN</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">IDENTIFICACIÓN OFICIAL VIGENTE</label>
+                                @if ($property->identificacion == null)
+                                    <input name="identificacion" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->identificacion) }}" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/identificacion/{{ $property->identificacion }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
                                 @endif
                             </div>
-
-
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>*Colonia</label>
-                            <select name="colonia" id="colonia" class="form-control">
-                                @foreach ($postals['postals'] as $postal)
-                                <option value="{{ $postal->id }}" {{ ( $postal->id == $property->postal_id)? 'selected' : '' }}>{{ $postal->colonia }}</option>
-
-                                @endforeach
-                            </select>
-                            @if($errors)
-                            <span class="text-danger"> {{$errors->first('colonia')}}</span>
-                            @endif
                         </div>
 
-                    </div>
-
-                    <div class="col-xs-12 col-md-12"> </div>
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Inmobiliaria</label>
-                            <select name="inmobiliaria" class="form-control">
-                                @foreach ($real_states as $real_state)
-                                <option value="{{ $real_state->id }}" {{ ( $property->realstate_id == $real_state->id )? 'selected' : ''  }}> {{ $real_state->description }} </option>
-                                @endforeach
-                            </select>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">CURP</label>
+                                 @if ($property->curp == null)
+                                    <input name="curp" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->curp) }}" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/curp/{{ $property->curp }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
                         </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label>Operacion</label>
-                            <select name="operacion" class="form-control">
-                                @foreach ($operations as $operation)
-                                <option value="{{ $operation->id }}" {{ ($property->operation_id == $operation->id)? 'selected' : '' }}> {{ $operation->description }} </option>
-                                @endforeach
-                            </select>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">RFC</label>
+                                 @if ($property->rfc == null)
+                                    <input name="rfc" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->rfc) }}" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/rfc/{{ $property->rfc }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
                         </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-3">
-                        <div class="form-group">
-                            <label>Pago</label>
-                            <select name="pago" class="form-control">
-                                @foreach ($form_payments as $form_payment)
-                                <option value="{{ $form_payment->id }}" {{ ($property->form_pay_id == $form_payment->id ) ? 'selected' : '' }}> {{ $form_payment->description }} </option>
-                                @endforeach
-                            </select>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">ACTA DE NACIMIENTO</label>
+                                 @if ($property->acta_nacimiento == null)
+                                    <input name="acta_nacimiento" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_nacimiento) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/acta_nacimiento/{{ $property->acta_nacimiento }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
                         </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-md-3">
-                        <div class="form-group">
-                            <label>Avaluo</label> &nbsp;
-                            <input type="checkbox" name="avaluo" value="1" {{ ($property->Avaluo == 1)? 'checked' : ''  }}>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">ACTA DE MATRIMONIO</label>
+                                 @if ($property->acta_matrimonio == null)
+                                    <input name="acta_matrimonio" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_matrimonio) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/acta_matrimonio/{{ $property->acta_matrimonio }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">PREDIAL</label>
+                                 @if ($property->predial == null)
+                                    <input name="predial" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/predial/{{ $property->predial }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">NO ADEUDO DE AGUA</label>
+                                 @if ($property->no_adeudo_agua == null)
+                                    <input name="no_adeudo_agua" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_agua) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/no_adeudo_agua/{{ $property->no_adeudo_agua }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">NO ADEUDO DE PREDIAL</label>
+                                 @if ($property->no_adeudo_predial == null)
+                                    <input name="no_adeudo_predial" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/no_adeudo_predial/{{ $property->no_adeudo_predial }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">CÉDULA Y PLANO CATASTRAL ACTUALIZADO</label>
+                                 @if ($property->cedula_plano_catastral == null)
+                                    <input name="cedula_plano_catastral" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->cedula_plano_catastral) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/cedula_plano_catastral/{{ $property->cedula_plano_catastral }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">COPIA DE LA ESCRITURA</label>
+                                 @if ($property->copia_escritura == null)
+                                    <input name="copia_escritura" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->copia_escritura) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/copia_escritura/{{ $property->copia_escritura }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <div class="form-group">
+                                <label class="small">REGLAMENTO DE CONDOMINOS Y NO ADEUDO DE CUOTAS EN SU CASO</label>
+                                 @if ($property->reglamento_condominios_no_adeudo == null)
+                                    <input name="reglamento_condominios_no_adeudo" class="form-control form-control-sm" type="file">
+                                @else
+                                    <p class="">
+                                        <i class="far fa-file fa-2x"></i>
+                                    </p>  
+                                    <p>
+                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->reglamento_condominios_no_adeudo) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                     <a href="/admin/destroy-document/reglamento_condominios_no_adeudo/{{ $property->reglamento_condominios_no_adeudo }}" class="btn btn-danger btn-sm">Borrar</a>
+                                    </p>                                 
+                                @endif
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-xs-12 col-md-3">
-                        <div class="form-group">
-                            <label>Gravamenes</label> &nbsp;
-                            <input type="checkbox" name="gravamenes" value="1" {{ ($property->assessment == 1)? 'checked' : '' }}>
+                    <div class="row">
+                        <div class="col-12 text-right pb-4">
+                            <button class="btn btn-primary">Guardar</button>
                         </div>
                     </div>
-
-                    <div class="col-xs-12 col-md-3">
-                        <div class="form-group">
-                            <label>Habitar</label> &nbsp;
-                            <input type="checkbox" name="habitar" value="1" {{ ($property->habitar == 1)? 'checked' : '' }}>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-3">
-                        <div class="form-group">
-                            <label>Propietario</label> &nbsp;
-                            <input type="checkbox" name="propietario" value="1" {{ ($property->is_property == 1)? 'checked' : '' }}>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-11">
-                        <h4 class="page-header"> </h4>
-                    </div>
-
-                    <div class="col-xs-12 col-md-11">
-                        <div class="form-group">
-                            <label> Documento </label>
-                            @if ($property->document == '')
-                            <input type="file" name="documento" class="form-control">
-                            @else
-                            <p class="">
-                                <span><i class="fas fa-file  fa-2x"></i></span>
-                            </p>
-                            <p>
-                                <a href="/admin/propiedad/destroy-document/{{ $property->id }}" class="btn btn-danger">Borrar</a>
-                            </p>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-11">
-                        <div class="form-group">
-                            <label> Observación </label>
-                            <textarea name="observacion" class="form-control" cols="30" rows="3">{{ $property->observation1 }}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-11">
-                        <div class="form-group">
-                            <label> Observación 2 </label>
-                            <textarea name="observacion2" class="form-control" cols="30" rows="3">{{ $property->observation2 }}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-11">
-                        <div class="form-group">
-                            <label> Observación 3 </label>
-                            <textarea name="observacion3" class="form-control" cols="30" rows="3">{{ $property->observation3 }}</textarea>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-md-11">
-                        <p class="margin"> </p>
-
-                        <button class="btn btn-primary pull-right " type="submit">Guardar</button>
-                    </div>
-
 
                 </div>
                 {{ Form::close() }}
             </div>
         </div>
     </div>
+
 </div>
-@stop
+
+
+<!-- Modal -->
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="clientModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="clientModalLabel">AGREGAR CLIENTE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="client" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><span class="small font-weight-bold"> CLAVE </span> </th>
+                                        <th><span class="small font-weight-bold"> NOMBRE </span> </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($clients as $client)
+
+                                    <tr>
+                                        <td> <span class="small">{{ $client->clave_interna }}</span></td>
+                                        <td> <span class="small">{{ $client->nombre }}</span> </td>
+                                        <td>
+                                            <button type="button" onclick="addClient('{{ $client->clave_interna }}')" class="btn btn-info  btn-sm ">
+                                                <i class="fas fa-plus-circle"></i> Agregar
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@endsection
 
 @section('js')
-<script src="{{ asset('vendor_assets/typeahead/typeahead.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+
+
+<script>
+    $(function() {
+        var table = $('#client').DataTable({
+
+            responsive: true,
+            "pageLength": 5,
+
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "BUSCAR:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+        });
+        $('.dataTables_filter input').addClass('form-control-sm');
+    })
+</script>
 
 @endsection

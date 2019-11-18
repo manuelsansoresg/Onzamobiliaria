@@ -100,11 +100,12 @@ class PropertyController extends Controller
         $real_states   = Realstate::where('status', 1)->get();
         $operations    = Operation::where('status', 1)->get();
         $form_payments = FormPayment::where('status', 1)->get();
+        $clients       = Client::all();
+        $path_document = $this->path_document;
 
-        $postals = Postal::getById($property->postal_id);
         
 
-        return view('propiedad.edit', compact('real_states', 'operations', 'form_payments', 'postals', 'property') );
+        return view('propiedad.edit', compact('real_states', 'operations', 'form_payments', 'clients', 'property', 'path_document') );
     }
 
     /**
@@ -122,18 +123,20 @@ class PropertyController extends Controller
         return redirect('/admin/propiedad');
     }
 
-    public function destroyDocument($id)
+    public function destroyDocument($name_column, $name)
     {
-        $property = Property::find($id);
+        $property = Property::where($name_column, $name)->first();
         
         if($property){
             
-            $document = $property->document;
-            @unlink('.'.$this->path_document.'/'.$document);
-            $property->document = '';
+            $document = $property->$name_column;
+            @unlink('.' . $this->path_document . '/'.$property->id. '/' . $document);
+            $property->$name_column = '';
             $property->update();
         }
-        return redirect('/admin/propiedad/'.$id. '/edit');
+
+        
+        return redirect('/admin/propiedad/'. $property->id. '/edit');
     }
 
 

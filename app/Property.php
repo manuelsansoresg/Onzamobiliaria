@@ -9,33 +9,54 @@ use Illuminate\Support\Facades\DB;
 class Property extends Model
 {
     protected $fillable = [
-        'realstate_id', 'operation_id', 'postal_id', 'form_pay_id',
+        'realstate_id', 'operation_id', 'postal_id', 'form_pay_id', 'institution', 'assessment',
         'inmobiliaria','operacion', 'avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
         'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
         'pass_easy_broker', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
     static function getById($id)
     {
         $property = Property::select(
+            'realstate_id', 'operation_id','institution','saldo',
+            'clients.clave_interna as cve_int_cliente',
             'realstates.description as realstate_description',
             'properties.id',
-            'properties.status as status',
             'operations.description as operations_description',
             'form_payments.description as form_payment_description',
-            'Avaluo',  'assessment', 'habitar', 'is_property',
-            'postal_id',  'realstate_id', 'operation_id', 'form_pay_id',
-            'street', 'noInt', 'noExt',
-            'price',  'predial' , 'institution',
-            'name', 'email',
-            'phone_contact',  'celular' , 'celular2',
-            'observation1', 'observation2', 'observation3',
-            'rooms', 'bathrooms', 'pass_easy_broker',
+            'Avaluo',
+            'assessment',
+            'habitar',
+            'is_predial',
             'document',
-            'postal.codigo as codigo', 'colonia'
+            'form_pay_id',
+            'estado_conservacion_antiguedad',
+            'infraestructura_zona',
+            'pass_easy_broker',
+            'properties.clave_interna',
+            'is_titulo',
+            'price',
+            'address',
+            'is_property',
+            'properties.status as status',
+            'metros_construccion',
+            'metros_terreno',
+            'frente',
+            'fondo',
+            'identificacion',
+            'curp',
+            'rfc',
+            'acta_nacimiento',
+            'acta_matrimonio',
+            'predial',
+            'no_adeudo_agua',
+            'no_adeudo_predial',
+            'cedula_plano_catastral',
+            'copia_escritura',
+            'reglamento_condominios_no_adeudo'
         )
             ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
             ->join('operations', 'operations.id', '=', 'properties.operation_id')
+            ->leftJoin('clients', 'clients.id', '=', 'properties.client_id')
             ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id')
-            ->join('postal', 'postal.id', '=', 'properties.postal_id')
             ->where('properties.id', $id )
             ->first();
         return $property;
@@ -63,10 +84,7 @@ class Property extends Model
                                     'address',
                                     'is_property',
                                     'properties.status as status',
-            'metros_construccion',
-            'metros_terreno',
-            'frente',
-            'fondo'
+                                    'metros_construccion','metros_terreno', 'frente', 'fondo'
                                     
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')

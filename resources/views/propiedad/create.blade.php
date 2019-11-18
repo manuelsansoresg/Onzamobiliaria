@@ -144,6 +144,16 @@
                                 <input name="metros_construccion" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DESCRIPCIÓN</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">M<sup>2</sup> de Terreno</label>
@@ -180,7 +190,7 @@
                                 <input name="pass_easy_broker" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
-
+                      
                     </div>
 
                     <div class="row">
@@ -189,7 +199,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">IDENTIFICACIÓN OFICIAL VIGENTE</label>

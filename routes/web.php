@@ -44,10 +44,8 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::resource('/propiedad', 'PropertyController');
     Route::get('/propiedad/status/{id}/{status}', 'PropertyController@changeStatus');
-    Route::get('/propiedad/destroy-document/{id}', 'PropertyController@destroyDocument');
+    Route::get('/destroy-document/{name_column}/{name}', 'PropertyController@destroyDocument');
     Route::get('/property/addUser/{id}/{user_id}', 'PropertyController@addUser');
-    
-
 
     Route::resource('/postal', 'PostalController');
 
@@ -60,8 +58,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/seguimiento-asesores/{property_id}/create', 'PropertyAssigmentController@create');
 
     Route::get('/property/getAll', 'PropertyAssigmentController@getAll');
-    
-    
 
     Route::resource('/usuarios', 'UserController');
     Route::resource('/clientes', 'ClientController');
