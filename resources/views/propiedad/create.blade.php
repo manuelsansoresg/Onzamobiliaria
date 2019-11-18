@@ -86,7 +86,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Institución</label>
-                                <input name="institucion" class="form-control form-control-sm" type="text">
+                                <input name="institution" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
 
@@ -190,7 +190,7 @@
                                 <input name="pass_easy_broker" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
-                      
+
                     </div>
 
                     <div class="row">
