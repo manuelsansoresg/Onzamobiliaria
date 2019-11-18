@@ -20,7 +20,9 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <input type="text" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm" placeholder="CLIENTE">
+                                <label class="small">Cliente</label>
+                                 <div class="w-100"></div>
+                                <input type="text" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                 <div class="input-group-prepend">
                                     <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
@@ -28,6 +30,13 @@
                                 <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
                                 @endif
 
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Clave EASYBROKER</label>
+                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
 
@@ -67,9 +76,11 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Avaluo</label> &nbsp;
-                                <input type="checkbox" name="is_avaluo" id="is_avaluo" onchange="avaluo()" value="1">
+                                <input type="checkbox" name="avaluo" id="is_avaluo" onchange="changeAvaluo()" value="activo">
                                 <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
-
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('Avaluo')}}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -184,12 +195,7 @@
                                 <input name="infraestructura_zona" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label class="small">Clave EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text">
-                            </div>
-                        </div>
+                        
 
                     </div>
 
@@ -300,7 +306,6 @@
                             <table id="client" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th><span class="small font-weight-bold"> CLAVE </span> </th>
                                         <th><span class="small font-weight-bold"> NOMBRE </span> </th>
                                         <th></th>
                                     </tr>
@@ -309,10 +314,9 @@
                                     @foreach ($clients as $client)
 
                                     <tr>
-                                        <td> <span class="small">{{ $client->clave_interna }}</span></td>
                                         <td> <span class="small">{{ $client->nombre }}</span> </td>
                                         <td>
-                                            <button type="button" onclick="addClient('{{ $client->clave_interna }}')" class="btn btn-info  btn-sm ">
+                                            <button type="button" onclick="addClient('{{ $client->id }}')" class="btn btn-info  btn-sm ">
                                                 <i class="fas fa-plus-circle"></i> Agregar
                                             </button>
                                         </td>

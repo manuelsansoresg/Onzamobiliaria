@@ -10,12 +10,13 @@ class Property extends Model
 {
     protected $fillable = [
         'realstate_id', 'operation_id', 'postal_id', 'form_pay_id', 'institution', 'assessment',
-        'inmobiliaria','operacion', 'avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
+        'inmobiliaria','operacion', 'Avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
         'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
         'pass_easy_broker', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
     static function getById($id)
     {
         $property = Property::select(
+            'client_id',
             'realstate_id', 'operation_id','institution','saldo',
             'clients.clave_interna as cve_int_cliente',
             'realstates.description as realstate_description',
@@ -111,10 +112,12 @@ class Property extends Model
         $get_cp = Postal::where('id', $request->colonia )->first();
 
         if ($isUpdate == false) {
-            $client   = Client::where('clave_interna', $request->cve_int_cliente)->first();
+            $client   = Client::find($request->cve_int_cliente)->first();
+            
             $property = new Property($request->except('_token', 'cve_int_cliente', 'identificacion',
             'curp','rfc','acta_nacimiento','acta_matrimonio','predial','no_adeudo_agua','no_adeudo_predial','cedula_plano_catastral','copia_escritura','reglamento_condominios_no_adeudo' ));
             $property->client_id = $client->id;
+            $property->is_avaluo = ($request->Avaluo == '')? '' : 1;
         }else{
             $property = Property::find($property_id);
             $property->fill($request->except(
@@ -132,6 +135,7 @@ class Property extends Model
                 'copia_escritura',
                 'reglamento_condominios_no_adeudo'
             ) );
+            $property->is_avaluo = ($request->Avaluo == '') ? '' : 1;
         }
        
        /*  $property->realstate_id = $request->inmobiliaria; //departamento-local-terreno

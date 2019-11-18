@@ -39,11 +39,15 @@ if ($("#frm_propiedad").length > 0) {
     
 }
 
-window.avaluo = function(){
-    var is_avaluo = 0;
-    if ($('#is_avaluo').prop('checked')) {
-        $('#Avaluo').prop("disabled", false); // Element(s) are now enabled.
-    }else{
-        $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
+$(document).ready(function () {
+    window.changeAvaluo = function () {
+        var is_avaluo = 0;
+        if ($('#is_avaluo').prop('checked')) {
+            $('#Avaluo').prop("disabled", false); // Element(s) are now enabled.
+        } else {
+            $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
+        }
     }
-}
+});
+
+

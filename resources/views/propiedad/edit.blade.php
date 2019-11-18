@@ -20,7 +20,9 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <input type="text" name="cve_int_cliente" value="{{ $property->cve_int_cliente }}" id="cve_int_cliente" class="form-control form-control-sm" placeholder="CLIENTE">
+                                <label class="small">Cliente</label>
+                                <div class="w-100"></div>
+                                <input type="text" name="cve_int_cliente" value="{{ $property->client_id }}" id="cve_int_cliente" class="form-control form-control-sm">
                                 <div class="input-group-prepend">
                                     <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
@@ -28,6 +30,15 @@
                                 <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
                                 @endif
 
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Clave EASYBROKER</label>
+                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text"
+            
+                                    value="{{ $property->pass_easy_broker }}">
                             </div>
                         </div>
 
@@ -67,9 +78,16 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Avaluo</label> &nbsp;
-                                <input type="checkbox" name="avaluo" value="1" {{ ($property->Avaluo == 1)? 'checked' : '' }}>
-                                <input type="text" name="txtvaluo" class="form-control form-control-sm">
-
+                                <input type="checkbox" name="avaluo" value="1" {{ ($property->is_avaluo == 1)? 'checked' : '' }}>
+                                @if ($property->is_avaluo == 1)
+                                    <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo"  class="form-control form-control-sm">
+                                @else
+                                    <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
+                                    
+                                @endif
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('Avaluo')}}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -184,12 +202,7 @@
                                 <input name="infraestructura_zona" class="form-control form-control-sm" type="text" value="{{ $property->infraestructura_zona }}">
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label class="small">Clave EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text" value="{{ $property->pass_easy_broker }}">
-                            </div>
-                        </div>
+                       
 
                     </div>
 
