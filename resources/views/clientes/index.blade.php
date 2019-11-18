@@ -20,10 +20,6 @@
                         <th> <span class="small font-weight-bold">NOMBRE</span> </th>
                         <th> <span class="small font-weight-bold">CORREO</span> </th>
                         <th> <span class="small font-weight-bold">TELÉFONO</span> </th>
-                        <th> <span class="small font-weight-bold">MEDIO DE CONTACTO</span> </th>
-                        <th> <span class="small font-weight-bold">PROPIEDAD DE INTERES</span> </th>
-                        <th> <span class="small font-weight-bold">PRECIO</span> </th>
-                        <th> <span class="small font-weight-bold">TÍTULO DE LA PROPIEDAD</span></th>
                         <th> <span class="small font-weight-bold">CLAVE INTERNA</span> </th>
 
                         <th style="width: 60px"></th>
@@ -36,10 +32,6 @@
                         <td> <span class="small"> {{ $client->nombre }} </span> </td>
                         <td> <span class="small"> {{ $client->correo }} </span> </td>
                         <td> <span class="small"> {{ $client->telefono }} </span> </td>
-                        <td> <span class="small"> {{ $client->medio_contacto }} </span> </td>
-                        <td> <span class="small"> {{ $client->propiedad_interes }} </span> </td>
-                        <td> <span class="small"> {{ $client->precio }} </span> </td>
-                        <td> <span class="small"> {{ $client->titulo_propiedad }} </span> </td>
                         <td> <span class="small"> {{ $client->clave_interna }} </span> </td>
                         <td>
 

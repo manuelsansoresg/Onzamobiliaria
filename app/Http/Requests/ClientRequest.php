@@ -26,7 +26,7 @@ class ClientRequest extends FormRequest
         return [
             'nombre' => 'required',
             'telefono' => 'required',
-            'clave_interna' => 'required'
+           
         ];
     }
 }

@@ -48,51 +48,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Medio por el que nos contacto</label>
-                        <input type="text" name="medio_contacto" class="form-control form-control-sm">
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('medio_contacto')}}</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Propiedad de interes</label>
-                        <input type="text" name="propiedad_interes" class="form-control form-control-sm">
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('propiedad_interes')}}</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Precio</label>
-                        <input type="text" name="precio" class="form-control form-control-sm">
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('precio')}}</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Título de la propiedad</label>
-                        <input type="text" name="titulo_propiedad" class="form-control form-control-sm">
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('titulo_propiedad')}}</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Clave interna</label>
-                        <input type="text" name="clave_interna" class="form-control form-control-sm">
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('clave_interna')}}</span>
-                        @endif
-                    </div>
-                </div>
+               
                 <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Propietario</label>

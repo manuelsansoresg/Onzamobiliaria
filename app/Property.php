@@ -23,6 +23,7 @@ class Property extends Model
             'operations.description as operations_description',
             'form_payments.description as form_payment_description',
             'Avaluo',
+            'is_avaluo',
             'assessment',
             'habitar',
             'is_predial',

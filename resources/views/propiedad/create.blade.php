@@ -14,7 +14,7 @@
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
-                {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST',  'files' => true]) }}
+                {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST',  'files' => true, 'id' => 'frm_propiedad']) }}
                 <h5 class="card-header">NUEVA PROPIEDAD</h5>
                 <div class="card-body">
                     <div class="row mt-3">
@@ -67,8 +67,8 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Avaluo</label> &nbsp;
-                                <input type="checkbox" name="avaluo" value="1">
-                                <input type="text" name="txtvaluo" class="form-control form-control-sm">
+                                <input type="checkbox" name="is_avaluo" id="is_avaluo" onchange="avaluo()" value="1">
+                                <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
 
                             </div>
                         </div>

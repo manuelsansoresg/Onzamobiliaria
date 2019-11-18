@@ -44,13 +44,14 @@
         </form>
     </nav>
 
-   
+
 
 
     @yield('content')
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('vendor_assets/DataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/js/dataTables.jqueryui.min.js') }}"></script>
     @yield('js')
 </body>
 
