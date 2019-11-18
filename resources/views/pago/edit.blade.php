@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Metodo Pago')
+@section('title', 'FORMA DE PAGO')
 @section('content')
 
 <div class="container">
@@ -16,7 +16,7 @@
             {{ Form::open(['route' => ['pago.update', $form_payment->id], 'method' => 'PUT', 'files' => true]) }}
             <div class="card">
                 <div class="card-header">
-                    EDITAR METODO PAGO
+                    EDITAR FORMA DE PAGO
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">DESCRIPCION</h5>

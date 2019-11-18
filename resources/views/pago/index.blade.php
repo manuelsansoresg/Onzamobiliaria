@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Metodo Pago')
+@section('title', 'FORMA DE PAGO')
 
 @section('content')
 <div class="container-fluid">
@@ -45,16 +45,16 @@
                                     {{ Form::open(['route' => ['pago.destroy', $form_payment->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
                                     <a href="{{route('pago.edit', $form_payment->id)}}" class="btn btn-primary">
                                         <i class="far fa-edit"></i>
-                                    </a>
+                                    </a>  
                                     @if($form_payment->status == 0)
                                     <a href="/admin/pago/status/{{ $form_payment->id }}/1" class="btn btn-success">
                                         <i class="fas fa-ban text-white"></i>
-                                    </a>
+                                    </a>  
                                     @else
                                     <a href="/admin/pago/status/{{ $form_payment->id }}/0" class="btn btn-warning">
                                         <i class="fas fa-ban"></i>
                                     </a>
-                                    @endif
+                                    @endif  
                                     @role('admin')
                                     <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
                                         <i class="far fa-trash-alt"></i>
@@ -77,8 +77,11 @@
     $(function() {
 
         $('#mobiliaria').DataTable({
-            responsive: true,
-            "pageLength": 525,
+           
+            "lengthMenu": [ [5,10, 25, 50,100, -1], [5,10, 25, 50,100, "TODOS"] ],
+            pageLength: 5,
+            "paging": true,
+            
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

@@ -62,7 +62,7 @@
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="" class="text-body">
+                        <a href="/admin/catalogos" class="text-body">
                             <span class="h6">CATALOGOS</span>
                         </a>
                     </h5>
