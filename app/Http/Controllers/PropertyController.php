@@ -55,6 +55,7 @@ class PropertyController extends Controller
         $operations    = Operation::where('status', 1)->get();
         $form_payments = FormPayment::where('status', 1)->get();
         $clients       = Client::all();
+        
 
         return view('propiedad.create', compact('real_states', 'operations', 'form_payments', 'clients') );
     }
@@ -104,10 +105,11 @@ class PropertyController extends Controller
         $clients       = Client::all();
         $postals       = Postal::where('codigo', $cp->codigo)->get();
         $path_document = $this->path_document;
+        $my_payments   = FormPayment::myPayments($id);
         
         
 
-        return view('propiedad.edit', compact('real_states', 'cp', 'postals', 'operations', 'form_payments', 'clients', 'property', 'path_document') );
+        return view('propiedad.edit', compact('real_states', 'cp', 'postals', 'my_payments', 'operations', 'form_payments', 'clients', 'property', 'path_document') );
     }
 
     /**

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/Responsive-2.2.3/css/responsive.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
     @yield('css')
 </head>
 
@@ -50,6 +51,8 @@
     @yield('content')
 
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('vendor_assets/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/js/dataTables.jqueryui.min.js') }}"></script>
     @yield('js')

@@ -193,9 +193,9 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">¿Formas de pago deseables?</label>
-                                <select name="form_pay_id" class="form-control">
+                                <select name="form_pay_id[]" id="form_pay_id"  class="form-control" multiple="multiple">
                                     @foreach ($form_payments as $form_payment)
-                                    <option value="{{ $form_payment->id }}" {{ ($property->form_pay_id == $form_payment->id )? 'selected' : '' }}> {{ $form_payment->description }} </option>
+                                    <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
                                     @endforeach
                                 </select>
                             </div>

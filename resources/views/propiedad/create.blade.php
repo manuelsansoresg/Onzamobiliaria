@@ -2,6 +2,8 @@
 
 @section('title', 'Propiedad')
 
+
+
 @section('content')
 <div class="container">
     <div class="row mt-3">
@@ -180,7 +182,8 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">¿Formas de pago deseables?</label>
-                                <select name="form_pay_id" class="form-control">
+                                <div class="w-100"></div>
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control" multiple="multiple">
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach

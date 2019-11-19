@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Property extends Model
 {
     protected $fillable = [
-        'realstate_id', 'operation_id', 'postal_id', 'form_pay_id', 'institution', 'assessment', 'observation1',
+        'realstate_id', 'operation_id', 'postal_id', 'institution', 'assessment', 'observation1',
         'inmobiliaria','operacion', 'Avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
         'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
         'pass_easy_broker', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
@@ -23,14 +23,13 @@ class Property extends Model
             'realstates.description as realstate_description',
             'properties.id',
             'operations.description as operations_description',
-            'form_payments.description as form_payment_description',
             'Avaluo',
             'is_avaluo',
             'assessment',
             'habitar',
             'is_predial',
             'document',
-            'form_pay_id',
+            'form_pays',
             'estado_conservacion_antiguedad',
             'infraestructura_zona',
             'pass_easy_broker',
@@ -65,7 +64,6 @@ class Property extends Model
             ->join('operations', 'operations.id', '=', 'properties.operation_id')
             ->leftJoin('postal', 'postal.id', '=', 'properties.postal_id')
             ->leftJoin('clients', 'clients.id', '=', 'properties.client_id')
-            ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id')
             ->where('properties.id', $id )
             ->first();
         return $property;
@@ -82,7 +80,6 @@ class Property extends Model
         $property = Property::select('realstates.description as realstate_description',
                                     'properties.id',
                                     'operations.description as operations_description',
-                                    'form_payments.description as form_payment_description',
                                     'Avaluo',
                                     'assessment',
                                     'habitar',
@@ -98,8 +95,7 @@ class Property extends Model
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
                         ->join('operations', 'operations.id', '=', 'properties.operation_id')
-                        ->leftJoin('clients', 'clients.id', '=', 'properties.client_id')
-                        ->join('form_payments', 'form_payments.id', '=', 'properties.form_pay_id');
+                        ->leftJoin('clients', 'clients.id', '=', 'properties.client_id');
 
         if($user_role != 'admin'){
             $property = $property->where('properties.user_id', $user->id);
@@ -118,15 +114,26 @@ class Property extends Model
      
         $get_cp = Postal::where('id', $request->colonia )->first();
 
+        $form_pays = '';
+
+        foreach ($request->form_pay_id as $form_pay) {
+            $form_pays .= ",$form_pay";
+        }
+
+        $form_pays = trim($form_pays , ',');
+        
+
         if ($isUpdate == false) {
         
             $client   = Client::find($request->cve_int_cliente)->first();
             
-            $property            = new Property($request->except('_token', 'cve_int_cliente', 'identificacion',
+            $property            = new Property($request->except('_token',
+                'form_pay_id', 'cve_int_cliente', 'identificacion',
             'curp','rfc','acta_nacimiento','acta_matrimonio','predial','no_adeudo_agua','no_adeudo_predial','cedula_plano_catastral','copia_escritura','reglamento_condominios_no_adeudo' ));
             $property->client_id = $client->id;
-            $property->is_avaluo = ($request->Avaluo == '')? '': 1;
+            $property->is_avaluo = ($request->Avaluo == '')? 0: 1;
             $property->postal_id = $get_cp->id;
+            $property->form_pays = $form_pays;
         
         }else{
 
@@ -148,7 +155,8 @@ class Property extends Model
             ) );
 
             $property->postal_id = $get_cp->id;
-            $property->is_avaluo = ($request->Avaluo == '') ? '': 1;
+            $property->is_avaluo = ($request->Avaluo == '') ? 0: 1;
+            $property->form_pays = $form_pays;
         }
        
        /*  $property->realstate_id = $request->inmobiliaria; //departamento-local-terreno

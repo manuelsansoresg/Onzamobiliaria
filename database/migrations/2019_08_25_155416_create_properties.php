@@ -25,7 +25,7 @@ class CreateProperties extends Migration
             $table->smallInteger('is_predial')->comment('tiene predial')->nullable();
             $table->smallInteger('habitar')->comment('Si esta Habitada')->nullable();
             $table->string('document')->comment('Cuenta con documento')->nullable();
-            $table->bigInteger('form_pay_id')->unsigned();
+            
             $table->string('institution')->nullable();
             $table->string('saldo')->nullable();
             
@@ -48,8 +48,7 @@ class CreateProperties extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('postal_id')->references('id')->on('postal')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('form_pay_id')->references('id')->on('form_payments')
-                ->onUpdate('cascade')->onDelete('cascade');
+            
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id_capture')->references('id')->on('users')
