@@ -27,7 +27,8 @@ class PropertyRequest extends FormRequest
             
             'address' => 'required',
             'cve_int_cliente' => 'exists:clients,id',
-            'Avaluo' => 'requiredIf:avaluo,activo'
+            'Avaluo' => 'requiredIf:avaluo,activo',
+            'cp' => 'required'
         ];
     }
 }

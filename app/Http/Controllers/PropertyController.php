@@ -97,15 +97,17 @@ class PropertyController extends Controller
     {
          
         $property      = Property::getById($id);
+        $cp            = Postal::find($property->postal_id);
         $real_states   = Realstate::where('status', 1)->get();
         $operations    = Operation::where('status', 1)->get();
         $form_payments = FormPayment::where('status', 1)->get();
         $clients       = Client::all();
+        $postals       = Postal::where('codigo', $cp->codigo)->get();
         $path_document = $this->path_document;
-
+        
         
 
-        return view('propiedad.edit', compact('real_states', 'operations', 'form_payments', 'clients', 'property', 'path_document') );
+        return view('propiedad.edit', compact('real_states', 'cp', 'postals', 'operations', 'form_payments', 'clients', 'property', 'path_document') );
     }
 
     /**

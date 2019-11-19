@@ -102,6 +102,43 @@
                         </div>
 
                         <div class="col-12 col-md-4">
+                            <div class="input-group mb-2">
+                                <label class="small">*CP</label>
+                                <div class="w-100"></div>
+                                <input type="text" name="cp" id="cp" value="{{ $cp->codigo }}" class="form-control">
+                                <div class="input-group-prepend">
+                                    <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm">Buscar</button>
+                                </div>
+                                @if($errors)
+                                <div class="w-100"></div>
+                                <p class="text-danger"> {{$errors->first('cp')}}</p>
+                                @endif
+                        
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">*Colonia</label> &nbsp;
+                                @if ($property->codigo == '')
+                                    <select name="colonia" id="colonia" class="form-control" disabled="">
+                                    </select>
+                                @else
+                                    <select name="colonia" id="colonia" class="form-control">
+                                        @foreach ($postals as $postal)
+                                            <option value="{{ $postal->id }}" {{ ($postal->id == $property->postal_id )? 'selected' : '' }} >{{ $postal->colonia }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                               
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('address')}}</span>
+                                @endif
+                        
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Institución</label>
                                 <input name="institution" value="{{ $property->institution }}" class="form-control form-control-sm" type="text">
@@ -143,6 +180,13 @@
                             <div class="form-group">
                                 <label class="small"> ¿Cuentan con documento para exentar? </label>
                                 <input type="checkbox" {{ ($property->document == 1)? 'checked' : ''}} name="document" value="1">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <label class="small"> Comentarios </label>
+                                <textarea name="observation1" class="form-control" id="" cols="30" rows="10">{{ $property->observation1 }}</textarea>
                             </div>
                         </div>
                         <div class="w-100"></div>
