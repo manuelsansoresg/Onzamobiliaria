@@ -1,21 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.master')
 
 @section('title', 'Asignación de Asesores')
 
-@section('content_header')
-<section class="content-header">
-    <h1>
-        Seguimiento de asesores
-        <small>Lista</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="/admin/seguimiento-asesores"><i class="fa fa-dashboard"></i> Seguimiento de asesores</a></li>
-        <li class="active">lista de llamadas</li>
-    </ol>
-</section>
-@stop
 @section('content')
+
 <div class="content">
     <div class="row">
         <div class="box">
@@ -37,7 +25,7 @@
                     <thead>
                         <tr>
 
-                            <th> FECHA </th>
+                            <th> CVE EASYBROKER </th>
                             <th>NOMBRE CONTACTO</th>
                             <th>STATUS</th>
 
@@ -48,14 +36,14 @@
                     <tbody>
                         <tr>
                             <td>
-                                {{ date('Y-m-d', strtotime($property_assignment->date) ) }}
+                                {{ $property_assignment->pass_easy_broker }}
                             </td>
                             <td>
-                                {{ $property_assignment->name }}
+
                             </td>
 
                             <td>
-                                {{ $property_assignment->description }}
+
                             </td>
 
                             <td>
@@ -93,21 +81,15 @@
 
     </div>
 </div>
-@stop
+@endsection
 
 @section('js')
-<script src="{{ asset('vendor/adminlte/plugins/datatable/js/responsive.js') }}"></script>
+
 <script>
     $(function() {
 
         $('#mobiliaria').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            "scrollX": true,
+            responsive: true,
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

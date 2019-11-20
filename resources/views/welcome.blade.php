@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="" class="text-body">
-                        <span class="h6">PROPIEDADES</span>
+                            <span class="h6">PROPIEDADES</span>
                         </a>
                     </h5>
 
@@ -41,7 +41,7 @@
 
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/clientes">
+                <a href="/admin/seguimiento-asesores">
                     <i class="fas fa-box-open fa-3x mt-3 text-primary"></i>
                 </a>
                 <div class="card-body">
@@ -57,7 +57,7 @@
 
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/catalogos">                    
+                <a href="/admin/catalogos">
                     <i class="fab fa-artstation fa-3x mt-3"></i>
                 </a>
                 <div class="card-body">
@@ -69,12 +69,12 @@
 
                 </div>
             </div>
-        </div>       
-        
-       
+        </div>
+
+
         @endrole
         @role('asesor')
-        
+
         <div class="col-12 col-md-2">
             <div class="card text-center">
                 <a href="/admin/clientes">
@@ -99,7 +99,7 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="" class="text-body">
-                        <span class="h6">PROPIEDADES</span>
+                            <span class="h6">PROPIEDADES</span>
                         </a>
                     </h5>
 

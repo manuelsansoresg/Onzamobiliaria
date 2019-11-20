@@ -5,22 +5,51 @@ namespace App;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Property_assigment extends Model
 {
     protected $table    = 'property_assignment';
-    protected $fillable = ['property_id', 'name', 'date', 'status_follow_id', 'observation1', 'observation2', 'observation3', 'status_break', 'status'];
+    protected $fillable = ['property_id', 'nombre', 'telefono','correo','add_id', 'asesor_id'];
     
+    static function create($request, $id = null)
+    {
+        if($id == null){
+            $property = Property::where('pass_easy_broker', $request->easy_broker)->first();
+            $property_assigment = new Property_assigment($request->except('_token', 'easy_broker'));
+            $property_assigment->property_id = $property->id;
+            $property_assigment->save();
+        }else{
+            $property = Property::where('pass_easy_broker', $request->easy_broker)->first();
+            $property_assigment = Property_assigment::find($id);
+            $property_assigment->fill($request->except('_token', 'easy_broker'));
+            $property_assigment->property_id = $property->id;
+            $property_assigment->update();
+        }
+
+        
+    }
+
 
     static function getAll()
     {
         $user      = User::find(Auth::id());
         $user_role = $user->getRoleNames()->first();
 
-        $property  = Property::select('properties.id', 'users.name', 'street', 'noInt', 'noExt', 'postal.codigo as codigo', 'colonia', 'pass_easy_broker', 'date_assignment')
-                       //->join('property_assignment', 'property_assignment.property_id', '=', 'properties.id' )
-                        ->join('postal', 'postal.id', '=', 'properties.postal_id')
-                        ->join('users', 'properties.user_id_capture', '=' , 'users.id')
+        $property  = Property::select('pass_easy_broker', 'properties.id',
+            'property_assignment.id as assignment_id', 'realstates.description as propiedad', 
+                            'colonia', 'operations.description as operacion', 'price', 'pu.name as asesor', 'ads.description as portal',
+            'property_assignment.nombre as nombre_prospecto',
+            'property_assignment.telefono',
+            'property_assignment.correo',
+            'su.name as asesor_asignado')
+                       ->join('property_assignment', 'property_assignment.property_id', '=', 'properties.id' )
+                        ->leftJoin('ads', 'ads.id', '=', 'property_assignment.add_id')
+                       ->leftJoin('postal', 'postal.id', '=', 'properties.postal_id')
+                       ->join( DB::raw('users pu'), DB::raw('pu.id') , '=' , 'properties.user_id')
+                       ->join( DB::raw('users su'), DB::raw('su.id') , '=' , 'property_assignment.asesor_id')
+                        ->leftJoin('realstates', 'realstates.id', '=', 'properties.realstate_id')
+                        ->join('operations', 'operations.id', '=', 'properties.operation_id')
                         ->where('properties.status', 1);
         
         if ($user_role != 'admin') {
@@ -106,12 +135,34 @@ class Property_assigment extends Model
         return array('table' => $table, 'table_head' => $table_head );
     }
 
-    static function getById($property_id)
+    static function getById($id)
     {
-        $property = Property_assigment::select('name', 'date', 'description', 'property_assignment.id', 'property_assignment.status')
-                    ->where('property_id', $property_id)
-                    ->join('status_follows', 'status_follows.id', '=', 'property_assignment.status_follow_id')
-                    ->get();
+        $property = Property::select(
+            'pass_easy_broker',
+            'properties.id',
+            'property_assignment.id as assignment_id',
+            'realstates.description as propiedad',
+            'colonia',
+            'operations.description as operacion',
+            'price',
+            'pu.name as asesor',
+            'ads.description as portal',
+            'property_assignment.nombre as nombre_prospecto',
+            'property_assignment.telefono',
+            'property_assignment.correo',
+            'property_assignment.add_id',
+            'property_assignment.asesor_id',
+            'su.name as asesor_asignado')
+                    ->join('property_assignment', 'property_assignment.property_id', '=', 'properties.id')
+                    ->leftJoin('ads', 'ads.id', '=', 'property_assignment.add_id')
+                    ->leftJoin('postal', 'postal.id', '=', 'properties.postal_id')
+                    ->join(DB::raw('users pu'), DB::raw('pu.id'), '=', 'properties.user_id')
+                    ->join(DB::raw('users su'), DB::raw('su.id'), '=', 'property_assignment.asesor_id')
+                    ->leftJoin('realstates', 'realstates.id', '=', 'properties.realstate_id')
+                    ->join('operations', 'operations.id', '=', 'properties.operation_id')
+                    ->where('properties.status', 1)
+                    ->where('property_assignment.id', $id)
+                    ->first();
         return $property;
     }
 

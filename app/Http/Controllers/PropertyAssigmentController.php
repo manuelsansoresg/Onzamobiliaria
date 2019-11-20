@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
 use App\Http\Requests\PropertyAsigmentRequest;
 use App\Property_assigment;
 use App\StatusFollow;
+use App\User;
 use Illuminate\Http\Request;
 
 class PropertyAssigmentController extends Controller
@@ -26,7 +28,7 @@ class PropertyAssigmentController extends Controller
     {
         $property_assignments = Property_assigment::getById($property_id);
         $property_id          = $property_id;
-        return view('Seguimiento-Asesores.list.index', compact('property_assignments', 'property_id'));
+        return view('Seguimiento-Asesores.index', compact('property_assignments', 'property_id'));
     }
 
     public function getAll()
@@ -40,14 +42,13 @@ class PropertyAssigmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($property_id)
+    public function create()
     {
-        $status      = StatusFollow::all();
-        $property_id = $property_id;
+        $status   = StatusFollow::all();
+        $ads      = Ad::all();
+        $asesores = User::getAsesor();
 
-        
-
-        return view('Seguimiento-Asesores.list.create', compact('status', 'property_id'));
+        return view('Seguimiento-Asesores.create', compact('status', 'ads', 'asesores'));
     }
 
     /**
@@ -58,12 +59,10 @@ class PropertyAssigmentController extends Controller
      */
     public function store(PropertyAsigmentRequest $request)
     {
-        $property_assignment = new Property_assigment($request->except('_token'));
-        $property_assignment->save();
+        $property_assignment = Property_assigment::create($request);
         
-
         flash('Elemento guardado');
-        return redirect('/admin/seguimiento-asesores/lista/'. $request->property_id);
+        return redirect('/admin/seguimiento-asesores');
     }
 
     /**
@@ -85,11 +84,13 @@ class PropertyAssigmentController extends Controller
      */
     public function edit($id)
     {
-        $property_assigment = Property_assigment::find($id);
-        $property_id        = $property_assigment->property_id;
+        $property_assigment = Property_assigment::getById($id);
         $status             = StatusFollow::all();
+        $ads                = Ad::all();
+        $asesores           = User::getAsesor();
+        
 
-        return view('Seguimiento-Asesores.list.edit', compact('status', 'property_id', 'property_assigment'));
+        return view('Seguimiento-Asesores.edit', compact('status',  'property_assigment', 'ads', 'asesores'));
 
     }
 
@@ -102,12 +103,11 @@ class PropertyAssigmentController extends Controller
      */
     public function update(PropertyAsigmentRequest $request, $id)
     {
-        $property_assigment = Property_assigment::find($id);
-        $property_assigment->fill($request->except('_token'));
-        $property_assigment->update();
+        $property_assigment = Property_assigment::create($request, $id);
+        
 
         flash('Elemento guardado');
-        return redirect('/admin/seguimiento-asesores/lista/' . $request->property_id);
+        return redirect('/admin/seguimiento-asesores');
     }
 
     public function changeStatus($id, $status)

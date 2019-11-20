@@ -37,4 +37,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    static function getAsesor()
+    {
+        $users = User::select('users.name', 'username', 'users.id', 'roles.name as name_role')
+                    ->join('model_has_roles', 'model_has_roles.model_id', '=' , 'users.id')
+                    ->join('roles', 'roles.id' , 'model_has_roles.role_id')
+                    ->where('roles.name', 'asesor')
+                    ->get();
+
+        return $users;
+    }
 }

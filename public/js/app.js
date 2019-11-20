@@ -40003,19 +40003,7 @@ window.addClient = function (cve) {
   $('#clientModal').modal('hide');
 };
 
-if ($("#frm_propiedad").length > 0) {}
-
-$(document).ready(function () {
-  window.changeAvaluo = function () {
-    var is_avaluo = 0;
-
-    if ($('#is_avaluo').prop('checked')) {
-      $('#Avaluo').prop("disabled", false); // Element(s) are now enabled.
-    } else {
-      $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
-    }
-  };
-
+if ($("#frm_propiedad").length > 0) {
   $('#form_pay_id').multiselect({
     templates: {
       li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
@@ -40027,6 +40015,18 @@ $(document).ready(function () {
       container.find('input').addClass('d-none');
     }
   });
+}
+
+$(document).ready(function () {
+  window.changeAvaluo = function () {
+    var is_avaluo = 0;
+
+    if ($('#is_avaluo').prop('checked')) {
+      $('#Avaluo').prop("disabled", false); // Element(s) are now enabled.
+    } else {
+      $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
+    }
+  };
 });
 
 /***/ }),

@@ -106,7 +106,17 @@ class Property extends Model
         return $property;
     }
 
-    
+    static function searchByEasyBroker($easy_broker)
+    {
+        $property = Property::select('users.name as asesor', 'realstates.description as tipo', 'operations.description as operacion', 'colonia', 'price')
+                            ->leftJoin('postal', 'postal.id', '=', 'properties.postal_id')
+                            ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
+                            ->join('users', 'users.id', '=', 'properties.user_id')
+                            ->join('operations', 'operations.id', '=', 'properties.operation_id')
+                            ->where('pass_easy_broker', $easy_broker)
+                            ->first();
+        return array('property' => $property, 'total' => ($property)? 1 : 0 );
+    }
 
 
     static function createUpdateProperty($request, $path, $isUpdate = false, $property_id = null)
@@ -134,6 +144,7 @@ class Property extends Model
             $property->is_avaluo = ($request->Avaluo == '')? 0: 1;
             $property->postal_id = $get_cp->id;
             $property->form_pays = $form_pays;
+            $property->user_id   = Auth::id();
         
         }else{
 

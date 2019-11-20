@@ -112,6 +112,12 @@ class PropertyController extends Controller
         return view('propiedad.edit', compact('real_states', 'cp', 'postals', 'my_payments', 'operations', 'form_payments', 'clients', 'property', 'path_document') );
     }
 
+    public function searchEasyBroker($easy_broker)
+    {
+        $property = Property::searchByEasyBroker($easy_broker);
+        return response()->json($property);
+    }
+
     /**
      * Update the specified resource in storage.
      *

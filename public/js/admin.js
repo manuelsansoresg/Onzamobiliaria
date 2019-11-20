@@ -5012,19 +5012,7 @@ window.addClient = function (cve) {
   $('#clientModal').modal('hide');
 };
 
-if ($("#frm_propiedad").length > 0) {}
-
-$(document).ready(function () {
-  window.changeAvaluo = function () {
-    var is_avaluo = 0;
-
-    if ($('#is_avaluo').prop('checked')) {
-      $('#Avaluo').prop("disabled", false); // Element(s) are now enabled.
-    } else {
-      $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
-    }
-  };
-
+if ($("#frm_propiedad").length > 0) {
   $('#form_pay_id').multiselect({
     templates: {
       li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
@@ -5036,6 +5024,18 @@ $(document).ready(function () {
       container.find('input').addClass('d-none');
     }
   });
+}
+
+$(document).ready(function () {
+  window.changeAvaluo = function () {
+    var is_avaluo = 0;
+
+    if ($('#is_avaluo').prop('checked')) {
+      $('#Avaluo').prop("disabled", false); // Element(s) are now enabled.
+    } else {
+      $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
+    }
+  };
 });
 
 /***/ }),
@@ -5048,6 +5048,8 @@ $(document).ready(function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 var table;
 $(document).ready(function () {
@@ -5066,6 +5068,30 @@ $(document).ready(function () {
       setInterval(reloadTable(), 2000);
   }); */
 });
+
+window.searchEasyBroker = function () {
+  var easy_broker = $('#easy_broker').val();
+  $('#error_easy').html('');
+
+  if (easy_broker == '') {
+    $('#error_easy').html('El campo easy broker esta vacio');
+  } else {
+    axios.get('/admin/propiedad/search/easybroker/' + easy_broker).then(function (response) {
+      var result = response.data.property;
+      var total = response.data.total;
+
+      if (total > 0) {
+        $('#val_propiedad').html(result.propiedad);
+        $('#val_operacion').html(result.operacion);
+        $('#val_colonia').html(result.colonia);
+        $('#val_asesor').html(result.asesor);
+        $('#val_precio').html(result.precio);
+      } else {
+        $('#error_easy').html('El campo easy broker seleccionado no existe.');
+      }
+    })["catch"](function (error) {});
+  }
+};
 
 function getProperties(resolve, async) {
   axios.get('/admin/property/getAll').then(function (response) {
