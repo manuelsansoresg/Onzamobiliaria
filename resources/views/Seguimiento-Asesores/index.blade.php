@@ -8,7 +8,7 @@
     <div class="row mt-3">
         <div class="col-12 text-right">
             <a href="/admin/seguimiento-asesores/create" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
+                <i class="fas fa-plus-circle"></i> &nbsp; Asignación
             </a>
         </div>
         <div class="col-12 mt-3">
