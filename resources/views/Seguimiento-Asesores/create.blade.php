@@ -47,14 +47,14 @@
                             <span class="font-weight-bold small"> PROPIEDAD: </span>
                         </div>
                         <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_propiedad">CASA</span>
+                            <span class="small text-uppercase" id="val_propiedad"></span>
                         </div>
 
                         <div class="col-5 col-md-2">
                             <span class="font-weight-bold small"> OPERACIÓN: </span>
                         </div>
                         <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_operacion">CASA</span>
+                            <span class="small text-uppercase" id="val_operacion"></span>
                         </div>
 
 
@@ -62,21 +62,21 @@
                             <span class="font-weight-bold small"> COLONIA: </span>
                         </div>
                         <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_colonia">CASA</span>
+                            <span class="small text-uppercase" id="val_colonia"></span>
                         </div>
 
                         <div class="col-5 col-md-2">
                             <span class="font-weight-bold small"> ASESOR: </span>
                         </div>
                         <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_asesor">CASA</span>
+                            <span class="small text-uppercase" id="val_asesor"></span>
                         </div>
 
                         <div class="col-5 col-md-2">
                             <span class="font-weight-bold small"> PRECIO: </span>
                         </div>
                         <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_precio">CASA</span>
+                            <span class="small text-uppercase" id="val_precio"></span>
                         </div>
                     </div>
 
