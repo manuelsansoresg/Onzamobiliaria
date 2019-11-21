@@ -135,6 +135,11 @@ class Property_assigment extends Model
         return array('table' => $table, 'table_head' => $table_head );
     }
 
+    static function getAssigmentByyId($property_id)
+    {
+        # code...
+    }
+
     static function getById($id)
     {
         $property = Property::select(

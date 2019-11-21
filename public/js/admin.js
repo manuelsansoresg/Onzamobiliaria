@@ -5081,7 +5081,7 @@ window.searchEasyBroker = function () {
       var total = response.data.total;
 
       if (total > 0) {
-        $('#val_propiedad').html(result.propiedad);
+        $('#val_propiedad').html(result.tipo);
         $('#val_operacion').html(result.operacion);
         $('#val_colonia').html(result.colonia);
         $('#val_asesor').html(result.asesor);

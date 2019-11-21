@@ -18,63 +18,63 @@
 
             <table id="property_assigment" class="table table-bordered table-responsive">
                 <thead>
-                        <tr>
-                            <th> <span class="small font-weight-bold"> CVE EASYBROKER </span> </th>
-                            <th> <span class="small font-weight-bold"> PROPIEDAD</span> </th>
-                            <th> <span class="small font-weight-bold"> COLONIA </span> </th>
-                            <th> <span class="small font-weight-bold"> OPERACIÓN </span> </th>
-                            <th> <span class="small font-weight-bold"> PRECIO </span> </th>
-                            <th> <span class="small font-weight-bold"> ASESOR </span> </th>
-                            <th> <span class="small font-weight-bold"> PORTAL </span> </th>
-                            <th> <span class="small font-weight-bold"> NOMBRE PROSPECTO </span> </th>
-                            <th> <span class="small font-weight-bold"> TELEFONO </span> </th>
-                            <th> <span class="small font-weight-bold"> CORREO </span> </th>
-                            <th> <span class="small font-weight-bold"> ASIGNAR ASESOR </span> </th>
+                    <tr>
+                        <th> <span class="small font-weight-bold"> CVE EASYBROKER </span> </th>
+                        <th> <span class="small font-weight-bold"> PROPIEDAD</span> </th>
+                        <th> <span class="small font-weight-bold"> COLONIA </span> </th>
+                        <th> <span class="small font-weight-bold"> OPERACIÓN </span> </th>
+                        <th> <span class="small font-weight-bold"> PRECIO </span> </th>
+                        <th> <span class="small font-weight-bold"> ASESOR </span> </th>
+                        <th> <span class="small font-weight-bold"> PORTAL </span> </th>
+                        <th> <span class="small font-weight-bold"> NOMBRE PROSPECTO </span> </th>
+                        <th> <span class="small font-weight-bold"> TELEFONO </span> </th>
+                        <th> <span class="small font-weight-bold"> CORREO </span> </th>
+                        <th> <span class="small font-weight-bold"> ASIGNAR ASESOR </span> </th>
+                        @role('admin')
+                        <th>Numero de llamadas</th>
+                        @endrole
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach ($property_assignments as $property_assignment)
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="small"> {{ $property_assignment->pass_easy_broker }} </span>
+                        </td>
+                        <td> <span class="small"> {{ $property_assignment->propiedad }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->colonia }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->operacion }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->price }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->asesor }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->portal }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->nombre_prospecto }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->telefono }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->correo }} </span> </td>
+                        <td> <span class="small"> {{ $property_assignment->asesor_asignado }} </span> </td>
+                        <td></td>
+                        <td>
+                            {{ Form::open(['route' => ['seguimiento-asesores.destroy', $property_assignment->assignment_id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                            <a href="/admin/historico-seguimiento/{{ $property_assignment->assignment_id }}" class="btn btn-primary">
+                                <i class="fas fa-phone-volume"></i>
+                            </a>
+
                             @role('admin')
-                            <th>Numero de llamadas</th>
+                            <a href="{{route('seguimiento-asesores.edit', $property_assignment->assignment_id)}}" class="btn btn-primary ml-1">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger ml-1">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
                             @endrole
-                            <th></th>
-                        </tr>
-                    </thead>
-                    @foreach ($property_assignments as $property_assignment)
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span class="small"> {{ $property_assignment->pass_easy_broker }} </span>
-                            </td>
-                            <td> <span class="small"> {{ $property_assignment->propiedad }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->colonia }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->operacion }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->price }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->asesor }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->portal }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->nombre_prospecto }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->telefono }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->correo }} </span> </td>
-                            <td> <span class="small"> {{ $property_assignment->asesor_asignado }} </span> </td>
-                            <td></td>
-                            <td>
-                                {{ Form::open(['route' => ['seguimiento-asesores.destroy', $property_assignment->assignment_id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="/admin/seguimiento-asesores/lista/{{ $property_assignment->id }}" class="btn btn-primary">
-                                    <i class="fas fa-phone-volume"></i>
-                                </a>
-                                
-                                @role('admin')
-                                <a href="{{route('seguimiento-asesores.edit', $property_assignment->assignment_id)}}" class="btn btn-primary ml-1">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger ml-1">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                                @endrole
-                                {{ Form::close() }}
-                            </td>
-                        </tr>
-                    </tbody>
-                    {{-- <tbody>
+                            {{ Form::close() }}
+                        </td>
+                    </tr>
+                </tbody>
+                {{-- <tbody>
                         @role('admin')
                         <tr class="{{ classAlert($property_assignment->id) }}">
-                        @else
+                @else
                 <tr>
                     @endrole
                     <td>{{ $property_assignment->id  }}</td>

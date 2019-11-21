@@ -55,7 +55,10 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('/seguimiento-asesores', 'PropertyAssigmentController');
     Route::get('/seguimiento-asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
-    Route::get('/seguimiento-asesores/lista/{property_id}', 'PropertyAssigmentController@lista');
+    
+    Route::resource('/historico-seguimiento', 'HistoricAssigmentController');
+    Route::get('/historico-seguimiento/create/{id_assigment}', 'HistoricAssigmentController@create');
+    
     //Route::get('/seguimiento-asesores/{property_id}/create', 'PropertyAssigmentController@create');
 
     Route::get('/property/getAll', 'PropertyAssigmentController@getAll');

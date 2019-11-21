@@ -14,7 +14,7 @@
 
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
-            {{ Form::open(['route' => ['historico-seguimiento.update', $historico->id], 'method' => 'PUT']) }}
+            {{ Form::open(['route' => 'historico-seguimiento.store', 'method' => 'POST']) }}
             <input type="hidden" name="property_assignment_id" value="{{ $id_assigment }}">
             <div class="row">
                 <div class="col-12">
@@ -26,8 +26,8 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Status seguimiento</label>
                         <select name="status_follow_id" class="form-control">
-                            @foreach ($status_all as $status)
-                            <option value="{{ $status->id }}" {{ ($historico->status_follow_id ==  $status->id )? 'selected' : '' }}>{{ $status->description }}</option>
+                            @foreach ($status_all  as $status)
+                                <option value="{{ $status->id }}">{{ $status->description }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -37,15 +37,15 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Observación</label>
                         <div class="w-100"></div>
-                        <textarea name="observacion1" id="" cols="50" rows="10">{{ $historico->observacion1 }}</textarea>
+                        <textarea name="observacion1" id="" cols="50" rows="10"></textarea>
                         @if($errors)
                         <span class="text-danger"> {{$errors->first('observacion1')}}</span>
                         @endif
                     </div>
                 </div>
+              
 
-
-
+              
 
             </div>
             <div class="row">
@@ -69,7 +69,7 @@
             <!-- /.box-header -->
             <div class="box-body">
 
-
+                
 
                 <div class="container">
                     <div class="row">
@@ -81,55 +81,55 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     <input type="text" name="date" value="{{ date('Y-m-d', strtotime ($property_assigment->date)) }}" autocomplete="off" class="form-control pull-right" id="datepicker">
-                            </div> --}}
+                                </div> --}}
 
-                            @if($errors)
-                            <span class="text-danger"> {{$errors->first('date')}}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Status seguimiento</label>
-                            <select class="form-control" name="status_follow_id">
-                                {{-- @foreach ($status as $status)
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('date')}}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Status seguimiento</label>
+                                <select class="form-control" name="status_follow_id">
+                                   {{--  @foreach ($status as $status)
                                     <option value="{{ $status->id }}" {{ ($property_assigment->status_follow_id ==  $status->id ) ? 'selected' : '' }}>{{ $status->description }}</option>
-                                @endforeach --}}
-                            </select>
-                        </div>
-                        {{-- <div class="form-group">
+                                    @endforeach --}}
+                                </select>
+                            </div>
+                          {{--   <div class="form-group">
                                 <label for="exampleInputEmail1">Nombre contacto</label>
                                 <input type="text" name="name" value="{{ $property_assigment->name }}" class="form-control">
 
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('name')}}</span>
-                        @endif
-                    </div> --}}
-                    {{-- <div class="form-group">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('name')}}</span>
+                                @endif
+                            </div> --}}
+                           {{--  <div class="form-group">
                                 <label> Observación 1 </label>
                                 <textarea name="observation1" class="form-control" cols="30" rows="3"> {{ $property_assigment->observation1 }} </textarea>
-                </div>
-                <div class="form-group">
-                    <label> Observación 2 </label>
-                    <textarea name="observation2" class="form-control" cols="30" rows="3"> {{ $property_assigment->observation2 }} </textarea>
-                </div>
-                <div class="form-group">
-                    <label> Observación 3 </label>
-                    <textarea name="observation3" class="form-control" cols="30" rows="3"> {{ $property_assigment->observation3 }} </textarea>
-                </div> --}}
+                            </div>
+                            <div class="form-group">
+                                <label> Observación 2 </label>
+                                <textarea name="observation2" class="form-control" cols="30" rows="3"> {{ $property_assigment->observation2 }} </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label> Observación 3 </label>
+                                <textarea name="observation3" class="form-control" cols="30" rows="3"> {{ $property_assigment->observation3 }} </textarea>
+                            </div> --}}
 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group pull-right">
-                    <button class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group pull-right">
+                                <button class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
-    {{ Form::close() }}
-</div>
-</div>
-</div>
 </div>
 @stop
 

@@ -28,7 +28,7 @@ class PropertyAssigmentController extends Controller
     {
         $property_assignments = Property_assigment::getById($property_id);
         $property_id          = $property_id;
-        return view('Seguimiento-Asesores.index', compact('property_assignments', 'property_id'));
+        return view('Seguimiento-Asesores.list.index', compact('property_assignments', 'property_id'));
     }
 
     public function getAll()
