@@ -15,44 +15,52 @@
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => ['historico-seguimiento.update', $historico->id], 'method' => 'PUT']) }}
-            <input type="hidden" name="property_assignment_id" value="{{ $id_assigment }}">
-            <div class="row">
-                <div class="col-12">
-                    <h5>Nuevo registro llamada</h5>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Status seguimiento</label>
-                        <select name="status_follow_id" class="form-control">
-                            @foreach ($status_all as $status)
-                            <option value="{{ $status->id }}" {{ ($historico->status_follow_id ==  $status->id )? 'selected' : '' }}>{{ $status->description }}</option>
-                            @endforeach
-                        </select>
+            <div class="card">
+                <div class="card-header">.:: Editar registro llamada ::.</div>
+                <div class="card-body">
+                    <input type="hidden" name="property_assignment_id" value="{{ $id_assigment }}">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Nuevo registro llamada</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Observación</label>
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Status seguimiento</label>
+                                <select name="status_follow_id" class="form-control">
+                                    @foreach ($status_all as $status)
+                                        <option value="{{ $status->id }}" {{ ($historico->status_follow_id ==  $status->id )? 'selected' : '' }}>{{ $status->description }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="w-100"></div>
-                        <textarea name="observacion1" id="" cols="50" rows="10">{{ $historico->observacion1 }}</textarea>
-                        @if($errors)
-                        <span class="text-danger"> {{$errors->first('observacion1')}}</span>
-                        @endif
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Observación</label>
+                                <div class="w-100"></div>
+                                <textarea name="observacion1" id="" cols="50" rows="10">{{ $historico->observacion1 }}</textarea>
+                                @if($errors)
+                                    <span class="text-danger"> {{$errors->first('observacion1')}}</span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
+
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 text-right">
+                            <button class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
 
-
-
-
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 text-right">
-                    <button class="btn btn-primary">Guardar</button>
                 </div>
             </div>
+
             {{ Form::close() }}
         </div>
     </div>

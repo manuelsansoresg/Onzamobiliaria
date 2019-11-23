@@ -31,7 +31,7 @@ class HistoricAssigmentController extends Controller
 
         return view('Seguimiento-Asesores.list.create', compact('id_assigment', 'status_all'));
     }
-   
+
 
     /**
      * Store a newly created resource in storage.
@@ -87,6 +87,7 @@ class HistoricAssigmentController extends Controller
     {
         $historic = HistoricAssigment::find($id_assigment);
         $historic->fill($request->except('_token'));
+
         $historic->update();
         flash('Elemento guardado');
         return redirect('/admin/historico-seguimiento/' . $request->property_assignment_id);

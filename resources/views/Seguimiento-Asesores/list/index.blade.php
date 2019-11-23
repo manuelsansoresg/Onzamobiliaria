@@ -7,8 +7,11 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-12 text-right">
+            <a href="/admin/seguimiento-asesores" class="btn btn-primary btn-sm  pull-right">
+                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
+            </a>
             <a href="/admin/historico-seguimiento/create/{{ $id_assigment }}" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-plus-circle"></i> &nbsp; Asignación
+                <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
             </a>
         </div>
         <div class="col-12 mt-3">
@@ -22,7 +25,7 @@
                         <th>STATUS</th>
                         <th>OBSERVACIÓN</th>
 
-                        <th></th>
+                        <th style="width: 150px;"></th>
                     </tr>
                 </thead>
                 @foreach ($property_assignments as $property_assignment)

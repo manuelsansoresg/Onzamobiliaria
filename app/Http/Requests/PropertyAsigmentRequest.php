@@ -6,13 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PropertyAsigmentRequest extends FormRequest
 {
-    /* public function attributes()
-    {
-        return [
-            'date' => 'fecha',
-            'name' => 'nombre',
-        ];
-    } */
+
 
     /**
      * Determine if the user is authorized to make this request.
@@ -36,7 +30,8 @@ class PropertyAsigmentRequest extends FormRequest
             'nombre' => 'required',
             'telefono' => 'required',
             'easy_broker' => 'required|exists:properties,pass_easy_broker',
-            'correo' => 'email',
+            'correo' => 'email'
+
         ];
     }
 }

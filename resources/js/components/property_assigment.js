@@ -3,18 +3,21 @@ var Swal = require('sweetalert2');
 var table;
 
 $(document).ready(function () {
-    window.paceOptions = {
+   /*  window.paceOptions = {
         ajax: false,
         restartOnRequestAfter: false,
-    };
-   
+    }; */
+
+    setInterval(getProperties, 100000); 
+
     /* getProperties(false, false);
-    setInterval(reloadTable, 9000); */
-   
-    /*  setInterval(function () {
-        table.ajax.reload(null, false); 
+
+
+     setInterval(function () {
+        table.ajax.reload(null, false);
     }, 30000); */
-    /* miPrimeraPromise.then((successMessage) => { 
+
+   /*  miPrimeraPromise.then((successMessage) => {
         setInterval(reloadTable(), 2000);
     }); */
 
@@ -23,6 +26,7 @@ $(document).ready(function () {
 window.searchEasyBroker = function(){
     var easy_broker = $('#easy_broker').val();
     $('#error_easy').html('');
+
     if(easy_broker == ''){
         $('#error_easy').html('El campo easy broker esta vacio');
     }else{
@@ -31,7 +35,7 @@ window.searchEasyBroker = function(){
             .then(function (response) {
                 var result = response.data.property;
                 var total = response.data.total;
-                
+
                 if (total  > 0) {
                     $('#val_propiedad').html(result.tipo);
                     $('#val_operacion').html(result.operacion);
@@ -41,7 +45,7 @@ window.searchEasyBroker = function(){
                 }else{
                     $('#error_easy').html('El campo easy broker seleccionado no existe.');
                 }
-               
+
 
             })
             .catch(function (error) {
@@ -52,46 +56,38 @@ window.searchEasyBroker = function(){
     }
 }
 
-function getProperties(resolve, async) {
-
+function getProperties() {
+    $('#table-assigment').html('');
     axios.get
         ('/admin/property/getAll')
         .then(function (response) {
-            console.log(response);
+
             var rtable = response.data.table;
             var head = response.data.table_head;
-            table = $('#property_assigment').DataTable({
-                    deferRender: true,
-                    destroy: true,
-                    data: rtable,
-                    columns: head
-                });
-            if (async == true){
-                resolve('do');
-            }
-          
+            $('#table-assigment').html(rtable);
+
 
         })
         .catch(function (error) {
 
-            
+
 
         })
 }
 
-window.reloadTable = function() {
-   
-    
+/* window.reloadTable = function() {
+
+
     let miPrimeraPromise = new Promise((resolve, reject) => {
-        
+
         getProperties(true, false);
 
-        
+
     });
-    
+
     miPrimeraPromise.then((successMessage) => {
         table.destroy();
         getProperties(false, false);
-    }); 
+    });
 
-}
+} */

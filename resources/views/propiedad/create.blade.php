@@ -23,7 +23,7 @@
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
                                 <label class="small">Cliente</label>
-                                 <div class="w-100"></div>
+                                <div class="w-100"></div>
                                 <input type="text" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                 <div class="input-group-prepend">
                                     <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
@@ -39,6 +39,9 @@
                             <div class="form-group">
                                 <label class="small">Clave EASYBROKER</label>
                                 <input name="pass_easy_broker" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -102,14 +105,13 @@
                                 <div class="w-100"></div>
                                 <input type="text" name="cp" id="cp" class="form-control">
                                 <div class="input-group-prepend">
-                                    <button type="button" onclick="searchPostal()"
-                                        class="btn btn-info btn-sm">Buscar</button>
+                                    <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
                                 @if($errors)
                                 <div class="w-100"></div>
                                 <p class="text-danger"> {{$errors->first('cp')}}</p>
                                 @endif
-                        
+
                             </div>
                         </div>
 
@@ -121,11 +123,11 @@
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('address')}}</span>
                                 @endif
-                        
+
                             </div>
                         </div>
 
-                       
+
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
@@ -144,6 +146,9 @@
                             <div class="form-group">
                                 <label class="small">Precio</label>
                                 <input name="price" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('price')}}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -188,6 +193,10 @@
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach
                                 </select>
+                                @if($errors)
+                                <div class="w-100"></div>
+                                <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -236,7 +245,7 @@
                                 <input name="infraestructura_zona" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
-                        
+
 
                     </div>
 

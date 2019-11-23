@@ -18,10 +18,11 @@ class PropertyAssigmentController extends Controller
      */
     public function index()
     {
-        //
-        $property_assignments = Property_assigment::getall();
         
-        return view('Seguimiento-Asesores.index', compact('property_assignments'));
+        $property_assignments = Property_assigment::search();
+        $all_status = StatusFollow::where('status', 1)->get();
+        
+        return view('Seguimiento-Asesores.index', compact('property_assignments', 'all_status'));
     }
 
     public function lista($property_id)
@@ -60,7 +61,7 @@ class PropertyAssigmentController extends Controller
     public function store(PropertyAsigmentRequest $request)
     {
         $property_assignment = Property_assigment::create($request);
-        
+
         flash('Elemento guardado');
         return redirect('/admin/seguimiento-asesores');
     }
@@ -88,7 +89,7 @@ class PropertyAssigmentController extends Controller
         $status             = StatusFollow::all();
         $ads                = Ad::all();
         $asesores           = User::getAsesor();
-        
+
 
         return view('Seguimiento-Asesores.edit', compact('status',  'property_assigment', 'ads', 'asesores'));
 
@@ -104,7 +105,7 @@ class PropertyAssigmentController extends Controller
     public function update(PropertyAsigmentRequest $request, $id)
     {
         $property_assigment = Property_assigment::create($request, $id);
-        
+
 
         flash('Elemento guardado');
         return redirect('/admin/seguimiento-asesores');

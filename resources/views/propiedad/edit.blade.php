@@ -37,8 +37,11 @@
                             <div class="form-group">
                                 <label class="small">Clave EASYBROKER</label>
                                 <input name="pass_easy_broker" class="form-control form-control-sm" type="text"
-            
+
                                     value="{{ $property->pass_easy_broker }}">
+                                @if($errors)
+                                    <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -83,7 +86,7 @@
                                     <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo"  class="form-control form-control-sm">
                                 @else
                                     <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
-                                    
+
                                 @endif
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('Avaluo')}}</span>
@@ -113,10 +116,10 @@
                                 <div class="w-100"></div>
                                 <p class="text-danger"> {{$errors->first('cp')}}</p>
                                 @endif
-                        
+
                             </div>
                         </div>
-                        
+
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">*Colonia</label> &nbsp;
@@ -130,11 +133,11 @@
                                         @endforeach
                                     </select>
                                 @endif
-                               
+
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('address')}}</span>
                                 @endif
-                        
+
                             </div>
                         </div>
 
@@ -246,7 +249,7 @@
                                 <input name="infraestructura_zona" class="form-control form-control-sm" type="text" value="{{ $property->infraestructura_zona }}">
                             </div>
                         </div>
-                       
+
 
                     </div>
 
@@ -265,11 +268,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->identificacion) }}" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/identificacion/{{ $property->identificacion }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -282,11 +285,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->curp) }}" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/curp/{{ $property->curp }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -298,11 +301,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->rfc) }}" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/rfc/{{ $property->rfc }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -314,11 +317,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_nacimiento) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/acta_nacimiento/{{ $property->acta_nacimiento }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -330,11 +333,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_matrimonio) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/acta_matrimonio/{{ $property->acta_matrimonio }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -346,11 +349,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/predial/{{ $property->predial }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -362,11 +365,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_agua) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/no_adeudo_agua/{{ $property->no_adeudo_agua }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -378,11 +381,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/no_adeudo_predial/{{ $property->no_adeudo_predial }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -394,11 +397,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->cedula_plano_catastral) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/cedula_plano_catastral/{{ $property->cedula_plano_catastral }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -410,11 +413,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->copia_escritura) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/copia_escritura/{{ $property->copia_escritura }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -426,11 +429,11 @@
                                 @else
                                     <p class="">
                                         <i class="far fa-file fa-2x"></i>
-                                    </p>  
+                                    </p>
                                     <p>
                                         <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->reglamento_condominios_no_adeudo) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                      <a href="/admin/destroy-document/reglamento_condominios_no_adeudo/{{ $property->reglamento_condominios_no_adeudo }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>                                 
+                                    </p>
                                 @endif
                             </div>
                         </div>

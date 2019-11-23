@@ -14,6 +14,7 @@
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => ['seguimiento-asesores.update', $property_assigment->assignment_id], 'method' => 'PUT']) }}
+            <input type="hidden" name="date_assignment" value="{{ date('Y-m-d H:i:s') }}">
             <div class="card">
                 <div class="card-header">.:: Editar Asignacion ::.</div>
                 <div class="card-body">

@@ -28,7 +28,7 @@
             @include('flash::message')
         </div>
         <div class="col-12 mt-3">
-    
+
                 <table id="mobiliaria" class="table table-bordered table-responsive">
                     <thead>
                         <tr>
@@ -54,12 +54,12 @@
                         <tr>
                             <td> <span class="small"> {{ $property->pass_easy_broker  }} </span> </td>
                             <td> <span class="small"> {{ $property->clave_interna }} </span> </td>
-                            <td>  
+                            <td>
                             @if ($property->is_titulo == 1)
                                 <span class="badge bg-green">Sí</span>
                                 @else
                                 <span class="badge bg-red">No</span>
-                            @endif    
+                            @endif
                             </td>
                             <td> <span class="small"> {{ $property->price  }} </span> </td>
                             <td>
@@ -82,8 +82,8 @@
                                 <span class="badge bg-red">No</span>
                                 @endif
                             </td>
-                            
-                            
+
+
                             <td><span class="small"> {{ $property->metros_construccion  }} </span></td>
                             <td><span class="small"> {{ $property->metros_terreno  }} </span></td>
                             <td><span class="small"> {{ $property->frente  }} </span></td>
@@ -96,7 +96,7 @@
                                 <i class="fas fa-ban text-success"></i>
                                 <span>Activo</span>
                                 @endif
-                            
+
                             </td>
 
                             <td>
@@ -105,7 +105,7 @@
                                     <i class="fas fa-file-pdf"></i>
                                 </a> -->
                                 @role('admin')
-                                <button type="button" onclick="userModal({{ $property->id }})" class="btn btn-info btn-flat ml-1"><i class="fas fa-user-plus"></i></button>
+                                {{--<button type="button" onclick="userModal({{ $property->id }})" class="btn btn-info btn-flat ml-1"><i class="fas fa-user-plus"></i></button>--}}
                                 @endrole
                                 <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary ml-1">
                                     <i class="far fa-edit"></i>
@@ -156,7 +156,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                
+
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
@@ -235,7 +235,7 @@
         });
 
         $('#table-users').DataTable({
-           
+
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

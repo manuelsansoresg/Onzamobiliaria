@@ -5053,20 +5053,19 @@ var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/di
 
 var table;
 $(document).ready(function () {
-  window.paceOptions = {
-    ajax: false,
-    restartOnRequestAfter: false
-  };
+  /*  window.paceOptions = {
+       ajax: false,
+       restartOnRequestAfter: false,
+   }; */
+  setInterval(getProperties, 100000);
   /* getProperties(false, false);
-  setInterval(reloadTable, 9000); */
-
-  /*  setInterval(function () {
-      table.ajax.reload(null, false); 
+     setInterval(function () {
+      table.ajax.reload(null, false);
   }, 30000); */
 
-  /* miPrimeraPromise.then((successMessage) => { 
-      setInterval(reloadTable(), 2000);
-  }); */
+  /*  miPrimeraPromise.then((successMessage) => {
+       setInterval(reloadTable(), 2000);
+   }); */
 });
 
 window.searchEasyBroker = function () {
@@ -5093,33 +5092,30 @@ window.searchEasyBroker = function () {
   }
 };
 
-function getProperties(resolve, async) {
+function getProperties() {
+  $('#table-assigment').html('');
   axios.get('/admin/property/getAll').then(function (response) {
-    console.log(response);
     var rtable = response.data.table;
     var head = response.data.table_head;
-    table = $('#property_assigment').DataTable({
-      deferRender: true,
-      destroy: true,
-      data: rtable,
-      columns: head
-    });
-
-    if (async == true) {
-      resolve('do');
-    }
+    $('#table-assigment').html(rtable);
   })["catch"](function (error) {});
 }
+/* window.reloadTable = function() {
 
-window.reloadTable = function () {
-  var miPrimeraPromise = new Promise(function (resolve, reject) {
-    getProperties(true, false);
-  });
-  miPrimeraPromise.then(function (successMessage) {
-    table.destroy();
-    getProperties(false, false);
-  });
-};
+
+    let miPrimeraPromise = new Promise((resolve, reject) => {
+
+        getProperties(true, false);
+
+
+    });
+
+    miPrimeraPromise.then((successMessage) => {
+        table.destroy();
+        getProperties(false, false);
+    });
+
+} */
 
 /***/ }),
 
