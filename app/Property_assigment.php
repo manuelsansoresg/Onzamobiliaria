@@ -44,8 +44,8 @@ class Property_assigment extends Model
 
     static function getAll()
     {
-        $campo =  $_GET['campo'];
-        $filtro = $_GET['filtro'];
+        $campo =  (isset($_GET['campo']))?$_GET['campo']: '';
+        $filtro = (isset($_GET['filtro']))?$_GET['filtro']: '';
 
         
         DB::enableQueryLog();
@@ -95,7 +95,7 @@ class Property_assigment extends Model
         $properties = [];
         $is_error = false;
         
-        if ($filtro != 'TODOS') {
+        if ($filtro!= '' && $filtro != 'TODOS') {
             
             foreach ($property as $row) {
 
@@ -113,6 +113,7 @@ class Property_assigment extends Model
         if($is_error == true){
             $property =  [];
         }
+        
         return $property;
     }
 
@@ -189,10 +190,10 @@ class Property_assigment extends Model
                                 </a>'
                                 );
                 }else{
-
+                    //dd($dias);
                     if ($dias < 1) {
 
-                        $table.= '<tr>';
+                        /*  $table.= '<tr>';
                         $table.= '<td> <span class="small">'. $alert. $property->pass_easy_broker.' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->propiedad.' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->colonia.' </span> </td>';
@@ -213,7 +214,23 @@ class Property_assigment extends Model
 
                         $table.= '</form>';
                         $table.= '</td>';
-                        $table.= '/<tr>';
+                        $table.= '/<tr>'; */
+                        $table[] = array(
+                            $alert . ' ' . $property->pass_easy_broker,
+                            $property->propiedad,
+                            $property->colonia,
+                            $property->operacion,
+                            $property->price,
+                            $property->asesor,
+                            $property->portal,
+                            $property->nombre_prospecto,
+                            $property->telefono,
+                            $property->correo,
+                            //'llamadas'=>$llamadas,
+                            ' <a href="/admin/seguimiento-asesores/lista/' . $property->id . '" class="btn btn-primary">
+                                    <i class="fas fa-phone-volume"></i>
+                                </a>'
+                        );
                     }
                 }
             }
