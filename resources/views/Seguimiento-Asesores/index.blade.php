@@ -65,9 +65,9 @@
     
                         </tr>
                     </thead>
-                    @foreach ($property_assignments as $property_assignment)
-                    <tbody id="table-assigment">
-                        <tr>
+                   {{--  @foreach ($property_assignments as $property_assignment) --}}
+                    <tbody >
+                        {{-- <tr>
                             <td>
                                 <span class="small"> {{ $property_assignment->pass_easy_broker }} </span>
                             </td>
@@ -100,7 +100,7 @@
                                 @endrole
                                 {{ Form::close() }}
                             </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                     {{-- <tbody>
                             @role('admin')
@@ -135,7 +135,7 @@
     
                     </tr>
                     </tbody> --}}
-                    @endforeach
+                    {{-- @endforeach --}}
     
                 </table>
 
@@ -143,7 +143,6 @@
         </div>
         <div class="row">
             <div class="col-12">
-                {{ $property_assignments->links() }}
             </div>
         </div>
     </div>
@@ -151,7 +150,7 @@
 @stop
 
 @section('js')
-<script src="{{ asset('vendor/adminlte/plugins/datatable/js/responsive.js') }}"></script>
+
 <script src="{{ asset('js/admin.js') }}"></script>
 <script>
    /*  $(function() {

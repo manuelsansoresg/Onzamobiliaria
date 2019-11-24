@@ -5052,12 +5052,27 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 var table;
+var ref;
 $(document).ready(function () {
   /*  window.paceOptions = {
        ajax: false,
        restartOnRequestAfter: false,
    }; */
-  setInterval(getProperties, 100000);
+  table = $('#property_assigment').DataTable({
+    /*    searching: false, */
+    "ajax": '/admin/property/getAll',
+    "bJQueryUI": true,
+    "bSort": false,
+    "bPaginate": true,
+    // Pagination True 
+    "sPaginationType": "full_numbers",
+    // And its type.
+    "iDisplayLength": 10
+  });
+  table.destroy();
+  setTimeout(function () {
+    setInterval(getProperties, 100000);
+  }, 3000);
   /* getProperties(false, false);
      setInterval(function () {
       table.ajax.reload(null, false);
@@ -5093,12 +5108,19 @@ window.searchEasyBroker = function () {
 };
 
 function getProperties() {
-  $('#table-assigment').html('');
-  axios.get('/admin/property/getAll').then(function (response) {
-    var rtable = response.data.table;
-    var head = response.data.table_head;
-    $('#table-assigment').html(rtable);
-  })["catch"](function (error) {});
+  table.ajax.reload();
+  /* $('#table-assigment').html(''); */
+
+  /*  axios.get
+       ('/admin/property/getAll')
+       .then(function (response) {
+           $('#table-assigment').html('');
+           var rtable = response.data.table;
+           var head = response.data.table_head;
+           $('#table-assigment').html(rtable);
+         })
+       .catch(function (error) {
+          }) */
 }
 /* window.reloadTable = function() {
 

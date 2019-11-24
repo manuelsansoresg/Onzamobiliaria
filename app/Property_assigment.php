@@ -132,10 +132,12 @@ class Property_assigment extends Model
 
     static function getAllTable()
     {
-        $properties = self::search();
-        $table      = '';
+        $properties = self::getall();
+        $table      = array();
         $user       = User::find(Auth::id());
         $user_role  = $user->getRoleNames()->first();
+
+        
 
         if ($properties) {
             foreach ($properties as $property) {
@@ -154,7 +156,7 @@ class Property_assigment extends Model
                 if ($user_role == 'admin') {
 
 
-                    $table.= '<tr>';
+                    /* $table.= '<tr>';
                     $table.= '<td> <span class="small">'. $alert. $property->pass_easy_broker.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->propiedad.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->colonia.' </span> </td>';
@@ -181,25 +183,25 @@ class Property_assigment extends Model
                             </button>';
                     $table.= '</form>';
                     $table.= '</td>';
-                    $table.= '/<tr>';
+                    $table.= '/<tr>'; */
 
-                    /* $table[] = array(
-                                'easy_broker'=>$alert.' '.$property->pass_easy_broker,
-                                'propiedad'=>$property->propiedad,
-                                'colonia'=>$property->colonia,
-                                'operacion'=>$property->operacion,
-                                'price'=>$property->price,
-                                'asesor'=>$property->asesor,
-                                'portal'=>$property->portal,
-                                'nombre_prospecto'=>$property->nombre_prospecto,
-                                'telefono'=>$property->telefono,
-                                'correo'=>$property->correo,
-                                'asesor_asignado'=>$property->asesor_asignado,
+                    $table[] = array(
+                                $alert.' '.$property->pass_easy_broker,
+                                $property->propiedad,
+                                $property->colonia,
+                                $property->operacion,
+                                $property->price,
+                                $property->asesor,
+                                $property->portal,
+                                $property->nombre_prospecto,
+                                $property->telefono,
+                                $property->correo,
+                                $property->asesor_asignado,
                                 //'llamadas'=>$llamadas,
-                                'link'=>' <a href="/admin/seguimiento-asesores/lista/'.$property->id.'" class="btn btn-primary">
+                                ' <a href="/admin/seguimiento-asesores/lista/'.$property->id.'" class="btn btn-primary">
                                     <i class="fas fa-phone-volume"></i>
                                 </a>'
-                                ); */
+                                );
                 }else{
 
                     if ($dias < 1) {
@@ -231,7 +233,7 @@ class Property_assigment extends Model
             }
         }
 
-
+        
         //$table_head->{$title} = 'Dirección';
 
         /*
@@ -259,7 +261,7 @@ class Property_assigment extends Model
         //$table_head = array('Dirección', 'Easybroker');
 
 
-        return array('table' => $table, 'table_head' => $table_head );
+        return array('data' => $table, 'table_head' => $table_head );
     }
 
     static function getAssigmentByyId($property_id)
