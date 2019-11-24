@@ -8,12 +8,14 @@ $(document).ready(function () {
         ajax: false,
         restartOnRequestAfter: false,
     }; */
+    var filtro = $('#filtro').val();
+    var campo = $('#campo').val();
     table = $('#property_assigment').DataTable({ 
       
        
      /*    searching: false, */
         
-        "ajax": '/admin/property/getAll',
+        "ajax": '/admin/property/getAll?filtro=' + filtro + '&campo=' + campo,
         "bJQueryUI": true,
         "bSort": false,
         "bPaginate": true, // Pagination True 
@@ -25,7 +27,8 @@ $(document).ready(function () {
     table.destroy();
     
     setTimeout(function () { 
-        setInterval(getProperties, 100000); 
+        $('#body_assigment').html(),
+        setInterval(getProperties, 9000); 
     }, 3000); 
 
     /* getProperties(false, false);

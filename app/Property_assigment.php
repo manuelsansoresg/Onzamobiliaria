@@ -33,41 +33,21 @@ class Property_assigment extends Model
 
     static function search()
     {
-        $campo = (isset($_GET['campo'])) ? $_GET['campo'] : '';
-        $filtro = (isset($_GET['filtro'])) ? $_GET['filtro'] : '';
+       
 
         $properties = self::getAll();
 
-        //dd(DB::getQueryLog());
-        //dd($properties);
-        // Get current page form url e.x. &page=1
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-
-        // Create a new Laravel collection from the array data
-        $itemCollection = collect($properties);
-
-        // Define how many items we want to be visible in each page
-        $perPage = 10;
-
-        // Slice the collection to get the items to display in current page
-        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-
-        // Create our paginator and pass it to the view
-        $paginatedItems = new LengthAwarePaginator($currentPageItems, count($itemCollection), $perPage);
-
-        // set url path for generted links
-        $paginatedItems->setPath("/admin/seguimiento-asesores?filtro=$filtro&campo=$campo");
         
-        return $paginatedItems;
+        return $properties;
 
     }
 
     static function getAll()
     {
-        $campo = (isset($_GET['campo'])) ? $_GET['campo'] : '';
-        $filtro = (isset($_GET['filtro'])) ? $_GET['filtro'] : '';
+        $campo =  $_GET['campo'];
+        $filtro = $_GET['filtro'];
 
-
+        
         DB::enableQueryLog();
         $user      = User::find(Auth::id());
 
@@ -113,19 +93,25 @@ class Property_assigment extends Model
 
         $property   = $property->get();
         $properties = [];
-
-        if ($filtro != '' && $filtro != 'TODOS') {
-
+        $is_error = false;
+        
+        if ($filtro != 'TODOS') {
+            
             foreach ($property as $row) {
 
                 $assigment = HistoricAssigment::where('status_follow_id', $filtro)->where('property_assignment_id', $row->assignment_id)->count();
-
+                $is_error = true;
                 if ($assigment > 0) {
+                    $is_error = false;
                     $properties[] = $row;
                 }
             }
         } else {
             $properties = $property;
+        }
+        //dd(DB::getQueryLog());
+        if($is_error == true){
+            $property =  [];
         }
         return $property;
     }

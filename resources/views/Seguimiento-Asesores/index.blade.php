@@ -5,6 +5,8 @@
 
 @section('content')
 <div class="container-fluid">
+    <input type="hidden" id="filtro" value="{{ isset($_GET['filtro'])? $_GET['filtro'] : '' }}">
+    <input type="hidden" id="campo" value="{{ isset($_GET['campo'])? $_GET['campo'] : '' }}">
     <div class="row mt-3">
         @role('admin')
         <div class="col-12 text-right">
@@ -65,9 +67,9 @@
     
                         </tr>
                     </thead>
-                   {{--  @foreach ($property_assignments as $property_assignment) --}}
-                    <tbody >
-                        {{-- <tr>
+                    {{-- @foreach ($property_assignments as $property_assignment)
+                    <tbody id="body_assigment">
+                        <tr>
                             <td>
                                 <span class="small"> {{ $property_assignment->pass_easy_broker }} </span>
                             </td>
@@ -100,8 +102,8 @@
                                 @endrole
                                 {{ Form::close() }}
                             </td>
-                        </tr> --}}
-                    </tbody>
+                        </tr>
+                    </tbody> --}}
                     {{-- <tbody>
                             @role('admin')
                             <tr class="{{ classAlert($property_assignment->id) }}">
