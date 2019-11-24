@@ -5073,7 +5073,7 @@ $(document).ready(function () {
   });
   table.destroy();
   setTimeout(function () {
-    $('#body_assigment').html(), setInterval(getProperties, 9000);
+    $('#body_assigment').html(), setInterval(getProperties, 100000);
   }, 3000);
   /* getProperties(false, false);
      setInterval(function () {

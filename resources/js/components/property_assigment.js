@@ -28,7 +28,7 @@ $(document).ready(function () {
     
     setTimeout(function () { 
         $('#body_assigment').html(),
-        setInterval(getProperties, 9000); 
+        setInterval(getProperties, 100000); 
     }, 3000); 
 
     /* getProperties(false, false);
