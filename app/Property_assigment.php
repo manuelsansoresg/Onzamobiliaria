@@ -33,11 +33,11 @@ class Property_assigment extends Model
 
     static function search()
     {
-       
+
 
         $properties = self::getAll();
 
-        
+
         return $properties;
 
     }
@@ -47,7 +47,7 @@ class Property_assigment extends Model
         $campo =  (isset($_GET['campo']))?$_GET['campo']: '';
         $filtro = (isset($_GET['filtro']))?$_GET['filtro']: '';
 
-        
+
         DB::enableQueryLog();
         $user      = User::find(Auth::id());
 
@@ -94,9 +94,9 @@ class Property_assigment extends Model
         $property   = $property->get();
         $properties = [];
         $is_error = false;
-        
+
         if ($filtro!= '' && $filtro != 'TODOS') {
-            
+
             foreach ($property as $row) {
 
                 $assigment = HistoricAssigment::where('status_follow_id', $filtro)->where('property_assignment_id', $row->assignment_id)->count();
@@ -113,7 +113,7 @@ class Property_assigment extends Model
         if($is_error == true){
             $property =  [];
         }
-        
+
         return $property;
     }
 
@@ -123,8 +123,9 @@ class Property_assigment extends Model
         $table      = array();
         $user       = User::find(Auth::id());
         $user_role  = $user->getRoleNames()->first();
+        $td_option = '';
 
-        
+
 
         if ($properties) {
             foreach ($properties as $property) {
@@ -156,6 +157,7 @@ class Property_assigment extends Model
                     $table.= '<td> <span class="small">'. $property->correo.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->asesor_asignado.' </span> </td>';
                     $table.= '<td>';
+
                     $table.=  '<form method="POST" action="/admin/seguimiento-asesores/'. $property->assignment_id.'" accept-charset="UTF-8" class="form-inline">';
                     $table.= '<input name="_method" type="hidden" value="DELETE">';
                     $table.= '<input name="_token" type="hidden" value="'. csrf_token().'">';
@@ -171,6 +173,19 @@ class Property_assigment extends Model
                     $table.= '</form>';
                     $table.= '</td>';
                     $table.= '/<tr>'; */
+                    $td_option.=  '<form method="POST" action="/admin/seguimiento-asesores/'. $property->assignment_id.'" accept-charset="UTF-8" class="form-inline">';
+                    $td_option.= '<input name="_method" type="hidden" value="DELETE">';
+                    $td_option.= '<input name="_token" type="hidden" value="'. csrf_token().'">';
+                    $td_option.= '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-primary">
+                                <i class="fas fa-phone-volume"></i>
+                            </a>';
+                    $td_option.= '<a href="http://onzamobiliaria.test/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-primary ml-1">
+                                <i class="far fa-edit"></i>
+                            </a>';
+                    $td_option.= '<button onclick="return confirm(\'¿Deseas eliminar el elemento?\')" class="btn btn-danger ml-1">
+                                <i class="far fa-trash-alt"></i>
+                            </button>';
+                    $td_option.= '</form>';
 
                     $table[] = array(
                                 $alert.' '.$property->pass_easy_broker,
@@ -185,9 +200,7 @@ class Property_assigment extends Model
                                 $property->correo,
                                 $property->asesor_asignado,
                                 //'llamadas'=>$llamadas,
-                                ' <a href="/admin/seguimiento-asesores/lista/'.$property->id.'" class="btn btn-primary">
-                                    <i class="fas fa-phone-volume"></i>
-                                </a>'
+                                $td_option
                                 );
                 }else{
                     //dd($dias);
@@ -236,7 +249,7 @@ class Property_assigment extends Model
             }
         }
 
-        
+
         //$table_head->{$title} = 'Dirección';
 
         /*

@@ -484,10 +484,9 @@
                                     @foreach ($clients as $client)
 
                                     <tr>
-                                        <td> <span class="small">{{ $client->clave_interna }}</span></td>
                                         <td> <span class="small">{{ $client->nombre }}</span> </td>
                                         <td>
-                                            <button type="button" onclick="addClient('{{ $client->clave_interna }}')" class="btn btn-info  btn-sm ">
+                                            <button type="button" onclick="addClient('{{ $client->id }}')" class="btn btn-info  btn-sm ">
                                                 <i class="fas fa-plus-circle"></i> Agregar
                                             </button>
                                         </td>

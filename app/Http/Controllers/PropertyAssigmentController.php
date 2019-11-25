@@ -18,10 +18,10 @@ class PropertyAssigmentController extends Controller
      */
     public function index()
     {
-        
+
         $property_assignments = Property_assigment::search();
         $all_status = StatusFollow::where('status', 1)->get();
-        
+
         return view('Seguimiento-Asesores.index', compact('property_assignments', 'all_status'));
     }
 
@@ -134,6 +134,6 @@ class PropertyAssigmentController extends Controller
         $property_assigment->delete();
 
         flash('Elemento borrado');
-        return redirect('/admin/seguimiento-asesores/lista/' . $property_assigment->property_id);
+        return redirect('/admin/seguimiento-asesores');
     }
 }

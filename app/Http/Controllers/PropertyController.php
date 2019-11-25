@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\FormPayment;
+use App\Http\Requests\PropertyEditRequest;
 use App\Http\Requests\PropertyRequest;
 use App\Operation;
 use App\Postal;
@@ -125,7 +126,7 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PropertyRequest $request, $id)
+    public function update(PropertyEditRequest $request, $id)
     {
         $property = Property::createUpdateProperty($request, $this->path_document, true, $id);
         
