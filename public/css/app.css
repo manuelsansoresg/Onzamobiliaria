@@ -10684,3 +10684,11 @@ a.text-dark:focus {
   color: red;
 }
 
+.options-asesores {
+  width: 170px !important;
+}
+
+.scrolltable {
+  overflow: auto;
+}
+

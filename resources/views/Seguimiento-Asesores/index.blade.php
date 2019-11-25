@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-12 mt-3">
 
-            <table id="property_assigment" class="table table-bordered table-responsive">
+            <table id="property_assigment" class="table table-responsive dataTables_scrollBody" style="width:100%">
                 <thead>
                     <tr>
                         <th> <span class="small font-weight-bold"> CVE EASYBROKER </span> </th>
@@ -63,7 +63,7 @@
                         <th> <span class="small font-weight-bold"> ASIGNAR ASESOR </span> </th>
                         <!--  <th>LLAMADAS</th> -->
                         @endrole
-                        <th style="width: 160px;"></th>
+                        <th style="width: 160px;" class="options-asesores"></th>
 
                     </tr>
                 </thead>
@@ -153,7 +153,7 @@
 
 @section('js')
 
-<script src="{{ asset('js/admin.js') }}"></script>
+
 <script>
     /*  $(function() {
 

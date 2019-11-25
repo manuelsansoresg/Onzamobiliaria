@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/Responsive-2.2.3/css/responsive.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/Responsive-2.2.3/css/responsive.bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
     @yield('css')

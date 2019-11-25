@@ -16,12 +16,9 @@ $(document).ready(function () {
      /*    searching: false, */
         
         "ajax": '/admin/property/getAll?filtro=' + filtro + '&campo=' + campo,
-        "bJQueryUI": true,
-        "bSort": false,
-        "bPaginate": true, // Pagination True 
-        "sPaginationType": "full_numbers", // And its type.
-        "iDisplayLength": 10
+        "responsive": true,
         
+       
         
     });
     table.destroy();
