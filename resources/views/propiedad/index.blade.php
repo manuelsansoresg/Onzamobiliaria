@@ -2,6 +2,9 @@
 
 @section('title', 'Propiedad')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+@endsection
 
 <!-- @section('content_header')
 <section class="content-header">
@@ -18,6 +21,7 @@
 @section('content')
 
 <div class="container-fluid">
+
     <div class="row mt-3">
         <div class="col-12 text-right">
             <a href="/admin/propiedad/create" class="btn btn-success btn-sm  pull-right">
@@ -27,117 +31,128 @@
         <div class="col-12 mt-3">
             @include('flash::message')
         </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row mt-3 px-4 justify-content-end">
+        <form action="" method="GET" class="form-inline ">
+            <label class="px-2" for="inlineFormInputName2">Fecha Inicial: </label>
+            <input type="text" name="fecha_inicial" autocomplete="off" value="{{ (isset($_GET['fecha_inicial'])) ? $_GET['fecha_inicial'] : date('Y-m').'-01' }}" class="form-control px-2 form-control-sm datepicker">
+            <label class="px-2" for="inlineFormInputName2">Fecha Final: </label>
+            <input type="text" name="fecha_final" autocomplete="off" value="{{ (isset($_GET['fecha_final'])) ? $_GET['fecha_final'] : date('Y-m-d') }}" class="form-control px-2 form-control-sm datepicker">
+            <label class="px-2" for="inlineFormInputName2">Status : </label>
+            <select name="status"  class="form-control form-control-sm">
+                <option value="" {{ (isset($_GET['status']) && $_GET['status'] == '' ) ? 'selected': '' }}>TODOS</option>
+                <option value="1" {{ (isset($_GET['status']) && $_GET['status'] == 1 ) ? 'selected': '' }}>Disponible</option>
+                <option value="0" {{ (isset($_GET['status']) && $_GET['status'] == 0 ) ? 'selected': '' }}>No Disponible</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-sm mx-2"><i class="fas fa-search"></i> Buscar</button>
+        </form>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
         <div class="col-12 mt-3">
 
-                <table id="mobiliaria" class="table table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th><span class="small font-weight-bold">EASYBROKE </span> </th>
-                            <th><span class="small font-weight-bold">CLAVE</ </th>
-                            <th><span class="small font-weight-bold">TÍTULO </ </th>
-                            <th><span class="small font-weight-bold">PRECIO </ </th>
-                            <th><span class="small font-weight-bold">DIRECCIÓN </ </th>
-                            <th><span class="small font-weight-bold">OPERACIÓN </ </th>
-                            <th><span class="small font-weight-bold">HABITAR </ </th>
-                            <th><span class="small font-weight-bold">PROPIETARIO </ </th>
-                            <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION  </ </th>
-                            <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO  </ </th>
-                            <th><span class="small font-weight-bold"> FRENTE  </ </th>
-                            <th><span class="small font-weight-bold"> FONDO </ </th>
-                            <th><span class="small font-weight-bold">STATUS </ </th>
-                            <th style="width: 180px"></th>
-                        </tr>
-                    </thead>
+            <table id="mobiliaria" class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th><span class="small font-weight-bold">EASYBROKE </span> </th>
+                        <th><span class="small font-weight-bold">CLAVE</ </th> <th><span class="small font-weight-bold">TÍTULO </ </th> <th><span class="small font-weight-bold">PRECIO </ </th> <th><span class="small font-weight-bold">DIRECCIÓN </ </th> <th><span class="small font-weight-bold">OPERACIÓN </ </th> <th><span class="small font-weight-bold">HABITAR </ </th> <th><span class="small font-weight-bold">PROPIETARIO </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </ </th> <th><span class="small font-weight-bold"> FRENTE </ </th> <th><span class="small font-weight-bold"> FONDO </ </th> <th><span class="small font-weight-bold">STATUS </ </th> <th style="width: 180px">
+                        </th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                        @foreach ($properties as $property)
-                        <tr>
-                            <td> <span class="small"> {{ $property->pass_easy_broker  }} </span> </td>
-                            <td> <span class="small"> {{ $property->clave_interna }} </span> </td>
-                            <td>
+                <tbody>
+                    @foreach ($properties as $property)
+                    <tr>
+                        <td> <span class="small"> {{ $property->pass_easy_broker  }} </span> </td>
+                        <td> <span class="small"> {{ $property->clave_interna }} </span> </td>
+                        <td>
                             @if ($property->is_titulo == 1)
-                                <span class="badge bg-green">Sí</span>
-                                @else
-                                <span class="badge bg-red">No</span>
+                            <span class="badge bg-green">Sí</span>
+                            @else
+                            <span class="badge bg-red">No</span>
                             @endif
-                            </td>
-                            <td> <span class="small"> {{ $property->price  }} </span> </td>
-                            <td>
-                               <span class="small"> {{ $property->address  }} </span>
-                            </td>
-                            <td>
-                               <span class="small"> {{ $property->operations_description  }} </span>
-                            </td>
-                            <td>
-                                @if ($property->habitar == 1)
-                                <span class="badge bg-green">Sí</span>
-                                @else
-                                <span class="badge bg-red">No</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if ($property->is_property == 1)
-                                <span class="badge bg-green">Sí</span>
-                                @else
-                                <span class="badge bg-red">No</span>
-                                @endif
-                            </td>
+                        </td>
+                        <td> <span class="small"> {{ $property->price  }} </span> </td>
+                        <td>
+                            <span class="small"> {{ $property->address  }} </span>
+                        </td>
+                        <td>
+                            <span class="small"> {{ $property->operations_description  }} </span>
+                        </td>
+                        <td>
+                            @if ($property->habitar == 1)
+                            <span class="badge bg-green">Sí</span>
+                            @else
+                            <span class="badge bg-red">No</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($property->is_property == 1)
+                            <span class="badge bg-green">Sí</span>
+                            @else
+                            <span class="badge bg-red">No</span>
+                            @endif
+                        </td>
 
 
-                            <td><span class="small"> {{ $property->metros_construccion  }} </span></td>
-                            <td><span class="small"> {{ $property->metros_terreno  }} </span></td>
-                            <td><span class="small"> {{ $property->frente  }} </span></td>
-                            <td><span class="small"> {{ $property->fondo  }} </span></td>
-                            <td>
-                                @if($property->status == 0)
-                                <i class="fas fa-ban text-danger"></i>
-                                <span>Inactivo</span>
-                                @else
-                                <i class="fas fa-ban text-success"></i>
-                                <span>Activo</span>
-                                @endif
+                        <td><span class="small"> {{ $property->metros_construccion  }} </span></td>
+                        <td><span class="small"> {{ $property->metros_terreno  }} </span></td>
+                        <td><span class="small"> {{ $property->frente  }} </span></td>
+                        <td><span class="small"> {{ $property->fondo  }} </span></td>
+                        <td>
+                            @if($property->status == 0)
+                            <i class="fas fa-ban text-danger"></i>
+                            <span>Inactivo</span>
+                            @else
+                            <i class="fas fa-ban text-success"></i>
+                            <span>Activo</span>
+                            @endif
 
-                            </td>
+                        </td>
 
-                            <td>
-                                {{ Form::open(['route' => ['propiedad.destroy', $property->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <!--  <a href="/admin/propiedad/{{ $property->id }}" class="btn btn-info">
+                        <td>
+                            {{ Form::open(['route' => ['propiedad.destroy', $property->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                            <!--  <a href="/admin/propiedad/{{ $property->id }}" class="btn btn-info">
                                     <i class="fas fa-file-pdf"></i>
                                 </a> -->
-                                @role('admin')
-                                {{--<button type="button" onclick="userModal({{ $property->id }})" class="btn btn-info btn-flat ml-1"><i class="fas fa-user-plus"></i></button>--}}
-                                @endrole
-                                <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary ml-1">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                @if($property->status == 0)
+                            @role('admin')
+                            {{--<button type="button" onclick="userModal({{ $property->id }})" class="btn btn-info btn-flat ml-1"><i class="fas fa-user-plus"></i></button>--}}
+                            @endrole
+                            <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary ml-1">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            @if($property->status == 0)
+                            @role('admin')
                                 <a href="/admin/propiedad/status/{{ $property->id }}/1" class="btn btn-success ml-1">
                                     <i class="fas fa-ban text-white"></i>
                                 </a>
-                                @else
-                                <a href="/admin/propiedad/status/{{ $property->id }}/0" class="btn btn-warning ml-1">
-                                    <i class="fas fa-ban"></i>
-                                </a>
-                                @endif
-                                @role('admin')
-                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger ml-1">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                                @endrole
-                                {{ Form::close() }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
+                            @endrole
+                            @else
+                            <a href="/admin/propiedad/status/{{ $property->id }}/0" class="btn btn-warning ml-1">
+                                <i class="fas fa-ban"></i>
+                            </a>
+                            @endif
+                            @role('admin')
+                            <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger ml-1">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                            @endrole
+                            {{ Form::close() }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
 
-                </table>
-            </div>
+            </table>
         </div>
     </div>
+</div>
 {{-- modal agregar usuario captura --}}
 
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -160,8 +175,8 @@
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
-                            <td><span class="small">  {{ $user->name  }} </span> </td>
-                            <td><span class="small">  {{ $user->username  }} </span> </td>
+                            <td><span class="small"> {{ $user->name  }} </span> </td>
+                            <td><span class="small"> {{ $user->username  }} </span> </td>
                             <td>
                                 <button type="button" onclick="addUser('{{ $user->id }}')" class="btn btn-info  btn-sm ">
                                     <i class="fas fa-plus-circle"></i> Agregar
@@ -185,7 +200,7 @@
 @endsection
 
 @section('js')
-
+<script src="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 <script>
     $(function() {
 
@@ -211,6 +226,7 @@
         var table = $('#mobiliaria').DataTable({
 
             responsive: true,
+            searching: false,
 
             language: {
                 "decimal": "",
@@ -256,10 +272,14 @@
                     "previous": "Anterior"
                 }
             },
-        })
 
+        })
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        })
 
     })
 </script>
-<script src="{{ asset('js/admin.js') }}"></script>
+{{-- <script src="{{ asset('js/admin.js') }}"></script> --}}
 @stop

@@ -72,8 +72,12 @@ class Property extends Model
 
     static function getAll()
     {
-        $user      = User::find(Auth::id());
-        $user_role = $user->getRoleNames()->first();
+        $user           = User::find(Auth::id());
+        $user_role      = $user->getRoleNames()->first();
+        $fecha_inicial  = (isset($_GET['fecha_inicial'])) ? date($_GET['fecha_inicial']) : '';
+        $fecha_final    = (isset($_GET['fecha_final'])) ? date($_GET['fecha_final']) : '';
+        $status         = (isset($_GET['status'])) ? $_GET['status'] : '';
+
         
         DB::enableQueryLog();
 
@@ -99,6 +103,14 @@ class Property extends Model
 
         if($user_role != 'admin'){
             $property = $property->where('properties.user_id', $user->id);
+        }
+
+        if($fecha_inicial != ''){
+            $property = $property->whereBetween('properties.created_at', [$fecha_inicial, $fecha_final] );
+        }
+        
+        if($status != ''){
+            $property = $property->where('properties.status', $status );
         }
         
         $property = $property->get();

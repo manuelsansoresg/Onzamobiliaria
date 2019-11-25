@@ -36,11 +36,9 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Clave EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text"
-
-                                    value="{{ $property->pass_easy_broker }}">
+                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text" value="{{ $property->pass_easy_broker }}">
                                 @if($errors)
-                                    <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
+                                <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
                             </div>
                         </div>
@@ -71,7 +69,7 @@
                                 <label for="exampleInputEmail1" class="small">Tipo de Operación</label>
                                 <select name="operation_id" class="form-control form-control-sm ">
                                     @foreach ($operations as $operation)
-                                    <option value="{{ $operation->id }}" {{ ($property->operation_id == $operation->id)? 'selected' : '' }} > {{ $operation->description }} </option>
+                                    <option value="{{ $operation->id }}" {{ ($property->operation_id == $operation->id)? 'selected' : '' }}> {{ $operation->description }} </option>
                                     @endforeach
                                 </select>
 
@@ -83,9 +81,9 @@
                                 <label class="small">Avaluo</label> &nbsp;
                                 <input type="checkbox" name="avaluo" value="1" {{ ($property->is_avaluo == 1)? 'checked' : '' }}>
                                 @if ($property->is_avaluo == 1)
-                                    <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo"  class="form-control form-control-sm">
+                                <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo" class="form-control form-control-sm">
                                 @else
-                                    <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
+                                <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
 
                                 @endif
                                 @if($errors)
@@ -124,14 +122,14 @@
                             <div class="form-group">
                                 <label class="small">*Colonia</label> &nbsp;
                                 @if ($property->codigo == '')
-                                    <select name="colonia" id="colonia" class="form-control" disabled="">
-                                    </select>
+                                <select name="colonia" id="colonia" class="form-control" disabled="">
+                                </select>
                                 @else
-                                    <select name="colonia" id="colonia" class="form-control">
-                                        @foreach ($postals as $postal)
-                                            <option value="{{ $postal->id }}" {{ ($postal->id == $property->postal_id )? 'selected' : '' }} >{{ $postal->colonia }}</option>
-                                        @endforeach
-                                    </select>
+                                <select name="colonia" id="colonia" class="form-control">
+                                    @foreach ($postals as $postal)
+                                    <option value="{{ $postal->id }}" {{ ($postal->id == $property->postal_id )? 'selected' : '' }}>{{ $postal->colonia }}</option>
+                                    @endforeach
+                                </select>
                                 @endif
 
                                 @if($errors)
@@ -158,6 +156,9 @@
                             <div class="form-group">
                                 <label class="small">Precio</label>
                                 <input name="price" value="{{ $property->price }}" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('price')}}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -196,11 +197,15 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">¿Formas de pago deseables?</label>
-                                <select name="form_pay_id[]" id="form_pay_id"  class="form-control" multiple="multiple">
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control" multiple="multiple">
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
                                     @endforeach
                                 </select>
+                                @if($errors)
+                                <div class="w-100"></div>
+                                <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -264,15 +269,15 @@
                             <div class="form-group">
                                 <label class="small">IDENTIFICACIÓN OFICIAL VIGENTE</label>
                                 @if ($property->identificacion == null)
-                                    <input name="identificacion" class="form-control form-control-sm" type="file">
+                                <input name="identificacion" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->identificacion) }}" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/identificacion/{{ $property->identificacion }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->identificacion) }}" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/identificacion/{{ $property->identificacion }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
@@ -280,160 +285,160 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CURP</label>
-                                 @if ($property->curp == null)
-                                    <input name="curp" class="form-control form-control-sm" type="file">
+                                @if ($property->curp == null)
+                                <input name="curp" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->curp) }}" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/curp/{{ $property->curp }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->curp) }}" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/curp/{{ $property->curp }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">RFC</label>
-                                 @if ($property->rfc == null)
-                                    <input name="rfc" class="form-control form-control-sm" type="file">
+                                @if ($property->rfc == null)
+                                <input name="rfc" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->rfc) }}" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/rfc/{{ $property->rfc }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->rfc) }}" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/rfc/{{ $property->rfc }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">ACTA DE NACIMIENTO</label>
-                                 @if ($property->acta_nacimiento == null)
-                                    <input name="acta_nacimiento" class="form-control form-control-sm" type="file">
+                                @if ($property->acta_nacimiento == null)
+                                <input name="acta_nacimiento" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_nacimiento) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/acta_nacimiento/{{ $property->acta_nacimiento }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_nacimiento) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/acta_nacimiento/{{ $property->acta_nacimiento }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">ACTA DE MATRIMONIO</label>
-                                 @if ($property->acta_matrimonio == null)
-                                    <input name="acta_matrimonio" class="form-control form-control-sm" type="file">
+                                @if ($property->acta_matrimonio == null)
+                                <input name="acta_matrimonio" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_matrimonio) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/acta_matrimonio/{{ $property->acta_matrimonio }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->acta_matrimonio) }} " target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/acta_matrimonio/{{ $property->acta_matrimonio }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">PREDIAL</label>
-                                 @if ($property->predial == null)
-                                    <input name="predial" class="form-control form-control-sm" type="file">
+                                @if ($property->predial == null)
+                                <input name="predial" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/predial/{{ $property->predial }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/predial/{{ $property->predial }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">NO ADEUDO DE AGUA</label>
-                                 @if ($property->no_adeudo_agua == null)
-                                    <input name="no_adeudo_agua" class="form-control form-control-sm" type="file">
+                                @if ($property->no_adeudo_agua == null)
+                                <input name="no_adeudo_agua" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_agua) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/no_adeudo_agua/{{ $property->no_adeudo_agua }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_agua) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/no_adeudo_agua/{{ $property->no_adeudo_agua }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">NO ADEUDO DE PREDIAL</label>
-                                 @if ($property->no_adeudo_predial == null)
-                                    <input name="no_adeudo_predial" class="form-control form-control-sm" type="file">
+                                @if ($property->no_adeudo_predial == null)
+                                <input name="no_adeudo_predial" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/no_adeudo_predial/{{ $property->no_adeudo_predial }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->no_adeudo_predial) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/no_adeudo_predial/{{ $property->no_adeudo_predial }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CÉDULA Y PLANO CATASTRAL ACTUALIZADO</label>
-                                 @if ($property->cedula_plano_catastral == null)
-                                    <input name="cedula_plano_catastral" class="form-control form-control-sm" type="file">
+                                @if ($property->cedula_plano_catastral == null)
+                                <input name="cedula_plano_catastral" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->cedula_plano_catastral) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/cedula_plano_catastral/{{ $property->cedula_plano_catastral }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->cedula_plano_catastral) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/cedula_plano_catastral/{{ $property->cedula_plano_catastral }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">COPIA DE LA ESCRITURA</label>
-                                 @if ($property->copia_escritura == null)
-                                    <input name="copia_escritura" class="form-control form-control-sm" type="file">
+                                @if ($property->copia_escritura == null)
+                                <input name="copia_escritura" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->copia_escritura) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/copia_escritura/{{ $property->copia_escritura }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->copia_escritura) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/copia_escritura/{{ $property->copia_escritura }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-8">
                             <div class="form-group">
                                 <label class="small">REGLAMENTO DE CONDOMINOS Y NO ADEUDO DE CUOTAS EN SU CASO</label>
-                                 @if ($property->reglamento_condominios_no_adeudo == null)
-                                    <input name="reglamento_condominios_no_adeudo" class="form-control form-control-sm" type="file">
+                                @if ($property->reglamento_condominios_no_adeudo == null)
+                                <input name="reglamento_condominios_no_adeudo" class="form-control form-control-sm" type="file">
                                 @else
-                                    <p class="">
-                                        <i class="far fa-file fa-2x"></i>
-                                    </p>
-                                    <p>
-                                        <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->reglamento_condominios_no_adeudo) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
-                                     <a href="/admin/destroy-document/reglamento_condominios_no_adeudo/{{ $property->reglamento_condominios_no_adeudo }}" class="btn btn-danger btn-sm">Borrar</a>
-                                    </p>
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->reglamento_condominios_no_adeudo) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/reglamento_condominios_no_adeudo/{{ $property->reglamento_condominios_no_adeudo }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
                                 @endif
                             </div>
                         </div>
