@@ -62,6 +62,6 @@ class User extends Authenticatable
         $user->removeRole('asesor');
 
         $user->assignRole($request->role);
-        $user->update();
+        $user->update();                          
     }
 }
