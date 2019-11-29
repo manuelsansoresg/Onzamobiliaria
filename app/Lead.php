@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Lead extends Model
 {
+    protected $fillable = ['nombre', 'phone', 'ubicacion', 'share', 'operation_id', 'observation', 'status', 'fotos'];
 
     static function getById($id)
     {
@@ -57,41 +58,74 @@ class Lead extends Model
         return $lead;
     }
 
-    static function createUpdate ($request, $isUpdate = false, $lead_id = null)
+    static function createUpdate ($request, $path = false, $lead_id = null)
     {
-        if ($isUpdate == false) {
-            $lead = new Lead();
+        $share = isset($request->share) ? $request->share : 0; 
+        
+        if ($lead_id == null) {
+            $lead = new Lead($request->except('_token', 'image'));
         }else{
             $lead = Lead::find($lead_id);
         }
 
-        $lead->date             = $request->date;
-        $lead->realstate_id     = $request->realstate_id;
-        $lead->operation_id     = $request->operation_id;
-        $lead->phone            = $request->phone;
-        $lead->mobile           = $request->mobile;
-        $lead->share            = $request->share;
-        $lead->postal_id        = $request->colonia;
-        $lead->street           = $request->street;
-        $lead->n_in             = $request->n_in;
-        $lead->n_out            = $request->n_out;
-        $lead->status           = $request->status;
-        $lead->user_id          = Auth::id();
-        $lead->clasification_id = $request->clasification_id;
-        $lead->observation1      = $request->observation1;
-        $lead->observation2      = $request->observation2;
-        $lead->observation3      = $request->observation3;
-        $lead->date_write       = date('Y-m-d H:i:s');
+       
+        $lead->user_id = Auth::id();
+        $lead->share   = $share;
 
 
-        if ($isUpdate == false) {
+        if ($lead_id == null) {
             $lead->save();
         } else {
             $lead->update();
         }
 
+        if ($request->hasFile('image') != false) {
+            $files = array();
+           
+            foreach ($_FILES['image'] as $k => $l) {
+                foreach ($l as $i => $v) {
+                    if (!array_key_exists($i, $files))
+                        $files[$i] = array();
+                    $files[$i][$k] = $v;
+                }
+            }
+
+
+            $cont = -1;
+
+            foreach ($files as $file) {
+                $image_lead = new Images_lead();
+
+                $cont               = $cont + 1;
+                $image_cover        = $request->file('image')[$cont];
+                $pre = 'lead' . $cont . '_';
+                $image              = uploadImage($file, $image_cover, $path, true, $pre );
+
+                $image_lead->lead_id = $lead->id;
+                $image_lead->name =  $image;
+                $image_lead->thumb = 'thumb_'.$image;
+                $image_lead->save();
+
+                
+            }
+        }
+
         return $lead;   
 
+    }
+
+    static function delete_images($path, $lead_id)
+    {
+        $lead_images = Images_lead::where('lead_id', $lead_id)->get();
+        
+        foreach ($lead_images as $lead) {
+            @unlink($path . '/' . $lead->name);
+            @unlink($path . '/' . $lead->thumb);
+        }
+        
+        $lead = Lead::find($lead_id);
+        $lead->delete();
+       
     }
 
 }

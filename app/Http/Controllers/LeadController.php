@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
 {
+    protected $path_image;
+
+    
+    public function __construct()
+    {
+        $this->path_image = './img/lead';
+        
+    }
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +30,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $leads = Lead::getAll();
+        $leads = Lead::all();
         return view('prospecto.index', compact('leads'));
     }
 
@@ -46,7 +56,7 @@ class LeadController extends Controller
      */
     public function store(LeadRequest $request)
     {
-        Lead::createUpdate($request);
+        Lead::createUpdate($request, $this->path_image);
         flash('Elemento guardado');
         return redirect('/admin/prospecto');
     }
@@ -113,8 +123,9 @@ class LeadController extends Controller
      */
     public function destroy($id)
     {
-        $lead = Lead::find($id);
-        $lead->delete();
+       
+        $lead = Lead::delete_images($this->path_image, $id);
+        
         flash('Elemento borrado');
         return redirect('/admin/prospecto');
     }
