@@ -86,15 +86,7 @@ class UserController extends Controller
      */
     public function update(UserEditRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->fill($request->except('_token', 'password', 'role'));
-        
-        if($request->password != ''){
-            $user->password = Hash::make($request->password);
-        }
-        
-        $user->assignRole($request->role);
-        $user->update();
+        User::set($request, $id);
 
         flash('Elemento guardado');
         return redirect('/admin/usuarios');

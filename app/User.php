@@ -48,4 +48,20 @@ class User extends Authenticatable
 
         return $users;
     }
+
+    static function set($request, $id)
+    {
+        $user = User::find($id);
+        $user->fill($request->except('_token', 'password', 'role'));
+
+        if ($request->password != '') {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->removeRole('admin');
+        $user->removeRole('asesor');
+
+        $user->assignRole($request->role);
+        $user->update();                          
+    }
 }
