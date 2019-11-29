@@ -26,8 +26,8 @@
                         <th style="width: 10px"></th>                        
                     </tr>
                 </thead>
-                @foreach ($users as $user)
                 <tbody>
+                @foreach ($users as $user)
                     <tr>
                         <td><span class="small"> {{ $user->id }} </span> </td>
                         <td><span class="small"> {{ $user->name }} </span> </td>
@@ -46,8 +46,8 @@
                             {{ Form::close() }}                                    
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
-                @endforeach
             </table>
         </div>
     </div>

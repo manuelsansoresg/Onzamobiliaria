@@ -42,6 +42,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = new User($request->except('_token', 'role'));
+        $user->password = Hash::make($request->password);
         $user->assignRole($request->role);
         $user->save();
 
