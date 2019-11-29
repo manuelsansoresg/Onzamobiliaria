@@ -353,7 +353,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <table id="client" class="table table-bordered">
+                            <table id="client" class="table table-striped table-bordered"  style="width:100%">
                                 <thead>
                                     <tr>
                                         <th><span class="small font-weight-bold"> NOMBRE </span> </th>
@@ -393,9 +393,13 @@
     $(function() {
         var table = $('#client').DataTable({
 
+            "bSearchable": true,
+            "bFilter": true,
             responsive: true,
-            "pageLength": 5,
-
+            "bLengthChange": false,
+            "processing": true,
+            "info": true,
+            "stateSave": true,            
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
