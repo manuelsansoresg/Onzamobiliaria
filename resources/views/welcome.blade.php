@@ -30,7 +30,7 @@
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="" class="text-body">
+                        <a href="/admin/propiedad" class="text-body">
                             <span class="h6">PROPIEDADES</span>
                         </a>
                     </h5>

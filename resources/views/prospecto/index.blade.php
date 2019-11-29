@@ -1,137 +1,88 @@
-@extends('adminlte::page')
-
-@section('title', 'Prospecto')
-
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-@stop
-
-@section('content_header')
-<section class="content-header">
-    <h1>
-        Prospecto
-        <small>Lista</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Prospecto</li>
-    </ol>
-</section>
-@stop
+@extends('layouts.master')
+@section('title', 'PROSPECCION DE INMUEBLES')
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Prospecto</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div>
-                    <a href="/admin/prospecto/create" class="btn btn-success pull-right">
-                        <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
-                    </a>
-                </div>
-                <br><br>
-                <div class="col-md-12">
-                    @include('flash::message')
-                </div>
-                <br>
-                <br>
-                <br>
-                <table id="mobiliaria" class="table table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th>CALLE</th>
-                            <th>NO INT</th>
-                            <th>NO EXT</th>
-                            <th>TELÉFONO</th>
-                            <th>FECHA DE ASIGNACIÓN</th>
-                            <th>STATUS</th>
-                            <th style="width: 120px"></th>
-                        </tr>
-                    </thead>
-                    @foreach ($leads as $lead)
-                    <tbody>
-                        <tr>
-                            <td>{{ $lead->street  }}</td>
-                            <td>{{ $lead->n_in  }}</td>
-                            <td>{{ $lead->n_out  }}</td>
-                            <td>{{ $lead->phone  }}</td>
-                            <td>{{ substr($lead->date,0,10)  }}</td>
-                            <td>
-                                @if($lead->status == 0)
-                                <i class="fas fa-ban text-danger"></i>
-                                <span>Inactivo</span>
-                                @else
-                                <i class="fas fa-ban text-success"></i>
-                                <span>Activo</span>
-                                @endif
 
-                            </td>
-                            <td>
-                                {{ Form::open(['route' => ['prospecto.destroy', $lead->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('prospecto.edit', $lead->id)}}" class="btn btn-primary">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                @if($lead->status == 0)
-                                <a href="/admin/prospecto/status/{{ $lead->id }}/1" class="btn btn-success">
-                                    <i class="fas fa-ban text-white"></i>
-                                </a>
-                                @else
-                                <a href="/admin/prospecto/status/{{ $lead->id }}/0" class="btn btn-warning">
-                                    <i class="fas fa-ban"></i>
-                                </a>
-                                @endif
-                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                                {{ Form::close() }}
-                            </td>
-                        </tr>
-                    </tbody>
-                    @endforeach
-
-                </table>
-                <div class="col-md-12 text-center">
-
-                </div>
-            </div>
-
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-12 text-right">
+            <a href="/admin/prospecto/create" class="btn btn-success btn-sm  pull-right">
+                <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
+            </a>
         </div>
-
+        <div class="col-12 mt-3">
+            @include('flash::message')
+        </div>    
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8  mt-3">
+            <table id="portales" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th><span class="small font-weight-bold">#</span></th>
+                        <th><span class="small font-weight-bold">NOMBRE</span></th>
+                        <th><span class="small font-weight-bold">FECHA</span></th>
+                        <th><span class="small font-weight-bold">TELEFONO</span></th>                        
+                        <th><span class="small font-weight-bold">OBSERVACIONES</span></th>
+                        <th><span class="small font-weight-bold">ESTATUS</span></th>
+                        <th style="width: 60px"></th>
+                    </tr>
+                </thead>
+                @foreach ($leads as $lead)
+                <tbody>
+                    <tr>
+                        <td><span class="small">{{ $lead->id}}</span><td>
+                        <td><span class="small">{{ $lead->observation1}}</span><td>
+                        <td><span class="small">{{ substr($lead->date,0,10)}}</span><td>
+                        <td><span class="small">{{ $lead->phone}}</span><td>                                             
+                        <td><span class="small">{{ $lead->observation}}</span><td>
+                        <td><span class="small">
+                            @if($lead->status == 0)
+                                <i class="fas fa-ban text-danger"></i>
+                                <span>INACTIVO</span>
+                            @else
+                                <i class="fas fa-ban text-success"></i>
+                                <span>ACTIVO</span>
+                            @endif   
+                            </span>
+                        <td>
+                        <td>
+                            {{ Form::open(['route' => ['prospecto.destroy', $lead->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                            <a href="{{route('prospecto.edit', $lead->id)}}" class="btn btn-primary">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            @if($lead->status == 0)
+                            <a href="/admin/prospecto/status/{{ $lead->id }}/1" class="btn btn-success">
+                                <i class="fas fa-ban text-white"></i>
+                            </a>
+                            @else
+                            <a href="/admin/prospecto/status/{{ $lead->id }}/0" class="btn btn-warning">
+                                <i class="fas fa-ban"></i>
+                            </a>
+                            @endif
+                            <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                            {{ Form::close() }}
+                        </td>
+                    </tr>
+                </tbody>
+                @endforeach
+            </table>
+        </div>
     </div>
 </div>
-@stop
+@endsection
 
 @section('js')
-<script src="{{ asset('vendor/adminlte/plugins/datatable/js/responsive.js') }}"></script>
 <script>
     $(function() {
 
-        $('#mobiliaria thead tr').clone(true).appendTo('#mobiliaria thead');
+        $('#portales').DataTable({
+            "bSearchable": true,
+            "bFilter": true,
+            responsive: true,
+            "pageLength": 5,
 
-        $('#mobiliaria thead tr:eq(1) th').each(function(i) {
-
-            var title = $(this).text();
-            var ocultar = ($('#mobiliaria thead tr:eq(1) th').length == i + 1) ? 'hidden' : '';
-
-            $(this).html('<input class="' + ocultar + '" type="text" placeholder="Buscar ' + title + '" />');
-
-            $('input', this).on('keyup change', function() {
-                if (table.column(i).search() !== this.value) {
-                    table
-                        .column(i)
-                        .search(this.value)
-                        .draw();
-                }
-            });
-        });
-
-        var table = $('#mobiliaria').DataTable({
-            orderCellsTop: true,
-            fixedHeader: true,
-            "scrollX": true,
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -152,7 +103,7 @@
                     "previous": "Anterior"
                 }
             },
-        });
+        })
     })
 </script>
-@stop
+@endsection
