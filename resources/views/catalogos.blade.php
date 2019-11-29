@@ -1,12 +1,10 @@
 @extends('layouts.master')
-
 @section('title', 'Catalogos')
-
 @section('content')
-<div class="container">
-    <div class="row mt-5 justify-content-center">
-        @role('admin')
 
+<div class="container">
+    <div class="row mt-3 justify-content-center">
+        @role('admin')
         <div class="col-12 col-md-2">
             <div class="card text-center">
                 <a href="/admin/mobiliaria">                                        
@@ -76,7 +74,7 @@
                     </h5>
                 </div>
             </div>
-        </div>
+        </div>        
         <div class="col-12 col-md-2">
             <div class="card text-center">
                 <a href="/admin/pago">                                                                                                                        
@@ -91,10 +89,14 @@
                 </div>
             </div>
         </div>
+        @endrole
+    </div>
+    <div class="row mt-3 justify-content-center">
+        @role('admin')    
         <div class="col-12 col-md-2">
             <div class="card text-center">
                 <a href="/admin/usuarios">                                                                                                                        
-                    <i class="fas fa-dollar-sign fa-3x mt-3 text-primary"></i>
+                    <i class="fas fa-user-tie fa-3x mt-3 text-primary"></i>                    
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -105,6 +107,22 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-md-2">
+            <div class="card text-center"></div>
+        </div>
+        <div class="col-12 col-md-2">
+            <div class="card text-center"></div>
+        </div>
+        <div class="col-12 col-md-2">
+            <div class="card text-center"></div>
+        </div>
+        <div class="col-12 col-md-2">
+            <div class="card text-center"></div>
+        </div>
+        <div class="col-12 col-md-2">
+            <div class="card text-center"></div>
+        </div>
+
         @endrole
 
     </div>
