@@ -1,112 +1,85 @@
-@extends('adminlte::page')
-
-@section('title', 'Portales')
-
-@section('content_header')
-<section class="content-header">
-    <h1>
-        Portales
-        <small>Lista</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Portales</li>
-    </ol>
-</section>
-@stop
+@extends('layouts.master')
+@section('title', 'FORMA DE PAGO')
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Portales</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div>
-                    <a href="/admin/portales/create" class="btn btn-success pull-right">
-                        <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
-                    </a>
-                </div>
-                <br><br>
-                <div class="col-md-12">
-                    @include('flash::message')
-                </div>
-                <br><br><br>
-                <table id="mobiliaria" class="table table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>DESCRIPCIÓN</th>
-                            <th>STATUS</th>
-                            <th></th>
-                        </tr>
-                    </thead>
+
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-12 text-right">
+            <a href="/admin/portales/create" class="btn btn-success btn-sm  pull-right">
+                <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
+            </a>
+        </div>
+        <div class="col-12 mt-3">
+            @include('flash::message')
+        </div>    
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8  mt-3">
+            <table id="portales" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th> <span class="small font-weight-bold">#</span></th>
+                        <th> <span class="small font-weight-bold">DESCRIPCION</span> </th>
+                        <th> <span class="small font-weight-bold">ESTATUS</span> </th>        
+                        <th style="width: 60px"></th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach ($ads as $ad)
-                    <tbody>
-                        <tr>
-                            <td>{{ $ad->id  }}</td>
-                            <td>{{ $ad->description  }}</td>
-                            <td>
-                                @if($ad->status == 0)
+                    <tr>
+                        <td><span class="small">{{ $ad->id  }}</span></td>
+                        <td><span class="small">{{ $ad->description  }}</span></td>
+                        <td><span class="small">
+                            @if($ad->status == 0)
                                 <i class="fas fa-ban text-danger"></i>
                                 <span>Inactivo</span>
-                                @else
+                            @else
                                 <i class="fas fa-ban text-success"></i>
                                 <span>Activo</span>
-                                @endif
-
-                            </td>
-                            <td>
-                                {{ Form::open(['route' => ['portales.destroy', $ad->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                <a href="{{route('portales.edit', $ad->id)}}" class="btn btn-primary">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                @if($ad->status == 0)
+                            @endif        
+                            </span>
+                        </td>
+                        <td>
+                            {{ Form::open(['route' => ['portales.destroy', $ad->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                            <a href="{{route('portales.edit', $ad->id)}}" class="btn btn-sm btn-primary">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            @if($ad->status == 0)
                                 <a href="/admin/portales/status/{{ $ad->id }}/1" class="btn btn-success">
                                     <i class="fas fa-ban text-white"></i>
                                 </a>
-                                @else
+                            @else
                                 <a href="/admin/portales/status/{{ $ad->id }}/0" class="btn btn-warning">
                                     <i class="fas fa-ban"></i>
                                 </a>
-                                @endif
-                                @role('admin')
-                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
+                            @endif
+                            @role('admin')
+                                <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm ml-1">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-                                @endrole
-                                {{ Form::close() }}
-                            </td>
+                            @endrole
+                            {{ Form::close() }}
+                        </td>
                         </tr>
-                    </tbody>
-                    @endforeach
-
-                </table>
-                <div class="col-md-12 text-center">
-
-                </div>
-            </div>
-
+                        @endforeach
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
     </div>
 </div>
-@stop
+@endsection
 
 @section('js')
-<script src="{{ asset('vendor/adminlte/plugins/datatable/js/responsive.js') }}"></script>
 <script>
     $(function() {
 
-        $('#mobiliaria').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            "scrollX": true,
+        $('#portales').DataTable({
+            "bSearchable": true,
+            "bFilter": true,
+            responsive: true,
+            "pageLength": 5,
+
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -118,7 +91,7 @@
                 "lengthMenu": "Mostrar _MENU_ Entradas",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
-                "search": "Buscar:",
+                "search": "BUSCAR:",
                 "zeroRecords": "Sin resultados encontrados",
                 "paginate": {
                     "first": "Primero",
@@ -130,4 +103,4 @@
         })
     })
 </script>
-@stop
+@endsection

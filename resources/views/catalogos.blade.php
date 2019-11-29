@@ -91,6 +91,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-md-2">
+            <div class="card text-center">
+                <a href="/admin/usuarios">                                                                                                                        
+                    <i class="fas fa-dollar-sign fa-3x mt-3 text-primary"></i>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="/admin/usuarios" class="text-body " >                        
+                            <span class="h6">USUARIOS</span>
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </div>
         @endrole
 
     </div>

@@ -1,31 +1,19 @@
 @extends('layouts.master')
-
-@section('title', 'Seguimiento')
-
-<!-- @section('content_header')
-<section class="content-header">
-    <h1>
-        Seguimiento
-        <small>Lista</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Seguimiento</li>
-    </ol>
-</section>
-@stop -->
+@section('title', 'SEGUIMIENTO')
 @section('content')
+
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-12 text-right">
-            <a href="/admin/clientes/create" class="btn btn-success btn-sm  pull-right">
+            <a href="/admin/seguimiento/create" class="btn btn-success btn-sm  pull-right">
                 <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
             </a>
         </div>
         <div class="col-12 mt-3">
             @include('flash::message')
         </div>
-        <!-- /.box-header -->
+    </div>
+    <div class="row justify-content-center">
         <div class="col-12 mt-3">
             <table id="mobiliaria" class="table table-bordered table-responsive">
                 <thead>
@@ -35,9 +23,9 @@
                         <th>STATUS</th>
                         <th></th>
                     </tr>
-                </thead>
-                @foreach ($status_follows as $status_follow)
+                </thead>                
                 <tbody>
+                    @foreach ($status_follows as $status_follow)
                     <tr>
                         <td>{{ $status_follow->id  }}</td>
                         <td>{{ $status_follow->description  }}</td>
@@ -73,24 +61,25 @@
                             {{ Form::close() }}
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
-                @endforeach
-
             </table>
         </div>
     </div>
 </div>
 @endsection
-
 @section('js')
-<script src="{{ asset('vendor/adminlte/plugins/datatable/js/responsive.js') }}"></script>
 <script>
     $(function() {
 
         $('#mobiliaria').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
+            "bSearchable": true,
+            "bFilter": true,
+            responsive: true,
+            "pageLength": 5,
+            'paging': true,            
+            'lengthChange': false,            
+            'searching': true,            
             'ordering': true,
             'info': true,
             'autoWidth': false,
@@ -106,7 +95,7 @@
                 "lengthMenu": "Mostrar _MENU_ Entradas",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
-                "search": "Buscar:",
+                "search": "BUSCAR:",
                 "zeroRecords": "Sin resultados encontrados",
                 "paginate": {
                     "first": "Primero",
@@ -118,4 +107,4 @@
         })
     })
 </script>
-@stop
+@endsection
