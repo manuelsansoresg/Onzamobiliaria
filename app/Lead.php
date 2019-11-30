@@ -66,6 +66,7 @@ class Lead extends Model
             $lead = new Lead($request->except('_token', 'image'));
         }else{
             $lead = Lead::find($lead_id);
+            $lead->fill($request->except('_token', 'image'));
         }
 
        

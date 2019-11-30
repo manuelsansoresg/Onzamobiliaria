@@ -83,10 +83,9 @@ class LeadController extends Controller
         $real_states    = Realstate::where('status', 1)->get();
         $operations     = Operation::where('status', 1)->get();
         $clasifications = Clasification::where('status', 1)->get();
-        $lead           = Lead::getById($id);
-        $postals        = Postal::getById($lead->postal_id);
+        $lead           = Lead::find($id);
 
-        return view('prospecto.edit', compact('real_states', 'operations', 'clasifications', 'lead', 'postals'));
+        return view('prospecto.edit', compact('real_states', 'operations', 'clasifications', 'lead'));
     }
 
     /**
@@ -98,7 +97,7 @@ class LeadController extends Controller
      */
     public function update(LeadRequest $request, $id)
     {
-        $lead = Lead::createUpdate($request, true, $id);
+        $lead = Lead::createUpdate($request, $this->path_image, $id);
         flash('Elemento guardado');
         return redirect('/admin/prospecto');
     }

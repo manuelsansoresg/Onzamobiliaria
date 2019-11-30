@@ -13,36 +13,48 @@
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
-                {{ Form::open(['route' => ['prospecto.update', $lead->id], 'method' => 'PUT', 'id' => 'frm-property']) }}
-                <h5 class="card-header">EDITAR PROSPECCIÓN DE INMUEBLES</h5>
+
+                {{ Form::open(['route' => ['prospecto.update', $lead->id], 'method' => 'PUT', 'files' => true]) }}
+                <input type="hidden" name="status" value="1">
+                <h5 class="card-header">PROSPECCIÓN DE INMUEBLES</h5>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label class="small">NOMBRE</label>
-                                <input type="text" class="form-control" name="nombre" value="{{ $lead->observation1}}">
+                                <input type="text" class="form-control" name="nombre" value="{{ $lead->nombre }}">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('nombre')}}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label class="small">TELÉFONO</label>
                                 <input name="phone" class="form-control" type="text" value="{{ $lead->phone }}">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('phone')}}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <div class="row">                   
+                    <div class="row">
                         <div class="col-12 col-md-12">
                             <div class="form-group">
-                                <label class="small">UBICACIÓN</label>                                
-                                <textarea name="observation2" class="form-control" cols="20" rows="1">{{ $lead->observation2 }}</textarea>
+                                <label class="small">UBICACIÓN</label>
+                                <textarea name="ubicacion" class="form-control" cols="20" rows="1">{{ $lead->ubicacion }}</textarea>
                             </div>
-                        </div>                    
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label class="small">COMPARTIDA</label>
-                                <input type="checkbox" name="share" value="1" {{ ($lead->share == 1)? 'checked' : '' }}>
+                                @if ($lead->share == 1)
+                                    <input type="checkbox" name="share" value="1" checked>
+                                    @else
+                                    <input type="checkbox" name="share" value="1">
+                                @endif
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-6">
@@ -59,23 +71,23 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
                             <div class="form-group">
-                                <label class="small"> OBSERVACIÓN</label>                                
-                                <textarea name="observation3" class="form-control" cols="30" rows="1">{{ $lead->observation3 }}</textarea>
+                                <label class="small"> OBSERVACIÓN</label>
+                                <textarea name="observation" class="form-control" cols="20" rows="1">{{ $lead->observation }}</textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
                             <label class="small">FOTOS</label>
-                            <input name="fotos" class="form-control form-control-sm" type="file">
+                            <input name="image[]" class="form-control form-control-sm" multiple type="file">
                         </div>
-                    </div> 
+                    </div>
                     <div class="row  mt-3">
                         <div class="col-12 text-right pb-4">
                             <button class="btn btn-primary">Guardar</button>
                         </div>
-                    </div> 
-                </div>                               
+                    </div>
+                </div>
                 {{ Form::close() }}
             </div>
         </div>
