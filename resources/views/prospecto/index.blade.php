@@ -22,7 +22,7 @@
                         <th><span class="small font-weight-bold">TELEFONO</span></th>
                         <th><span class="small font-weight-bold">OBSERVACIONES</span></th>
                         <th><span class="small font-weight-bold">ESTATUS</span></th>
-                        <th style="width: 60px"></th>
+                        <th style="width: 100px"></th>
                     </tr>
                 </thead>
                 <tbody>
