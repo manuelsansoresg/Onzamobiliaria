@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clasification;
 use App\Http\Requests\LeadRequest;
+use App\Images_lead;
 use App\Lead;
 use App\Operation;
 use App\Postal;
@@ -84,8 +85,23 @@ class LeadController extends Controller
         $operations     = Operation::where('status', 1)->get();
         $clasifications = Clasification::where('status', 1)->get();
         $lead           = Lead::find($id);
+        $images         = Images_lead::where('lead_id', $id)->get(  );
+        $path_image     = $this->path_image;
 
-        return view('prospecto.edit', compact('real_states', 'operations', 'clasifications', 'lead'));
+        return view('prospecto.edit', compact('real_states', 'operations', 'clasifications', 'lead', 'images', 'path_image'));
+    }
+
+    public function delete_image($id)
+    {
+        $image        = Images_lead::find($id);
+        $id_prospecto = $image->lead_id;
+
+        @unlink($this->path_image.'/'.$image->name);
+        @unlink($this->path_image.'/thumb_'.$image->name);
+        
+        $image->delete();
+
+        return redirect('/admin/prospecto/'. $id_prospecto.'/edit');
     }
 
     /**

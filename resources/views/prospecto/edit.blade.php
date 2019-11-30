@@ -88,6 +88,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    @foreach ($images as $image)
+                        <div class="col-12 col-md-2">
+                            <img src="{{ asset($path_image.'/'.$image->thumb) }}" alt="">
+                            <p class="text-right mt-3 ">
+                                <a href="/admin/prospecto/imagen/delete/{{ $image->id }}" class="btn btn-sm btn-danger text-white"><i class="fas fa-trash-alt"></i>Borrar</a>
+                            </p>
+                        </div>
+                    @endforeach
+                   
+                </div>
                 {{ Form::close() }}
             </div>
         </div>
