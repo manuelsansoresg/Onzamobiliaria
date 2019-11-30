@@ -1,36 +1,26 @@
-@extends('adminlte::page')
-
-@section('title', 'Usuarios')
-
-@section('content_header')
-<section class="content-header">
-    <h1>
-        Usuarios
-        <small>Editar</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="/admin/usuarios"><i class="fa fa-dashboard"></i> Usuarios</a></li>
-        <li class="active">Editar</li>
-    </ol>
-</section>
-@stop
+@extends('layouts.master')
+@section('title', 'EDITAR USUARIO')
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Editar usuario</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                {{ Form::open(['route' => ['usuarios.update', $user->id], 'method' => 'PUT']) }}
-                <div class="container">
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-12 text-right">
+            <a href="/admin/usuarios" class="btn btn-success btn-sm  pull-right">
+                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
+            </a>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-12 col-md-8 ">
+            {{ Form::open(['route' => ['usuarios.update', $user->id], 'method' => 'PUT']) }}
+            <div class="card">
+                <div class="card-header">EDITAR USUARIO</div>
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
                             <p class="text-yellow">Los campos marcados con * son obligatorios</p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">*Nombre</label>
                                 <input type="text" name="name" class="form-control" value="{{ $user->name }}">
@@ -41,7 +31,7 @@
                             </div>
                         </div>
                         <div class="col-md-12"> </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">*Nick</label>
                                 <input type="text" name="username" class="form-control" value="{{ $user->username }}">
@@ -52,7 +42,7 @@
                             </div>
                         </div>
                         <div class="col-md-12"> </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">*Email</label>
                                 <input type="text" name="email" class="form-control" value="{{ $user->email }}">
@@ -63,7 +53,7 @@
                             </div>
                         </div>
                         <div class="col-md-12"> </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Easy Broker</label>
                                 <input type="text" name="easy_broker" class="form-control" value="{{ $user->easy_broker }}">
@@ -74,7 +64,7 @@
                             </div>
                         </div>
                         <div class="col-md-12"> </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Permiso</label>
                                 <select name="role" class="form-control">
@@ -86,7 +76,7 @@
                             </div>
                         </div>
                         <div class="col-md-12"> </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">*Password</label>
                                 <input type="password" name="password" class="form-control">
@@ -98,16 +88,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12 text-right">
                             <div class="form-group">
                                 <button class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{ Form::close() }}
-            </div>
-        </div>
+            </div>           
+            {{ Form::close() }}
+        </div>    
     </div>
 </div>
-@stop
+@endsection

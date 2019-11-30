@@ -6,6 +6,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LeadRequest extends FormRequest
 {
+    public function attributes()
+    {
+        return [
+            'phone' => 'teléfono',
+
+        ];
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +32,8 @@ class LeadRequest extends FormRequest
     public function rules()
     {
         return [
-            'cp' => 'required',
-            'colonia' => 'required',
+            'nombre' => 'required',
+            'phone' => 'required',
         ];
     }
 }

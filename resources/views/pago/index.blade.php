@@ -16,7 +16,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-12 col-md-8  mt-3">
-            <table id="pagos" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+            <table id="pagos" class="table table-striped table-bordered dt-responsive nowrap">
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
@@ -25,8 +25,8 @@
                         <th></th>
                     </tr>
                 </thead>
-                @foreach ($form_payments as $form_payment)
                 <tbody>
+                @foreach ($form_payments as $form_payment)
                     <tr>
                         <td>{{ $form_payment->id  }}</td>
                         <td>{{ $form_payment->description  }}</td>
@@ -62,8 +62,8 @@
                             {{ Form::close() }}
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
-                @endforeach
 
             </table>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clasification;
 use App\Http\Requests\LeadRequest;
+use App\Images_lead;
 use App\Lead;
 use App\Operation;
 use App\Postal;
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
 {
+    protected $path_image;
+
+    
+    public function __construct()
+    {
+        $this->path_image = './img/lead';
+        
+    }
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +31,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $leads = Lead::getAll();
+        $leads = Lead::all();
         return view('prospecto.index', compact('leads'));
     }
 
@@ -46,7 +57,7 @@ class LeadController extends Controller
      */
     public function store(LeadRequest $request)
     {
-        Lead::createUpdate($request);
+        Lead::createUpdate($request, $this->path_image);
         flash('Elemento guardado');
         return redirect('/admin/prospecto');
     }
@@ -73,10 +84,24 @@ class LeadController extends Controller
         $real_states    = Realstate::where('status', 1)->get();
         $operations     = Operation::where('status', 1)->get();
         $clasifications = Clasification::where('status', 1)->get();
-        $lead           = Lead::getById($id);
-        $postals        = Postal::getById($lead->postal_id);
+        $lead           = Lead::find($id);
+        $images         = Images_lead::where('lead_id', $id)->get(  );
+        $path_image     = $this->path_image;
 
-        return view('prospecto.edit', compact('real_states', 'operations', 'clasifications', 'lead', 'postals'));
+        return view('prospecto.edit', compact('real_states', 'operations', 'clasifications', 'lead', 'images', 'path_image'));
+    }
+
+    public function delete_image($id)
+    {
+        $image        = Images_lead::find($id);
+        $id_prospecto = $image->lead_id;
+
+        @unlink($this->path_image.'/'.$image->name);
+        @unlink($this->path_image.'/thumb_'.$image->name);
+        
+        $image->delete();
+
+        return redirect('/admin/prospecto/'. $id_prospecto.'/edit');
     }
 
     /**
@@ -88,7 +113,7 @@ class LeadController extends Controller
      */
     public function update(LeadRequest $request, $id)
     {
-        $lead = Lead::createUpdate($request, true, $id);
+        $lead = Lead::createUpdate($request, $this->path_image, $id);
         flash('Elemento guardado');
         return redirect('/admin/prospecto');
     }
@@ -113,8 +138,9 @@ class LeadController extends Controller
      */
     public function destroy($id)
     {
-        $lead = Lead::find($id);
-        $lead->delete();
+       
+        $lead = Lead::delete_images($this->path_image, $id);
+        
         flash('Elemento borrado');
         return redirect('/admin/prospecto');
     }

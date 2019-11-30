@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -17,14 +18,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'easy_broker'
+       'name', 'email', 'password', 'username', 'easy_broker'
     ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
-     */
+     */ 
     protected $hidden = [
         'password', 'remember_token',
     ];

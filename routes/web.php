@@ -52,6 +52,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('/prospecto', 'LeadController');
     Route::get('/prospecto/status/{id}/{status}', 'LeadController@changeStatus');
+    Route::get('/prospecto/imagen/delete/{id}', 'LeadController@delete_image');
+
 
     Route::resource('/seguimiento-asesores', 'PropertyAssigmentController');
     Route::get('/seguimiento-asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
