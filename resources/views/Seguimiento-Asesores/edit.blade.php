@@ -45,10 +45,11 @@
 
                     <div class="row mt-3">
                         <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> PROPIEDAD: </span>
+                            <span class="font-weight-bold small">PROPIEDAD: </span>
+
                         </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_propiedad">{{ $property_assigment->propiedad }}</span>
+                        <div class="col-7 col-md-4">                                                        
+                            <input type="text" name="nombre" class="form-control" readonly value="{{ $property_assigment->propiedad }}">
                         </div>
 
                         <div class="col-5 col-md-2">

@@ -95,6 +95,20 @@
         @role('admin')    
         <div class="col-12 col-md-2">
             <div class="card text-center">
+            <a href="/admin/clientes">                                                                                                                        
+                    <i class="fas fa-users fa-3x mt-3 text-primary"></i>                                    
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="/admin/clientes" class="text-body " >                        
+                            <span class="h6">CLIENTES</span>
+                        </a>
+                    </h5>
+                </div>            
+            </div>
+        </div>
+        <div class="col-12 col-md-2">
+            <div class="card text-center">
                 <a href="/admin/usuarios">                                                                                                                        
                     <i class="fas fa-user-tie fa-3x mt-3 text-primary"></i>                    
                 </a>
@@ -107,9 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-2">
-            <div class="card text-center"></div>
-        </div>
+        
         <div class="col-12 col-md-2">
             <div class="card text-center"></div>
         </div>

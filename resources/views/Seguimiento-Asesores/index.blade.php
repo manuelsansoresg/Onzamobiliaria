@@ -49,7 +49,7 @@
             <table id="property_assigment" class="table table-responsive dataTables_scrollBody" style="width:100%">
                 <thead>
                     <tr>
-                        <th> <span class="small font-weight-bold"> CVE EASYBROKER </span> </th>
+                        <th> <span class="small font-weight-bold"> EASYBROKER </span> </th>
                         <th> <span class="small font-weight-bold"> PROPIEDAD</span> </th>
                         <th> <span class="small font-weight-bold"> COLONIA </span> </th>
                         <th> <span class="small font-weight-bold"> OPERACIÓN </span> </th>

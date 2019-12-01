@@ -154,8 +154,9 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Precio</label>
+                                <label class="small">Precio Deseable</label>
                                 <input name="price" value="{{ $property->price }}" class="form-control form-control-sm" type="text">
+
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif

@@ -57,8 +57,12 @@
             <table id="mobiliaria" class="table table-bordered table-responsive">
                 <thead>
                     <tr>
-                        <th><span class="small font-weight-bold">EASYBROKE </span> </th>
-                        <th><span class="small font-weight-bold">CLAVE</ </th> <th><span class="small font-weight-bold">TÍTULO </ </th> <th><span class="small font-weight-bold">PRECIO </ </th> <th><span class="small font-weight-bold">DIRECCIÓN </ </th> <th><span class="small font-weight-bold">OPERACIÓN </ </th> <th><span class="small font-weight-bold">HABITAR </ </th> <th><span class="small font-weight-bold">PROPIETARIO </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </ </th> <th><span class="small font-weight-bold"> FRENTE </ </th> <th><span class="small font-weight-bold"> FONDO </ </th> <th><span class="small font-weight-bold">STATUS </ </th> <th style="width: 180px">
+                        <th><span class="small font-weight-bold">EASYBROKER </span> </th>
+                        <th><span class="small font-weight-bold">ASESOR</ </th> <th><span class="small font-weight-bold">TÍTULO </ </th> 
+                        <th><span class="small font-weight-bold">PRECIO </ </th> 
+                        <th><span class="small font-weight-bold">DIRECCIÓN </ </th> <th>
+                        <span class="small font-weight-bold">OPERACIÓN </ </th>                         
+                        <th><span class="small font-weight-bold">PROPIETARIO </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </ </th> <th><span class="small font-weight-bold"> FRENTE </ </th> <th><span class="small font-weight-bold"> FONDO </ </th> <th><span class="small font-weight-bold">STATUS </ </th> <th style="width: 180px">
                         </th>
                     </tr>
                 </thead>
@@ -82,13 +86,7 @@
                         <td>
                             <span class="small"> {{ $property->operations_description  }} </span>
                         </td>
-                        <td>
-                            @if ($property->habitar == 1)
-                            <span class="badge bg-green">Sí</span>
-                            @else
-                            <span class="badge bg-red">No</span>
-                            @endif
-                        </td>
+                        
                         <td>
                             @if ($property->is_property == 1)
                             <span class="badge bg-green">Sí</span>

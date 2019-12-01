@@ -20,6 +20,7 @@
                     <tr>
                         <th><span class="small font-weight-bold">NOMBRE</span></th>
                         <th><span class="small font-weight-bold">TELEFONO</span></th>
+                        <th><span class="small font-weight-bold">TIPO</span></th>
                         <th><span class="small font-weight-bold">OBSERVACIONES</span></th>
                         <th><span class="small font-weight-bold">ESTATUS</span></th>
                         <th style="width: 100px"></th>

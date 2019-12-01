@@ -75,12 +75,12 @@
 
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/clientes">
+                <a href="/admin/prospecto">
                     <i class="fas fa-box-open fa-3x mt-3 text-primary"></i>
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="/admin/clientes" class="text-body">
+                        <a href="/admin/prospecto" class="text-body">
                             <span class="h6">PROSPECCION DE INMUEBLES</span>
                         </a>
                     </h5>
