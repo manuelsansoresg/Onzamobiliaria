@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Lead extends Model
 {
-    protected $fillable = ['nombre', 'phone', 'ubicacion', 'share', 'operation_id', 'observation', 'status', 'fotos'];
+    protected $fillable = ['nombre', 'phone', 'realstate_id','user_id','ubicacion', 'share', 'operation_id', 'observation', 'status', 'fotos'];
 
     static function getById($id)
     {
@@ -20,6 +20,7 @@ class Lead extends Model
                         'colonia',
             'postal_id',
             'realstate_id',
+            'realstate_id.description as realstate_description',
             'operation_id',
             'clasification_id' ,
             'share' ,
@@ -45,7 +46,7 @@ class Lead extends Model
         $user      = User::find(Auth::id());
         $user_role = $user->getRoleNames()->first();
 
-        $lead = Lead::select('leads.id', 'street', 'n_in', 'n_out', 'phone', 'leads.date',  'leads.status')
+        $lead = Lead::select('leads.id','realstates.description as realstate_description', 'street', 'n_in', 'n_out', 'phone', 'leads.date', 'leads.status')
             ->join('realstates', 'realstates.id', '=', 'leads.realstate_id')
             ->join('operations', 'operations.id', '=', 'leads.operation_id')
             ->join('clasifications', 'clasifications.id', '=', 'leads.clasification_id');

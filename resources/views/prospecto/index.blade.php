@@ -21,6 +21,7 @@
                         <th><span class="small font-weight-bold">NOMBRE</span></th>
                         <th><span class="small font-weight-bold">TELEFONO</span></th>
                         <th><span class="small font-weight-bold">TIPO</span></th>
+                        <th><span class="small font-weight-bold">ASESOR</span></th>
                         <th><span class="small font-weight-bold">OBSERVACIONES</span></th>
                         <th><span class="small font-weight-bold">ESTATUS</span></th>
                         <th style="width: 100px"></th>
@@ -31,8 +32,9 @@
                     <tr>
                         <td><span class="small">{{ $lead->nombre}}</span> </td>
                         <td><span class="small">{{ $lead->phone}}</span> </td>
+                        <td><span class="small">{{ $lead->realstate_id}}</span> </td>
+                        <td><span class="small"></span> </td>
                         <td><span class="small">{{ $lead->observation}}</span> </td>
-
 
                         <td><span class="small">
                                 @if($lead->status == 0)

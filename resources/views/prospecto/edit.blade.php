@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">COMPARTIDA</label>
                                 @if ($lead->share == 1)
@@ -57,7 +57,17 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">TIPO</label>
+                                <select name="realstate_id" class="form-control form-control-sm">
+                                    @foreach ($real_states as $real_state)
+                                    <option value="{{ $real_state->id }}" {{ ($lead->realstate_id == $real_state->id )? 'selected' : ''  }}> {{ $real_state->description }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">OPERACIÓN</label>
                                 <select name="operation_id" class="form-control">
