@@ -179,7 +179,7 @@ class Property_assigment extends Model
                     $td_option.= '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-primary">
                                 <i class="fas fa-phone-volume"></i>
                             </a>';
-                    $td_option.= '<a href="http://onzamobiliaria.test/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-primary ml-1">
+                    $td_option.= '<a href="/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-primary ml-1">
                                 <i class="far fa-edit"></i>
                             </a>';
                     $td_option.= '<button onclick="return confirm(\'¿Deseas eliminar el elemento?\')" class="btn btn-danger ml-1">
@@ -240,7 +240,7 @@ class Property_assigment extends Model
                             $property->telefono,
                             $property->correo,
                             //'llamadas'=>$llamadas,
-                            ' <a href="/admin/seguimiento-asesores/lista/' . $property->id . '" class="btn btn-primary">
+                            ' <a href="/admin/historico-seguimiento/' . $property->assignment_id . '" class="btn btn-primary">
                                     <i class="fas fa-phone-volume"></i>
                                 </a>'
                         );
