@@ -107,7 +107,10 @@ class Property extends Model
         }
 
         if($fecha_inicial != ''){
-            $property = $property->whereBetween('properties.created_at', [$fecha_inicial, $fecha_final] );
+            //$property = $property->whereBetween('properties.created_at', [$fecha_inicial, $fecha_final] );
+            $property = $property->whereDate('properties.created_at', '>=', $fecha_inicial );
+            $property = $property->whereDate('properties.created_at', '<=', $fecha_final );
+            
         }
         
         if($status != ''){
@@ -115,7 +118,7 @@ class Property extends Model
         }
         
         $property = $property->get();
-        
+        //dd(DB::getQueryLog());
         return $property;
     }
 
