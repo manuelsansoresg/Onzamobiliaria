@@ -24,7 +24,7 @@
                         <th><span class="small font-weight-bold">ASESOR</span></th>
                         <th><span class="small font-weight-bold">OBSERVACIONES</span></th>
                         <th><span class="small font-weight-bold">ESTATUS</span></th>
-                        <th style="width: 100px"></th>
+                        <th style="width: 200px"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,8 +32,8 @@
                     <tr>
                         <td><span class="small">{{ $lead->nombre}}</span> </td>
                         <td><span class="small">{{ $lead->phone}}</span> </td>
-                        <td><span class="small">{{ $lead->realstate_id}}</span> </td>
-                        <td><span class="small"></span> </td>
+                        <td><span class="small">{{ $lead->tipo}}</span> </td>
+                        <td><span class="small">{{ $lead->name }}</span> </td>
                         <td><span class="small">{{ $lead->observation}}</span> </td>
 
                         <td><span class="small">
@@ -48,19 +48,19 @@
                         </td>
                         <td>
                             {{ Form::open(['route' => ['prospecto.destroy', $lead->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                            <a href="{{route('prospecto.edit', $lead->id)}}" class="btn btn-primary">
+                            <a href="{{route('prospecto.edit', $lead->id)}}" class="btn btn-sm btn-primary">
                                 <i class="far fa-edit"></i>
                             </a>
                             @if($lead->status == 0)
-                            <a href="/admin/prospecto/status/{{ $lead->id }}/1" class="btn btn-success">
+                            <a href="/admin/prospecto/status/{{ $lead->id }}/1" class="btn btn-sm btn-success ml-2">
                                 <i class="fas fa-ban text-white"></i>
                             </a>
                             @else
-                            <a href="/admin/prospecto/status/{{ $lead->id }}/0" class="btn btn-warning">
+                            <a href="/admin/prospecto/status/{{ $lead->id }}/0" class="btn btn-sm btn-warning ml-2">
                                 <i class="fas fa-ban"></i>
                             </a>
                             @endif
-                            <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger">
+                            <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-sm btn-danger ml-2">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                             {{ Form::close() }}

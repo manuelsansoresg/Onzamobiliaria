@@ -46,10 +46,11 @@ class Lead extends Model
         $user      = User::find(Auth::id());
         $user_role = $user->getRoleNames()->first();
 
-        $lead = Lead::select('leads.id','realstates.description as realstate_description', 'street', 'n_in', 'n_out', 'phone', 'leads.date', 'leads.status')
+        $lead = Lead::select('leads.id', 'nombre', 'phone', 'realstates.description as tipo', 'observation', 'leads.status', 'name')
             ->join('realstates', 'realstates.id', '=', 'leads.realstate_id')
-            ->join('operations', 'operations.id', '=', 'leads.operation_id')
-            ->join('clasifications', 'clasifications.id', '=', 'leads.clasification_id');
+            ->join('users', 'users.id', '=', 'leads.user_id');
+            //->join('operations', 'operations.id', '=', 'leads.operation_id')
+            //->join('clasifications', 'clasifications.id', '=', 'leads.clasification_id');
 
         if ($user_role != 'admin') {
             $lead = $lead->where('leads.user_id', $user->id);

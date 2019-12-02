@@ -31,7 +31,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $leads = Lead::all();
+        $leads = Lead::getAll();
         return view('prospecto.index', compact('leads'));
     }
 
