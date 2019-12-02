@@ -202,6 +202,7 @@ class Property_assigment extends Model
                                 //'llamadas'=>$llamadas,
                                 $td_option
                                 );
+                    $td_option = '';
                 }else{
                     //dd($dias);
                     if ($dias < 1) {
