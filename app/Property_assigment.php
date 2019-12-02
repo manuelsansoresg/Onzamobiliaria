@@ -92,29 +92,28 @@ class Property_assigment extends Model
 
 
         $property   = $property->get();
-        $properties = [];
+       
         $is_error = false;
 
         if ($filtro!= '' && $filtro != 'TODOS') {
-
+            $properties = [];
             foreach ($property as $row) {
-
+               
                 $assigment = HistoricAssigment::where('status_follow_id', $filtro)->where('property_assignment_id', $row->assignment_id)->count();
-                $is_error = true;
+                //echo $assigment;
                 if ($assigment > 0) {
-                    $is_error = false;
                     $properties[] = $row;
                 }
             }
         } else {
             $properties = $property;
         }
-        
+        /* dd($property);
         if($is_error == true){
             $property =  [];
-        }
+        } */
         //dd(DB::getQueryLog());
-        return $property;
+        return $properties;
     }
 
     static function getAllTable()
