@@ -33,7 +33,7 @@
                         <td><span class="small">{{ $lead->nombre}}</span> </td>
                         <td><span class="small">{{ $lead->phone}}</span> </td>
                         <td><span class="small">{{ $lead->realstate_id}}</span> </td>
-                        <td><span class="small"></span> </td>
+                        <td><span class="small">{{ $lead->realstate_id}}</span> </td>
                         <td><span class="small">{{ $lead->observation}}</span> </td>
 
                         <td><span class="small">
