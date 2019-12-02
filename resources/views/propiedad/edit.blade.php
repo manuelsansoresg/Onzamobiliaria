@@ -27,9 +27,9 @@
                             <div class="input-group mb-2">
                                 <label class="small">Nuevo cliente </label>
                                 @if ($property->is_new == 1)
-                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
+                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
                                 @else
-                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
+                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
                                 @endif
                             </div>
 
@@ -58,7 +58,7 @@
                         </div>
 
                     </div>
-                    <?php $d_datos_clientes = ($property->is_new == 1)? 'd-none' : '' ?>
+                    <?php $d_datos_clientes = ($property->is_new == 1) ? 'd-none' : '' ?>
                     <div class="row mt-3 {{ $d_datos_clientes }}" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php $d_inputs_cliente = ($property->is_new == 1)? '' : 'd-none' ?>
+                    <?php $d_inputs_cliente = ($property->is_new == 1) ? '' : 'd-none' ?>
                     <div class="row {{ $d_inputs_cliente }}" id="d_inputs-cliente">
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
@@ -115,10 +115,10 @@
                             <div class="form-group">
                                 <label class="small">Propietario</label>
                                 @if ($client->is_property == 1)
-                                    <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox" checked>
+                                <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox" checked>
                                 @else
-                                    <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox">
-                                    
+                                <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox">
+
                                 @endif
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.is_property')}}</span>
@@ -571,8 +571,9 @@
                             <table id="client" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th><span class="small font-weight-bold"> CLAVE </span> </th>
                                         <th><span class="small font-weight-bold"> NOMBRE </span> </th>
+                                        <th><span class="small font-weight-bold"> CORREO </span> </th>
+                                        <th><span class="small font-weight-bold"> TELÉFONO </span> </th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -581,9 +582,11 @@
 
                                     <tr>
                                         <td> <span class="small">{{ $client->nombre }}</span> </td>
+                                        <td> <span class="small">{{ $client->correo }}</span> </td>
+                                        <td> <span class="small">{{ $client->telefono }}</span> </td>
                                         <td>
                                             <button type="button" onclick="addClient('{{ $client->id }}')" class="btn btn-info  btn-sm ">
-                                                <i class="fas fa-plus-circle"></i> Agregar
+                                                <i class="fas fa-plus-circle"></i>
                                             </button>
                                         </td>
                                     </tr>
