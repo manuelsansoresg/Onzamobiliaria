@@ -109,11 +109,11 @@ class Property_assigment extends Model
         } else {
             $properties = $property;
         }
-        //dd(DB::getQueryLog());
+        
         if($is_error == true){
             $property =  [];
         }
-
+        //dd(DB::getQueryLog());
         return $property;
     }
 

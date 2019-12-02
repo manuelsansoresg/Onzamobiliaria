@@ -36,7 +36,6 @@ class PropertyRequest extends FormRequest
         return [
 
             'address' => 'required',
-            'cve_int_cliente' => 'exists:clients,id',
             'Avaluo' => 'requiredIf:avaluo,activo',
             'cp' => 'required',
             'pass_easy_broker' => 'required|unique:properties',

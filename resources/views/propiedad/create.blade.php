@@ -20,11 +20,24 @@
                 <h5 class="card-header">NUEVA PROPIEDAD</h5>
                 <div class="card-body">
                     <div class="row mt-3">
+                        <div class="col-12">
+                            <p>Los campos marcados con * son obligatorios</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-4">
+                            <div class="input-group mb-2">
+                                <label class="small">Nuevo cliente </label>
+                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
+                            </div>
+
+                        </div>
+                        <div class="w-100"></div>
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
                                 <label class="small">Cliente</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
+                                <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                 <div class="input-group-prepend">
                                     <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
@@ -35,16 +48,87 @@
                             </div>
                         </div>
 
+
+                    </div>
+
+                    <div class="row mt-3 mb-3">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DATOS DEL CLIENTE</span>
+                        </div>
+
+                    </div>
+                    <div class="row mt-3" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Clave EASYBROKER</label>
+                                <label class="small">Nombre</label>
+                                <input class="form-control form-control-sm" id="client_name" readonly type="text">
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Correo</label>
+                                <input class="form-control form-control-sm" id="client_email" readonly type="email">
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Teléfono</label>
+                                <input class="form-control form-control-sm" id="client_telefono" readonly type="text">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="d_inputs-cliente" style="display:none">
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Nombre</label>
+                                <input name="cliente[nombre]" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Correo</label>
+                                <input name="cliente[correo]" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Teléfono</label>
+                                <input name="cliente[telefono]" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Propietario</label>
+                                <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.is_property')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">*Clave EASYBROKER</label>
                                 <input name="pass_easy_broker" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
                             </div>
                         </div>
-
                     </div>
 
                     <div class="row mt-3">
@@ -144,7 +228,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Precio Deseable</label>
+                                <label class="small">*Precio Deseable</label>
                                 <input name="price" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
@@ -186,7 +270,7 @@
                         <div class="w-100"></div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">¿Formas de pago deseables?</label>
+                                <label class="small">*¿Formas de pago deseables?</label>
                                 <div class="w-100"></div>
                                 <select name="form_pay_id[]" id="form_pay_id" class="form-control" multiple="multiple">
                                     @foreach ($form_payments as $form_payment)
@@ -341,7 +425,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="clientModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="clientModalLabel">AGREGAR CLIENTE</h5>
@@ -353,10 +437,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <table id="client" class="table table-striped table-bordered"  style="width:100%">
+                            <table id="client" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th><span class="small font-weight-bold"> NOMBRE </span> </th>
+                                        <th><span class="small font-weight-bold"> CORREO </span> </th>
+                                        <th><span class="small font-weight-bold"> TELÉFONO </span> </th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -365,9 +451,11 @@
 
                                     <tr>
                                         <td> <span class="small">{{ $client->nombre }}</span> </td>
+                                        <td> <span class="small">{{ $client->correo }}</span> </td>
+                                        <td> <span class="small">{{ $client->telefono }}</span> </td>
                                         <td>
-                                            <button type="button" onclick="addClient('{{ $client->id }}')" class="btn btn-info  btn-sm ">
-                                                <i class="fas fa-plus-circle"></i> Agregar
+                                            <button type="button" onclick="addClient('{{ $client->id }}','{{ $client->nombre }}', '{{ $client->correo }}', '{{ $client->telefono }}')" class="btn btn-info  btn-sm ">
+                                                <i class="fas fa-plus-circle"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -399,7 +487,7 @@
             "bLengthChange": false,
             "processing": true,
             "info": true,
-            "stateSave": true,            
+            "stateSave": true,
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

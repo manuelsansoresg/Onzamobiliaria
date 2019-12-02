@@ -5007,8 +5007,23 @@ window.addUser = function (user_id) {
   });
 };
 
-window.addClient = function (cve) {
-  $('#cve_int_cliente').val(cve);
+window.changeClient = function () {
+  var n_client = $('#n_client').is(':checked') ? 1 : 0;
+
+  if (n_client == 0) {
+    $('#d_datos-cliente').show();
+    $('#d_inputs-cliente').hide();
+  } else {
+    $('#d_inputs-cliente').show();
+    $('#d_datos-cliente').hide();
+  }
+};
+
+window.addClient = function (user_id, nombre, correo, telefono) {
+  $('#cve_int_cliente').val(user_id);
+  $('#client_name').val(nombre);
+  $('#client_email').val(correo);
+  $('#client_telefono').val(telefono);
   $('#clientModal').modal('hide');
 };
 

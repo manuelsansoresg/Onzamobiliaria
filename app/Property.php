@@ -57,7 +57,8 @@ class Property extends Model
             'colonia',
             'codigo',
             'postal_id',
-            'observation1'
+            'observation1',
+            'is_new'
             
         )
             ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
@@ -134,8 +135,9 @@ class Property extends Model
     static function createUpdateProperty($request, $path, $isUpdate = false, $property_id = null)
     {
      
-        $get_cp = Postal::where('id', $request->colonia )->first();
-
+        $get_cp    = Postal::where('id', $request->colonia )->first();
+        $n_client  = ($request->n_client != null) ? 1: 0;
+        
         $form_pays = '';
 
         foreach ($request->form_pay_id as $form_pay) {
@@ -146,21 +148,31 @@ class Property extends Model
         
 
         if ($isUpdate == false) {
-        
-            $client   = Client::find($request->cve_int_cliente)->first();
+            
+            if($n_client == 0){
+                $client   = Client::find($request->cve_int_cliente)->first();
+            }
             
             $property            = new Property($request->except('_token',
                 'form_pay_id', 'cve_int_cliente', 'identificacion',
-            'curp','rfc','acta_nacimiento','acta_matrimonio','predial','no_adeudo_agua','no_adeudo_predial','cedula_plano_catastral','copia_escritura','reglamento_condominios_no_adeudo' ));
-            $property->client_id = $client->id;
+            'curp','rfc','acta_nacimiento','acta_matrimonio','predial','no_adeudo_agua','no_adeudo_predial','cedula_plano_catastral','copia_escritura','reglamento_condominios_no_adeudo',
+                'n_client',
+                'cliente' ));
+            if ($n_client == 0) {
+                $property->client_id = $client->id;
+            }
             $property->is_avaluo = ($request->Avaluo == '')? 0: 1;
             $property->postal_id = $get_cp->id;
             $property->form_pays = $form_pays;
             $property->user_id   = Auth::id();
+            $property->is_new   = $n_client;
         
         }else{
 
             $property = Property::find($property_id);
+            if ($n_client == 0) {
+                $client   = Client::find($request->cve_int_cliente)->first();
+            }
             $property->fill($request->except(
                 '_token',
                 'cve_int_cliente',
@@ -174,12 +186,17 @@ class Property extends Model
                 'no_adeudo_predial',
                 'cedula_plano_catastral',
                 'copia_escritura',
-                'reglamento_condominios_no_adeudo'
+                'reglamento_condominios_no_adeudo','n_client',
+                'cliente'
             ) );
 
             $property->postal_id = $get_cp->id;
             $property->is_avaluo = ($request->Avaluo == '') ? 0: 1;
             $property->form_pays = $form_pays;
+            $property->is_new   = $n_client;
+            if ($n_client == 0) {
+                $property->client_id = $client->id;
+            }
         }
        
        /*  $property->realstate_id = $request->inmobiliaria; //departamento-local-terreno
@@ -284,8 +301,15 @@ class Property extends Model
             $property->reglamento_condominios_no_adeudo = $name_file;
         }
 
+        
+        if($n_client == 1){
+            $client = new Client($request->cliente);
+            
+            $client->save();
+            $property->client_id = $client->id;
+        }
+        
         $property->update();
-
         return $property;   
 
     }

@@ -18,11 +18,28 @@
                 <h5 class="card-header">NUEVA PROPIEDAD</h5>
                 <div class="card-body">
                     <div class="row mt-3">
+                        <div class="col-12">
+                            <p>Los campos marcados con * son obligatorios</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-4">
+                            <div class="input-group mb-2">
+                                <label class="small">Nuevo cliente </label>
+                                @if ($property->is_new == 1)
+                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
+                                @else
+                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
+                                @endif
+                            </div>
+
+                        </div>
+                        <div class="w-100"></div>
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
                                 <label class="small">Cliente</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="cve_int_cliente" value="{{ $property->client_id }}" id="cve_int_cliente" class="form-control form-control-sm">
+                                <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                 <div class="input-group-prepend">
                                     <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
@@ -32,6 +49,84 @@
 
                             </div>
                         </div>
+
+
+                    </div>
+                    <div class="row mt-3 mb-3">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DATOS DEL CLIENTE</span>
+                        </div>
+
+                    </div>
+                    <?php $d_datos_clientes = ($property->is_new == 1)? 'd-none' : '' ?>
+                    <div class="row mt-3 {{ $d_datos_clientes }}" id="d_datos-cliente">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Nombre</label>
+                                <input class="form-control form-control-sm" id="client_name" value="{{ $client->nombre }}" readonly type="text">
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Correo</label>
+                                <input class="form-control form-control-sm" id="client_email" value="{{ $client->correo }}" readonly type="email">
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">Teléfono</label>
+                                <input class="form-control form-control-sm" id="client_telefono" value="{{ $client->telefono }}" readonly type="text">
+
+                            </div>
+                        </div>
+                    </div>
+                    <?php $d_inputs_cliente = ($property->is_new == 1)? '' : 'd-none' ?>
+                    <div class="row {{ $d_inputs_cliente }}" id="d_inputs-cliente">
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Nombre</label>
+                                <input name="cliente[nombre]" value="{{ $client->nombre }}" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Correo</label>
+                                <input name="cliente[correo]" value="{{ $client->correo }}" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Teléfono</label>
+                                <input name="cliente[telefono]" value="{{ $client->telefono }}" class="form-control form-control-sm" type="text">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mt-3">
+                            <div class="form-group">
+                                <label class="small">Propietario</label>
+                                @if ($client->is_property == 1)
+                                    <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox" checked>
+                                @else
+                                    <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox">
+                                    
+                                @endif
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.is_property')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">

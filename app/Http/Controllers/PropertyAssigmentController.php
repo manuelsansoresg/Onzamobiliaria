@@ -18,7 +18,7 @@ class PropertyAssigmentController extends Controller
      */
     public function index()
     {
-
+        
         $property_assignments = Property_assigment::search();
         $all_status = StatusFollow::where('status', 1)->get();
 
