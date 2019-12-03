@@ -92,29 +92,28 @@ class Property_assigment extends Model
 
 
         $property   = $property->get();
-        $properties = [];
+       
         $is_error = false;
 
         if ($filtro!= '' && $filtro != 'TODOS') {
-
+            $properties = [];
             foreach ($property as $row) {
-
+               
                 $assigment = HistoricAssigment::where('status_follow_id', $filtro)->where('property_assignment_id', $row->assignment_id)->count();
-                $is_error = true;
+                //echo $assigment;
                 if ($assigment > 0) {
-                    $is_error = false;
                     $properties[] = $row;
                 }
             }
         } else {
             $properties = $property;
         }
-        
+        /* dd($property);
         if($is_error == true){
             $property =  [];
-        }
+        } */
         //dd(DB::getQueryLog());
-        return $property;
+        return $properties;
     }
 
     static function getAllTable()
@@ -179,7 +178,7 @@ class Property_assigment extends Model
                     $td_option.= '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-primary">
                                 <i class="fas fa-phone-volume"></i>
                             </a>';
-                    $td_option.= '<a href="http://onzamobiliaria.test/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-primary ml-1">
+                    $td_option.= '<a href="/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-primary ml-1">
                                 <i class="far fa-edit"></i>
                             </a>';
                     $td_option.= '<button onclick="return confirm(\'¿Deseas eliminar el elemento?\')" class="btn btn-danger ml-1">
@@ -202,6 +201,7 @@ class Property_assigment extends Model
                                 //'llamadas'=>$llamadas,
                                 $td_option
                                 );
+                    $td_option = '';
                 }else{
                     //dd($dias);
                     if ($dias < 1) {
@@ -240,7 +240,7 @@ class Property_assigment extends Model
                             $property->telefono,
                             $property->correo,
                             //'llamadas'=>$llamadas,
-                            ' <a href="/admin/seguimiento-asesores/lista/' . $property->id . '" class="btn btn-primary">
+                            ' <a href="/admin/historico-seguimiento/' . $property->assignment_id . '" class="btn btn-primary">
                                     <i class="fas fa-phone-volume"></i>
                                 </a>'
                         );
