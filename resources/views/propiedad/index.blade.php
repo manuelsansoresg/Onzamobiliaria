@@ -225,7 +225,10 @@
 
             responsive: true,
             searching: false,
-
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

@@ -84,6 +84,10 @@
             'info': true,
             'autoWidth': false,
             "scrollX": true,
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

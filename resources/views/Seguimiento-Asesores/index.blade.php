@@ -155,13 +155,20 @@
 
 
 <script>
-    /*  $(function() {
+      $(function() {
 
         var table = $('#property_assigment').DataTable({
             "scrollX": true,
-
-            "pageLength": 5,
-
+            "searching": false,
+            "pagingType": "simple",
+            "bPaginate": true, 
+            "bFilter": false , 
+            "bLengthMenu" : true, //thought this line could hide the LengthMenu
+            "bInfo":false,  
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -183,6 +190,6 @@
                 }
             },
         });
-    }) */
+    }) 
 </script>
 @stop

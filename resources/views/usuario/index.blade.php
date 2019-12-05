@@ -63,6 +63,10 @@
             "bFilter": true,
             responsive: true,
             "pageLength": 5,
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
