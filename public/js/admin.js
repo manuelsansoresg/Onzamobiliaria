@@ -5069,29 +5069,15 @@ var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/di
 var table;
 var ref;
 $(document).ready(function () {
-  /*  window.paceOptions = {
-       ajax: false,
-       restartOnRequestAfter: false,
-   }; */
   var filtro = $('#filtro').val();
   var campo = $('#campo').val();
   table = $('#property_assigment').DataTable({
-    /*    searching: false, */
-    "ajax": '/admin/property/getAll?filtro=' + filtro + '&campo=' + campo,
-    "responsive": true
+    "ajax": '/admin/property/getAll?filtro=' + filtro + '&campo=' + campo
   });
   table.destroy();
   setTimeout(function () {
     $('#body_assigment').html(), setInterval(getProperties, 100000);
   }, 3000);
-  /* getProperties(false, false);
-     setInterval(function () {
-      table.ajax.reload(null, false);
-  }, 30000); */
-
-  /*  miPrimeraPromise.then((successMessage) => {
-       setInterval(reloadTable(), 2000);
-   }); */
 });
 
 window.searchEasyBroker = function () {
@@ -5120,35 +5106,7 @@ window.searchEasyBroker = function () {
 
 function getProperties() {
   table.ajax.reload();
-  /* $('#table-assigment').html(''); */
-
-  /*  axios.get
-       ('/admin/property/getAll')
-       .then(function (response) {
-           $('#table-assigment').html('');
-           var rtable = response.data.table;
-           var head = response.data.table_head;
-           $('#table-assigment').html(rtable);
-         })
-       .catch(function (error) {
-          }) */
 }
-/* window.reloadTable = function() {
-
-
-    let miPrimeraPromise = new Promise((resolve, reject) => {
-
-        getProperties(true, false);
-
-
-    });
-
-    miPrimeraPromise.then((successMessage) => {
-        table.destroy();
-        getProperties(false, false);
-    });
-
-} */
 
 /***/ }),
 
