@@ -73,7 +73,7 @@
         @endrole
         @role('asesor')
 
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-3">
             <div class="card text-center">
                 <a href="/admin/prospecto">
                     <i class="fas fa-box-open fa-3x mt-3 text-primary"></i>
@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-3">
             <div class="card text-center">
                 <a href="/admin/propiedad">
                     <i class="fas fa-home fa-3x mt-3 text-primary"></i>
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-3">
             <div class="card text-center">
                 <a href="/admin/seguimiento-asesores">
                     <i class="fas fa-box-open fa-3x mt-3 text-primary"></i>

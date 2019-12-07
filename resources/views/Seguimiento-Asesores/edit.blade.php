@@ -1,8 +1,7 @@
 @extends('layouts.master')
-
-@section('title', 'Asignacion de Asesores')
-
+@section('title', 'ASIGNACION DE ASESORES')
 @section('content')
+
 <div class="container">
     <div class="row mt-3">
         <div class="col-12 text-right">
