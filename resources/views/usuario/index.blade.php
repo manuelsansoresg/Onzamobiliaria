@@ -62,10 +62,10 @@
             "bSearchable": true,
             "bFilter": true,
             responsive: true,
-            "pageLength": 5,
+            "pageLength": 10,
             dom: 'Bfrtip',
             buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'excel', 'pdf', 'print'
             ],
             language: {
                 "decimal": "",

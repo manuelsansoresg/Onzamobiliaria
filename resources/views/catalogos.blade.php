@@ -7,13 +7,15 @@
         @role('admin')
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/mobiliaria">                                        
-                    <i class="fas fa-warehouse fa-3x mt-3 text-primary"></i>
-                </a>
                 <div class="card-body">
+                    <a href="/admin/mobiliaria">                                        
+                        <i class="fas fa-warehouse fa-3x mt-3 text-primary"></i>
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/mobiliaria" class="text-body">                        
-                            <span class="h6">INMOBILIARIA</span>
+                            <span class="h6">TIPO DE INMUEBLE</span>
                         </a>
                     </h5>
                 </div>
@@ -21,10 +23,12 @@
         </div>
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/portales">                                                            
-                    <i class="fas fa-archway fa-3x mt-3 text-primary"></i>
-                </a>
                 <div class="card-body">
+                    <a href="/admin/portales">                                                            
+                        <i class="fas fa-archway fa-3x mt-3 text-primary"></i>
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/portales" class="text-body">                        
                             <span class="h6">PORTALES</span>
@@ -35,10 +39,12 @@
         </div>
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/operaciones">                                                                                
-                    <i class="fas fa-tools fa-3x mt-3 text-primary"></i>
-                </a>
                 <div class="card-body">
+                    <a href="/admin/operaciones">                                                                                
+                        <i class="fas fa-tools fa-3x mt-3 text-primary"></i>
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/operaciones" class="text-body">                        
                             <span class="h6">OPERACIONES</span>
@@ -49,10 +55,12 @@
         </div>
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/clasificacion">                                                                                
-                    <i class="fab fa-servicestack fa-3x mt-3 text-primary"></i>
-                </a>
                 <div class="card-body">
+                    <a href="/admin/clasificacion">                                                                                
+                        <i class="fab fa-servicestack fa-3x mt-3 text-primary"></i>
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/clasificacion" class="text-body">                        
                             <span class="h6">CLASIFICACION</span>
@@ -63,10 +71,12 @@
         </div>
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/seguimiento">                                                                                                    
-                    <i class="fab fa-typo3 fa-3x mt-3 text-primary"></i>
-                </a>
                 <div class="card-body">
+                    <a href="/admin/seguimiento">                                                                                                    
+                        <i class="fab fa-typo3 fa-3x mt-3 text-primary"></i>
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/seguimiento" class="text-body " >                        
                             <span class="h6">EST. SEGMTO.</span>
@@ -77,10 +87,12 @@
         </div>        
         <div class="col-12 col-md-2">
             <div class="card text-center">
-                <a href="/admin/pago">                                                                                                                        
-                    <i class="fas fa-dollar-sign fa-3x mt-3 text-primary"></i>
-                </a>
                 <div class="card-body">
+                    <a href="/admin/pago">                                                                                                                        
+                        <i class="fas fa-dollar-sign fa-3x mt-3 text-primary"></i>
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/pago" class="text-body " >                        
                             <span class="h6">FORMA PAGO</span>
@@ -92,27 +104,15 @@
         @endrole
     </div>
     <div class="row mt-3 justify-content-center">
-        @role('admin')    
+        @role('admin')        
         <div class="col-12 col-md-2">
             <div class="card text-center">
-            <a href="/admin/clientes">                                                                                                                        
-                    <i class="fas fa-users fa-3x mt-3 text-primary"></i>                                    
-                </a>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="/admin/clientes" class="text-body " >                        
-                            <span class="h6">CLIENTES</span>
-                        </a>
-                    </h5>
-                </div>            
-            </div>
-        </div>
-        <div class="col-12 col-md-2">
-            <div class="card text-center">
-                <a href="/admin/usuarios">                                                                                                                        
-                    <i class="fas fa-user-tie fa-3x mt-3 text-primary"></i>                    
-                </a>
-                <div class="card-body">
+                    <a href="/admin/usuarios">                                                                                                                        
+                        <i class="fas fa-user-tie fa-3x mt-3 text-primary"></i>                    
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/usuarios" class="text-body " >                        
                             <span class="h6">USUARIOS</span>
@@ -122,6 +122,9 @@
             </div>
         </div>
         
+        <div class="col-12 col-md-2">
+            <div class="card text-center"></div>
+        </div>
         <div class="col-12 col-md-2">
             <div class="card text-center"></div>
         </div>
