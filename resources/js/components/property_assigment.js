@@ -10,7 +10,7 @@ $(document).ready(function () {
     table       = $('#property_assigment').DataTable({ 
         
         "ajax": '/admin/property/getAll?filtro=' + filtro + '&campo=' + campo,
-        "responsive": true,
+        
         
     });
 
