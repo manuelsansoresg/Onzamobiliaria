@@ -28,7 +28,12 @@
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
                                 <label class="small">Nuevo cliente </label>
+
                                 <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
+                                <div class="w-100"></div>
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
+                                @endif
                             </div>
 
                         </div>
@@ -119,7 +124,15 @@
                         </div>
                     </div>
 
-                    <div class="row">
+
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">*Clave EASYBROKER</label>
@@ -128,12 +141,6 @@
                                 <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
                         </div>
                     </div>
 

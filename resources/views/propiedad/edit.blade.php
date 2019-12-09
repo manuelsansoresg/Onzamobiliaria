@@ -31,6 +31,10 @@
                                 @else
                                 <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
                                 @endif
+                                <div class="w-100"></div>
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
+                                @endif
                             </div>
 
                         </div>
@@ -91,6 +95,7 @@
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
+                               
                             </div>
                         </div>
                         <div class="col-12 col-md-4 mt-3">
@@ -126,6 +131,13 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
+                        </div>
+                    </div>
                     <div class="row mt-3">
 
                         <div class="col-12 col-md-4">
@@ -138,12 +150,6 @@
                             </div>
                         </div>
 
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
-                        </div>
                     </div>
 
                     <div class="row mt-3">

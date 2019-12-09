@@ -11,7 +11,8 @@ class PropertyEditRequest extends FormRequest
         return [
             'pass_easy_broker' => 'Clave EASYBROKER',
             'price' => 'precio',
-            'form_pay_id' => 'Formas de pago'
+            'form_pay_id' => 'Formas de pago',
+            'cliente.nombre' => 'nombre',
 
         ];
     }
@@ -43,7 +44,8 @@ class PropertyEditRequest extends FormRequest
             'cp' => 'required',
             'pass_easy_broker' => 'required|unique:properties,pass_easy_broker,' . $user_id,
             'price' => 'required',
-            'form_pay_id' => 'required'
+            'form_pay_id' => 'required',
+            
         ];
     }
 }
