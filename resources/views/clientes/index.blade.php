@@ -4,50 +4,59 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/clientes/create" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-plus-circle"></i> &nbsp; Nuevo
-            </a>
-        </div>
+    <div class="row mt-3">        
         <div class="col-12 mt-3">
             @include('flash::message')
         </div>
-        <div class="col-12 mt-3">
-            <table id="mobiliaria" class="table table-bordered table-responsive mt-5">
-                <thead>
-                    <tr>
-                        <th> <span class="small font-weight-bold">NOMBRE</span> </th>
-                        <th> <span class="small font-weight-bold">CORREO</span> </th>
-                        <th> <span class="small font-weight-bold">TELÉFONO</span> </th>
-                        <th> <span class="small font-weight-bold">CLAVE INTERNA</span> </th>
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h5 class="mr-auto">LISTADO DE CLIENTES</h5>
+                    <div>
+                        <a href="/admin/clientes/create" class="btn btn-success btn-sm  pull-right"><i class="fas fa-plus-circle"></i> AGREGAR</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row mt-3">
+                    <div class="col-12 mt-3">
+                        <table id="mobiliaria" class="table table-bordered table-responsive mt-5">
+                            <thead>
+                                <tr>
+                                    <th> <span class="small font-weight-bold">NOMBRE</span> </th>
+                                    <th> <span class="small font-weight-bold">CORREO</span> </th>
+                                    <th> <span class="small font-weight-bold">TELÉFONO</span> </th>
+                                    <th> <span class="small font-weight-bold">CLAVE INTERNA</span> </th>
 
-                        <th style="width: 60px"></th>
-                    </tr>
-                </thead>
+                                    <th style="width: 60px"></th>
+                                </tr>
+                            </thead>
 
-                <tbody>
-                    @foreach ($clients as $client)
-                    <tr>
-                        <td> <span class="small"> {{ $client->nombre }} </span> </td>
-                        <td> <span class="small"> {{ $client->correo }} </span> </td>
-                        <td> <span class="small"> {{ $client->telefono }} </span> </td>
-                        <td> <span class="small"> {{ $client->clave_interna }} </span> </td>
-                        <td>
+                            <tbody>
+                                @foreach ($clients as $client)
+                                <tr>
+                                    <td> <span class="small"> {{ $client->nombre }} </span> </td>
+                                    <td> <span class="small"> {{ $client->correo }} </span> </td>
+                                    <td> <span class="small"> {{ $client->telefono }} </span> </td>
+                                    <td> <span class="small"> {{ $client->clave_interna }} </span> </td>
+                                    <td>
 
-                            {{ Form::open(['route' => ['clientes.destroy', $client->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                            <a href="{{route('clientes.edit', $client->id)}}" class="btn btn-sm btn-primary">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm ml-1">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                            {{ Form::close() }}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                        {{ Form::open(['route' => ['clientes.destroy', $client->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                        <a href="{{route('clientes.edit', $client->id)}}" class="btn btn-sm btn-primary">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm ml-1">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                        {{ Form::close() }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

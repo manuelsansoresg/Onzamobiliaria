@@ -2,21 +2,20 @@
 @section('title', 'PROSPECCION DE INMUEBLES')
 @section('content')
 
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/prospecto" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
+<div class="container">   
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
-            <div class="card">
-
-                {{ Form::open(['route' => 'prospecto.store', 'method' => 'POST',  'files' => true]) }}
+            {{ Form::open(['route' => 'prospecto.store', 'method' => 'POST',  'files' => true]) }}
+            <div class="card">                
                 <input type="hidden" name="status" value="1">
-                <h5 class="card-header">PROSPECCIÓN DE INMUEBLES</h5>
+                <div class="card-header">                    
+                    <div class="d-flex align-items-center">
+                        <h5 class="mr-auto">AGREGAR PROSPECIÓN DE INMUEBLE</h5>
+                        <div>
+                            <a href="/admin/prospecto" class="btn btn-success btn-sm  pull-right"><i class="fas fa-arrow-circle-left"></i> REGRESAR</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-md-6">
@@ -93,9 +92,9 @@
                             <button class="btn btn-primary">Guardar</button>
                         </div>
                     </div>
-                </div>
-                {{ Form::close() }}
+                </div>                
             </div>
+            {{ Form::close() }}
         </div>
     </div>
 </div>

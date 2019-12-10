@@ -3,20 +3,19 @@
 @section('title', 'Clientes')
 
 @section('content')
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/clientes" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
-
+<div class="container">    
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => ['clientes.update', $client->id], 'method' => 'PUT']) }}
             <div class="card">
-                <div class="card-header">EDITAR CLIENTE</div>
+                <div class="card-header">                    
+                    <div class="d-flex align-items-center">
+                        <h5 class="mr-auto">EDITAR CLIENTE</h5>
+                        <div>
+                            <a href="/admin/clientes" class="btn btn-success btn-sm  pull-right"><i class="fas fa-arrow-circle-left"></i> REGRESAR</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row mt-3">
                         <div class="col-12 col-md-12">
