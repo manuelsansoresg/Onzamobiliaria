@@ -236,7 +236,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">*Precio Deseable</label>
-                                <input name="price" class="form-control form-control-sm" type="text">
+                                <input name="price" data-behaviour="decimal" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
@@ -246,7 +246,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Saldo</label>
-                                <input name="saldo" class="form-control form-control-sm" type="text">
+                                <input name="saldo" data-behaviour="decimal" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -398,8 +398,14 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">CÉDULA Y PLANO CATASTRAL ACTUALIZADO</label>
+                                <label class="small">CÉDULA</label>
                                 <input name="cedula_plano_catastral" class="form-control form-control-sm" type="file">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">PLANO CATASTRAL ACTUALIZADO</label>
+                                <input name="plano_catastral" class="form-control form-control-sm" type="file">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
