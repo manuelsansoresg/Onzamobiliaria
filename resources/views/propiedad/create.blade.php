@@ -28,8 +28,14 @@
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
                                 <label class="small">Nuevo cliente </label>
+                                <?php $display_client = (old('n_client') == 1)? '': 'display:none' ?>
+                                <?php $display_client_read = (old('n_client') == 0)? '': 'display:none' ?>
+                                @if (old('n_client') == 1)
+                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
+                                    @else
+                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" >
+                                @endif
 
-                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
                                 <div class="w-100"></div>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
@@ -62,34 +68,34 @@
                         </div>
 
                     </div>
-                    <div class="row mt-3" id="d_datos-cliente">
+                    <div class="row mt-3 " style="{{ $display_client_read }}" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Nombre</label>
-                                <input class="form-control form-control-sm" id="client_name" readonly type="text">
+                                <input class="form-control form-control-sm"  id="client_name" readonly type="text">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Correo</label>
-                                <input class="form-control form-control-sm" id="client_email" readonly type="email">
+                                <input class="form-control form-control-sm"  id="client_email" readonly type="email">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Teléfono</label>
-                                <input class="form-control form-control-sm" id="client_telefono" readonly type="text">
+                                <input class="form-control form-control-sm"  id="client_telefono" readonly type="text">
 
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="d_inputs-cliente" style="display:none">
+                    <div class="row " id="d_inputs-cliente" style="{{ $display_client }}">
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">Nombre</label>
-                                <input name="cliente[nombre]" class="form-control form-control-sm" type="text">
+                                <input name="cliente[nombre]" value="{{ old('cliente.nombre') }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
@@ -98,7 +104,7 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">Correo</label>
-                                <input name="cliente[correo]" class="form-control form-control-sm" type="text">
+                                <input name="cliente[correo]" value="{{ old('cliente.correo') }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
                                 @endif
@@ -107,7 +113,7 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">Teléfono</label>
-                                <input name="cliente[telefono]" class="form-control form-control-sm" type="text">
+                                <input name="cliente[telefono]" value="{{ old('cliente.telefono') }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
                                 @endif
@@ -136,7 +142,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">*Clave EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text">
+                                <input name="pass_easy_broker" class="form-control form-control-sm" value="{{ old('pass_easy_broker') }}" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
@@ -182,7 +188,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Dirección</label> &nbsp;
-                                <input type="text" name="address" class="form-control form-control-sm">
+                                <input type="text" name="address" value="{{ old('address') }}" class="form-control form-control-sm">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('address')}}</span>
                                 @endif
@@ -194,7 +200,7 @@
                             <div class="input-group mb-2">
                                 <label class="small">*CP</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="cp" id="cp" class="form-control">
+                                <input type="text" name="cp" id="cp" value="{{ old('cp') }}" class="form-control">
                                 <div class="input-group-prepend">
                                     <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
@@ -223,7 +229,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Institución</label>
-                                <input name="institution" class="form-control form-control-sm" type="text">
+                                <input name="institution" value="{{ old('institution') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
 
@@ -236,7 +242,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">*Precio Deseable</label>
-                                <input name="price" data-behaviour="decimal" class="form-control form-control-sm" type="text">
+                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
@@ -246,7 +252,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Saldo</label>
-                                <input name="saldo" data-behaviour="decimal" class="form-control form-control-sm" type="text">
+                                <input name="saldo" value="{{ old('saldo') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -271,7 +277,7 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label class="small"> Comentarios </label>
-                                <textarea class="form-control" name="observation1" id="" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" name="observation1" id="" cols="30" rows="10">{{ old('observation1') }}</textarea>
                             </div>
                         </div>
                         <div class="w-100"></div>
@@ -293,7 +299,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">M<sup>2</sup> de construcción</label>
-                                <input name="metros_construccion" class="form-control form-control-sm" type="text">
+                                <input name="metros_construccion" value="{{ old('metros_construccion') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
 
@@ -309,31 +315,31 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">M<sup>2</sup> de Terreno</label>
-                                <input name="metros_terreno" class="form-control form-control-sm" type="text">
+                                <input name="metros_terreno" value="{{ old('metros_terreno') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Frente</label>
-                                <input name="frente" class="form-control form-control-sm" type="text">
+                                <input name="frente" value="{{ old('frente') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Fondo</label>
-                                <input name="fondo" class="form-control form-control-sm" type="text">
+                                <input name="fondo" value="{{ old('fondo') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Estado de conservación y antigüedad</label>
-                                <input name="estado_conservacion_antiguedad" class="form-control form-control-sm" type="text">
+                                <input name="estado_conservacion_antiguedad" value="{{ old('estado_conservacion_antiguedad') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Infraestructura de la zona</label>
-                                <input name="infraestructura_zona" class="form-control form-control-sm" type="text">
+                                <input name="infraestructura_zona" value="{{ old('infraestructura_zona') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
 

@@ -13,7 +13,7 @@ class PropertyRequest extends FormRequest
             'price' => 'precio',
             'form_pay_id' => 'Formas de pago',
             'cliente.nombre' => 'nombre',
-            'cliente.nombre' => 'Precio Deseable',
+            'cliente.form_pay_id' => 'Precio Deseable',
 
         ];
     }
