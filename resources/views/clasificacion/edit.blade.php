@@ -2,19 +2,19 @@
 @section('title', 'CLASIFICACIONES')
 @section('content')
 
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/clasificacion" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
+<div class="container">    
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => ['clasificacion.update', $clasification->id], 'method' => 'PUT', 'files' => true]) }}
             <div class="card">
-                <div class="card-header">EDITAR CLASIFICACIONES</div>
+                <div class="card-header">                    
+                    <div class="d-flex align-items-center">
+                        <h5 class="mr-auto">EDITAR CLASIFICACIONES</h5>
+                        <div>
+                            <a href="/admin/clasificacion" class="btn btn-success btn-sm  pull-right"><i class="fas fa-arrow-circle-left"></i> REGRESAR</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">DESCRIPCION</h5>
                     <div class="form-group">                        

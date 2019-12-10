@@ -3,23 +3,23 @@
 @section('content')
 
 @section('content')
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/usuarios" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
+<div class="container">    
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => 'usuarios.store', 'method' => 'POST', 'files' => true]) }}
             <div class="card">
-                <div class="card-header">.:: AGREGAR USUARIOS ::.</div>
+                <div class="card-header">                    
+                    <div class="d-flex align-items-center">
+                        <h5 class="mr-auto">AGREGAR USUARIOS</h5>
+                        <div>
+                            <a href="/admin/usuarios" class="btn btn-success btn-sm  pull-right"><i class="fas fa-arrow-circle-left"></i> REGRESAR</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            <p class="text-yellow">Los campos marcados con * son obligatorios</p>
+                        <div class="col-md-12">                            
+                            <p class="form-text text-muted">Los campos marcados con * son obligatorios.</p>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
