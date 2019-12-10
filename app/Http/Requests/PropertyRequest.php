@@ -13,6 +13,7 @@ class PropertyRequest extends FormRequest
             'price' => 'precio',
             'form_pay_id' => 'Formas de pago',
             'cliente.nombre' => 'nombre',
+            'cliente.nombre' => 'Precio Deseable',
 
         ];
     }
@@ -40,9 +41,10 @@ class PropertyRequest extends FormRequest
             'Avaluo' => 'requiredIf:avaluo,activo',
             'cp' => 'required',
             'pass_easy_broker' => 'required|unique:properties',
-            'price' => 'required',
+            'price' => ['required'],
             'form_pay_id' => 'required',
-            'cliente.nombre' => 'unique:clients,Nombre'
+            'cliente.nombre' => 'unique:clients,Nombre',
+            
         ];
     }
 }

@@ -95,7 +95,7 @@
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
-                               
+
                             </div>
                         </div>
                         <div class="col-12 col-md-4 mt-3">
@@ -256,7 +256,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Precio Deseable</label>
-                                <input name="price" value="{{ $property->price }}" class="form-control form-control-sm" type="text">
+                                <input name="price" data-behaviour="decimal" value="{{ $property->price }}" class="form-control form-control-sm" type="text">
 
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
@@ -267,7 +267,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Saldo</label>
-                                <input name="saldo" value="{{ $property->saldo }}" class="form-control form-control-sm" type="text">
+                                <input name="saldo" data-behaviour="decimal" value="{{ $property->saldo }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -498,7 +498,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">CÉDULA Y PLANO CATASTRAL ACTUALIZADO</label>
+                                <label class="small">CÉDULA</label>
                                 @if ($property->cedula_plano_catastral == null)
                                 <input name="cedula_plano_catastral" class="form-control form-control-sm" type="file">
                                 @else
@@ -508,6 +508,22 @@
                                 <p>
                                     <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->cedula_plano_catastral) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
                                     <a href="/admin/destroy-document/cedula_plano_catastral/{{ $property->cedula_plano_catastral }}" class="btn btn-danger btn-sm">Borrar</a>
+                                </p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">PLANO CATASTRAL ACTUALIZADO</label>
+                                @if ($property->plano_catastral == null)
+                                <input name="plano_catastral" class="form-control form-control-sm" type="file">
+                                @else
+                                <p class="">
+                                    <i class="far fa-file fa-2x"></i>
+                                </p>
+                                <p>
+                                    <a href="{{ asset($path_document.'/'.$property->id.'/'.$property->plano_catastral) }}" target="_blank" class="btn btn-success btn-sm">Abrir</a>
+                                    <a href="/admin/destroy-document/plano_catastral/{{ $property->plano_catastral }}" class="btn btn-danger btn-sm">Borrar</a>
                                 </p>
                                 @endif
                             </div>

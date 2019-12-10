@@ -12,7 +12,7 @@ class Property extends Model
         'realstate_id', 'operation_id', 'postal_id', 'institution', 'assessment', 'observation1',
         'inmobiliaria','operacion', 'Avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
         'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
-        'pass_easy_broker', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
+        'pass_easy_broker', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
     
     static function getById($id)
     {
@@ -52,6 +52,7 @@ class Property extends Model
             'no_adeudo_agua',
             'no_adeudo_predial',
             'cedula_plano_catastral',
+            'plano_catastral',
             'copia_escritura',
             'reglamento_condominios_no_adeudo',
             'colonia',
@@ -294,6 +295,10 @@ class Property extends Model
         if ($request->hasFile('cedula_plano_catastral') != false) {
             $name_file = self::copyFie($request, 'cedula_plano_catastral', $path_file);
             $property->cedula_plano_catastral = $name_file;
+        }
+        if ($request->hasFile('plano_catastral') != false) {
+            $name_file = self::copyFie($request, 'plano_catastral', $path_file);
+            $property->plano_catastral = $name_file;
         }
         if ($request->hasFile('copia_escritura') != false) {
             $name_file = self::copyFie($request, 'copia_escritura', $path_file);
