@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FormPayment;
 use App\HistoricAssigment;
 use App\Http\Requests\HistoricAssigmentRequest;
 use App\StatusFollow;
@@ -28,8 +29,9 @@ class HistoricAssigmentController extends Controller
     {
         $id_assigment = $id_assigment;
         $status_all   = StatusFollow::all();
+        $form_payments = FormPayment::getAll();
 
-        return view('Seguimiento-Asesores.list.create', compact('id_assigment', 'status_all'));
+        return view('Seguimiento-Asesores.list.create', compact('id_assigment', 'status_all', 'form_payments'));
     }
 
 
@@ -42,8 +44,8 @@ class HistoricAssigmentController extends Controller
      */
     public function store(HistoricAssigmentRequest $request)
     {
-        $historic = new HistoricAssigment($request->except('_token'));
-        $historic->save();
+        $historic =  HistoricAssigment::createUpdateHistoric($request);
+        
         flash('Elemento guardado');
         return redirect('/admin/historico-seguimiento/'.$request->property_assignment_id);
     }
@@ -58,6 +60,7 @@ class HistoricAssigmentController extends Controller
     {
         $property_assignments = HistoricAssigment::getById($id_assigment);
         $id_assigment         = $id_assigment;
+        
 
         return view('Seguimiento-Asesores.list.index', compact('property_assignments', 'id_assigment'));
     }
@@ -70,11 +73,14 @@ class HistoricAssigmentController extends Controller
      */
     public function edit($id_assigment)
     {
-        $status_all   = StatusFollow::all();
+        
+        $my_payments   = FormPayment::myPaymentsHistoric($id_assigment);
+        $status_all    = StatusFollow::all();
         $historico     = HistoricAssigment::find($id_assigment);
-        $id_assigment = $historico->property_assignment_id;
+        $id_assigment  = $historico->property_assignment_id;
+        $form_payments = FormPayment::getAll();
 
-        return view('Seguimiento-Asesores.list.edit', compact('id_assigment', 'status_all', 'historico'));
+        return view('Seguimiento-Asesores.list.edit', compact('id_assigment', 'status_all', 'historico', 'form_payments', 'my_payments'));
     }
 
     /**
@@ -86,10 +92,8 @@ class HistoricAssigmentController extends Controller
      */
     public function update(HistoricAssigmentRequest $request, $id_assigment)
     {
-        $historic = HistoricAssigment::find($id_assigment);
-        $historic->fill($request->except('_token'));
-
-        $historic->update();
+        $historic = HistoricAssigment::createUpdateHistoric($request, $id_assigment);
+       
         flash('Elemento guardado');
         return redirect('/admin/historico-seguimiento/' . $request->property_assignment_id);
     }
