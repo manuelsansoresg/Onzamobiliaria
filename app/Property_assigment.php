@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class Property_assigment extends Model
 {
     protected $table    = 'property_assignment';
-    protected $fillable = ['property_id', 'nombre', 'telefono','correo','add_id', 'asesor_id', 'date_assignment'];
+    protected $fillable = ['property_id', 'nombre', 'telefono','correo','add_id', 'asesor_id', 'date_assignment', 'porcentaje_comision'];
 
     static function create($request, $id = null)
     {

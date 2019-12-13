@@ -12,7 +12,7 @@ class Property extends Model
         'realstate_id', 'operation_id', 'postal_id', 'institution', 'assessment', 'observation1',
         'inmobiliaria','operacion', 'Avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
         'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
-        'pass_easy_broker', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
+        'pass_easy_broker', 'cuota_mantenimiento', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
     
     static function getById($id)
     {
@@ -143,6 +143,7 @@ class Property extends Model
      
         $get_cp    = Postal::where('id', $request->colonia )->first();
         $n_client  = ($request->n_client != null) ? 1: 0;
+        $privada   = ($request->privada != null) ? 1: 0;
         
         $form_pays = '';
 
@@ -161,6 +162,7 @@ class Property extends Model
             
             $property            = new Property($request->except('_token',
                 'form_pay_id', 'cve_int_cliente', 'identificacion',
+                'privada',
             'curp','rfc','acta_nacimiento','acta_matrimonio','predial','no_adeudo_agua','no_adeudo_predial','cedula_plano_catastral','copia_escritura','reglamento_condominios_no_adeudo',
                 'n_client',
                 'cliente' ));
@@ -171,7 +173,8 @@ class Property extends Model
             $property->postal_id = $get_cp->id;
             $property->form_pays = $form_pays;
             $property->user_id   = Auth::id();
-            $property->is_new   = $n_client;
+            $property->is_new    = $n_client;
+            $property->privada   = $privada;
         
         }else{
 
@@ -193,13 +196,15 @@ class Property extends Model
                 'cedula_plano_catastral',
                 'copia_escritura',
                 'reglamento_condominios_no_adeudo','n_client',
-                'cliente'
+                'cliente',
+                'privada'
             ) );
 
             $property->postal_id = $get_cp->id;
             $property->is_avaluo = ($request->Avaluo == '') ? 0: 1;
             $property->form_pays = $form_pays;
-            $property->is_new   = $n_client;
+            $property->is_new    = $n_client;
+            $property->privada   = $privada;
             if ($n_client == 0) {
                 $property->client_id = $client->id;
             }

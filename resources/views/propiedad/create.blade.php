@@ -28,12 +28,12 @@
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
                                 <label class="small">Nuevo cliente </label>
-                                <?php $display_client = (old('n_client') == 1)? '': 'display:none' ?>
-                                <?php $display_client_read = (old('n_client') == 0)? '': 'display:none' ?>
+                                <?php $display_client = (old('n_client') == 1) ? '' : 'display:none' ?>
+                                <?php $display_client_read = (old('n_client') == 0) ? '' : 'display:none' ?>
                                 @if (old('n_client') == 1)
-                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
-                                    @else
-                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" >
+                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
+                                @else
+                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
                                 @endif
 
                                 <div class="w-100"></div>
@@ -72,21 +72,21 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Nombre</label>
-                                <input class="form-control form-control-sm"  id="client_name" readonly type="text">
+                                <input class="form-control form-control-sm" id="client_name" readonly type="text">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Correo</label>
-                                <input class="form-control form-control-sm"  id="client_email" readonly type="email">
+                                <input class="form-control form-control-sm" id="client_email" readonly type="email">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">Teléfono</label>
-                                <input class="form-control form-control-sm"  id="client_telefono" readonly type="text">
+                                <input class="form-control form-control-sm" id="client_telefono" readonly type="text">
 
                             </div>
                         </div>
@@ -271,6 +271,18 @@
                             <div class="form-group">
                                 <label class="small"> ¿Cuentan con documento para exentar? </label>
                                 <input type="checkbox" name="document" value="1">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small"> privada </label>
+                                <input type="checkbox" name="privada" value="1">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small"> Cuota mantenimiento </label>
+                                <input type="text" data-behaviour="decimal" name="cuota_mantenimiento" value="1">
                             </div>
                         </div>
                         <div class="w-100"></div>

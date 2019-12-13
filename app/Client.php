@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    protected $fillable = ['nombre', 'correo', 'telefono', 'medio_contacto', 'propiedad_interes', 'precio', 'titulo_propiedad', 'clave_interna', 'is_property'];
+    protected $fillable = ['nombre', 'correo', 'telefono', 'medio_contacto', 'propiedad_interes', 'precio', 'titulo_propiedad', 'clave_interna', 'is_property', 'telefono2', 'telefono3'];
 
     static function create($request, $id = null)
     {

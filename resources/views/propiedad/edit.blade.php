@@ -288,6 +288,19 @@
                                 <input type="checkbox" {{ ($property->document == 1)? 'checked' : ''}} name="document" value="1">
                             </div>
                         </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small"> privada </label>
+                                <input type="checkbox" {{ ($property->privada == 1)? 'checked' : ''}} name="privada" value="1">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small"> Cuota mantenimiento </label>
+                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" value="1">
+                            </div>
+                        </div>
+
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
