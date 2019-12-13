@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'PROSPECCION DE INMUEBLES')
+@section('title', 'PROSPECCIÓN DE INMUEBLES')
 @section('content')
 
 <div class="container">    
@@ -10,7 +10,7 @@
                 <input type="hidden" name="status" value="1">                
                 <div class="card-header">                    
                     <div class="d-flex align-items-center">
-                        <h5 class="mr-auto">EDITAR PROSPECIÓN DE INMUEBLE</h5>
+                        <h5 class="mr-auto">EDITAR PROSPECCIÓN DE INMUEBLE</h5>
                         <div>
                             <a href="/admin/prospecto" class="btn btn-success btn-sm  pull-right"><i class="fas fa-arrow-circle-left"></i> REGRESAR</a>
                         </div>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">COMPARTIDA</label>
                                 @if ($lead->share == 1)
@@ -56,7 +56,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
+                        <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">TIPO</label>
                                 <select name="realstate_id" class="form-control form-control-sm">
@@ -66,7 +66,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
+                        <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">OPERACIÓN</label>
                                 <select name="operation_id" class="form-control">
@@ -74,6 +74,15 @@
                                     <option value="{{ $operation->id }}" {{ ($lead->operation_id == $operation->id)? 'selected' : '' }}> {{ $operation->description }} </option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label class="small">% COMISIÓN</label>
+                                <input type="text" class="form-control form-control-sm" name="porcentaje_comision" value="{{ $lead->porcentaje_comision }}>
+                                @if($errors)
+                                    <span class="text-danger"> {{$errors->first('porcentaje_comision')}}</span>
+                                @endif
                             </div>
                         </div>
                     </div>

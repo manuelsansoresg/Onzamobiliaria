@@ -10,7 +10,7 @@
                 <input type="hidden" name="status" value="1">
                 <div class="card-header">                    
                     <div class="d-flex align-items-center">
-                        <h5 class="mr-auto">AGREGAR PROSPECIÓN DE INMUEBLE</h5>
+                        <h5 class="mr-auto">AGREGAR PROSPECCIÓN DE INMUEBLE</h5>
                         <div>
                             <a href="/admin/prospecto" class="btn btn-success btn-sm  pull-right"><i class="fas fa-arrow-circle-left"></i> REGRESAR</a>
                         </div>
@@ -46,13 +46,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">COMPARTIDA</label>
                                 <input type="checkbox" name="share" value="1">
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
+                        <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">TIPO</label>
                                 <select name="realstate_id" class="form-control form-control-sm">
@@ -62,7 +62,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
+                        <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">OPERACIÓN</label>
                                 <select name="operation_id" class="form-control form-control-sm">
@@ -72,6 +72,15 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label class="small">% COMISIÓN</label>
+                                <input type="text" class="form-control form-control-sm" name="porcentaje_comision">
+                                @if($errors)
+                                    <span class="text-danger"> {{$errors->first('porcentaje_comision')}}</span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
@@ -79,7 +88,7 @@
                                 <label class="small"> OBSERVACIÓN</label>
                                 <textarea name="observation" class="form-control" cols="20" rows="1"></textarea>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-12">

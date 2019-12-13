@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <h5 class="mr-auto">PROSPECIÓN DE INMUEBLES</h5>
+                    <h5 class="mr-auto">PROSPECCIÓN DE INMUEBLES</h5>
                     <div>
                         <a href="/admin/prospecto/create" class="btn btn-success btn-sm  pull-right"><i class="fas fa-plus-circle"></i> AGREGAR</a>
                     </div>
