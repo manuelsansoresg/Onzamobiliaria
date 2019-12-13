@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HistoricAssigment extends Model
 {
-    protected $fillable = ['property_assignment_id', 'observacion1', 'observacion2', 'observacion3', 'status_follow_id','historic_assigments.created_at'];
+    protected $fillable = ['property_assignment_id', 'observacion1', 'observacion2', 'observacion3', 'status_follow_id','fecha'];
 
     static function getById($id_assigment)
     {
