@@ -4977,6 +4977,8 @@ __webpack_require__(/*! ./components/property.js */ "./resources/js/components/p
 
 __webpack_require__(/*! ./components/property_assigment */ "./resources/js/components/property_assigment.js");
 
+__webpack_require__(/*! ./components/select_multiple */ "./resources/js/components/select_multiple.js");
+
 /***/ }),
 
 /***/ "./resources/js/components/property.js":
@@ -5106,6 +5108,29 @@ window.searchEasyBroker = function () {
 
 function getProperties() {
   table.ajax.reload();
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/select_multiple.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/select_multiple.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+if ($(".multiple").length > 0) {
+  $('.multiple').multiselect({
+    templates: {
+      li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
+    },
+    nonSelectedText: 'Choose...',
+    selectedClass: 'bg-light',
+    onInitialized: function onInitialized(select, container) {
+      // hide checkboxes
+      container.find('input').addClass('d-none');
+    }
+  });
 }
 
 /***/ }),

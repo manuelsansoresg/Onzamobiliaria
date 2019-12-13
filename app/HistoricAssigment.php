@@ -26,4 +26,33 @@ class HistoricAssigment extends Model
 
          return $assigment;
     }
+
+    static function createUpdateHistoric($request, $historic_id = null){
+        
+        if ($historic_id == false) {
+            $historico = new HistoricAssigment($request->except('_token'));
+        }else{
+            $historico = HistoricAssigment::find($historic_id);
+            $historico->fill($request->except('_token'));
+        }
+
+        $form_pays = '';
+
+        foreach ($request->forma_pago as $form_pay) {
+            $form_pays .= ",$form_pay";
+        }
+
+        $form_pays = trim($form_pays, ',');
+
+        $historico->forma_pago = $form_pays;
+
+        if ($historic_id == false) {
+            $historico->save();
+        }else{
+            $historico->update();
+        }
+
+        return $historico;
+
+    }  
 }

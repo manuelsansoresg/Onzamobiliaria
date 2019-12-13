@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label class="small">FORMA DE PAGO</label>
                                 <div class="w-100"></div>
-                                <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm" multiple="multiple">
+                                <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm multiple" multiple="multiple">
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach
@@ -149,7 +149,6 @@
 @stop
 
 @section('js')
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 <script>
     $(function() {
