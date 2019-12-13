@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h5 class="mr-auto">SEGUIMIENTO DE LLAMADAS</h5>
-                        <div>                    
+                        <div>
                             <a href="/admin/seguimiento-asesores" class="btn btn-primary btn-sm  pull-right">
                                 <i class="fas fa-arrow-circle-left"></i> REGRESAR
                             </a>
@@ -38,7 +38,7 @@
                             @foreach ($property_assignments as $property_assignment)
                             <tbody>
                                 <tr>
-                                    <td>{{ $property_assignment->created_at }}</td>
+                                    <td>{{ date('Y-m-d', strtotime($property_assignment->fecha)) }}</td>
                                     <td>{{ $property_assignment->status }}</td>
                                     <td>{{ $property_assignment->observacion1  }}</td>
                                     <td>
