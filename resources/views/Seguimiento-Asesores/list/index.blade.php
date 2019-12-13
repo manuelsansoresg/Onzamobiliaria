@@ -29,7 +29,8 @@
                         <table id="mobiliaria" class="table table-bordered table-responsive">
                             <thead>
                                 <tr>
-                                    <th>STATUS</th>
+                                    <th>FECHA</th>
+                                    <th>ESTATUS</th>
                                     <th>OBSERVACIÓN</th>
                                     <th style="width: 150px;"></th>
                                 </tr>
@@ -37,6 +38,7 @@
                             @foreach ($property_assignments as $property_assignment)
                             <tbody>
                                 <tr>
+                                    <td>{{ $property_assignment->created_at }}</td>
                                     <td>{{ $property_assignment->status }}</td>
                                     <td>{{ $property_assignment->observacion1  }}</td>
                                     <td>

@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <input type="hidden" name="property_assignment_id" value="{{ $id_assigment }}">                   
                     <div class="row mt-3">
-                        <div class="col-12 col-md-8">
+                        <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ESTATUS SEGUIMIENTO</label>
                                 <select name="status_follow_id" class="form-control form-control-sm">
@@ -30,22 +30,21 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-12 col-md-4">
-                                <div class="form-group">
-                                    <label class="small">FORMA DE PAGO</label>
-                                    <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm multiple" multiple="multiple">
-                                        @foreach ($form_payments as $form_payment)
-                                        <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors)
-                                    <div class="w-100"></div>
-                                    <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>
-                                    @endif
-                                </div>
-                            </div>
                         </div>
-                        
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <label class="small">FORMA DE PAGO</label>
+                                <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm multiple" multiple="multiple">
+                                    @foreach ($form_payments as $form_payment)
+                                    <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
+                                    @endforeach
+                                </select>
+                                @if($errors)
+                                <div class="w-100"></div>
+                                <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>
+                                @endif
+                            </div>
+                        </div>                        
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">

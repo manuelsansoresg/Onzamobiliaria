@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <input type="hidden" name="property_assignment_id" value="{{ $id_assigment }}">
                     <div class="row mt-3">
-                        <div class="col-12 col-md-8">
+                        <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ESTATUS DE SEGUIMIENTO</label>
                                 <select name="status_follow_id" class="form-control form-control-sm">
@@ -31,7 +31,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label class="small">FORMA DE PAGO</label>
                                 <div class="w-100"></div>
