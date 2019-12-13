@@ -44,7 +44,7 @@ window.searchEasyBroker = function(){
                     $('#val_operacion').html(result.operacion);
                     $('#val_colonia').html(result.colonia);
                     $('#val_asesor').html(result.asesor);
-                    $('#val_precio').html(result.precio);
+                    $('#val_precio').html(result.price);
                 }else{
                     $('#error_easy').html('El campo easy broker seleccionado no existe.');
                 }

@@ -79,7 +79,7 @@
                             <span class="badge bg-red">No</span>
                             @endif
                         </td>
-                        <td> <span class="small"> {{ $property->price  }} </span> </td>
+                        <td> <span class="small"> {{ precio($property->price)  }} </span> </td>
                         <td>
                             <span class="small"> {{ $property->address  }} </span>
                         </td>

@@ -48,3 +48,8 @@ function uploadImage($file, $image_cover,  $path, $is_move = false, $pre = '', $
 
     return  $name_full_return;
 }
+
+function precio($precio)
+{
+    return number_format($precio, 2, '.', ',');
+}
