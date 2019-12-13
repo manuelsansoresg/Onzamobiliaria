@@ -69,7 +69,7 @@
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">OPERACIÓN</label>
-                                <select name="operation_id" class="form-control">
+                                <select name="operation_id" class="form-control form-control-sm">
                                     @foreach ($operations as $operation)
                                     <option value="{{ $operation->id }}" {{ ($lead->operation_id == $operation->id)? 'selected' : '' }}> {{ $operation->description }} </option>
                                     @endforeach
@@ -79,7 +79,7 @@
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label class="small">% COMISIÓN</label>
-                                <input type="text" class="form-control form-control-sm" name="porcentaje_comision" value="{{ $lead->porcentaje_comision }}>
+                                <input type="text" class="form-control form-control-sm" name="porcentaje_comision" value="{{ $lead->porcentaje_comision }}">
                                 @if($errors)
                                     <span class="text-danger"> {{$errors->first('porcentaje_comision')}}</span>
                                 @endif
