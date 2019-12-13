@@ -47,6 +47,24 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"  class="small">TELÉFONO 2</label>
+                                <input type="text" name="telefono2" value="{{ $client->telefono2 }}" class="form-control form-control-sm">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('telefono2')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"  class="small">TELÉFONO 2</label>
+                                <input type="text" name="telefono3" value="{{ $client->telefono3 }}" class="form-control form-control-sm">
+                                @if($errors)
+                                <span class="text-danger"> {{$errors->first('telefono3')}}</span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-12 col-md-2">
                             <div class="form-group">
                                 <label for="exampleInputEmail1"  class="small">¿ES PROPIETARIO?</label>

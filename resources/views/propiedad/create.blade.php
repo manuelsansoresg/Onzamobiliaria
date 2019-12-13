@@ -282,7 +282,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small"> Cuota mantenimiento </label>
-                                <input type="text" data-behaviour="decimal" name="cuota_mantenimiento" value="1">
+                                <input type="text" data-behaviour="decimal" name="cuota_mantenimiento" class="form-control">
                             </div>
                         </div>
                         <div class="w-100"></div>

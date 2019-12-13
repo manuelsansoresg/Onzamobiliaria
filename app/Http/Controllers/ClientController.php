@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Http\Requests\ClientEditRequest;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
 
@@ -72,7 +73,7 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientRequest $request, $id)
+    public function update(ClientEditRequest $request, $id)
     {
         Client::create($request, $id);
         flash('Elemento guardado');

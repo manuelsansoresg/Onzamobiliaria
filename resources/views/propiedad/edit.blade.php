@@ -43,7 +43,7 @@
                             <div class="input-group mb-2">
                                 <label class="small">Cliente</label>
                                 <div class="w-100"></div>
-                                <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
+                                <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" value="{{ $property->client_id }}" class="form-control form-control-sm">
                                 <div class="input-group-prepend">
                                     <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
                                 </div>
@@ -297,7 +297,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small"> Cuota mantenimiento </label>
-                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" value="1">
+                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" class="form-control">
                             </div>
                         </div>
 
@@ -620,7 +620,7 @@
                                         <td> <span class="small">{{ $client->correo }}</span> </td>
                                         <td> <span class="small">{{ $client->telefono }}</span> </td>
                                         <td>
-                                            <button type="button" onclick="addClient('{{ $client->id }}')" class="btn btn-info  btn-sm ">
+                                            <button type="button" onclick="addClient('{{ $client->id }}','{{ $client->nombre }}', '{{ $client->correo }}', '{{ $client->telefono }}')" class="btn btn-info  btn-sm ">
                                                 <i class="fas fa-plus-circle"></i>
                                             </button>
                                         </td>
