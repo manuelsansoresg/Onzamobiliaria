@@ -2,20 +2,22 @@
 @section('title', 'ASIGNACION DE ASESORES')
 @section('content')
 
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/seguimiento-asesores" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
+<div class="container">    
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => ['seguimiento-asesores.update', $property_assigment->assignment_id], 'method' => 'PUT']) }}
             <input type="hidden" name="date_assignment" value="{{ date('Y-m-d H:i:s') }}">
             <div class="card">
-                <div class="card-header">.:: Editar Asignacion ::.</div>
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h5 class="mr-auto">EDITAR ASIGNACIÓN</h5>
+                        <div>
+                            <a href="/admin/seguimiento-asesores" class="btn btn-success btn-sm  pull-right">
+                                <i class="fas fa-arrow-circle-left"></i> REGRESAR
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
 
                     <div class="row">
@@ -43,44 +45,37 @@
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small">PROPIEDAD: </span>
-
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">PROPIEDAD</span>
+                                <input type="text" id="nombre" name="nombre" class="form-control form-control-sm" readonly value="{{ $property_assigment->propiedad }}">
+                            </div>
                         </div>
-                        <div class="col-7 col-md-4">
-                            <input type="text" name="nombre" class="form-control" readonly value="{{ $property_assigment->propiedad }}">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">OPERACIÓN</span>
+                                <input type="text" id="val_operacion" name="val_operacion" class="form-control form-control-sm" readonly value="{{ $property_assigment->operacion }}">
+                            </div>
                         </div>
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> OPERACIÓN: </span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">COLONIA</span>
+                                <input type="text" id="val_colonia" name="val_colonia" class="form-control form-control-sm" readonly value="{{ $property_assigment->colonia }}">
+                            </div>
                         </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_operacion">{{ $property_assigment->operacion }}</span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">ASESOR</span>
+                                <input type="text" name="val_asesor" id="val_asesor" class="form-control form-control-sm text-uppercase" readonly value="{{ $property_assigment->asesor }}">
+                            </div>
                         </div>
-
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> COLONIA: </span>
-                        </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_colonia">{{ $property_assigment->colonia }}</span>
-                        </div>
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> ASESOR: </span>
-                        </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_asesor"> {{ $property_assigment->asesor }} </span>
-                        </div>
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> PRECIO: </span>
-                        </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_precio"> {{ precio($property_assigment->price) }} </span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">PRECIO</span>
+                                <input type="text" name="val_precio" id="val_precio" class="form-control form-control-sm" readonly value="{{ $property_assigment->price }}">
+                            </div>
                         </div>
                     </div>
-
                     <div class="row mt-3">
                         <div class="col-12">
                             <span class="font-weight-bold">COMPLEMENTARIO</span>
@@ -90,8 +85,8 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Portal</label>
-                                <select name="add_id" class="form-control">
+                                <label class="small">PORTAL</label>
+                                <select name="add_id" class="form-control form-control-sm">
                                     @foreach ($ads as $ad)
                                     <option value="{{ $ad->id }}" {{ ($property_assigment->add_id == $ad->id )? 'selected' : '' }}>{{ $ad->description }}</option>
                                     @endforeach
@@ -100,8 +95,8 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Nombre Prospecto</label>
-                                <input type="text" name="nombre" value="{{ $property_assigment->nombre_prospecto }}" class="form-control">
+                                <label class="small">NOMBRE PROSPECTO</label>
+                                <input type="text" name="nombre" value="{{ $property_assigment->nombre_prospecto }}" class="form-control form-control-sm">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('nombre')}}</span>
                                 @endif
@@ -109,8 +104,8 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Teléfono</label>
-                                <input type="text" name="telefono" value="{{ $property_assigment->telefono }}" class="form-control">
+                                <label class="small">TELÉFONO</label>
+                                <input type="text" name="telefono" value="{{ $property_assigment->telefono }}" class="form-control form-control-sm">
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('telefono')}}</span>
@@ -118,17 +113,17 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Correo</label>
-                                <input type="email" name="correo" value=" {{ $property_assigment->correo }} " class="form-control">
+                                <label class="small">CORREO</label>
+                                <input type="email" name="correo" value=" {{ $property_assigment->correo }} " class="form-control form-control-sm">
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('correo')}}</span>
                             @endif
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-8">
                             <div class="form-group">
-                                <label class="small">Asesor</label>
-                                <select name="asesor_id" class="form-control" id="">
+                                <label class="small">ASESOR</label>
+                                <select name="asesor_id" class="form-control form-control-sm" id="">
                                     @foreach ($asesores as $asesor)
                                     <option value="{{ $asesor->id }}" {{ ($property_assigment->asesor_id == $asesor->id )? 'selected' : '' }}>{{ $asesor->name }}</option>
                                     @endforeach

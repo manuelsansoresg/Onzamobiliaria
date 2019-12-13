@@ -3,19 +3,21 @@
 @section('title', 'Asignacion de Asesores')
 
 @section('content')
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/seguimiento-asesores" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
+<div class="container">    
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
             {{ Form::open(['route' => 'seguimiento-asesores.store', 'method' => 'POST', 'files' => true]) }}
             <div class="card">
-                <div class="card-header">.:: Nueva Asignacion ::.</div>
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h5 class="mr-auto">AGREGAR ASIGNACIÓN</h5>
+                        <div>
+                            <a href="/admin/seguimiento-asesores" class="btn btn-success btn-sm  pull-right">
+                                <i class="fas fa-arrow-circle-left"></i> REGRESAR
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
 
                     <div class="row">
@@ -89,8 +91,8 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Portal</label>
-                                <select name="add_id" class="form-control">
+                                <label class="small">PORTAL</label>
+                                <select name="add_id" class="form-control form-control-sm">
                                     @foreach ($ads as $ad)
                                     <option value="{{ $ad->id }}">{{ $ad->description }}</option>
                                     @endforeach
@@ -99,8 +101,8 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Nombre Prospecto</label>
-                                <input type="text" name="nombre" class="form-control">
+                                <label class="small">NOMBRE PROSPECTO</label>
+                                <input type="text" name="nombre" class="form-control form-control-sm">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('nombre')}}</span>
                                 @endif
@@ -108,8 +110,8 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Teléfono</label>
-                                <input type="text" name="telefono" class="form-control">
+                                <label class="small">TELÉFONO</label>
+                                <input type="text" name="telefono" class="form-control form-control-sm">
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('telefono')}}</span>
@@ -117,17 +119,17 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Correo</label>
-                                <input type="email" name="correo" class="form-control">
+                                <label class="small">CORREO</label>
+                                <input type="email" name="correo" class="form-control form-control-sm">
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('correo')}}</span>
                             @endif
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-8">
                             <div class="form-group">
-                                <label class="small">Asesor</label>
-                                <select name="asesor_id" class="form-control" id="">
+                                <label class="small">ASESOR</label>
+                                <select name="asesor_id" class="form-control form-control-sm" id="">
                                     @foreach ($asesores as $asesor)
                                     <option value="{{ $asesor->id }}">{{ $asesor->name }}</option>
                                     @endforeach
