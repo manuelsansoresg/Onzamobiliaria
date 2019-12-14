@@ -3,7 +3,7 @@
 @section('title', 'PROPIEDAD')
 
 @section('content')
-<div class="container">    
+<div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
@@ -42,21 +42,21 @@
                         <div class="col-12 col-md-4">
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <div class="input-group mb-2">                                
+                                    <div class="input-group mb-2">
                                         <label class="small">CLIENTE</label>
                                         <div class="w-100"></div>
-                                        <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" value="{{ $property->client_id }}" class="form-control form-control-sm">                                        
+                                        <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" value="{{ $property->client_id }}" class="form-control form-control-sm">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">                        
+                                <div class="col-12 col-md-6">
                                     <div class="input-group-prepend">
                                         <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -609,7 +609,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <table id="client" class="table table-bordered">
+                            <table id="client" class="table table-bordered dataTables_scrollBody">
                                 <thead>
                                     <tr>
                                         <th><span class="small font-weight-bold"> NOMBRE </span> </th>
@@ -655,6 +655,7 @@
 
             responsive: true,
             "pageLength": 5,
+            "scrollX": true,
 
             language: {
                 "decimal": "",

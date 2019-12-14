@@ -5,7 +5,7 @@
 
 
 @section('content')
-<div class="container">    
+<div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
@@ -31,16 +31,16 @@
                                 <?php $display_client = (old('n_client') == 1) ? '' : 'display:none' ?>
                                 <?php $display_client_read = (old('n_client') == 0) ? '' : 'display:none' ?>
                                 @if (old('n_client') == 1)
-                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" class="custom-control-input" onchange="changeClient()"  checked>
+                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" class="custom-control-input" onchange="changeClient()" checked>
                                 @else
-                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" class="custom-control-input" onchange="changeClient()">
+                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" class="custom-control-input" onchange="changeClient()">
                                 @endif
 
                                 <div class="w-100"></div>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
-                            </div>                          
+                            </div>
 
 
                         </div>
@@ -48,16 +48,16 @@
                         <div class="col-12 col-md-4">
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <div class="input-group mb-2">                                
-                                        <label class="small">CLIENTE</label>                                
-                                        <div class="w-100"></div>                                
+                                    <div class="input-group mb-2">
+                                        <label class="small">CLIENTE</label>
+                                        <div class="w-100"></div>
                                         <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">                        
+                                <div class="col-12 col-md-6">
                                     <div class="input-group-prepend">
                                         <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                     </div>
@@ -141,9 +141,9 @@
                         <div class="col-12">
                             <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
                         </div>
-                    </div>                  
-                                        
-                        
+                    </div>
+
+
 
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
@@ -472,7 +472,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <table id="client" class="table table-striped table-bordered" style="width:100%">
+                            <table id="client" class="table table-striped table-bordered dataTables_scrollBody" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th><span class="small font-weight-bold"> NOMBRE </span> </th>
@@ -515,7 +515,7 @@
 <script>
     $(function() {
         var table = $('#client').DataTable({
-
+            "scrollX": true,
             "bSearchable": true,
             "bFilter": true,
             responsive: true,
