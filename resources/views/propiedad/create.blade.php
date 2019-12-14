@@ -1,61 +1,67 @@
 @extends('layouts.master')
 
-@section('title', 'Propiedad')
+@section('title', 'PROPIEDAD')
 
 
 
 @section('content')
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/propiedad" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
+<div class="container">    
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
                 {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST',  'files' => true, 'id' => 'frm_propiedad']) }}
-                <h5 class="card-header">NUEVA PROPIEDAD</h5>
+                <h5 class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h6 class="mr-auto">AGREGAR PROPIEDAD</h6>
+                        <a href="/admin/propiedad" class="btn btn-success btn-sm  pull-right">
+                            <i class="fas fa-arrow-circle-left"></i> REGRESAR
+                        </a>
+                    </div>
+                </h5>
                 <div class="card-body">
-                    <div class="row mt-3">
+                    <div class="row">
                         <div class="col-12">
                             <p>Los campos marcados con * son obligatorios</p>
                         </div>
                     </div>
-                    <div class="row mt-3">
+                    <div class="row">
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <label class="small">Nuevo cliente </label>
+                                <label class="small">AGREGAR NUEVO CLIENTE </label>
                                 <?php $display_client = (old('n_client') == 1) ? '' : 'display:none' ?>
                                 <?php $display_client_read = (old('n_client') == 0) ? '' : 'display:none' ?>
                                 @if (old('n_client') == 1)
-                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
+                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" class="custom-control-input" onchange="changeClient()"  checked>
                                 @else
-                                <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()">
+                                    <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" class="custom-control-input" onchange="changeClient()">
                                 @endif
 
                                 <div class="w-100"></div>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
-                            </div>
+                            </div>                          
+
 
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-4">
-                            <div class="input-group mb-2">
-                                <label class="small">Cliente</label>
-                                <div class="w-100"></div>
-                                <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
-                                <div class="input-group-prepend">
-                                    <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="input-group mb-2">                                
+                                        <label class="small">CLIENTE</label>                                
+                                        <div class="w-100"></div>                                
+                                        <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
+                                        @if($errors)
+                                        <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
+                                        @endif
+                                    </div>
                                 </div>
-                                @if($errors)
-                                <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
-                                @endif
-
+                                <div class="col-12 col-md-6">                        
+                                    <div class="input-group-prepend">
+                                        <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -71,30 +77,29 @@
                     <div class="row mt-3 " style="{{ $display_client_read }}" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Nombre</label>
+                                <label class="small">NOMBRE</label>
                                 <input class="form-control form-control-sm" id="client_name" readonly type="text">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Correo</label>
+                                <label class="small">EMAIL</label>
                                 <input class="form-control form-control-sm" id="client_email" readonly type="email">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Teléfono</label>
+                                <label class="small">TELÉFONO</label>
                                 <input class="form-control form-control-sm" id="client_telefono" readonly type="text">
-
                             </div>
                         </div>
                     </div>
                     <div class="row " id="d_inputs-cliente" style="{{ $display_client }}">
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Nombre</label>
+                                <label class="small">NOMBRE</label>
                                 <input name="cliente[nombre]" value="{{ old('cliente.nombre') }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
@@ -103,7 +108,7 @@
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Correo</label>
+                                <label class="small">EMAIL</label>
                                 <input name="cliente[correo]" value="{{ old('cliente.correo') }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
@@ -112,7 +117,7 @@
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Teléfono</label>
+                                <label class="small">TELÉFONO</label>
                                 <input name="cliente[telefono]" value="{{ old('cliente.telefono') }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
@@ -121,7 +126,7 @@
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Propietario</label>
+                                <label class="small">PROPIETARIO</label>
                                 <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.is_property')}}</span>
@@ -136,48 +141,47 @@
                         <div class="col-12">
                             <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
                         </div>
-                    </div>
+                    </div>                  
+                                        
+                        
 
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">*Clave EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control form-control-sm" value="{{ old('pass_easy_broker') }}" type="text">
+                                <label class="small"><i class="fas fa-key pr-1 mt-2"></i>CLAVE EASYBROKER</label>
+                                <input name="pass_easy_broker" class="form-control is-valid form-control-sm" value="{{ old('pass_easy_broker') }}" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
                             </div>
                         </div>
                     </div>
-
-                    <div class="row mt-3">
+                    <div class="row mt-1">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1" class="small">Tipo de Propiedad</label>
+                                <label for="exampleInputEmail1" class="small">TIPO DE PROPIEDAD</label>
                                 <select name="realstate_id" class="form-control form-control-sm">
                                     @foreach ($real_states as $real_state)
                                     <option value="{{ $real_state->id }}"> {{ $real_state->description }} </option>
                                     @endforeach
                                 </select>
-
                             </div>
                         </div>
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1" class="small">Tipo de Operación</label>
+                                <label for="exampleInputEmail1" class="small">TIPO DE OPERACIÓN</label>
                                 <select name="operation_id" class="form-control form-control-sm ">
                                     @foreach ($operations as $operation)
                                     <option value="{{ $operation->id }}"> {{ $operation->description }} </option>
                                     @endforeach
                                 </select>
-
                             </div>
                         </div>
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Avaluo</label> &nbsp;
+                                <label class="small">AVALUO</label> &nbsp;
                                 <input type="checkbox" name="avaluo" id="is_avaluo" onchange="changeAvaluo()" value="activo">
                                 <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
                                 @if($errors)
@@ -187,7 +191,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Dirección</label> &nbsp;
+                                <label class="small">DIRECCIÓN</label> &nbsp;
                                 <input type="text" name="address" value="{{ old('address') }}" class="form-control form-control-sm">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('address')}}</span>
@@ -198,11 +202,11 @@
 
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <label class="small">*CP</label>
+                                <label class="small">* CÓDIGO POSTAL</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="cp" id="cp" value="{{ old('cp') }}" class="form-control">
+                                <input type="text" name="cp" id="cp" value="{{ old('cp') }}" class="form-control is-valid form-control-sm" required>
                                 <div class="input-group-prepend">
-                                    <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm">Buscar</button>
+                                    <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                 </div>
                                 @if($errors)
                                 <div class="w-100"></div>
@@ -214,8 +218,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">*Colonia</label> &nbsp;
-                                <select name="colonia" id="colonia" class="form-control" disabled="">
+                                <label class="small">* COLONIA</label> &nbsp;
+                                <select name="colonia" id="colonia" class="form-control form-control-sm" disabled="">
                                 </select>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('address')}}</span>
@@ -228,21 +232,21 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Institución</label>
+                                <label class="small">INSTITUCIÓN</label>
                                 <input name="institution" value="{{ old('institution') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Gravamenes</label> &nbsp;
+                                <label class="small">GRAVAMENES</label> &nbsp;
                                 <input type="checkbox" name="assessment" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">*Precio Deseable</label>
-                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text">
+                                <label class="small">* PRECIO DESEABLE</label>
+                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control is-valid form-control-sm" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
@@ -251,53 +255,53 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Saldo</label>
+                                <label class="small">SALDO</label>
                                 <input name="saldo" value="{{ old('saldo') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Predial al día</label>
+                                <label class="small">PREDIAL AL DÍA</label>
                                 <input name="is_predial" type="checkbox" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">¿La casa se encuentra habitada?</label> &nbsp;
+                                <label class="small">¿LA CASA SE ENCUENTRA HABITADA?</label> &nbsp;
                                 <input type="checkbox" name="habitar" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"> ¿Cuentan con documento para exentar? </label>
+                                <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR?</label>
                                 <input type="checkbox" name="document" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"> privada </label>
+                                <label class="small">PRIVADA</label>
                                 <input type="checkbox" name="privada" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"> Cuota mantenimiento </label>
-                                <input type="text" data-behaviour="decimal" name="cuota_mantenimiento" class="form-control">
+                                <label class="small">CUOTA DE MATENIMIENTO</label>
+                                <input type="text" data-behaviour="decimal" name="cuota_mantenimiento" class="form-control form-control-sm">
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
-                                <label class="small"> Comentarios </label>
-                                <textarea class="form-control" name="observation1" id="" cols="30" rows="10">{{ old('observation1') }}</textarea>
+                                <label class="small">COMENTARIOS </label>
+                                <textarea class="form-control form-control-sm" name="observation1" id="" cols="30" rows="10">{{ old('observation1') }}</textarea>
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">*¿Formas de pago deseables?</label>
+                                <label class="small">* ¿FORMAS DE PAGO DESEABLES?</label>
                                 <div class="w-100"></div>
-                                <select name="form_pay_id[]" id="form_pay_id" class="form-control" multiple="multiple">
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control is-valid form-control-sm" multiple="multiple" required>
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach
@@ -310,7 +314,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">M<sup>2</sup> de construcción</label>
+                                <label class="small">M<sup>2</sup>DE CONSTRUCCIÓN</label>
                                 <input name="metros_construccion" value="{{ old('metros_construccion') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
@@ -326,31 +330,31 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">M<sup>2</sup> de Terreno</label>
+                                <label class="small">M<sup>2</sup>DE TERRENO</label>
                                 <input name="metros_terreno" value="{{ old('metros_terreno') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Frente</label>
+                                <label class="small">FRENTE</label>
                                 <input name="frente" value="{{ old('frente') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Fondo</label>
+                                <label class="small">FONDO</label>
                                 <input name="fondo" value="{{ old('fondo') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Estado de conservación y antigüedad</label>
+                                <label class="small">ESTADO DE CONSERVACIÓN Y ANTIGÜEDAD</label>
                                 <input name="estado_conservacion_antiguedad" value="{{ old('estado_conservacion_antiguedad') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Infraestructura de la zona</label>
+                                <label class="small">INFRAESTRUCTURA DE LA ZONA</label>
                                 <input name="infraestructura_zona" value="{{ old('infraestructura_zona') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>

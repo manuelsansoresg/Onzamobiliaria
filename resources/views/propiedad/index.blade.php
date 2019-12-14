@@ -28,26 +28,28 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 mt-3">
+                    <div class="col-12 mt-12">
                         <form action="" method="GET" class="form-inline ">
                             <div class="row">
-                                <div class="form-group">                                
-                                    <label class="px-2" for="inlineFormInputName2">FECHA INICIAL: </label>
-                                    <input type="text" name="fecha_inicial" autocomplete="off" value="{{ (isset($_GET['fecha_inicial'])) ? $_GET['fecha_inicial'] : date('Y-m').'-01' }}" class="form-control px-2 form-control-sm datepicker">
-                                    <label class="px-2" for="inlineFormInputName2">FECHA FINAL: </label>
-                                    <input type="text" name="fecha_final" autocomplete="off" value="{{ (isset($_GET['fecha_final'])) ? $_GET['fecha_final'] : date('Y-m-d') }}" class="form-control px-2 form-control-sm datepicker">
-                                    <label class="px-2" for="inlineFormInputName2">ESTATUS : </label>
-                                    <select name="status"  class="form-control form-control-sm">
-                                        <option value="" {{ (isset($_GET['status']) && $_GET['status'] == '' ) ? 'selected': '' }}>TODOS</option>
-                                        <option value="1" {{ (isset($_GET['status']) && $_GET['status'] == 1 ) ? 'selected': '' }}>Disponible</option>
-                                        <option value="0" {{ (isset($_GET['status']) && $_GET['status'] == 0 ) ? 'selected': '' }}>No Disponible</option>
-                                    </select>
-                                </div>                                                         
-                                <div class="row-md-12 text-right">
+                                <div class="col-12 col-md-12">
+                                    <div class="form-group">                                                                   
+                                        <label class="px-2" for="inlineFormInputName2">FECHA INICIAL: </label>
+                                        <input type="text" name="fecha_inicial" autocomplete="off" value="{{ (isset($_GET['fecha_inicial'])) ? $_GET['fecha_inicial'] : date('Y-m').'-01' }}" class="form-control px-2 form-control-sm datepicker">
+                                        <label class="px-2" for="inlineFormInputName2">FECHA FINAL: </label>
+                                        <input type="text" name="fecha_final" autocomplete="off" value="{{ (isset($_GET['fecha_final'])) ? $_GET['fecha_final'] : date('Y-m-d') }}" class="form-control px-2 form-control-sm datepicker">
+                                        <label class="px-2" for="inlineFormInputName2">ESTATUS : </label>
+                                        <select name="status"  class="form-control form-control-sm">
+                                            <option value="" {{ (isset($_GET['status']) && $_GET['status'] == '' ) ? 'selected': '' }}>TODOS</option>
+                                            <option value="1" {{ (isset($_GET['status']) && $_GET['status'] == 1 ) ? 'selected': '' }}>Disponible</option>
+                                            <option value="0" {{ (isset($_GET['status']) && $_GET['status'] == 0 ) ? 'selected': '' }}>No Disponible</option>
+                                        </select>
+                                    </div>                                                                         
+                                </div>
+                                <div class="col-12 col-md-2">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                     </div>
-                                </div>
+                                </div>                               
                             </div>
                         </form>
 

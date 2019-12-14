@@ -1,21 +1,21 @@
 @extends('layouts.master')
 
-@section('title', 'Propiedad')
+@section('title', 'PROPIEDAD')
 
 @section('content')
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="/admin/propiedad" class="btn btn-success btn-sm  pull-right">
-                <i class="fas fa-arrow-circle-left"></i> &nbsp; Regresar
-            </a>
-        </div>
-    </div>
+<div class="container">    
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
                 {{ Form::open(['route' => ['propiedad.update', $property->id], 'method' => 'PUT', 'files' => true]) }}
-                <h5 class="card-header">NUEVA PROPIEDAD</h5>
+                <h5 class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h6 class="mr-auto">EDITAR PROPIEDAD</h6>
+                        <a href="/admin/propiedad" class="btn btn-success btn-sm  pull-right">
+                            <i class="fas fa-arrow-circle-left"></i> REGRESAR
+                        </a>
+                    </div>
+                </h5>
                 <div class="card-body">
                     <div class="row mt-3">
                         <div class="col-12">
@@ -25,7 +25,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <label class="small">Nuevo cliente </label>
+                                <label class="small"><label class="small">AGREGAR NUEVO CLIENTE </label> </label>
                                 @if ($property->is_new == 1)
                                 <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
                                 @else
@@ -40,17 +40,23 @@
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-4">
-                            <div class="input-group mb-2">
-                                <label class="small">Cliente</label>
-                                <div class="w-100"></div>
-                                <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" value="{{ $property->client_id }}" class="form-control form-control-sm">
-                                <div class="input-group-prepend">
-                                    <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm">Buscar</button>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="input-group mb-2">                                
+                                        <label class="small">CLIENTE</label>
+                                        <div class="w-100"></div>
+                                        <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" value="{{ $property->client_id }}" class="form-control form-control-sm">                                        
+                                        @if($errors)
+                                        <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
+                                        @endif
+                                    </div>
                                 </div>
-                                @if($errors)
-                                <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
-                                @endif
-
+                                <div class="col-12 col-md-6">                        
+                                    <div class="input-group-prepend">
+                                        <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
 
@@ -66,21 +72,21 @@
                     <div class="row mt-3 {{ $d_datos_clientes }}" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Nombre</label>
+                                <label class="small">NOMBRE</label>
                                 <input class="form-control form-control-sm" id="client_name" value="{{ $client->nombre }}" readonly type="text">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Correo</label>
+                                <label class="small">EMAIL</label>
                                 <input class="form-control form-control-sm" id="client_email" value="{{ $client->correo }}" readonly type="email">
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Teléfono</label>
+                                <label class="small">TELÉFONO</label>
                                 <input class="form-control form-control-sm" id="client_telefono" value="{{ $client->telefono }}" readonly type="text">
 
                             </div>
@@ -90,7 +96,7 @@
                     <div class="row {{ $d_inputs_cliente }}" id="d_inputs-cliente">
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Nombre</label>
+                                <label class="small">NOMBRE</label>
                                 <input name="cliente[nombre]" value="{{ $client->nombre }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
@@ -100,7 +106,7 @@
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Correo</label>
+                                <label class="small">EMAIL</label>
                                 <input name="cliente[correo]" value="{{ $client->correo }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
@@ -109,7 +115,7 @@
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Teléfono</label>
+                                <label class="small">TELÉFONO</label>
                                 <input name="cliente[telefono]" value="{{ $client->telefono }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
@@ -118,7 +124,7 @@
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
-                                <label class="small">Propietario</label>
+                                <label class="small">PROPIETARIO</label>
                                 @if ($client->is_property == 1)
                                 <input name="cliente[is_property]" class="mt-2" value="1" type="checkbox" checked>
                                 @else
@@ -142,8 +148,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Clave EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text" value="{{ $property->pass_easy_broker }}">
+                                <label class="small"><i class="fas fa-key pr-1 mt-2"></i>CLAVE EASYBROKER</label>
+                                <input name="pass_easy_broker" class="form-control is-valid form-control-sm" type="text" value="{{ $property->pass_easy_broker }}" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
@@ -155,7 +161,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1" class="small">Tipo de Propiedad</label>
+                                <label for="exampleInputEmail1" class="small">TIPO DE PROPIEDAD</label>
                                 <select name="realstate_id" class="form-control form-control-sm">
                                     @foreach ($real_states as $real_state)
                                     <option value="{{ $real_state->id }}" {{ ($property->realstate_id == $real_state->id )? 'selected' : ''  }}> {{ $real_state->description }} </option>
@@ -167,7 +173,7 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1" class="small">Tipo de Operación</label>
+                                <label for="exampleInputEmail1" class="small">TIPO DE OPERACIÓN</label>
                                 <select name="operation_id" class="form-control form-control-sm ">
                                     @foreach ($operations as $operation)
                                     <option value="{{ $operation->id }}" {{ ($property->operation_id == $operation->id)? 'selected' : '' }}> {{ $operation->description }} </option>
@@ -179,7 +185,7 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Avaluo</label> &nbsp;
+                                <label class="small">AVALUO</label> &nbsp;
                                 <input type="checkbox" name="avaluo" value="1" {{ ($property->is_avaluo == 1)? 'checked' : '' }}>
                                 @if ($property->is_avaluo == 1)
                                 <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo" class="form-control form-control-sm">
@@ -194,7 +200,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Dirección</label> &nbsp;
+                                <label class="small">DIRECCIÓN</label> &nbsp;
                                 <input type="text" name="address" value="{{ $property->address }}" class="form-control form-control-sm">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('address')}}</span>
@@ -205,11 +211,11 @@
 
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <label class="small">*CP</label>
+                                <label class="small">* CÓDIGO POSTAL</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="cp" id="cp" value="{{ $cp->codigo }}" class="form-control">
+                                <input type="text" name="cp" id="cp" value="{{ $cp->codigo }}" class="form-control is-valid form-control-sm">
                                 <div class="input-group-prepend">
-                                    <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm">Buscar</button>
+                                    <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                 </div>
                                 @if($errors)
                                 <div class="w-100"></div>
@@ -221,12 +227,12 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">*Colonia</label> &nbsp;
+                                <label class="small">* COLONIA</label> &nbsp;
                                 @if ($property->codigo == '')
                                 <select name="colonia" id="colonia" class="form-control" disabled="">
                                 </select>
                                 @else
-                                <select name="colonia" id="colonia" class="form-control">
+                                <select name="colonia" id="colonia" class="form-control form-control-sm">
                                     @foreach ($postals as $postal)
                                     <option value="{{ $postal->id }}" {{ ($postal->id == $property->postal_id )? 'selected' : '' }}>{{ $postal->colonia }}</option>
                                     @endforeach
@@ -242,20 +248,20 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Institución</label>
+                                <label class="small">INSTITUCIÓN</label>
                                 <input name="institution" value="{{ $property->institution }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Gravamenes</label> &nbsp;
+                                <label class="small">GRAVAMENES</label> &nbsp;
                                 <input type="checkbox" {{ ($property->assessment == 1)? 'checked' : ''}} name="assessment" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Precio Deseable</label>
+                                <label class="small">PRECIO DESEABLE</label>
                                 <input name="price" data-behaviour="decimal" value="{{ $property->price }}" class="form-control form-control-sm" type="text">
 
                                 @if($errors)
@@ -266,53 +272,53 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Saldo</label>
+                                <label class="small">SALDO</label>
                                 <input name="saldo" data-behaviour="decimal" value="{{ $property->saldo }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Predial al día</label>
+                                <label class="small">PREDIAL AL DÍA</label>
                                 <input name="is_predial" {{ ($property->is_predial == 1)? 'checked' : ''}} type="checkbox" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">¿La casa se encuentra habitada?</label> &nbsp;
+                                <label class="small">¿LA CASA SE ENCUENTRA HABITADA?</label> &nbsp;
                                 <input type="checkbox" {{ ($property->habitar == 1)? 'checked' : ''}} name="habitar" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"> ¿Cuentan con documento para exentar? </label>
+                                <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR? </label>
                                 <input type="checkbox" {{ ($property->document == 1)? 'checked' : ''}} name="document" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"> privada </label>
+                                <label class="small">PRIVADA</label>
                                 <input type="checkbox" {{ ($property->privada == 1)? 'checked' : ''}} name="privada" value="1">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"> Cuota mantenimiento </label>
-                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" class="form-control">
+                                <label class="small">CUOTA MANTENIMIENTO </label>
+                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" class="form-control form-control-sm">
                             </div>
                         </div>
 
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
-                                <label class="small"> Comentarios </label>
-                                <textarea name="observation1" class="form-control" id="" cols="30" rows="10">{{ $property->observation1 }}</textarea>
+                                <label class="small">COMENTARIOS</label>
+                                <textarea name="observation1" class="form-control form-control-sm" id="" cols="30" rows="10">{{ $property->observation1 }}</textarea>
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">¿Formas de pago deseables?</label>
-                                <select name="form_pay_id[]" id="form_pay_id" class="form-control" multiple="multiple">
+                                <label class="small">¿FORMAS DE PAGO DESEABLES?</label>
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control form-control-sm" multiple="multiple" required>
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
                                     @endforeach
@@ -325,7 +331,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">M<sup>2</sup> de construcción</label>
+                                <label class="small">M<sup>2</sup>DE CONSTRUCCIÓN</label>
                                 <input name="metros_construccion" value="{{ $property->metros_construccion }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
@@ -341,31 +347,31 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">M<sup>2</sup> de Terreno</label>
+                                <label class="small">M<sup>2</sup>DE TERRENO</label>
                                 <input name="metros_terreno" class="form-control form-control-sm" type="text" value="{{ $property->metros_terreno }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Frente</label>
+                                <label class="small">FRENTE</label>
                                 <input name="frente" class="form-control form-control-sm" type="text" value="{{ $property->frente }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Fondo</label>
+                                <label class="small">FONDO</label>
                                 <input name="fondo" class="form-control form-control-sm" type="text" value="{{ $property->fondo }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Estado de conservación y antigüedad</label>
+                                <label class="small">ESTADO DE CONSERVACIÓN Y ANTIGÜEDAD</label>
                                 <input name="estado_conservacion_antiguedad" class="form-control form-control-sm" type="text" value="{{ $property->estado_conservacion_antiguedad }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">Infraestructura de la zona</label>
+                                <label class="small">INFRAESTRUCTURA DE LA ZONA</label>
                                 <input name="infraestructura_zona" class="form-control form-control-sm" type="text" value="{{ $property->infraestructura_zona }}">
                             </div>
                         </div>

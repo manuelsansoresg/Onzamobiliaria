@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Asignación de Asesores')
+@section('title', 'SEGUIMIENTO DE LLAMADAS')
 
 
 @section('content')
@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body">
                     <div class="col-12 mt-3">
-                        <table id="mobiliaria" class="table table-bordered table-responsive">
+                        <table id="mobiliaria" class="table table-bordered table-responsive" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>FECHA</th>
