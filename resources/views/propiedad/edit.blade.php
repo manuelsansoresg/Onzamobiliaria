@@ -302,8 +302,15 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">CUOTA MANTENIMIENTO </label>
+                                <label class="small">CUOTA DE MANTENIMIENTO </label>
                                 <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" class="form-control form-control-sm">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">TÍTULO</label>
+                                <input type="checkbox" {{ ($property->is_titulo == 1)? 'checked' : ''}} name="is_titulo" value="1">
                             </div>
                         </div>
 

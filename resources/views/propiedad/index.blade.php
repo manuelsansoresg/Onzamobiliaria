@@ -3,13 +3,13 @@
 @section('title', 'PROPIEDAD')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor_assets/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
-    <div class="row">        
+    <div class="row">
         <div class="col-12 mt-3">
             @include('flash::message')
         </div>
@@ -32,24 +32,24 @@
                         <form action="" method="GET" class="form-inline ">
                             <div class="row">
                                 <div class="col-12 col-md-12">
-                                    <div class="form-group">                                                                   
+                                    <div class="form-group">
                                         <label class="px-2" for="inlineFormInputName2">FECHA INICIAL: </label>
                                         <input type="text" name="fecha_inicial" autocomplete="off" value="{{ (isset($_GET['fecha_inicial'])) ? $_GET['fecha_inicial'] : date('Y-m').'-01' }}" class="form-control px-2 form-control-sm datepicker">
                                         <label class="px-2" for="inlineFormInputName2">FECHA FINAL: </label>
                                         <input type="text" name="fecha_final" autocomplete="off" value="{{ (isset($_GET['fecha_final'])) ? $_GET['fecha_final'] : date('Y-m-d') }}" class="form-control px-2 form-control-sm datepicker">
                                         <label class="px-2" for="inlineFormInputName2">ESTATUS : </label>
-                                        <select name="status"  class="form-control form-control-sm">
+                                        <select name="status" class="form-control form-control-sm">
                                             <option value="" {{ (isset($_GET['status']) && $_GET['status'] == '' ) ? 'selected': '' }}>TODOS</option>
                                             <option value="1" {{ (isset($_GET['status']) && $_GET['status'] == 1 ) ? 'selected': '' }}>Disponible</option>
                                             <option value="0" {{ (isset($_GET['status']) && $_GET['status'] == 0 ) ? 'selected': '' }}>No Disponible</option>
                                         </select>
-                                    </div>                                                                         
+                                    </div>
                                 </div>
                                 <div class="col-12 col-md-2">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                     </div>
-                                </div>                               
+                                </div>
                             </div>
                         </form>
 
@@ -60,8 +60,8 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div class="col-12 mt-3 px-4 justify-content-end">     
-        <div class="card">            
+    <div class="col-12 mt-3 px-4 justify-content-end">
+        <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 mt-3">
@@ -69,11 +69,11 @@
                             <thead>
                                 <tr>
                                     <th><span class="small font-weight-bold">EASYBROKER </span> </th>
-                                    <th><span class="small font-weight-bold">ASESOR</ </th> <th><span class="small font-weight-bold">TÍTULO </ </th> 
-                                    <th><span class="small font-weight-bold">PRECIO </ </th> 
-                                    <th><span class="small font-weight-bold">DIRECCIÓN </ </th> <th>
-                                    <span class="small font-weight-bold">OPERACIÓN </ </th>                         
-                                    <th><span class="small font-weight-bold">PROPIETARIO </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </ </th> <th><span class="small font-weight-bold"> FRENTE </ </th> <th><span class="small font-weight-bold"> FONDO </ </th> <th><span class="small font-weight-bold">STATUS </ </th> <th style="width: 180px">
+                                    <th><span class="small font-weight-bold">ASESOR </span> </th>
+                                    <th> <span class="small font-weight-bold">PROPIETARIO </span> </th>
+                                    <th> <span class="small font-weight-bold">TEL PROPIETARIO </span> </th>
+                                    <th><span class="small font-weight-bold">TÍTULO </ </th> <th><span class="small font-weight-bold">PRECIO </ </th> <th><span class="small font-weight-bold">DIRECCIÓN </ </th> <th>
+                                                    <span class="small font-weight-bold">OPERACIÓN </ </th> <th><span class="small font-weight-bold">PROPIETARIO </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </ </th> <th><span class="small font-weight-bold"> FRENTE </ </th> <th><span class="small font-weight-bold"> FONDO </ </th> <th><span class="small font-weight-bold">STATUS </ </th> <th style="width: 180px">
                                     </th>
                                 </tr>
                             </thead>
@@ -81,7 +81,9 @@
                                 @foreach ($properties as $property)
                                 <tr>
                                     <td> <span class="small"> {{ $property->pass_easy_broker  }} </span> </td>
-                                    <td> <span class="small"> {{ $property->clave_interna }} </span> </td>
+                                    <td> <span class="small"> {{ $property->acesor }} </span> </td>
+                                    <td> <span class="small"> {{ (isset($property->cliente))? "$property->cliente": '' }} </span> </td>
+                                    <td> <span class="small"> {{ (isset($property->telefono))? $property->telefono : '' }} </span> </td>
                                     <td>
                                         @if ($property->is_titulo == 1)
                                         <span class="badge bg-green">Sí</span>
@@ -91,7 +93,7 @@
                                     </td>
                                     <td><span class="small"> {{ precio($property->price)  }} </span> </td>
                                     <td><span class="small"> {{ $property->address  }} </span></td>
-                                    <td><span class="small"> {{ $property->operations_description  }} </span></td>                        
+                                    <td><span class="small"> {{ $property->operations_description  }} </span></td>
                                     <td>
                                         @if ($property->is_property == 1)
                                         <span class="badge bg-green">Sí</span>
@@ -116,16 +118,16 @@
                                     <td>
                                         {{ Form::open(['route' => ['propiedad.destroy', $property->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
                                         @role('admin')
-                                       
+
                                         @endrole
                                         <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary ml-1">
                                             <i class="far fa-edit"></i>
                                         </a>
                                         @if($property->status == 0)
                                         @role('admin')
-                                            <a href="/admin/propiedad/status/{{ $property->id }}/1" class="btn btn-success ml-1">
-                                                <i class="fas fa-ban text-white"></i>
-                                            </a>
+                                        <a href="/admin/propiedad/status/{{ $property->id }}/1" class="btn btn-success ml-1">
+                                            <i class="fas fa-ban text-white"></i>
+                                        </a>
                                         @endrole
                                         @else
                                         <a href="/admin/propiedad/status/{{ $property->id }}/0" class="btn btn-warning ml-1">
@@ -146,7 +148,7 @@
                     </div>
                 </div>
             </div>
-        </div>          
+        </div>
     </div>
 </div>
 {{-- modal agregar usuario captura --}}
@@ -225,51 +227,50 @@
         var table = $('#mobiliaria').DataTable({
 
             responsive: true,
-            searching: false,                        
+            searching: false,
             dom: 'Bfrtip',
-            buttons: [               
-                {
-                    extend: 'pdf',                    
+            buttons: [{
+                    extend: 'pdf',
                     orientation: 'landscape',
                     text: 'PDF',
                     className: 'btn-danger',
-                    title:'LISTADO DE PROPIEDADES',
+                    title: 'LISTADO DE PROPIEDADES',
                     fontSize: '6',
                     //messageTop: '', AGREGAR TITULO
                     pageSize: 'letter', //A3 , A4,A5 , A6 , legal , letter
-                    pageMargins: [ 0, 0, 0, 0 ], // try #1 setting margins
-                    margin: [ 0, 0, 0, 0 ], // try #2 setting margins                    
+                    pageMargins: [0, 0, 0, 0], // try #1 setting margins
+                    margin: [0, 0, 0, 0], // try #2 setting margins                    
                     customize: function(doc) {
                         doc.styles.title = {
                             color: 'black',
                             fontSize: '10',
                             alignment: 'left'
                         }
-                        doc.styles['td:nth-child(2)'] = { 
+                        doc.styles['td:nth-child(2)'] = {
                             width: '100px',
                             'max-width': '100px'
                         }
                         doc.styles.tableHeader = {
-                            fillColor:'#525659',
-                            color:'#FFF',
+                            fillColor: '#525659',
+                            color: '#FFF',
                             fontSize: '8',
                             alignment: 'left',
-                            bold: true 
+                            bold: true
                         }
                         doc.defaultStyle.fontSize = 9;
-                        doc.pageMargins = [50,50,30,30];
-                        doc.content[1].margin = [ 5, 0, 0, 5]
-                    }  
+                        doc.pageMargins = [50, 50, 30, 30];
+                        doc.content[1].margin = [5, 0, 0, 5]
+                    }
                 },
                 {
-                    extend: 'excel',                   
+                    extend: 'excel',
                     text: 'EXCEL',
                 },
                 {
                     extend: 'print',
                     text: 'IMPRIMIR',
                 }
-            ],            
+            ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

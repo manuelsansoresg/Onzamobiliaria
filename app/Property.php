@@ -61,7 +61,8 @@ class Property extends Model
             'observation1',
             'is_new',
             'cuota_mantenimiento',
-            'privada'
+            'privada',
+            'is_titulo'
             
         )
             ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
@@ -99,10 +100,14 @@ class Property extends Model
                                     'is_property',
                                     'properties.status as status',
                                     'metros_construccion','metros_terreno', 'frente', 'fondo',
-                                    'cuota_mantenimiento'
+                                    'cuota_mantenimiento',
+                                    'name as acesor',
+                                    'nombre',
+                                    'clients.nombre as cliente', 'telefono'
                                     
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
+                        ->join('users', 'users.id', '=', 'properties.user_id')
                         ->join('operations', 'operations.id', '=', 'properties.operation_id')
                         ->leftJoin('clients', 'clients.id', '=', 'properties.client_id');
 
@@ -147,6 +152,7 @@ class Property extends Model
         $get_cp    = Postal::where('id', $request->colonia )->first();
         $n_client  = ($request->n_client != null) ? 1: 0;
         $privada   = ($request->privada != null) ? 1: 0;
+        $is_titulo = ($request->is_titulo != null) ? 1: 0;
         
         $form_pays = '';
 
@@ -178,6 +184,7 @@ class Property extends Model
             $property->user_id   = Auth::id();
             $property->is_new    = $n_client;
             $property->privada   = $privada;
+            $property->is_titulo   = $is_titulo;
         
         }else{
             
@@ -209,6 +216,8 @@ class Property extends Model
             $property->form_pays = $form_pays;
             $property->is_new    = $n_client;
             $property->privada   = $privada;
+            $property->is_titulo   = $is_titulo;
+
             if ($n_client == 0) {
                 $property->client_id = $client->id;
             }

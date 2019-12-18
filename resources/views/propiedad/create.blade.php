@@ -289,6 +289,12 @@
                                 <input type="text" data-behaviour="decimal" name="cuota_mantenimiento" class="form-control form-control-sm">
                             </div>
                         </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">TÍTULO</label>
+                                <input type="checkbox" name="is_titulo" value="1">
+                            </div>
+                        </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
