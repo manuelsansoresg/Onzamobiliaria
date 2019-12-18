@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row mt-3">        
+    <div class="row mt-3">
         <div class="col-12 mt-3">
             @include('flash::message')
         </div>
@@ -28,6 +28,7 @@
                                 <th> <span class="small font-weight-bold">CORREO</span> </th>
                                 <th> <span class="small font-weight-bold">TELÉFONO</span> </th>
                                 <th> <span class="small font-weight-bold">CLAVE INTERNA</span> </th>
+                                <th> <span class="small font-weight-bold">PROPIETARIO</span> </th>
 
                                 <th style="width: 60px"></th>
                             </tr>
@@ -40,6 +41,7 @@
                                 <td> <span class="small"> {{ $client->correo }} </span> </td>
                                 <td> <span class="small"> {{ $client->telefono }} </span> </td>
                                 <td> <span class="small"> {{ $client->clave_interna }} </span> </td>
+                                <td> <span class="small"> {!! ($client->is_property==1)? '<span class="badge bg-green">Sí</span>' : '<span class="badge bg-red">No</span>' !!} </span> </td>
                                 <td>
 
                                     {{ Form::open(['route' => ['clientes.destroy', $client->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
@@ -58,7 +60,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 @endsection
 
