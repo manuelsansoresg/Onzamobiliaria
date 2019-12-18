@@ -73,9 +73,49 @@
             responsive: true,
             "pageLength": 10,
             dom: 'Bfrtip',
-            buttons: [
-            'excel', 'pdf', 'print'
-            ],
+            buttons: [               
+                {
+                    extend: 'pdf',                    
+                    orientation: 'landscape',
+                    text: 'PDF',
+                    className: 'btn-danger',
+                    title:'LISTADO DE USUARIOS',
+                    fontSize: '6',
+                    //messageTop: '', AGREGAR TITULO
+                    pageSize: 'letter', //A3 , A4,A5 , A6 , legal , letter
+                    pageMargins: [ 0, 0, 0, 0 ], // try #1 setting margins
+                    margin: [ 0, 0, 0, 0 ], // try #2 setting margins                    
+                    customize: function(doc) {
+                        doc.styles.title = {
+                            color: 'black',
+                            fontSize: '10',
+                            alignment: 'left'
+                        }
+                        doc.styles['td:nth-child(2)'] = { 
+                            width: '100px',
+                            'max-width': '100px'
+                        }
+                        doc.styles.tableHeader = {
+                            fillColor:'#525659',
+                            color:'#FFF',
+                            fontSize: '8',
+                            alignment: 'left',
+                            bold: true 
+                        }
+                        doc.defaultStyle.fontSize = 9;
+                        doc.pageMargins = [50,50,30,30];
+                        doc.content[1].margin = [ 5, 0, 0, 5]
+                    }  
+                },
+                {
+                    extend: 'excel',                   
+                    text: 'EXCEL',
+                },
+                {
+                    extend: 'print',
+                    text: 'IMPRIMIR',
+                }
+            ],      
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",

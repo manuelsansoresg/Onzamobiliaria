@@ -23,11 +23,11 @@
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="input-group mb-2">
-                                <label class="small">EASY BROKER</label>
+                                <label class="small"><i class="fas fa-key pr-1 mt-2"></i>CLAVE EASYBROKER</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="easy_broker" id="easy_broker" value="{{ $property_assigment->pass_easy_broker }}" class="form-control form-control-sm">
+                                <input type="text" name="easy_broker" id="easy_broker" value="{{ $property_assigment->pass_easy_broker }}" class="form-control is-valid form-control-sm" required>
                                 <div class="input-group-prepend">
-                                    <button type="button" onclick="searchEasyBroker()" class="btn btn-info btn-sm">Buscar</button>
+                                    <button type="button" onclick="searchEasyBroker()" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                 </div>
                                 @if($errors)
                                 <div class="w-100"></div>

@@ -115,11 +115,8 @@
                                     </td>
                                     <td>
                                         {{ Form::open(['route' => ['propiedad.destroy', $property->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                        <!--  <a href="/admin/propiedad/{{ $property->id }}" class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i>
-                                            </a> -->
                                         @role('admin')
-                                        {{--<button type="button" onclick="userModal({{ $property->id }})" class="btn btn-info btn-flat ml-1"><i class="fas fa-user-plus"></i></button>--}}
+                                       
                                         @endrole
                                         <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary ml-1">
                                             <i class="far fa-edit"></i>
@@ -228,11 +225,51 @@
         var table = $('#mobiliaria').DataTable({
 
             responsive: true,
-            searching: false,
+            searching: false,                        
             dom: 'Bfrtip',
-            buttons: [
-            'excel', 'pdf', 'print'
-            ],
+            buttons: [               
+                {
+                    extend: 'pdf',                    
+                    orientation: 'landscape',
+                    text: 'PDF',
+                    className: 'btn-danger',
+                    title:'LISTADO DE PROPIEDADES',
+                    fontSize: '6',
+                    //messageTop: '', AGREGAR TITULO
+                    pageSize: 'letter', //A3 , A4,A5 , A6 , legal , letter
+                    pageMargins: [ 0, 0, 0, 0 ], // try #1 setting margins
+                    margin: [ 0, 0, 0, 0 ], // try #2 setting margins                    
+                    customize: function(doc) {
+                        doc.styles.title = {
+                            color: 'black',
+                            fontSize: '10',
+                            alignment: 'left'
+                        }
+                        doc.styles['td:nth-child(2)'] = { 
+                            width: '100px',
+                            'max-width': '100px'
+                        }
+                        doc.styles.tableHeader = {
+                            fillColor:'#525659',
+                            color:'#FFF',
+                            fontSize: '8',
+                            alignment: 'left',
+                            bold: true 
+                        }
+                        doc.defaultStyle.fontSize = 9;
+                        doc.pageMargins = [50,50,30,30];
+                        doc.content[1].margin = [ 5, 0, 0, 5]
+                    }  
+                },
+                {
+                    extend: 'excel',                   
+                    text: 'EXCEL',
+                },
+                {
+                    extend: 'print',
+                    text: 'IMPRIMIR',
+                }
+            ],            
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
