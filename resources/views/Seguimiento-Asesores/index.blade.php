@@ -63,8 +63,9 @@
                                 <th> <span class="small font-weight-bold"> CORREO </span> </th>
                                 @role('admin')
                                 <th> <span class="small font-weight-bold"> ASIGNAR ASESOR </span> </th>
-                                <!--  <th>LLAMADAS</th> -->
+                                 <th>LLAMADAS</th>
                                 @endrole
+                                <!-- <th>Llamadas</th> -->
                                 <th style="width: 160px;" class="options-asesores"></th>
         
                             </tr>

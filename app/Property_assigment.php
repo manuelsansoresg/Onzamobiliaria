@@ -129,14 +129,14 @@ class Property_assigment extends Model
         if ($properties) {
             foreach ($properties as $property) {
 
-                $llamadas = Property_assigment::where('property_id', $property->id)->count();
+                $llamadas = HistoricAssigment::where('property_assignment_id', $property->assignment_id)->count();
                 $date1    = new DateTime(date('Y-m-d H:i:s', strtotime($property->date_assignment)));
                 $date2    = new DateTime("now");
                 $diff     = $date1->diff($date2);
                 $dias     = $diff->format('%d');
                 $alert    = '';
 
-                if ($dias > 0) {
+                if ($dias > 0 && $llamadas == 0) {
                     $alert = '<i class="fas fa-exclamation-circle text-danger"></i>';
                 }
 
@@ -198,13 +198,13 @@ class Property_assigment extends Model
                                 $property->telefono,
                                 $property->correo,
                                 $property->asesor_asignado,
-                                //'llamadas'=>$llamadas,
+                                $llamadas,
                                 $td_option
                                 );
                     $td_option = '';
                 }else{
                     //dd($dias);
-                    if ($dias < 1) {
+                    if ($dias < 1 || $llamadas > 0) {
 
                         /*  $table.= '<tr>';
                         $table.= '<td> <span class="small">'. $alert. $property->pass_easy_broker.' </span> </td>';
