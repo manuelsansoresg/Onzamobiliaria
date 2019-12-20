@@ -49,7 +49,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="input-group mb-2">
-                                        <label class="small">CLIENTE</label>
+                                        <label class="small">*CLIENTE</label>
                                         <div class="w-100"></div>
                                         <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                         @if($errors)
@@ -307,7 +307,7 @@
                             <div class="form-group">
                                 <label class="small">* ¿FORMAS DE PAGO DESEABLES?</label>
                                 <div class="w-100"></div>
-                                <select name="form_pay_id[]" id="form_pay_id" class="form-control is-valid form-control-sm" multiple="multiple" required>
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control is-valid form-control-sm" multiple="multiple">
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach

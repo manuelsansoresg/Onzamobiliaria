@@ -43,7 +43,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="input-group mb-2">
-                                        <label class="small">CLIENTE</label>
+                                        <label class="small">*CLIENTE</label>
                                         <div class="w-100"></div>
                                         <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" value="{{ $property->client_id }}" class="form-control form-control-sm">
                                         @if($errors)
@@ -68,8 +68,8 @@
                         </div>
 
                     </div>
-                    <?php $d_datos_clientes = ($property->is_new == 1) ? 'd-none' : '' ?>
-                    <div class="row mt-3 {{ $d_datos_clientes }}" id="d_datos-cliente">
+                    <?php $d_datos_clientes = ($property->is_new == 1) ? 'display:none' : '' ?>
+                    <div class="row mt-3" style="{{ $d_datos_clientes }}" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">NOMBRE</label>
@@ -92,12 +92,12 @@
                             </div>
                         </div>
                     </div>
-                    <?php $d_inputs_cliente = ($property->is_new == 1) ? '' : 'd-none' ?>
-                    <div class="row {{ $d_inputs_cliente }}" id="d_inputs-cliente">
+                    <?php $d_inputs_cliente = ($property->is_new == 1) ? '' : 'display:none' ?>
+                    <div class="row" style=" {{ $d_inputs_cliente }}" id="d_inputs-cliente">
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">NOMBRE</label>
-                                <input name="cliente[nombre]" value="{{ $client->nombre }}" class="form-control form-control-sm" type="text">
+                                <input name="cliente[nombre]" value="{{ $client->nombre }}" class="form-control form-control-sm input-edit" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
@@ -107,7 +107,7 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">EMAIL</label>
-                                <input name="cliente[correo]" value="{{ $client->correo }}" class="form-control form-control-sm" type="text">
+                                <input name="cliente[correo]" value="{{ $client->correo }}" class="form-control form-control-sm input-edit" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
                                 @endif
@@ -116,7 +116,7 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">TELÉFONO</label>
-                                <input name="cliente[telefono]" value="{{ $client->telefono }}" class="form-control form-control-sm" type="text">
+                                <input name="cliente[telefono]" value="{{ $client->telefono }}" class="form-control form-control-sm input-edit" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
                                 @endif
@@ -324,8 +324,8 @@
                         <div class="w-100"></div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">¿FORMAS DE PAGO DESEABLES?</label>
-                                <select name="form_pay_id[]" id="form_pay_id" class="form-control form-control-sm" multiple="multiple" required>
+                                <label class="small">*¿FORMAS DE PAGO DESEABLES?</label>
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control form-control-sm" multiple="multiple" >
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
                                     @endforeach

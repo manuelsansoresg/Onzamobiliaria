@@ -5022,6 +5022,13 @@ window.changeClient = function () {
 };
 
 window.addClient = function (user_id, nombre, correo, telefono) {
+  if ($("#d_datos-cliente").length > 0) {
+    $('#d_datos-cliente').show();
+    $('#d_inputs-cliente').hide();
+    $("#n_client").prop("checked", false);
+    $('.input-edit').val('');
+  }
+
   $('#cve_int_cliente').val(user_id);
   $('#client_name').val(nombre);
   $('#client_email').val(correo);
