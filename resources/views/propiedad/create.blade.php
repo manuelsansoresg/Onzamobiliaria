@@ -9,7 +9,7 @@
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
-                {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST',  'files' => true, 'id' => 'frm_propiedad']) }}
+                {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST',  'files' => true, 'id' => 'frm_propiedad', 'class' => 'needs-validation', 'novalidate']) }}
                 <h5 class="card-header">
                     <div class="d-flex align-items-center">
                         <h6 class="mr-auto">AGREGAR PROPIEDAD</h6>
@@ -56,12 +56,16 @@
                                         <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
                                         @endif
                                     </div>
+
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="input-group-prepend">
                                         <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="small text-danger">
+                                Busque o agregue un nuevo cliente
                             </div>
                         </div>
 
@@ -100,16 +104,19 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">NOMBRE</label>
-                                <input name="cliente[nombre]" value="{{ old('cliente.nombre') }}" class="form-control form-control-sm" type="text">
+                                <input name="cliente[nombre]" id="cliente_nombre" value="{{ old('cliente.nombre') }}" class="form-control form-control-sm" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo NOMBRE es obligatorio
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">EMAIL</label>
-                                <input name="cliente[correo]" value="{{ old('cliente.correo') }}" class="form-control form-control-sm" type="text">
+                                <input name="cliente[correo]" id="cliente_correo" value="{{ old('cliente.correo') }}" class="form-control form-control-sm" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
                                 @endif
@@ -118,10 +125,13 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">TELÉFONO</label>
-                                <input name="cliente[telefono]" value="{{ old('cliente.telefono') }}" class="form-control form-control-sm" type="text">
+                                <input name="cliente[telefono]" id="cliente_telefono" value="{{ old('cliente.telefono') }}" class="form-control form-control-sm" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo TELÉFONO es obligatorio
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4 mt-3">
@@ -148,11 +158,14 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"><i class="fas fa-key pr-1 mt-2"></i>CLAVE EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control is-valid form-control-sm" value="{{ old('pass_easy_broker') }}" type="text" required>
+                                <label class="small"><i class="fas fa-key pr-1 mt-2"></i>*CLAVE EASYBROKER</label>
+                                <input name="pass_easy_broker" class="form-control  form-control-sm" value="{{ old('pass_easy_broker') }}" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo CLAVE EASYBROKER es obligatorio
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -204,7 +217,7 @@
                             <div class="input-group mb-2">
                                 <label class="small">* CÓDIGO POSTAL</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="cp" id="cp" value="{{ old('cp') }}" class="form-control is-valid form-control-sm" required>
+                                <input type="text" name="cp" id="cp" value="{{ old('cp') }}" class="form-control  form-control-sm" required>
                                 <div class="input-group-prepend">
                                     <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                 </div>
@@ -213,17 +226,24 @@
                                 <p class="text-danger"> {{$errors->first('cp')}}</p>
                                 @endif
 
+                                <div class="invalid-feedback">
+                                    El campo CÓDIGO POSTAL es obligatorio
+                                </div>
+
                             </div>
                         </div>
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">* COLONIA</label> &nbsp;
-                                <select name="colonia" id="colonia" class="form-control form-control-sm" disabled="">
+                                <select name="colonia" id="colonia" class="form-control form-control-sm" disabled="" required>
                                 </select>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('address')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo COLONIA es obligatorio
+                                </div>
 
                             </div>
                         </div>
@@ -246,10 +266,13 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">* PRECIO DESEABLE</label>
-                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control is-valid form-control-sm" type="text" required>
+                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo PRECIO DESEABLE es obligatorio
+                                </div>
                             </div>
                         </div>
 
@@ -307,11 +330,14 @@
                             <div class="form-group">
                                 <label class="small">* ¿FORMAS DE PAGO DESEABLES?</label>
                                 <div class="w-100"></div>
-                                <select name="form_pay_id[]" id="form_pay_id" class="form-control is-valid form-control-sm" multiple="multiple">
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control  form-control-sm is-invalid" multiple="multiple" required>
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach
                                 </select>
+                                <div class="small text-danger" id="error_formapago" style="display: none">
+                                    El campo ¿FORMAS DE PAGO DESEABLES? es obligatorio
+                                </div>
                                 @if($errors)
                                 <div class="w-100"></div>
                                 <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>
@@ -473,6 +499,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+
             </div>
             <div class="modal-body">
                 <div class="container">

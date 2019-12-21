@@ -7,7 +7,7 @@
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-12 ">
             <div class="card">
-                {{ Form::open(['route' => ['propiedad.update', $property->id], 'method' => 'PUT', 'files' => true]) }}
+                {{ Form::open(['route' => ['propiedad.update', $property->id], 'method' => 'PUT', 'files' => true, 'id' => 'frm_propiedad', 'class' => 'needs-validation', 'novalidate']) }}
                 <h5 class="card-header">
                     <div class="d-flex align-items-center">
                         <h6 class="mr-auto">EDITAR PROPIEDAD</h6>
@@ -58,6 +58,9 @@
                                 </div>
 
                             </div>
+                            <div class="small text-danger" style="display: none" id="error_cliente">
+                                Busque o agregue un nuevo cliente
+                            </div>
                         </div>
 
 
@@ -97,17 +100,20 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">NOMBRE</label>
-                                <input name="cliente[nombre]" value="{{ $client->nombre }}" class="form-control form-control-sm input-edit" type="text">
+                                <input name="cliente[nombre]" id="cliente_nombre" value="{{ $client->nombre }}" class="form-control form-control-sm input-edit" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo NOMBRE es obligatorio
+                                </div>
 
                             </div>
                         </div>
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">EMAIL</label>
-                                <input name="cliente[correo]" value="{{ $client->correo }}" class="form-control form-control-sm input-edit" type="text">
+                                <input name="cliente[correo]" id="cliente_correo" value="{{ $client->correo }}" class="form-control form-control-sm input-edit" type="text">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.correo')}}</span>
                                 @endif
@@ -116,10 +122,13 @@
                         <div class="col-12 col-md-4 mt-3">
                             <div class="form-group">
                                 <label class="small">TELÉFONO</label>
-                                <input name="cliente[telefono]" value="{{ $client->telefono }}" class="form-control form-control-sm input-edit" type="text">
+                                <input name="cliente[telefono]" id="cliente_telefono" value="{{ $client->telefono }}" class="form-control form-control-sm input-edit" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('cliente.telefono')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo TELÉFONO es obligatorio
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4 mt-3">
@@ -148,11 +157,14 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small"><i class="fas fa-key pr-1 mt-2"></i>CLAVE EASYBROKER</label>
-                                <input name="pass_easy_broker" class="form-control is-valid form-control-sm" type="text" value="{{ $property->pass_easy_broker }}" required>
+                                <label class="small"><i class="fas fa-key pr-1 mt-2"></i>*CLAVE EASYBROKER</label>
+                                <input name="pass_easy_broker" class="form-control form-control-sm" type="text" value="{{ $property->pass_easy_broker }}" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('pass_easy_broker')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo CLAVE EASYBROKER es obligatorio
+                                </div>
                             </div>
                         </div>
 
@@ -213,7 +225,7 @@
                             <div class="input-group mb-2">
                                 <label class="small">* CÓDIGO POSTAL</label>
                                 <div class="w-100"></div>
-                                <input type="text" name="cp" id="cp" value="{{ $cp->codigo }}" class="form-control is-valid form-control-sm">
+                                <input type="text" name="cp" id="cp" value="{{ $cp->codigo }}" class="form-control form-control-sm" required>
                                 <div class="input-group-prepend">
                                     <button type="button" onclick="searchPostal()" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                 </div>
@@ -221,6 +233,9 @@
                                 <div class="w-100"></div>
                                 <p class="text-danger"> {{$errors->first('cp')}}</p>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo CÓDIGO POSTAL es obligatorio
+                                </div>
 
                             </div>
                         </div>
@@ -262,11 +277,14 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">PRECIO DESEABLE</label>
-                                <input name="price" data-behaviour="decimal" value="{{ $property->price }}" class="form-control form-control-sm" type="text">
+                                <input name="price" data-behaviour="decimal" value="{{ $property->price }}" class="form-control form-control-sm" type="text" required>
 
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
+                                <div class="invalid-feedback">
+                                    El campo PRECIO DESEABLE es obligatorio
+                                </div>
                             </div>
                         </div>
 
@@ -325,11 +343,15 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">*¿FORMAS DE PAGO DESEABLES?</label>
-                                <select name="form_pay_id[]" id="form_pay_id" class="form-control form-control-sm" multiple="multiple" >
+                                <div class="w-100"></div>
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control form-control-sm" multiple="multiple" required>
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
                                     @endforeach
                                 </select>
+                                <div class="small text-danger" id="error_formapago" style="display: none">
+                                    El campo ¿FORMAS DE PAGO DESEABLES? es obligatorio
+                                </div>
                                 @if($errors)
                                 <div class="w-100"></div>
                                 <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>

@@ -39861,9 +39861,7 @@ window.Vue = require('vue'); */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //require('./components/step.js');
 
 
-__webpack_require__(/*! ./components/cp.js */ "./resources/js/components/cp.js");
-
-__webpack_require__(/*! ./components/property */ "./resources/js/components/property.js");
+__webpack_require__(/*! ./components/cp.js */ "./resources/js/components/cp.js"); //require('./components/property');
 
 /***/ }),
 
@@ -39967,89 +39965,6 @@ window.searchPostal = function () {
     });
   }
 };
-
-/***/ }),
-
-/***/ "./resources/js/components/property.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/property.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* var validate = require('jquery-validation');
-import 'jquery-validation/dist/localization/messages_es'; */
-var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-
-window.userModal = function (property_id) {
-  $('#userModal').modal('show');
-  $('#property_id').val(property_id);
-};
-
-window.addUser = function (user_id) {
-  var property_id = $('#property_id').val();
-  axios.get('/admin/property/addUser/' + property_id + '/' + user_id).then(function (response) {
-    location.reload();
-  })["catch"](function (error) {
-    var result = error.response.data;
-    /* $('.spinner-contacto').hide(); */
-  });
-};
-
-window.changeClient = function () {
-  var n_client = $('#n_client').is(':checked') ? 1 : 0;
-
-  if (n_client == 0) {
-    $('#d_datos-cliente').show();
-    $('#d_inputs-cliente').hide();
-  } else {
-    $('#d_inputs-cliente').show();
-    $('#d_datos-cliente').hide();
-  }
-};
-
-window.addClient = function (user_id, nombre, correo, telefono) {
-  if ($("#d_datos-cliente").length > 0) {
-    $('#d_datos-cliente').show();
-    $('#d_inputs-cliente').hide();
-    $("#n_client").prop("checked", false);
-    $('.input-edit').val('');
-  }
-
-  $('#cve_int_cliente').val(user_id);
-  $('#client_name').val(nombre);
-  $('#client_email').val(correo);
-  $('#client_telefono').val(telefono);
-  $('#clientModal').modal('hide');
-};
-
-if ($("#frm_propiedad").length > 0) {
-  $('#form_pay_id').multiselect({
-    templates: {
-      li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
-    },
-    nonSelectedText: 'Choose...',
-    selectedClass: 'bg-light',
-    onInitialized: function onInitialized(select, container) {
-      // hide checkboxes
-      container.find('input').addClass('d-none');
-    }
-  });
-}
-
-$(document).ready(function () {
-  window.changeAvaluo = function () {
-    var is_avaluo = 0;
-
-    if ($('#is_avaluo').prop('checked')) {
-      $('#Avaluo').prop("disabled", false); // Element(s) are now enabled.
-    } else {
-      $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
-    }
-  };
-});
 
 /***/ }),
 

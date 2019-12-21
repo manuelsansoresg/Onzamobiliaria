@@ -34,9 +34,20 @@ window.changeClient = function(){
     if(n_client == 0){ 
         $('#d_datos-cliente').show();
         $('#d_inputs-cliente').hide();
+
+        $("#cliente_nombre").attr("required", false);
+        $("#cliente_telefono").attr("required", false);
+
     }else{
         $('#d_inputs-cliente').show();
         $('#d_datos-cliente').hide();
+
+        $("#cliente_nombre").attr("required", true);
+        $("#cliente_telefono").attr("required", true);
+
+        $('#cliente_nombre').val('');
+        $('#cliente_correo').val('');
+        $('#cliente_telefono').val('');
     }
 }
  
@@ -55,7 +66,8 @@ window.addClient = function(user_id, nombre, correo, telefono){
     $('#client_telefono').val(telefono);
     $('#clientModal').modal('hide');
 
-    
+    $("#cliente_nombre").attr("required", false);
+    $("#cliente_telefono").attr("required", false);
 
 }
 
@@ -92,4 +104,33 @@ $(document).ready(function () {
 
 
 
+$("#frm_propiedad").submit(function (event) { 
+    var formpago = $('#form_pay_id').val();
+    var error = false;
+    /* var check = $('input:checkbox[name=colorfavorito]:checked').val();
+    
+    event.preventDefault();  */
+    
+    console.log('test');
 
+    /* if ($('#n_client').is(':checked')){
+        if ($('#client_name').val().length == 0){
+            $('#error_cliente').show();
+            error = true;
+        }else{
+            $('#error_cliente').hide();
+        }
+    }else{
+        console.log('nocheck');
+    } */
+
+    if(formpago.length==0){
+        $('#error_formapago').show();
+    }else{
+        $('#error_formapago').hide();
+    }
+
+    if(error == false){
+        $("#frm_propiedad").submit();
+    }
+});

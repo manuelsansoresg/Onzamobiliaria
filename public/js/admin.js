@@ -4979,6 +4979,26 @@ __webpack_require__(/*! ./components/property_assigment */ "./resources/js/compo
 
 __webpack_require__(/*! ./components/select_multiple */ "./resources/js/components/select_multiple.js");
 
+(function () {
+  'use strict';
+
+  window.addEventListener('load', function () {
+    //Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation'); //Loop over them and prevent submission
+
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
 /***/ }),
 
 /***/ "./resources/js/components/property.js":
@@ -5015,9 +5035,16 @@ window.changeClient = function () {
   if (n_client == 0) {
     $('#d_datos-cliente').show();
     $('#d_inputs-cliente').hide();
+    $("#cliente_nombre").attr("required", false);
+    $("#cliente_telefono").attr("required", false);
   } else {
     $('#d_inputs-cliente').show();
     $('#d_datos-cliente').hide();
+    $("#cliente_nombre").attr("required", true);
+    $("#cliente_telefono").attr("required", true);
+    $('#cliente_nombre').val('');
+    $('#cliente_correo').val('');
+    $('#cliente_telefono').val('');
   }
 };
 
@@ -5034,6 +5061,8 @@ window.addClient = function (user_id, nombre, correo, telefono) {
   $('#client_email').val(correo);
   $('#client_telefono').val(telefono);
   $('#clientModal').modal('hide');
+  $("#cliente_nombre").attr("required", false);
+  $("#cliente_telefono").attr("required", false);
 };
 
 if ($("#frm_propiedad").length > 0) {
@@ -5060,6 +5089,35 @@ $(document).ready(function () {
       $('#Avaluo').prop("disabled", true); // Element(s) are now enabled.
     }
   };
+});
+$("#frm_propiedad").submit(function (event) {
+  var formpago = $('#form_pay_id').val();
+  var error = false;
+  /* var check = $('input:checkbox[name=colorfavorito]:checked').val();
+  
+  event.preventDefault();  */
+
+  console.log('test');
+  /* if ($('#n_client').is(':checked')){
+      if ($('#client_name').val().length == 0){
+          $('#error_cliente').show();
+          error = true;
+      }else{
+          $('#error_cliente').hide();
+      }
+  }else{
+      console.log('nocheck');
+  } */
+
+  if (formpago.length == 0) {
+    $('#error_formapago').show();
+  } else {
+    $('#error_formapago').hide();
+  }
+
+  if (error == false) {
+    $("#frm_propiedad").submit();
+  }
 });
 
 /***/ }),
