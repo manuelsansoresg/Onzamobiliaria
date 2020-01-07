@@ -17,7 +17,10 @@
 
 Route::redirect('/', '/login', 301);
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'],   function () {
+    
+    Auth::routes();
+
     Route::resource('/mobiliaria','RealstateController');
     Route::get('/mobiliaria/status/{id}/{status}','RealstateController@changeStatus');
     
