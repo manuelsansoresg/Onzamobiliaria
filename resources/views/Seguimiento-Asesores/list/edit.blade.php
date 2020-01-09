@@ -6,27 +6,27 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
-            {{ Form::open(['route' => ['historico-seguimiento.update', $historico->id], 'method' => 'PUT']) }}
+            {{ Form::open(['route' => ['historico-seguimiento.update', $historico->id], 'method' => 'PUT', 'class' => 'needs-validation', 'novalidate']) }}
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h5 class="mr-auto">EDITAR UN REGISTRO DE LLAMADA</h5>
-                        <div>                    
+                        <div>
                             <a href="/admin/historico-seguimiento/{{ $id_assigment }}" class="btn btn-success btn-sm  pull-right">
                                 <i class="fas fa-arrow-circle-left"></i> REGRESAR
-                            </a>                           
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <input type="hidden" name="property_assignment_id" value="{{ $id_assigment }}">                   
+                    <input type="hidden" name="property_assignment_id" value="{{ $id_assigment }}">
                     <div class="row mt-3">
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ESTATUS SEGUIMIENTO</label>
                                 <select name="status_follow_id" class="form-control form-control-sm">
                                     @foreach ($status_all as $status)
-                                        <option value="{{ $status->id }}" {{ ($historico->status_follow_id ==  $status->id )? 'selected' : '' }}>{{ $status->description }}</option>
+                                    <option value="{{ $status->id }}" {{ ($historico->status_follow_id ==  $status->id )? 'selected' : '' }}>{{ $status->description }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -34,25 +34,32 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label class="small">FORMA DE PAGO</label>
-                                <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm multiple" multiple="multiple">
+                                <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm multiple" multiple="multiple" required>
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}" {{ ( in_array($form_payment->id, $my_payments) )? 'selected' : '' }}> {{ $form_payment->description }} </option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    El campo FORMA DE PAGO es obligatorio
+                                </div>
                                 @if($errors)
                                 <div class="w-100"></div>
                                 <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>
                                 @endif
                             </div>
-                        </div>                        
+                        </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">OBSERVACIÓN</label>
                                 <div class="w-100"></div>
-                                <textarea name="observacion1" id="" cols="95" rows="10">{{ $historico->observacion1 }}</textarea>
+                                <textarea name="observacion1" class="form-control" id="" cols="95" rows="10" required>{{ $historico->observacion1 }}</textarea>
+                                <div class="w-100"></div>
+                                <div class="invalid-feedback">
+                                    El campo OBSERVACIÓN es obligatorio
+                                </div>
                                 @if($errors)
-                                    <span class="text-danger"> {{$errors->first('observacion1')}}</span>
+                                <span class="text-danger"> {{$errors->first('observacion1')}}</span>
                                 @endif
                             </div>
                         </div>

@@ -6,15 +6,15 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
-            {{ Form::open(['route' => 'historico-seguimiento.store', 'method' => 'POST', 'files' => true]) }}
+            {{ Form::open(['route' => 'historico-seguimiento.store', 'method' => 'POST', 'files' => true, 'class' => 'needs-validation', 'novalidate']) }}
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h5 class="mr-auto">AGREGAR UN REGISTRO DE LLAMADA</h5>
-                        <div>                    
+                        <div>
                             <a href="/admin/historico-seguimiento/{{ $id_assigment }}" class="btn btn-success btn-sm  pull-right">
                                 <i class="fas fa-arrow-circle-left"></i> REGRESAR
-                            </a>                           
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -35,11 +35,14 @@
                             <div class="form-group">
                                 <label class="small">FORMA DE PAGO</label>
                                 <div class="w-100"></div>
-                                <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm multiple" multiple="multiple">
+                                <select name="forma_pago[]" id="forma_pago" class="form-control form-control-sm multiple" multiple="multiple" required>
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    El campo FORMA DE PAGO es obligatorio
+                                </div>
                                 @if($errors)
                                 <div class="w-100"></div>
                                 <span class="text-danger"> {{$errors->first('form_pay_id')}}</span>
@@ -52,7 +55,11 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">OBSERVACIÓN</label>
                                 <div class="w-100"></div>
-                                <textarea name="observacion1" id="" cols="95" rows="10"></textarea>
+                                <textarea class="form-control" name="observacion1" id="" cols="95" rows="10" required></textarea>
+                                <div class="w-100"></div>
+                                <div class="invalid-feedback">
+                                    El campo OBSERVACIÓN es obligatorio
+                                </div>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('observacion1')}}</span>
                                 @endif
