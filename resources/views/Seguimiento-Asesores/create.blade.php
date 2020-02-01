@@ -3,10 +3,11 @@
 @section('title', 'Asignacion de Asesores')
 
 @section('content')
-<div class="container">    
+<div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
-            {{ Form::open(['route' => 'seguimiento-asesores.store', 'method' => 'POST', 'files' => true]) }}
+            {{ Form::open(['route' => 'seguimiento-asesores.store', 'method' => 'POST', 'files' => true,  'class' => 'needs-validation', 'novalidate']) }}
+            <input type="hidden" name="date_assignment" value="{{ date('Y-m-d H:i:s') }}">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
@@ -22,7 +23,7 @@
 
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <div class="input-group mb-2">                                
+                            <div class="input-group mb-2">
                                 <label class="small"><i class="fas fa-key pr-1 mt-2"></i>CLAVE EASYBROKER</label>
                                 <div class="w-100"></div>
                                 <input type="text" name="easy_broker" id="easy_broker" class="form-control is-valid form-control-sm" required>
@@ -102,7 +103,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">NOMBRE PROSPECTO</label>
-                                <input type="text" name="nombre" class="form-control form-control-sm">
+                                <input type="text" name="nombre" class="form-control form-control-sm" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('nombre')}}</span>
                                 @endif
@@ -111,7 +112,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">TELÉFONO</label>
-                                <input type="text" name="telefono" class="form-control form-control-sm">
+                                <input type="text" name="telefono" class="form-control form-control-sm" required>
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('telefono')}}</span>
@@ -120,7 +121,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CORREO</label>
-                                <input type="email" name="correo" class="form-control form-control-sm">
+                                <input type="email" name="correo" class="form-control form-control-sm" required>
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('correo')}}</span>

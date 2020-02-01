@@ -2,10 +2,10 @@
 @section('title', 'ASIGNACION DE ASESORES')
 @section('content')
 
-<div class="container">    
+<div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-8 ">
-            {{ Form::open(['route' => ['seguimiento-asesores.update', $property_assigment->assignment_id], 'method' => 'PUT']) }}
+            {{ Form::open(['route' => ['seguimiento-asesores.update', $property_assigment->assignment_id], 'method' => 'PUT', 'class' => 'needs-validation', 'novalidate']) }}
             <input type="hidden" name="date_assignment" value="{{ date('Y-m-d H:i:s') }}">
             <div class="card">
                 <div class="card-header">
@@ -96,7 +96,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">NOMBRE PROSPECTO</label>
-                                <input type="text" name="nombre" value="{{ $property_assigment->nombre_prospecto }}" class="form-control form-control-sm">
+                                <input type="text" name="nombre" value="{{ $property_assigment->nombre_prospecto }}" class="form-control form-control-sm" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('nombre')}}</span>
                                 @endif
@@ -105,7 +105,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">TELÉFONO</label>
-                                <input type="text" name="telefono" value="{{ $property_assigment->telefono }}" class="form-control form-control-sm">
+                                <input type="text" name="telefono" value="{{ $property_assigment->telefono }}" class="form-control form-control-sm" required>
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('telefono')}}</span>
@@ -114,7 +114,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CORREO</label>
-                                <input type="email" name="correo" value=" {{ $property_assigment->correo }} " class="form-control form-control-sm">
+                                <input type="email" name="correo" value=" {{ $property_assigment->correo }} " class="form-control form-control-sm" required>
                             </div>
                             @if($errors)
                             <span class="text-danger"> {{$errors->first('correo')}}</span>

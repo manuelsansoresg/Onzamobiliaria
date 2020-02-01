@@ -42,6 +42,21 @@ class Property_assigment extends Model
 
     }
 
+    public static function getAllAssigment()
+    {
+        $property_assigment = Property_assigment::select(
+                                        'property_assignment.id as assignment_id',
+                                        'property_assignment.created_at',
+                                         'property_assignment.nombre as nombre_prospecto',
+                                        'property_assignment.telefono',
+                                        'property_assignment.correo',
+                                        'property_assignment.date_assignment'
+                                        )
+                                ->join('properties', 'properties.id', '=', 'property_assignment.property_id')
+                                ->where('properties.status', 1)->get();
+        return $property_assigment;
+    }
+
     static function getAll($assignment_id = "")
     {
         $campo =  (isset($_GET['campo']))?$_GET['campo']: '';
@@ -70,12 +85,12 @@ class Property_assigment extends Model
             'property_assignment.date_assignment'
         )
             ->join('property_assignment', 'property_assignment.property_id', '=', 'properties.id')
-            ->leftJoin('ads', 'ads.id', '=', 'property_assignment.add_id')
-            ->leftJoin('postal', 'postal.id', '=', 'properties.postal_id')
-            ->leftJoin(DB::raw('users pu'), DB::raw('pu.id'), '=', 'properties.user_id')
-            ->leftJoin(DB::raw('users su'), DB::raw('su.id'), '=', 'property_assignment.asesor_id')
-            ->leftJoin('realstates', 'realstates.id', '=', 'properties.realstate_id')
-            ->leftJoin('operations', 'operations.id', '=', 'properties.operation_id')
+            ->join('ads', 'ads.id', '=', 'property_assignment.add_id')
+            ->join('postal', 'postal.id', '=', 'properties.postal_id')
+            ->join(DB::raw('users pu'), DB::raw('pu.id'), '=', 'properties.user_id')
+            ->join(DB::raw('users su'), DB::raw('su.id'), '=', 'property_assignment.asesor_id')
+            ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
+            ->join('operations', 'operations.id', '=', 'properties.operation_id')
             ->orderBy('property_assignment.date_assignment', 'desc')
             ->where('properties.status', 1);
         if($assignment_id != ''){
@@ -116,7 +131,7 @@ class Property_assigment extends Model
 
     static function getAllTable()
     {
-        $properties = self::getall();
+        $properties = self::getAllAssigment();
 
         $table      = array();
         $user       = User::find(Auth::id());
@@ -303,11 +318,11 @@ class Property_assigment extends Model
     {
         /*DB::enableQueryLog();*/
         $historic = HistoricAssigment::select('status_follows.description')
+                                        ->join('status_follows', 'status_follows.id', '=' , 'historic_assigments.status_follow_id')
                                         ->where('historic_assigments.property_assignment_id', $property_assignment_id)
-                                        ->join('status_follows', 'status_follows.id', '=' , 'historic_assigments.property_assignment_id')
                                         ->orderBy('historic_assigments.created_at', 'desc')
                                         ->first();
-
+        /*dd( DB::getQueryLog());*/
         $status = '<span class="badge badge-success">disponible</span>';
 
         if(is_object($historic)){
