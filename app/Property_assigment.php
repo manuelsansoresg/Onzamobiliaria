@@ -42,7 +42,7 @@ class Property_assigment extends Model
 
     }
 
-    static function getAll()
+    static function getAll($assignment_id = "")
     {
         $campo =  (isset($_GET['campo']))?$_GET['campo']: '';
         $filtro = (isset($_GET['filtro']))?$_GET['filtro']: '';
@@ -76,29 +76,31 @@ class Property_assigment extends Model
             ->leftJoin(DB::raw('users su'), DB::raw('su.id'), '=', 'property_assignment.asesor_id')
             ->leftJoin('realstates', 'realstates.id', '=', 'properties.realstate_id')
             ->leftJoin('operations', 'operations.id', '=', 'properties.operation_id')
+            ->orderBy('property_assignment.date_assignment', 'desc')
             ->where('properties.status', 1);
+        if($assignment_id != ''){
+            $property = $property->where('property_assignment.id', $assignment_id);
+        }
 
         if ($user_role != 'admin') {
             $property = $property->where('property_assignment.asesor_id', Auth::id());
         }
 
-        if ($campo != '') {
+        /*if ($campo != '') {
             $property = $property->where(function ($q) use ($campo) {
                 $q->orWhere('pass_easy_broker', 'like', "%$campo%");
                 $q->orWhere('property_assignment.nombre', 'like', "%$campo%");
                 $q->orWhere('price', '>=', $campo);
             });
-        }
-
+        }*/
 
         $property   = $property->get();
-       
-        $is_error = false;
+        $is_error   = false;
 
-        if ($filtro!= '' && $filtro != 'TODOS') {
+       /* if ($filtro!= '' && $filtro != 'TODOS') {
             $properties = [];
             foreach ($property as $row) {
-               
+
                 $assigment = HistoricAssigment::where('status_follow_id', $filtro)->where('property_assignment_id', $row->assignment_id)->count();
                 //echo $assigment;
                 if ($assigment > 0) {
@@ -107,24 +109,19 @@ class Property_assigment extends Model
             }
         } else {
             $properties = $property;
-        }
-        /* dd($property);
-        if($is_error == true){
-            $property =  [];
-        } */
-        //dd(DB::getQueryLog());
-        return $properties;
+        }*/
+
+        return $property;
     }
 
     static function getAllTable()
     {
         $properties = self::getall();
+
         $table      = array();
         $user       = User::find(Auth::id());
         $user_role  = $user->getRoleNames()->first();
-        $td_option = '';
-
-
+        $td_option  = '';
 
         if ($properties) {
             foreach ($properties as $property) {
@@ -137,24 +134,34 @@ class Property_assigment extends Model
                 $alert    = '';
 
                 if ($dias > 0 && $llamadas == 0) {
-                    $alert = '<i class="fas fa-exclamation-circle text-danger"></i>';
-                }
+                    $alert = '<span class="badge badge-danger">NO</span>';
+
+
+                }else{
+                    $assigment = Property_assigment::find($property->assignment_id);
+                    $assigment->is_seguimiento = 1;
+                    $assigment->update();
+                    $alert = '<span class="badge badge-success">SÍ</span>';
+                 }
+
+
 
                 if ($user_role == 'admin') {
 
-
-                    /* $table.= '<tr>';
-                    $table.= '<td> <span class="small">'. $alert. $property->pass_easy_broker.' </span> </td>';
+                    /*$table.= '<tr>';
+                    $table.= '<td> '.$alert.' </td>';
+                    $table.= '<td> <span class="small">'. $property->pass_easy_broker.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->propiedad.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->colonia.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->operacion.' </span> </td>';
-                    $table.= '<td> <span class="small">'. $property->price.' </span> </td>';
+                    $table.= '<td> <span class="small">'. precio($property->price).' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->asesor.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->portal.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->nombre_prospecto.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->telefono.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->correo.' </span> </td>';
                     $table.= '<td> <span class="small">'. $property->asesor_asignado.' </span> </td>';
+                    $table.= '<td> <span class="small">'. $llamadas.' </span> </td>';
                     $table.= '<td>';
 
                     $table.=  '<form method="POST" action="/admin/seguimiento-asesores/'. $property->assignment_id.'" accept-charset="UTF-8" class="form-inline">';
@@ -163,16 +170,17 @@ class Property_assigment extends Model
                     $table.= '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-primary">
                                 <i class="fas fa-phone-volume"></i>
                             </a>';
-                    $table.= '<a href="http://onzamobiliaria.test/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-primary ml-1">
+                    $table.= '<a href="http://onzamobiliaria.test/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="mt-1 btn btn-primary ">
                                 <i class="far fa-edit"></i>
                             </a>';
-                    $table.= '<button onclick="return confirm(\'¿Deseas eliminar el elemento?\')" class="btn btn-danger ml-1">
+                    $table.= '<button onclick="return confirm(\'¿Deseas eliminar el elemento?\')" class="mt-1 btn btn-danger">
                                 <i class="far fa-trash-alt"></i>
                             </button>';
                     $table.= '</form>';
                     $table.= '</td>';
-                    $table.= '/<tr>'; */
-                    $td_option.=  '<form method="POST" action="/admin/seguimiento-asesores/'. $property->assignment_id.'" accept-charset="UTF-8" class="form-inline">';
+                    $table.= '/<tr>';*/
+
+                   /* $td_option.=  '<form method="POST" action="/admin/seguimiento-asesores/'. $property->assignment_id.'" accept-charset="UTF-8" class="form-inline">';
                     $td_option.= '<input name="_method" type="hidden" value="DELETE">';
                     $td_option.= '<input name="_token" type="hidden" value="'. csrf_token().'">';
                     $td_option.= '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-primary">
@@ -184,34 +192,40 @@ class Property_assigment extends Model
                     $td_option.= '<button onclick="return confirm(\'¿Deseas eliminar el elemento?\')" class="btn btn-danger ml-1">
                                 <i class="far fa-trash-alt"></i>
                             </button>';
-                    $td_option.= '</form>';
+                    $td_option.= '</form> ';*/
 
-                    $table[] = array(
-                                $alert.' '.$property->pass_easy_broker,
-                                $property->propiedad,
-                                $property->colonia,
-                                $property->operacion,
-                                precio($property->price),
-                                $property->asesor,
-                                $property->portal,
-                                $property->nombre_prospecto,
-                                $property->telefono,
-                                $property->correo,
-                                $property->asesor_asignado,
-                                $llamadas,
-                                $td_option
-                                );
                     $td_option = '';
+                    $table[] = array(
+                        date('Y-m-d', strtotime( $property->date_assignment)),
+                        $property->nombre_prospecto,
+                        $property->telefono,
+                        self::getStatysAssigmentId($property->assignment_id),
+                        "<a onclick=\"viewMore('".$property->assignment_id."')\" class=\"btn btn-primary text-white\"> <i class=\"fas fa-plus-square\"></i> </a>".
+                        '<a href="/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-secondary ml-md-1  text-white"> <i class="fas fa-edit"></i> </a>'.
+                        '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-success text-white ml-md-1"> <i class="fas fa-phone"></i> </a>'
+
+                    );
                 }else{
+
                     //dd($dias);
                     if ($dias < 1 || $llamadas > 0) {
 
-                        /*  $table.= '<tr>';
-                        $table.= '<td> <span class="small">'. $alert. $property->pass_easy_broker.' </span> </td>';
+                        $table[] = array(
+                            date('Y-m-d', strtotime( $property->date_assignment)),
+                            $property->nombre_prospecto,
+                            $property->telefono,
+                            self::getStatysAssigmentId($property->assignment_id),
+                            "<a onclick=\"viewMore('".$property->assignment_id."')\" class=\"btn btn-primary text-white\"> <i class=\"fas fa-plus-square\"></i> </a>".
+                            '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-success text-white ml-md-1"> <i class="fas fa-phone"></i> </a>'
+
+                        );
+
+                        /*$table.= '<tr>';
+                        $table.= '<td> <span class="small">'.  $property->pass_easy_broker.' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->propiedad.' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->colonia.' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->operacion.' </span> </td>';
-                        $table.= '<td> <span class="small">'. $property->price.' </span> </td>';
+                        $table.= '<td> <span class="small">'. precio($property->price).' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->asesor.' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->portal.' </span> </td>';
                         $table.= '<td> <span class="small">'. $property->nombre_prospecto.' </span> </td>';
@@ -227,8 +241,11 @@ class Property_assigment extends Model
 
                         $table.= '</form>';
                         $table.= '</td>';
-                        $table.= '/<tr>'; */
-                        $table[] = array(
+                        $table.= '</tr>';*/
+
+
+
+                        /*$table[] = array(
                             $alert . ' ' . $property->pass_easy_broker,
                             $property->propiedad,
                             $property->colonia,
@@ -243,7 +260,8 @@ class Property_assigment extends Model
                             ' <a href="/admin/historico-seguimiento/' . $property->assignment_id . '" class="btn btn-primary">
                                     <i class="fas fa-phone-volume"></i>
                                 </a>'
-                        );
+                        );*/
+
                     }
                 }
             }
@@ -278,11 +296,36 @@ class Property_assigment extends Model
 
 
         return array('data' => $table, 'table_head' => $table_head );
+
+    }
+
+    public static function getStatysAssigmentId($property_assignment_id)
+    {
+        /*DB::enableQueryLog();*/
+        $historic = HistoricAssigment::select('status_follows.description')
+                                        ->where('historic_assigments.property_assignment_id', $property_assignment_id)
+                                        ->join('status_follows', 'status_follows.id', '=' , 'historic_assigments.property_assignment_id')
+                                        ->orderBy('historic_assigments.created_at', 'desc')
+                                        ->first();
+
+        $status = '<span class="badge badge-success">disponible</span>';
+
+        if(is_object($historic)){
+            $status = $historic->description;
+            if($historic->description == 'SUSPENDIDA' || $historic->description == 'CANCELADA'){
+                $status = '<span class="badge badge-warning">'.$historic->description.'</span>';
+            }
+        }
+        //$status = $historic->description;
+        return $status;
+        /*return DB::getQueryLog();*/
+
     }
 
     static function getAssigmentByyId($property_id)
     {
-        # code...
+        $properties = self::getall($property_id);
+        return $properties;
     }
 
     static function getById($id)

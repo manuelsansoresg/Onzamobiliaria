@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\HistoricAssigment;
 use App\Http\Requests\PropertyAsigmentRequest;
 use App\Property_assigment;
 use App\StatusFollow;
@@ -18,7 +19,7 @@ class PropertyAssigmentController extends Controller
      */
     public function index()
     {
-        
+
         $property_assignments = Property_assigment::search();
         $all_status = StatusFollow::where('status', 1)->get();
 
@@ -35,7 +36,33 @@ class PropertyAssigmentController extends Controller
     public function getAll()
     {
         $properties = Property_assigment::getAllTable();
-        return response()->json($properties);
+        return response($properties);
+        //return response()->json($properties);
+    }
+
+    public function viewMore($property_assignment_id)
+    {
+        $property = Property_assigment::getAssigmentByyId($property_assignment_id);
+        $table    = '';
+        if(is_object($property)){
+            $property = $property[0];
+            $llamadas = HistoricAssigment::where('property_assignment_id', $property->assignment_id)->count();
+            $table .= '<tr>';
+            $table .= '<td> <small>'.$property->pass_easy_broker.' </small> </td>';
+            $table .= '<td> <small> '.$property->propiedad.'</small> </td>';
+            $table .= '<td> <small> '.$property->colonia.' </small> </td>';
+            $table .= '<td> <small>'.$property->operacion.' </small> </td>';
+            $table .= '<td> <small>'.precio($property->precio).' </small> </td>';
+            $table .= '<td> <small>'.$property->asesor.' </small> </td>';
+            $table .= '<td> <small> '.$property->portal.' </small> </td>';
+            $table .= '<td> <small> '.$property->nombre_prospecto.' </small> </td>';
+            $table .= '<td> <small> '.$property->telefono.' </small> </td>';
+            $table .= '<td> <small> '.$property->correo.' </small> </td>';
+            $table .= '<td> <small> '.$property->asesor_asignado.' </small> </td>';
+            $table .= '<td> <span class="badge badge-success">'.$llamadas.'</span> </td>';
+            $table .= '</tr>';
+        }
+        return response()->json($table);
     }
 
     /**

@@ -17,6 +17,7 @@ class HistoricAssigment extends Model
         $assigment = HistoricAssigment::select('historic_assigments.id', 'status_follows.description as status', 'historic_assigments.observacion1', 'historic_assigments.created_at as fecha')
                                     ->join('property_assignment', 'property_assignment.id', '=', 'historic_assigments.property_assignment_id')
                                     ->join('status_follows', 'status_follows.id', '=', 'historic_assigments.status_follow_id')
+                                    ->orderBy('historic_assigments.created_at', 'desc')
                                     ->where('property_assignment_id', $id_assigment);
         if ($user_role != 'admin') {
             $assigment = $assigment->where('asesor_id', Auth::id());
@@ -28,7 +29,7 @@ class HistoricAssigment extends Model
     }
 
     static function createUpdateHistoric($request, $historic_id = null){
-        
+
         if ($historic_id == false) {
             $historico = new HistoricAssigment($request->except('_token'));
         }else{
@@ -54,5 +55,5 @@ class HistoricAssigment extends Model
 
         return $historico;
 
-    }  
+    }
 }

@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <input type="hidden" id="filtro" value="{{ isset($_GET['filtro'])? $_GET['filtro'] : '' }}">
     <input type="hidden" id="campo" value="{{ isset($_GET['campo'])? $_GET['campo'] : '' }}">
-    <div class="row mt-3">        
+    <div class="row mt-3">
         <div class="col-12 mt-3">
             @include('flash::message')
         </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
+            <div class="row d-none">
                 <div class="row mt-3 px-3 justify-content-end">
                     <form action="" method="GET" class="form-inline ">
                         <label class="" for="inlineFormInputName2">Filtro: </label>
@@ -48,29 +48,25 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <table id="property_assigment" class="table table-responsive dataTables_scrollBody" style="width:100%">
-                        <thead>
+                    <div class="table-responsive">
+                        <table id="table_property_assigment" class="table  dataTables_scrollBody" style="width:100%">
+                            <thead>
                             <tr>
-                                <th> <span class="small font-weight-bold"> EASYBROKER </span> </th>
-                                <th> <span class="small font-weight-bold"> PROPIEDAD</span> </th>
-                                <th> <span class="small font-weight-bold"> COLONIA </span> </th>
-                                <th> <span class="small font-weight-bold"> OPERACIÓN </span> </th>
-                                <th> <span class="small font-weight-bold"> PRECIO </span> </th>
-                                <th> <span class="small font-weight-bold"> ASESOR </span> </th>
-                                <th> <span class="small font-weight-bold"> PORTAL </span> </th>
-                                <th> <span class="small font-weight-bold"> NOMBRE PROSPECTO </span> </th>
-                                <th> <span class="small font-weight-bold"> TELEFONO </span> </th>
-                                <th> <span class="small font-weight-bold"> CORREO </span> </th>
-                                @role('admin')
-                                <th> <span class="small font-weight-bold"> ASIGNAR ASESOR </span> </th>
-                                 <th>LLAMADAS</th>
-                                @endrole
+
+                                <th> <span class="small font-weight-bold"> FECHA DE ASIG </span> </th>
+                                <th> <span class="small font-weight-bold"> NOMBRE </span> </th>
+                                <th> <span class="small font-weight-bold"> TELÉFONO </span> </th>
+                                <th> <span class="small font-weight-bold"> STATUS </span> </th>
+
                                 <!-- <th>Llamadas</th> -->
-                                <th style="width: 160px;" class="options-asesores"></th>
-        
+                                <th style="width: 180px;" class=""></th>
+
                             </tr>
-                        </thead>
-                    </table>
+
+                            </thead>
+                            <tbody id="body_assigment"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -82,6 +78,46 @@
     </div>
 </div>
 
+<div class="modal fade" id="moreSection" tabindex="-1" role="dialog" aria-labelledby="moreSectionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moreSectionLabel">SEGUIMIENTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-responsive dataTables_scrollBody">
+                    <thead>
+                       <tr>
+                           <th> <small>EASYBROKER</small> </th>
+                           <th> <small>PROPIEDAD</small> </th>
+                           <th> <small>COLONIA</small> </th>
+                           <th> <small>OPERACIÓN</small> </th>
+                           <th><small>PRECIO</small></th>
+                           <th><small>ASESOR</small></th>
+                           <th><small>PORTAL</small></th>
+                           <th><small>NOMBRE PROSPECTO</small></th>
+                           <th><small>TELÉFONO</small></th>
+                           <th><small>CORREO</small></th>
+                           <th><small>ASESOR</small></th>
+                           <th><small>LLAMADAS</small></th>
+
+                       </tr>
+                    </thead>
+                    <tbody id="body_more">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 @stop
 
 @section('js')
@@ -95,14 +131,14 @@
             responsive: true,
             searching: false,
             //"pagingType": "simple",
-            //"bPaginate": true, 
-            //"bFilter": false , 
+            //"bPaginate": true,
+            //"bFilter": false ,
             //"bLengthMenu" : true, //thought this line could hide the LengthMenu
-            "bInfo":false,  
+            "bInfo":false,
             dom: 'Bfrtip',
-            buttons: [               
+            buttons: [
                 {
-                    extend: 'pdf',                    
+                    extend: 'pdf',
                     orientation: 'landscape',
                     text: 'PDF',
                     className: 'btn-danger',
@@ -111,14 +147,14 @@
                     //messageTop: '', AGREGAR TITULO
                     pageSize: 'letter', //A3 , A4,A5 , A6 , legal , letter
                     pageMargins: [ 0, 0, 0, 0 ], // try #1 setting margins
-                    margin: [ 0, 0, 0, 0 ], // try #2 setting margins                    
+                    margin: [ 0, 0, 0, 0 ], // try #2 setting margins
                     customize: function(doc) {
                         doc.styles.title = {
                             color: 'black',
                             fontSize: '10',
                             alignment: 'left'
                         }
-                        doc.styles['td:nth-child(2)'] = { 
+                        doc.styles['td:nth-child(2)'] = {
                             width: '100px',
                             'max-width': '100px'
                         }
@@ -127,22 +163,22 @@
                             color:'#FFF',
                             fontSize: '8',
                             alignment: 'left',
-                            bold: true 
+                            bold: true
                         }
                         doc.defaultStyle.fontSize = 9;
                         doc.pageMargins = [50,50,30,30];
                         doc.content[1].margin = [ 5, 0, 0, 5]
-                    }  
+                    }
                 },
                 {
-                    extend: 'excel',                   
+                    extend: 'excel',
                     text: 'EXCEL',
                 },
                 {
                     extend: 'print',
                     text: 'IMPRIMIR',
                 }
-            ],      
+            ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -164,6 +200,6 @@
                 }
             },
         });
-    }) 
+    })
 </script>
 @stop
