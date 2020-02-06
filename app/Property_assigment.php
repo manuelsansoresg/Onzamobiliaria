@@ -44,6 +44,9 @@ class Property_assigment extends Model
 
     public static function getAllAssigment()
     {
+        $user      = User::find(Auth::id());
+        $user_role = $user->getRoleNames()->first();
+
         $property_assigment = Property_assigment::select(
                                         'property_assignment.id as assignment_id',
                                         'property_assignment.created_at',
@@ -53,7 +56,11 @@ class Property_assigment extends Model
                                         'property_assignment.date_assignment'
                                         )
                                 ->join('properties', 'properties.id', '=', 'property_assignment.property_id')
-                                ->where('properties.status', 1)->get();
+                                ->where('properties.status', 1);
+        if ($user_role != 'admin') {
+            $property_assigment = $property_assigment->where('property_assignment.asesor_id', Auth::id());
+        }
+        $property_assigment = $property_assigment->get();
         return $property_assigment;
     }
 
@@ -67,6 +74,7 @@ class Property_assigment extends Model
         $user      = User::find(Auth::id());
 
         $user_role = $user->getRoleNames()->first();
+
 
         $property  = Property::select(
             'pass_easy_broker',
