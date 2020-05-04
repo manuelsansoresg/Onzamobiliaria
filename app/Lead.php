@@ -29,10 +29,10 @@ class Lead extends Model
             'observation2',
             'observation3'
                             )
-            ->join('realstates', 'realstates.id', '=', 'leads.realstate_id')
-            ->join('operations', 'operations.id', '=', 'leads.operation_id')
-            ->join('clasifications', 'clasifications.id', '=', 'leads.clasification_id')
-            ->join('postal', 'postal.id', '=', 'leads.postal_id')
+            ->join('realstates', 'realstates.id', '=', 'leads.realstate_id', 'left')
+            ->join('operations', 'operations.id', '=', 'leads.operation_id', 'left')
+            ->join('clasifications', 'clasifications.id', '=', 'leads.clasification_id', 'left')
+            ->join('postal', 'postal.id', '=', 'leads.postal_id', 'left')
             ->where('leads.id', $id)
             ->first();
 
@@ -47,8 +47,8 @@ class Lead extends Model
         $user_role = $user->getRoleNames()->first();
 
         $lead = Lead::select('leads.id', 'nombre', 'phone', 'realstates.description as tipo', 'observation', 'leads.status', 'name')
-            ->join('realstates', 'realstates.id', '=', 'leads.realstate_id')
-            ->join('users', 'users.id', '=', 'leads.user_id');
+            ->join('realstates', 'realstates.id', '=', 'leads.realstate_id', 'left')
+            ->join('users', 'users.id', '=', 'leads.user_id', 'left');
             //->join('operations', 'operations.id', '=', 'leads.operation_id')
             //->join('clasifications', 'clasifications.id', '=', 'leads.clasification_id');
 

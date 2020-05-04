@@ -23,14 +23,99 @@ $(document).ready(function () {
 
     /*setTimeout(getProperties(), 300);*/
 
+
+
     var table = $('#table_property_assigment').DataTable( {
         "ajax":'/admin/property/getAll',
-        "order": [[ 0, 'desc' ]]
+
+        "order": [[ 0, 'desc' ]],
+        dom: 'Bfrtip',
+        buttons: [{
+            extend: 'pdf',
+            orientation: 'landscape',
+            text: 'PDF',
+            className: 'btn-danger',
+            title: 'LISTADO DE PROPIEDADES',
+            fontSize: '6',
+            //messageTop: '', AGREGAR TITULO
+            pageSize: 'letter', //A3 , A4,A5 , A6 , legal , letter
+            pageMargins: [0, 0, 0, 0], // try #1 setting margins
+            margin: [0, 0, 0, 0], // try #2 setting margins                    
+            customize: function (doc) {
+                doc.styles.title = {
+                    color: 'black',
+                    fontSize: '10',
+                    alignment: 'left'
+                }
+                doc.styles['td:nth-child(2)'] = {
+                    width: '100px',
+                    'max-width': '100px'
+                }
+                doc.styles.tableHeader = {
+                    fillColor: '#525659',
+                    color: '#FFF',
+                    fontSize: '8',
+                    alignment: 'left',
+                    bold: true
+                }
+                doc.defaultStyle.fontSize = 9;
+                doc.pageMargins = [50, 50, 30, 30];
+                doc.content[1].margin = [5, 0, 0, 5]
+            }
+        },
+        {
+            extend: 'excel',
+            text: 'EXCEL',
+        },
+        {
+            extend: 'print',
+            text: 'IMPRIMIR',
+        }
+        ],
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        console.log('res'+$(this).val());
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+
     } );
+
+   function search(){
+       $("#table_property_assigment tfoot th").each( function ( i ) {
+           var select = $('<select><option value=""></option></select>')
+               .appendTo( $(this).empty() )
+               .on( 'change', function () {
+                   table.column( i )
+                       .search( $(this).val() )
+                       .draw();
+               } );
+
+           table.column( i ).data().unique().sort().each( function ( d, j ) {
+               select.append( '<option value="'+d+'">'+d+'</option>' )
+           } );
+       } );
+   }
 
     setInterval( function () {
         try {
             table.ajax.reload();
+
         }
         catch(error) {
             console.error(error);

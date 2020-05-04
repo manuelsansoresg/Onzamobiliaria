@@ -52,10 +52,15 @@
                         <table id="table_property_assigment" class="table  dataTables_scrollBody" style="width:100%">
                             <thead>
                             <tr>
-
+                                @role('admin')
+                                <th> <span class="small font-weight-bold"> SEGUIMIENTO </span> </th>
+                                @endrole
                                 <th> <span class="small font-weight-bold"> FECHA DE ASIG </span> </th>
                                 <th> <span class="small font-weight-bold"> NOMBRE </span> </th>
                                 <th> <span class="small font-weight-bold"> TELÉFONO </span> </th>
+                                @role('admin')
+                                <th> <span class="small font-weight-bold"> ASESOR </span> </th>
+                                @endrole
                                 <th> <span class="small font-weight-bold"> STATUS </span> </th>
 
                                 <!-- <th>Llamadas</th> -->
@@ -64,7 +69,20 @@
                             </tr>
 
                             </thead>
-                            <tbody id="body_assigment"></tbody>
+                            <tbody ></tbody>
+                            <tfoot>
+                            <tr>
+
+
+                                <th>FECHA DE ASIG</th>
+                                <th>TELÉFONO</th>
+                                @role('admin')
+                                <th>ASESOR</th>
+                                @endrole
+                                <th>STATUS</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -79,7 +97,7 @@
 </div>
 
 <div class="modal fade" id="moreSection" tabindex="-1" role="dialog" aria-labelledby="moreSectionLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog <modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="moreSectionLabel">SEGUIMIENTO</h5>

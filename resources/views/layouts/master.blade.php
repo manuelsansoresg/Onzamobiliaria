@@ -58,6 +58,8 @@
     <script src="{{ asset('vendor_assets/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/js/dataTables.jqueryui.min.js') }}"></script>
     <script src="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('vendor_assets/jquery.infiniteScroll.js') }}"></script>
 
     <script src="{{ asset('js/admin.js') }}"></script>

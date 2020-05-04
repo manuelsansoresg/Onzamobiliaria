@@ -53,9 +53,11 @@ class Property_assigment extends Model
                                          'property_assignment.nombre as nombre_prospecto',
                                         'property_assignment.telefono',
                                         'property_assignment.correo',
-                                        'property_assignment.date_assignment'
+                                        'property_assignment.date_assignment',
+                                        'users.name as asesor'
                                         )
                                 ->join('properties', 'properties.id', '=', 'property_assignment.property_id')
+                                ->join('users', 'users.id', '=', 'property_assignment.asesor_id')
                                 ->where('properties.status', 1);
         if ($user_role != 'admin') {
             $property_assigment = $property_assigment->where('property_assignment.asesor_id', Auth::id());
@@ -83,7 +85,7 @@ class Property_assigment extends Model
             'realstates.description as propiedad',
             'colonia',
             'operations.description as operacion',
-            'price',
+            'properties.price',
             'pu.name as asesor',
             'ads.description as portal',
             'property_assignment.nombre as nombre_prospecto',
@@ -157,14 +159,14 @@ class Property_assigment extends Model
                 $alert    = '';
 
                 if ($dias > 0 && $llamadas == 0) {
-                    $alert = '<span class="badge badge-danger">NO</span>';
+                    $alert = 'NO';
 
 
                 }else{
                     $assigment = Property_assigment::find($property->assignment_id);
                     $assigment->is_seguimiento = 1;
                     $assigment->update();
-                    $alert = '<span class="badge badge-success">SÍ</span>';
+                    $alert = 'SÍ';
                  }
 
 
@@ -219,9 +221,11 @@ class Property_assigment extends Model
 
                     $td_option = '';
                     $table[] = array(
+                        $alert,
                         date('Y-m-d', strtotime( $property->date_assignment)),
                         $property->nombre_prospecto,
                         $property->telefono,
+                        $property->asesor,
                         self::getStatysAssigmentId($property->assignment_id),
                         "<a onclick=\"viewMore('".$property->assignment_id."')\" class=\"btn btn-primary text-white\"> <i class=\"fas fa-plus-square\"></i> </a>".
                         '<a href="/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-secondary ml-md-1  text-white"> <i class="fas fa-edit"></i> </a>'.
@@ -331,12 +335,12 @@ class Property_assigment extends Model
                                         ->orderBy('historic_assigments.created_at', 'desc')
                                         ->first();
         /*dd( DB::getQueryLog());*/
-        $status = '<span class="badge badge-success">disponible</span>';
+        $status = 'disponible';
 
         if(is_object($historic)){
-            $status = $historic->description;
+            $status = ''.$historic->description.'';
             if($historic->description == 'SUSPENDIDA' || $historic->description == 'CANCELADA'){
-                $status = '<span class="badge badge-warning">'.$historic->description.'</span>';
+                $status = ''.$historic->description.'';
             }
         }
         //$status = $historic->description;

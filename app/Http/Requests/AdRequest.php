@@ -30,8 +30,12 @@ class AdRequest extends FormRequest
      */
     public function rules()
     {
+        
+        $ad_id = (isset(\Request::segments()[2]))?  \Request::segments()[2] : '';
+        
+
         return [
-            'description' => 'required'
+            'description' => 'required|unique:ads,description,'. $ad_id
         ];
     }
 }

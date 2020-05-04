@@ -52,7 +52,7 @@ class PropertyAssigmentController extends Controller
             $table .= '<td> <small> '.$property->propiedad.'</small> </td>';
             $table .= '<td> <small> '.$property->colonia.' </small> </td>';
             $table .= '<td> <small>'.$property->operacion.' </small> </td>';
-            $table .= '<td> <small>'.precio($property->precio).' </small> </td>';
+            $table .= '<td> <small>'.precio($property->price).' </small> </td>';
             $table .= '<td> <small>'.$property->asesor.' </small> </td>';
             $table .= '<td> <small> '.$property->portal.' </small> </td>';
             $table .= '<td> <small> '.$property->nombre_prospecto.' </small> </td>';
