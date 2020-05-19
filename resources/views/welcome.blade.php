@@ -45,7 +45,7 @@
                 </div>
                 <div class="card-footer text-muted">
                     <h5 class="card-title">
-                        <a href="/admin/seguimiento-asesores" class="text-body"><span class="h6">PROSPECTO VENTA/RENTA</span></a>
+                        <a href="/admin/seguimiento-asesores" class="text-body"><span class="h6">CLIENTES</span></a>
                     </h5>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/clientes" class="text-body " >                        
-                            <span class="h6">CLIENTES</span>
+                            <span class="h6">PROPIETARIOS</span>
                         </a>
                     </h5>
                 </div>            
@@ -140,8 +140,9 @@
                 </div>
                 <div class="card-footer text-muted">
                     <h5 class="card-title">
-                        <a href="/admin/seguimiento-asesores" class="text-body"><span class="h6">PROSPECTO VENTA/RENTA</span></a>
+                        <a href="/admin/seguimiento-asesores" class="text-body"><span class="h6">CLIENTES</span></a>
                     </h5>
+                    
                 </div>
             </div>
         </div>
@@ -155,7 +156,7 @@
                 <div class="card-footer text-muted">
                     <h5 class="card-title">
                         <a href="/admin/clientes" class="text-body " >                        
-                            <span class="h6">CLIENTES</span>
+                            <span class="h6">PROPIETARIOS</span>
                         </a>
                     </h5>
                 </div>            

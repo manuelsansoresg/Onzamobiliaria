@@ -120,23 +120,10 @@
                     </h5>
                 </div>
             </div>
-        </div>
+        </div>       
         
         <div class="col-12 col-md-2">
-            <div class="card text-center">
-                <div class="card-body">
-                    <a href="">                                                                                                                        
-                        <i class="fas fa-file-upload fa-3x mt-3 text-primary"></i>                                        
-                    </a>
-                </div>
-                <div class="card-footer text-muted">
-                    <h5 class="card-title">
-                        <a href="" class="text-body " >                        
-                            <span class="h6">CARGAR EXCEL</span>
-                        </a>
-                    </h5>
-                </div>
-            </div>
+            <div class="card text-center"></div>
         </div>
         <div class="col-12 col-md-2">
             <div class="card text-center"></div>

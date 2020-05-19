@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <label class="small">AGREGAR NUEVO CLIENTE </label>
+                                <label class="small">AGREGAR NUEVO CONTACTO </label>
                                 <?php $display_client = (old('n_client') == 1) ? '' : 'display:none' ?>
                                 <?php $display_client_read = (old('n_client') == 0) ? '' : 'display:none' ?>
                                 @if (old('n_client') == 1)
@@ -49,7 +49,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="input-group mb-2">
-                                        <label class="small">*CLIENTE</label>
+                                        <label class="small">*CONTACTO</label>
                                         <div class="w-100"></div>
                                         <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                         @if($errors)
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="small text-danger">
-                                Busque o agregue un nuevo cliente
+                                Busque o agregue un nuevo contacto
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
 
                     <div class="row mt-3 mb-3">
                         <div class="col-12">
-                            <span class="small font-weight-bold">DATOS DEL CLIENTE</span>
+                            <span class="small font-weight-bold">DATOS DEL CONTACTO</span>
                         </div>
 
                     </div>
@@ -166,6 +166,13 @@
                                 <div class="invalid-feedback">
                                     El campo CLAVE EASYBROKER es obligatorio
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <div class="form-group">
+                                <label class="small">NOMBRE DESARROLLO</label>
+                                <input name="name_property" class="form-control  form-control-sm" value="{{ old('name_property') }}" type="text" required>
+                               
                             </div>
                         </div>
                     </div>
@@ -266,7 +273,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">* PRECIO DESEABLE</label>
-                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text" required>
+                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text"   required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
@@ -317,6 +324,16 @@
                                 <label class="small">TÍTULO</label>
                                 <input type="checkbox" name="is_titulo" value="1">
                             </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">COMISION</label>
+                                <input type="text" data-behaviour="decimal" name="comision" class="form-control form-control-sm">                                
+                            </div>                            
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
