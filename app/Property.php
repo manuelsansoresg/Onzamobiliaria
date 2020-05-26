@@ -12,7 +12,9 @@ class Property extends Model
         'realstate_id', 'operation_id', 'postal_id', 'institution', 'assessment', 'observation1',
         'inmobiliaria','operacion', 'Avaluo', 'address', 'small', 'gravamenes', 'price', 'saldo', 'is_predial', 'habitar', 'document',
         'pago','metros_construccion','metros_terreno','frente','fondo','estado_conservacion_antiguedad','infraestructura_zona',
-        'pass_easy_broker', 'cuota_mantenimiento', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial', 'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'plano_catastral', 'copia_escritura', 'reglamento_condominios_no_adeudo'];
+        'pass_easy_broker', 'cuota_mantenimiento', 'identificacion','curp', 'rfc', 'acta_nacimiento', 'acta_matrimonio', 'predial',
+        'no_adeudo_agua', 'no_adeudo_predial', 'cedula_plano_catastral', 'plano_catastral', 'copia_escritura',
+        'reglamento_condominios_no_adeudo','name_property','comision','documentname','Fecha'];
     
     static function getById($id)
     {
@@ -62,7 +64,10 @@ class Property extends Model
             'is_new',
             'cuota_mantenimiento',
             'privada',
-            'is_titulo'
+            'is_titulo',
+            'name_property',
+            'comision',
+            'documentname'
             
         )
             ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
@@ -103,7 +108,7 @@ class Property extends Model
                                     'cuota_mantenimiento',
                                     'name as acesor',
                                     'nombre',
-                                    'clients.nombre as cliente', 'telefono'
+                                    'clients.nombre as cliente', 'telefono','name_property','comision','documentname','properties.created_at'
                                     
                                     )
                         ->join('realstates', 'realstates.id', '=', 'properties.realstate_id')
@@ -155,10 +160,16 @@ class Property extends Model
         $is_titulo = ($request->is_titulo != null) ? 1: 0;
         
         $form_pays = '';
+        $documento ='';
 
         foreach ($request->form_pay_id as $form_pay) {
             $form_pays .= ",$form_pay";
         }
+        
+        foreach ($request->documentname as $form_document) {
+            $documento .= ",$form_document";
+        }
+        
 
         $form_pays = trim($form_pays , ',');
         
@@ -181,6 +192,7 @@ class Property extends Model
             $property->is_avaluo = ($request->Avaluo == '')? 0: 1;
             $property->postal_id = $get_cp->id;
             $property->form_pays = $form_pays;
+            $property->documentname = $documento;
             $property->user_id   = Auth::id();
             $property->is_new    = $n_client;
             $property->privada   = $privada;
@@ -214,9 +226,12 @@ class Property extends Model
             $property->postal_id = $get_cp->id;
             $property->is_avaluo = ($request->Avaluo == '') ? 0: 1;
             $property->form_pays = $form_pays;
+            $property->documentname = $documento;
             $property->is_new    = $n_client;
             $property->privada   = $privada;
             $property->is_titulo   = $is_titulo;
+            $property->name_property = $request->name_property;
+            $property->comision = $request->comision;
 
             if ($n_client == 0) {
                 $property->client_id = $client->id;

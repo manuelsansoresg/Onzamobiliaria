@@ -65,46 +65,43 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 mt-3">
-                        <table id="mobiliaria" class="table table-bordered table-responsive">
+                        <table id="mobiliaria" class="table table-striped table-bordered dt-responsive nowrap">
+                        
                             <thead>
                                 <tr>
+                                    <th><span class="small font-weight-bold">FECHA </span> </th>
                                     <th><span class="small font-weight-bold">EASYBROKER </span> </th>
-                                    <th><span class="small font-weight-bold">ASESOR </span> </th>
-                                    <th> <span class="small font-weight-bold">PROPIETARIO </span> </th>
-                                    <th> <span class="small font-weight-bold">TEL PROPIETARIO </span> </th>
-                                    <th><span class="small font-weight-bold">TÍTULO </ </th> <th><span class="small font-weight-bold">PRECIO </ </th> <th><span class="small font-weight-bold">DIRECCIÓN </ </th> <th>
-                                                    <span class="small font-weight-bold">OPERACIÓN </ </th> <th><span class="small font-weight-bold">PROPIETARIO </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION </ </th> <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </ </th> <th><span class="small font-weight-bold"> FRENTE </ </th> <th><span class="small font-weight-bold"> FONDO </ </th> <th><span class="small font-weight-bold">STATUS </ </th> <th style="width: 180px">
-                                    </th>
+                                    <th><span class="small font-weight-bold">NOMBRE DESARROLLO </span> </th>
+                                    <th><span class="small font-weight-bold">TEL PROPIETARIO </span> </th>                                    
+                                    <th> <span class="small font-weight-bold">PROPIETARIO </span> </th>                                    
+                                    <th><span class="small font-weight-bold">PRECIO </span> </th>                                     
+                                    <th><span class="small font-weight-bold">DOMICILIO </span> </th>
+                                    <th><span class="small font-weight-bold">TIPO DE PROPIEDAD </span> </th>  
+                                    <th><span class="small font-weight-bold">OPERACION</span> </th> 
+                                    <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION</span> </th> 
+                                    <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </span> </th>
+                                    <th><span class="small font-weight-bold">ASESOR </span> </th>                                     
+                                    <th><span class="small font-weight-bold">STATUS </span></th> 
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($properties as $property)
                                 <tr>
+                                    <td> <span class="small"> {{ $property->created_at  }} </span> </td>
                                     <td> <span class="small"> {{ $property->pass_easy_broker  }} </span> </td>
-                                    <td> <span class="small"> {{ $property->acesor }} </span> </td>
-                                    <td> <span class="small"> {{ (isset($property->cliente))? "$property->cliente": '' }} </span> </td>
+                                    <td> <span class="small"> {{ $property->name_property  }} </span> </td>                                    
                                     <td> <span class="small"> {{ (isset($property->telefono))? $property->telefono : '' }} </span> </td>
-                                    <td>
-                                        @if ($property->is_titulo == 1)
-                                        <span class="badge bg-green">Sí</span>
-                                        @else
-                                        <span class="badge bg-red">No</span>
-                                        @endif
-                                    </td>
+                                    <td> <span class="small"> {{ (isset($property->cliente))? "$property->cliente": '' }} </span> </td>                                    
                                     <td><span class="small"> {{ precio($property->price)  }} </span> </td>
                                     <td><span class="small"> {{ $property->address  }} </span></td>
+                                    <td><span class="small"> {{ $property->realstate_description  }} </span></td>
                                     <td><span class="small"> {{ $property->operations_description  }} </span></td>
-                                    <td>
-                                        @if ($property->is_property == 1)
-                                        <span class="badge bg-green">Sí</span>
-                                        @else
-                                        <span class="badge bg-red">No</span>
-                                        @endif
-                                    </td>
                                     <td><span class="small"> {{ $property->metros_construccion  }} </span></td>
                                     <td><span class="small"> {{ $property->metros_terreno  }} </span></td>
-                                    <td><span class="small"> {{ $property->frente  }} </span></td>
-                                    <td><span class="small"> {{ $property->fondo  }} </span></td>
+                                    <td> <span class="small"> {{ $property->acesor }} </span> </td>
                                     <td>
                                         @if($property->status == 0)
                                         <i class="fas fa-ban text-danger"></i>
@@ -123,6 +120,8 @@
                                         <a href="{{route('propiedad.edit', $property->id)}}" class="btn btn-primary ml-1">
                                             <i class="far fa-edit"></i>
                                         </a>
+                                    </td>
+                                    <td>
                                         @if($property->status == 0)
                                         @role('admin')
                                         <a href="/admin/propiedad/status/{{ $property->id }}/1" class="btn btn-success ml-1">
@@ -134,6 +133,8 @@
                                             <i class="fas fa-ban"></i>
                                         </a>
                                         @endif
+                                    </td>
+                                    <td>
                                         @role('admin')
                                         <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger ml-1">
                                             <i class="far fa-trash-alt"></i>
@@ -225,7 +226,18 @@
         }); */
 
         var table = $('#mobiliaria').DataTable({
-
+            scrollY:        "400px",
+            scrollX:        true,
+            scrollCollapse: true,
+            columnDefs:[
+                    { width: "5px", targets: 7 },
+                    { width: "5px", targets: 8 },
+                    { width: "2px", targets: 9 },
+                    { width: "2px", targets: 10 }
+                ],           
+            
+            bProcessing: true,
+            bAutoWidth: false,
             responsive: true,
             searching: true,
             dom: 'Bfrtip',

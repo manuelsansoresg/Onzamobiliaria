@@ -78,7 +78,7 @@
                         </div>
 
                     </div>
-                    <div class="row mt-3 " style="{{ $display_client_read }}" id="d_datos-cliente">
+                    <div class="row mt-3 " style ="{{ $display_client_read }}" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">NOMBRE</label>
@@ -305,6 +305,12 @@
                             <div class="form-group">
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR?</label>
                                 <input type="checkbox" name="document" value="1">
+                                <select name="documentname[]" id="documentname" class="form-control  form-control-sm is-invalid" multiple="multiple" required>
+                                    <option>IFE</option>
+                                    <option>ACTA DE NACIMIENTO</option>
+                                    <option>PREDIAL</option>
+                                </select>
+
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -512,7 +518,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="clientModalLabel">AGREGAR CLIENTE</h5>
+                <h5 class="modal-title" id="clientModalLabel">AGREGAR CONTACTO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

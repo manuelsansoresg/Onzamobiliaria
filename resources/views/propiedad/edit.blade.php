@@ -25,7 +25,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="input-group mb-2">
-                                <label class="small"><label class="small">AGREGAR NUEVO CLIENTE </label> </label>
+                                <label class="small"><label class="small">AGREGAR NUEVO CONTACTO </label> </label>
                                 @if ($property->is_new == 1)
                                 <input type="checkbox" id="n_client" name="n_client" class="mt-1 ml-1" value="1" onchange="changeClient()" checked>
                                 @else
@@ -43,7 +43,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="input-group mb-2">
-                                        <label class="small">*CLIENTE</label>
+                                        <label class="small">*CONTACTO</label>
                                         <div class="w-100"></div>
                                         <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" value="{{ $property->client_id }}" class="form-control form-control-sm">
                                         @if($errors)
@@ -59,7 +59,7 @@
 
                             </div>
                             <div class="small text-danger" style="display: none" id="error_cliente">
-                                Busque o agregue un nuevo cliente
+                                Busque o agregue un nuevo contacto
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                     </div>
                     <div class="row mt-3 mb-3">
                         <div class="col-12">
-                            <span class="small font-weight-bold">DATOS DEL CLIENTE</span>
+                            <span class="small font-weight-bold">DATOS DEL CONTACTO</span>
                         </div>
 
                     </div>
@@ -167,7 +167,13 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-12 col-md-8">
+                            <div class="form-group">
+                                <label class="small">NOMBRE DESARROLLO</label>
+                                <input name="name_property" class="form-control  form-control-sm" value="{{ $property->name_property }}" type="text" required>
+                               
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row mt-3">
@@ -310,6 +316,11 @@
                             <div class="form-group">
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR? </label>
                                 <input type="checkbox" {{ ($property->document == 1)? 'checked' : ''}} name="document" value="1">
+                                <select name="documentname[]" id="documentname" class="form-control  form-control-sm is-invalid" multiple="multiple" required>
+                                    <option>IFE</option>
+                                    <option>ACTA DE NACIMIENTO</option>
+                                    <option>PREDIAL</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -330,6 +341,16 @@
                                 <label class="small">TÍTULO</label>
                                 <input type="checkbox" {{ ($property->is_titulo == 1)? 'checked' : ''}} name="is_titulo" value="1">
                             </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">COMISION</label>
+                                <input type="text" data-behaviour="decimal" name="comision" class="form-control form-control-sm" value = "{{ $property->comision }}">                                
+                            </div>                            
                         </div>
 
                         <div class="w-100"></div>
@@ -629,7 +650,7 @@
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="clientModalLabel">AGREGAR CLIENTE</h5>
+                <h5 class="modal-title" id="clientModalLabel">AGREGAR CONTAC</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
