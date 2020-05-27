@@ -322,7 +322,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CUOTA DE MATENIMIENTO</label>
-                                <input data-msg="Debe ingresar un valor." data-rule="required" type=""  class="importe-cargo form-control"
+                                <input data-msg="Debe ingresar un valor." data-rule="required" type=""  class="form-control  form-control-sm"
                                  name="cuota_mantenimiento" id="cuota_mantenimiento">
                             </div>
                         </div>

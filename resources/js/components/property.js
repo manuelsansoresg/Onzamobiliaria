@@ -129,3 +129,14 @@ $("#frm_propiedad").submit(function (event) {
         $("#frm_propiedad").submit();
     }
 });
+$("#cuota_mantenimiento").on({
+    "focus": function(event) {
+      $(event.target).select();
+    },
+    "keyup": function(event) {
+      $(event.target).val(function(index, value) {
+        return value.replace(/\D/g, "")
+          .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+      });
+    }
+  });
