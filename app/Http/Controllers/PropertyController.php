@@ -33,7 +33,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties = Property::getAll();
+        $properties = Property::getAll();       
         $users      = User::all();
         
         return view('propiedad.index', compact('properties', 'users'));

@@ -131,7 +131,8 @@ class Property extends Model
             $property = $property->where('properties.status', $status );
         }
         
-        $property = $property->get();
+        $property = $property->orderBy('properties.created_at', 'desc')->get();
+        //$property = $property->orderby('properties.created_at', 'DESC')->get();
         //dd(DB::getQueryLog());
         return $property;
     }
@@ -166,11 +167,18 @@ class Property extends Model
             $form_pays .= ",$form_pay";
         }
         
-        foreach ($request->documentname as $form_document) {
-            $documento .= ",$form_document";
+        if ($request->documentname != null){
+            foreach ($request->documentname as $form_document) {
+                if ($documento == ""){
+                    $documento = $form_document;
+                }else{
+                    $documento .= ",$form_document";
+                }
+            }
+        }else{
+            $documento = "";
         }
         
-
         $form_pays = trim($form_pays , ',');
         
 
@@ -232,6 +240,7 @@ class Property extends Model
             $property->is_titulo   = $is_titulo;
             $property->name_property = $request->name_property;
             $property->comision = $request->comision;
+            $property->cuota_mantenimiento = str_replace(',', '', $request->cuota_mantenimiento);
 
             if ($n_client == 0) {
                 $property->client_id = $client->id;

@@ -316,11 +316,50 @@
                             <div class="form-group">
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR? </label>
                                 <input type="checkbox" {{ ($property->document == 1)? 'checked' : ''}} name="document" value="1">
-                                <select name="documentname[]" id="documentname" class="form-control  form-control-sm is-invalid" multiple="multiple" required>
-                                    <option>IFE</option>
-                                    <option>ACTA DE NACIMIENTO</option>
-                                    <option>PREDIAL</option>
-                                </select>
+                                <?php 
+                                    $qcruzo1 = false;
+                                    $qcruzo2 = false;
+                                    $qcruzo3 = false 
+                                ?>
+                                <select name="documentname[]" id="documentname" class="form-control select2" multiple="multiple" required>
+                                   
+
+                                    @foreach(explode(',',$property->documentname) as $row)
+
+                                        @if ($qcruzo1 == false)
+                                            @if ($row =="IFE") 
+                                                <option value="IFE" selected>IFE</option>
+                                                <?php $qcruzo1 = true; ?>                                                                            
+                                            @endif
+                                        @endif
+                                        @if ($qcruzo2 == false)
+                                            @if ($row =="ACTA DE NACIMIENTO") 
+                                                <option value="ACTA DE NACIMIENTO" selected>ACTA DE NACIMIENTO</option>
+                                                <?php $qcruzo2 =true;  ?>                                     
+                                            @endif
+                                        @endif
+                                        @if ($qcruzo3 == false)
+                                            @if ($row =="PREDIAL") 
+                                                <option value="PREDIAL" selected>PREDIAL</option>
+                                                <?php $qcruzo3= true; ?>                                      
+                                            @endif
+                                        @endif
+                                       <!-- 
+                                        <option value="IFE" {{( $row =="IFE" )? 'selected' : ''}}>IFE</option>
+                                        <option value="ACTA DE NACIMIENTO" {{( $row =="ACTA DE NACIMIENTO" )? 'selected' : ''}}>ACTA DE NACIMIENTO</option>
+                                        <option value="PREDIAL" {{( $row =="PREDIAL" )? 'selected' : ''}}>PREDIAL</option>
+                                      -->
+                                    @endforeach
+                                    @if ($qcruzo1 == false)
+                                        <option value="IFE">IFE</option>
+                                    @endif
+                                    @if ($qcruzo2 == false)
+                                        <option value="ACTA DE NACIMIENTO">ACTA DE NACIMIENTO</option>
+                                    @endif
+                                    @if ($qcruzo3 == false)
+                                        <option value="PREDIAL">PREDIAL</option>
+                                    @endif
+                               </select>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">

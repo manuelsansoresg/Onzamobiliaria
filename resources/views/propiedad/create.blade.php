@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mt-3">
+    <div class="form-row mt-5">
         <div class="col-12 col-md-12 ">
             <div class="card">
                 {{ Form::open(['route' => 'propiedad.store', 'method' => 'POST',  'files' => true, 'id' => 'frm_propiedad', 'class' => 'needs-validation', 'novalidate']) }}
@@ -305,10 +305,10 @@
                             <div class="form-group">
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR?</label>
                                 <input type="checkbox" name="document" value="1">
-                                <select name="documentname[]" id="documentname" class="form-control  form-control-sm is-invalid" multiple="multiple" required>
-                                    <option>IFE</option>
-                                    <option>ACTA DE NACIMIENTO</option>
-                                    <option>PREDIAL</option>
+                                <select name="documentname[]" id="documentname" class="form-control  form-control-sm" multiple="multiple" required>
+                                    <option value="IFE">IFE</option>
+                                    <option value="ACTA DE NACIMIENTO">ACTA DE NACIMIENTO</option>
+                                    <option value="PREDIAL">PREDIAL</option>
                                 </select>
 
                             </div>
@@ -322,7 +322,8 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CUOTA DE MATENIMIENTO</label>
-                                <input type="text" data-behaviour="decimal" name="cuota_mantenimiento" class="form-control form-control-sm">
+                                <input data-msg="Debe ingresar un valor." data-rule="required" type=""  class="importe-cargo form-control"
+                                 name="cuota_mantenimiento" id="cuota_mantenimiento">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -353,7 +354,7 @@
                             <div class="form-group">
                                 <label class="small">* ¿FORMAS DE PAGO DESEABLES?</label>
                                 <div class="w-100"></div>
-                                <select name="form_pay_id[]" id="form_pay_id" class="form-control  form-control-sm is-invalid" multiple="multiple" required>
+                                <select name="form_pay_id[]" id="form_pay_id" class="form-control form-control-sm is-invalid" multiple="multiple" required>
                                     @foreach ($form_payments as $form_payment)
                                     <option value="{{ $form_payment->id }}"> {{ $form_payment->description }} </option>
                                     @endforeach
