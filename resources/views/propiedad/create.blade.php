@@ -78,7 +78,7 @@
                         </div>
 
                     </div>
-                    <div class="row mt-3 " style ="{{ $display_client_read }}" id="d_datos-cliente">
+                    <div class="row mt-3 " style="{{ $display_client_read }}" id="d_datos-cliente">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">NOMBRE</label>
@@ -172,7 +172,7 @@
                             <div class="form-group">
                                 <label class="small">NOMBRE DESARROLLO</label>
                                 <input name="name_property" class="form-control  form-control-sm" value="{{ old('name_property') }}" type="text" required>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">* PRECIO DESEABLE</label>
-                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text"   required>
+                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
@@ -322,8 +322,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CUOTA DE MATENIMIENTO</label>
-                                <input data-msg="Debe ingresar un valor." data-rule="required" type=""  class="form-control  form-control-sm"
-                                 name="cuota_mantenimiento" id="cuota_mantenimiento">
+                                <input data-msg="Debe ingresar un valor." data-rule="required" type="" class="form-control  form-control-sm format_number" name="cuota_mantenimiento" id="cuota_mantenimiento">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -339,8 +338,8 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">COMISION</label>
-                                <input type="text" data-behaviour="decimal" name="comision" class="form-control form-control-sm">                                
-                            </div>                            
+                                <input type="text" data-behaviour="decimal" name="comision" class="form-control form-control-sm">
+                            </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">

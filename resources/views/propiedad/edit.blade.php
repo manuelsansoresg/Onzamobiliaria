@@ -371,7 +371,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CUOTA DE MANTENIMIENTO </label>
-                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" class="form-control form-control-sm">
+                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" class="form-control form-control-sm format_number">
                             </div>
                         </div>
 

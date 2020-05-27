@@ -5119,6 +5119,16 @@ $("#frm_propiedad").submit(function (event) {
     $("#frm_propiedad").submit();
   }
 });
+$(".format_number").on({
+  "focus": function focus(event) {
+    $(event.target).select();
+  },
+  "keyup": function keyup(event) {
+    $(event.target).val(function (index, value) {
+      return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+    });
+  }
+});
 
 /***/ }),
 
