@@ -27,7 +27,6 @@ $(document).ready(function () {
 
     var table = $('#table_property_assigment').DataTable( {
         "ajax":'/admin/property/getAll',
-
         "order": [[ 0, 'desc' ]],
         dom: 'Bfrtip',
         buttons: [{
