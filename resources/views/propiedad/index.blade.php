@@ -66,22 +66,22 @@
                 <div class="row">
                     <div class="col-12 mt-3">
                         <table id="mobiliaria" class="table table-striped table-bordered dt-responsive nowrap">
-                        
+
                             <thead>
                                 <tr>
                                     <th><span class="small font-weight-bold">FECHA </span> </th>
                                     <th><span class="small font-weight-bold">EASYBROKER </span> </th>
                                     <th><span class="small font-weight-bold">NOMBRE DESARROLLO </span> </th>
-                                    <th><span class="small font-weight-bold">TEL PROPIETARIO </span> </th>                                    
-                                    <th> <span class="small font-weight-bold">PROPIETARIO </span> </th>                                    
-                                    <th><span class="small font-weight-bold">PRECIO </span> </th>                                     
+                                    <th><span class="small font-weight-bold">TEL PROPIETARIO </span> </th>
+                                    <th> <span class="small font-weight-bold">PROPIETARIO </span> </th>
+                                    <th><span class="small font-weight-bold">PRECIO </span> </th>
                                     <th><span class="small font-weight-bold">DOMICILIO </span> </th>
-                                    <th><span class="small font-weight-bold">TIPO DE PROPIEDAD </span> </th>  
-                                    <th><span class="small font-weight-bold">OPERACION</span> </th> 
-                                    <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION</span> </th> 
+                                    <th><span class="small font-weight-bold">TIPO DE PROPIEDAD </span> </th>
+                                    <th><span class="small font-weight-bold">OPERACION</span> </th>
+                                    <th><span class="small font-weight-bold">M<sup>2</sup> CONSTRUCCION</span> </th>
                                     <th><span class="small font-weight-bold">M<sup>2</sup> TERRENO </span> </th>
-                                    <th><span class="small font-weight-bold">ASESOR </span> </th>                                     
-                                    <th><span class="small font-weight-bold">STATUS </span></th> 
+                                    <th><span class="small font-weight-bold">ASESOR </span> </th>
+                                    <th><span class="small font-weight-bold">STATUS </span></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -92,9 +92,9 @@
                                 <tr>
                                     <td> <span class="small"> {{ $property->created_at  }} </span> </td>
                                     <td> <span class="small"> {{ $property->pass_easy_broker  }} </span> </td>
-                                    <td> <span class="small"> {{ $property->name_property  }} </span> </td>                                    
+                                    <td> <span class="small"> {{ $property->name_property  }} </span> </td>
                                     <td> <span class="small"> {{ (isset($property->telefono))? $property->telefono : '' }} </span> </td>
-                                    <td> <span class="small"> {{ (isset($property->cliente))? "$property->cliente": '' }} </span> </td>                                    
+                                    <td> <span class="small"> {{ (isset($property->cliente))? "$property->cliente": '' }} </span> </td>
                                     <td><span class="small"> {{ precio($property->price)  }} </span> </td>
                                     <td><span class="small"> {{ $property->address  }} </span></td>
                                     <td><span class="small"> {{ $property->realstate_description  }} </span></td>
@@ -226,16 +226,30 @@
         }); */
 
         var table = $('#mobiliaria').DataTable({
-            scrollY:        "400px",
-            scrollX:        true,
+            scrollY: "400px",
+            "order": [
+                [0, "desc"]
+            ],
+            scrollX: true,
             scrollCollapse: true,
-            columnDefs:[
-                    { width: "5px", targets: 7 },
-                    { width: "5px", targets: 8 },
-                    { width: "2px", targets: 9 },
-                    { width: "2px", targets: 10 }
-                ],           
-            
+            columnDefs: [{
+                    width: "5px",
+                    targets: 7
+                },
+                {
+                    width: "5px",
+                    targets: 8
+                },
+                {
+                    width: "2px",
+                    targets: 9
+                },
+                {
+                    width: "2px",
+                    targets: 10
+                }
+            ],
+
             bProcessing: true,
             bAutoWidth: false,
             responsive: true,
