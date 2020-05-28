@@ -241,6 +241,9 @@ class Property extends Model
             $property->name_property = $request->name_property;
             $property->comision = $request->comision;
             $property->cuota_mantenimiento = str_replace(',', '', $request->cuota_mantenimiento);
+            $property->saldo = str_replace(',', '', $request->saldo);
+            $property->price = str_replace(',', '', $request->price);
+            $property->Avaluo = str_replace(',', '', $request->Avaluo);
 
             if ($n_client == 0) {
                 $property->client_id = $client->id;

@@ -83,7 +83,7 @@ if ($("#frm_propiedad").length > 0) {
             // hide checkboxes
             container.find('input').addClass('d-none');
         }
-    });
+    });    
 }
 
 $(document).ready(function () {
@@ -134,9 +134,26 @@ $(".format_number").on({
       $(event.target).select();
     },
     "keyup": function(event) {
+      // skip for arrow keys
+        if(event.which >= 37 && event.which <= 40){
+            event.preventDefault();
+        }
+      $(event.target).val(function(index, value) {
+        return value.replace(/\D/g, "")
+          .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+          .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+      });
+    } 
+  });
+/*
+$(".format_number").on({
+    "focus": function(event) {
+      $(event.target).select();
+    },
+    "keyup": function(event) {
       $(event.target).val(function(index, value) {
         return value.replace(/\D/g, "")
           .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
       });
     } 
-  });
+  });*/

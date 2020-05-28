@@ -159,14 +159,14 @@ class Property_assigment extends Model
                 $alert    = '';
 
                 if ($dias > 0 && $llamadas == 0) {
-                    $alert = 'NO';
+                    $alert = '<button type="button" class="btn btn-danger">NO</button>';
 
 
                 }else{
                     $assigment = Property_assigment::find($property->assignment_id);
                     $assigment->is_seguimiento = 1;
                     $assigment->update();
-                    $alert = 'SÍ';
+                    $alert = '<button type="button" class="btn btn-success">SÍ</button>';
                  }
 
 

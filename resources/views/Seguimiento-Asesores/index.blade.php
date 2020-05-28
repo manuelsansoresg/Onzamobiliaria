@@ -97,7 +97,7 @@
 </div>
 
 <div class="modal fade" id="moreSection" tabindex="-1" role="dialog" aria-labelledby="moreSectionLabel" aria-hidden="true">
-    <div class="modal-dialog <modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="moreSectionLabel">SEGUIMIENTO</h5>
@@ -130,8 +130,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                <button type="button" class="btn btn-primary">GUARDAR</button>
             </div>
         </div>
     </div>

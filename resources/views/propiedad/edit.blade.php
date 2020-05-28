@@ -206,9 +206,9 @@
                                 <label class="small">AVALUO</label> &nbsp;
                                 <input type="checkbox" name="avaluo" id="is_avaluo" onchange="changeAvaluo()" value="1" {{ ($property->is_avaluo == 1)? 'checked' : '' }}>
                                 @if ($property->is_avaluo == 1)
-                                <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo" class="form-control form-control-sm">
+                                <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo" class="form-control form-control-sm format_number">
                                 @else
-                                <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
+                                <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm format_number">
 
                                 @endif
                                 @if($errors)
@@ -283,7 +283,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">PRECIO DESEABLE</label>
-                                <input name="price" data-behaviour="decimal" value="{{ $property->price }}" class="form-control form-control-sm" type="text" required>
+                                <input name="price" data-behaviour="decimal" value="{{ $property->price }}" class="form-control form-control-sm format_number" type="text" required>
 
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
@@ -297,7 +297,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">SALDO</label>
-                                <input name="saldo" data-behaviour="decimal" value="{{ $property->saldo }}" class="form-control form-control-sm" type="text">
+                                <input name="saldo" data-behaviour="decimal" value="{{ $property->saldo }}" class="form-control form-control-sm format_number" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -321,26 +321,26 @@
                                 $qcruzo2 = false;
                                 $qcruzo3 = false
                                 ?>
-                                <select name="documentname[]" id="documentname" class="form-control select2" multiple="multiple" required>
+                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple" required>
 
 
                                     @foreach(explode(',',$property->documentname) as $row)
 
                                     @if ($qcruzo1 == false)
                                     @if ($row =="IFE")
-                                    <option value="IFE" selected>IFE</option>
+                                    <option value="INE" selected>INE</option>
                                     <?php $qcruzo1 = true; ?>
                                     @endif
                                     @endif
                                     @if ($qcruzo2 == false)
-                                    @if ($row =="ACTA DE NACIMIENTO")
-                                    <option value="ACTA DE NACIMIENTO" selected>ACTA DE NACIMIENTO</option>
+                                    @if ($row =="RECIBO DE LUZ FACTURADO")
+                                    <option value="RECIBO DE LUZ FACTURADO" selected>RECIBO DE LUZ FACTURADO</option>
                                     <?php $qcruzo2 = true;  ?>
                                     @endif
                                     @endif
                                     @if ($qcruzo3 == false)
-                                    @if ($row =="PREDIAL")
-                                    <option value="PREDIAL" selected>PREDIAL</option>
+                                    @if ($row =="COMPROBANTE DE ESTADO DE CUENTA BANCARIO")
+                                    <option value="COMPROBANTE DE ESTADO DE CUENTA BANCARIO" selected>COMPROBANTE DE ESTADO DE CUENTA BANCARIO</option>
                                     <?php $qcruzo3 = true; ?>
                                     @endif
                                     @endif
@@ -351,13 +351,13 @@
                                       -->
                                     @endforeach
                                     @if ($qcruzo1 == false)
-                                    <option value="IFE">IFE</option>
+                                    <option value="INE">INE</option>
                                     @endif
                                     @if ($qcruzo2 == false)
-                                    <option value="ACTA DE NACIMIENTO">ACTA DE NACIMIENTO</option>
+                                    <option value="RECIBO DE LUZ FACTURADO">RECIBO DE LUZ FACTURADO</option>
                                     @endif
                                     @if ($qcruzo3 == false)
-                                    <option value="PREDIAL">PREDIAL</option>
+                                    <option value="COMPROBANTE DE ESTADO DE CUENTA BANCARIO">COMPROBANTE DE ESTADO DE CUENTA BANCARIO</option>
                                     @endif
                                 </select>
                             </div>
