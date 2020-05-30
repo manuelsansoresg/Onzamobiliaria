@@ -305,7 +305,7 @@
                             <div class="form-group">
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR?</label>
                                 <input type="checkbox" name="document" value="1">
-                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple" required>                               
+                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple">                               
                                     <option value="INE">INE</option>
                                     <option value="RECIBO DE LUZ FACTURADO">RECIBO DE LUZ FACTURADO</option>
                                     <option value="COMPROBANTE DE ESTADO DE CUENTA BANCARIO">COMPROBANTE DE ESTADO DE CUENTA BANCARIO</option>
@@ -322,7 +322,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CUOTA DE MATENIMIENTO</label>
-                                <input data-msg="Debe ingresar un valor." data-rule="required" type="" class="form-control form-control-sm format_number" name="cuota_mantenimiento" id="cuota_mantenimiento">
+                                <input data-msg="Debe ingresar un valor." data-behaviour="decimal" data-rule="required" type="" class="form-control form-control-sm format_number" name="cuota_mantenimiento" id="cuota_mantenimiento">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">

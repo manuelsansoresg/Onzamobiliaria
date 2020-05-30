@@ -1,9 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'onza inmobiliaria')
+@section('title', 'ONZA INMOBILIARIA')
 
 @section('content_header')
-<h1>Bienvenido</h1>
+<link  rel="icon"   href="{{ asset('img/logo.png') }}" type="image/png" />
+<h1>BIEVENIDO</h1>
 @stop
 
 @section('content')

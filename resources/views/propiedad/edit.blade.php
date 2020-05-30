@@ -321,7 +321,7 @@
                                 $qcruzo2 = false;
                                 $qcruzo3 = false
                                 ?>
-                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple" required>
+                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple" >
 
 
                                     @foreach(explode(',',$property->documentname) as $row)
