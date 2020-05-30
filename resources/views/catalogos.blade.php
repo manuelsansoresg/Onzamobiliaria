@@ -1,4 +1,5 @@
 @extends('layouts.master')
+<link  rel="icon"   href="{{ asset('img/logo.png') }}" type="image/png" />
 @section('title', 'Catalogos')
 @section('content')
 

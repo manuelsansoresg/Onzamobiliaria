@@ -146,6 +146,7 @@ class Property extends Model
                             ->join('operations', 'operations.id', '=', 'properties.operation_id')
                             ->where('pass_easy_broker', $easy_broker)
                             ->first();
+        
         $prop = array(
             'tipo' => $property->tipo, 'operacion' => $property->operacion, 'colonia' => $property->colonia, 'asesor' => $property->asesor, 'price' => precio($property->price) );
         return array('property' => $prop, 'total' => ($property)? 1 : 0 );

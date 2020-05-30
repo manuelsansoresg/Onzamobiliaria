@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'ADMINISTRACIÓN')
-
+<link  rel="icon"   href="{{ asset('img/logo.png') }}" type="image/png" />
 @section('content')
 <div class="container">
     <div class="row mt-3 justify-content-center">

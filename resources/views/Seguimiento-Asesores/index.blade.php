@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="table_property_assigment" class="table  dataTables_scrollBody" style="width:100%">
+                        <table id="table_property_assigment" class="table dataTables_scrollBody" style="width:100%">
                             <thead>
                             <tr>
                                 @role('admin')
@@ -62,6 +62,7 @@
                                 <th> <span class="small font-weight-bold"> ASESOR </span> </th>
                                 @endrole
                                 <th> <span class="small font-weight-bold"> STATUS </span> </th>
+                                <th> <span class="small font-weight-bold"> OBSERVACIONES </span> </th>
 
                                 <!-- <th>Llamadas</th> -->
                                 <th style="width: 180px;" class=""></th>
@@ -131,7 +132,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
-                <button type="button" class="btn btn-primary">GUARDAR</button>
+                <button type="button" class="btn btn-primary">ACEPTAR</button>
             </div>
         </div>
     </div>
@@ -145,6 +146,9 @@
       $(function() {
 
         var table = $('#property_assigment').DataTable({
+            "order": [
+                [1, "desc"]
+            ],
             //"scrollX": true,
             responsive: true,
             searching: false,
@@ -158,7 +162,7 @@
                 {
                     extend: 'pdf',
                     orientation: 'landscape',
-                    text: 'PDF',
+                    text: '<i class="far fa-file-pdf"> PDF</i>',
                     className: 'btn-danger',
                     title:'LISTADO DE PROSPECTO VENTA/RENTA(ASIGNACIÓN)',
                     fontSize: '6',
@@ -190,11 +194,13 @@
                 },
                 {
                     extend: 'excel',
-                    text: 'EXCEL',
+                    text: '<i class="fas fa-file-excel"> EXCEL </i>',
+                    className: 'btn btn-success',
                 },
                 {
                     extend: 'print',
-                    text: 'IMPRIMIR',
+                    text:'<i class="fas fa-print"> IMPRIMIR</i>',
+                    className: 'btn btn-light',
                 }
             ],
             language: {

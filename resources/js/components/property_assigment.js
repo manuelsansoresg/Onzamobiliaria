@@ -27,12 +27,20 @@ $(document).ready(function () {
 
     var table = $('#table_property_assigment').DataTable( {
         "ajax":'/admin/property/getAll',
-        "order": [[ 0, 'desc' ]],
+
+        "order": [[ 1, 'desc' ]],
+        scrollY: "400px",
+        scrollX: true,
+        scrollCollapse: true,
+        bAutoWidth: false,
+        lengthMenu: [100],
+        orderCellsTop: true,
+        fixedHeader: true,
         dom: 'Bfrtip',
         buttons: [{
             extend: 'pdf',
             orientation: 'landscape',
-            text: 'PDF',
+            text: '<i class="far fa-file-pdf"> PDF</i>',
             className: 'btn-danger',
             title: 'LISTADO DE PROPIEDADES',
             fontSize: '6',
@@ -64,11 +72,13 @@ $(document).ready(function () {
         },
         {
             extend: 'excel',
-            text: 'EXCEL',
+            text: '<i class="fas fa-file-excel"> EXCEL </i>',
+            className: 'btn btn-success',
         },
         {
             extend: 'print',
-            text: 'IMPRIMIR',
+            text:'<i class="fas fa-print"> IMPRIMIR</i>',
+            className: 'btn btn-light',
         }
         ],
         initComplete: function () {
@@ -147,7 +157,7 @@ window.searchEasyBroker = function(){
     $('#error_easy').html('');
 
     if(easy_broker == ''){
-        $('#error_easy').html('El campo easy broker esta vacio');
+        $('#error_easy').html('FAVOR DE CAPTURAR LA CLAVE EASYBROKER');
     }else{
         axios.get
             ('/admin/propiedad/search/easybroker/' + easy_broker)
@@ -156,13 +166,18 @@ window.searchEasyBroker = function(){
                 var total = response.data.total;
 
                 if (total  > 0) {
-                    $('#val_propiedad').html(result.tipo);
+                    /*$('#val_propiedad').html(result.tipo);
                     $('#val_operacion').html(result.operacion);
                     $('#val_colonia').html(result.colonia);
                     $('#val_asesor').html(result.asesor);
-                    $('#val_precio').html(result.price);
+                    $('#val_precio').html(result.price);*/
+                    $("#valnombre").val(result.tipo);
+                    $('#valoperacion').val(result.operacion);
+                    $('#valcolonia').val(result.colonia);
+                    $('#valasesor').val(result.asesor);
+                    $('#valprecio').val(result.price);
                 }else{
-                    $('#error_easy').html('El campo easy broker seleccionado no existe.');
+                    $('#error_easy').html('LA CLAVE NO EXISTE, FAVOR DE VERIFICAR.');
                 }
 
 

@@ -43,13 +43,9 @@
                                             <option value="1" {{ (isset($_GET['status']) && $_GET['status'] == 1 ) ? 'selected': '' }}>Disponible</option>
                                             <option value="0" {{ (isset($_GET['status']) && $_GET['status'] == 0 ) ? 'selected': '' }}>No Disponible</option>
                                         </select>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-2">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
-                                    </div>
-                                </div>
+                                </div>                               
                             </div>
                         </form>
 
@@ -254,13 +250,15 @@
             bAutoWidth: false,
             responsive: true,
             searching: true,
+            lengthMenu: [100],
             orderCellsTop: true,
             fixedHeader: true,
+            lengthChange: false,
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'pdf',
                     orientation: 'landscape',
-                    text: 'PDF',
+                    text: '<i class="far fa-file-pdf"> PDF</i>',                    
                     className: 'btn-danger',
                     title: 'LISTADO DE PROPIEDADES',
                     fontSize: '6',
@@ -292,11 +290,13 @@
                 },
                 {
                     extend: 'excel',
-                    text: 'EXCEL',
+                    text: '<i class="fas fa-file-excel"> EXCEL </i>',
+                    className: 'btn btn-success',
                 },
                 {
                     extend: 'print',
-                    text: 'IMPRIMIR',
+                    text:'<i class="fas fa-print"> IMPRIMIR</i>',
+                    className: 'btn btn-light',
                 }
             ],
             language: {
@@ -320,7 +320,7 @@
                 }
             },
         });
-
+              
         $('#table-users').DataTable({
 
             language: {

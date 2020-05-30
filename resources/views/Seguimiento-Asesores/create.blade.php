@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Asignacion de Asesores')
+@section('title', 'ASIGNACION DE ASESORES')
 
 @section('content')
 <div class="container">
@@ -46,43 +46,37 @@
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> PROPIEDAD: </span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">PROPIEDAD</span>
+                                <input type="text" id="valnombre" name="valnombre" value="" class="form-control form-control-sm" readonly>
+                            </div>
                         </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_propiedad"></span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">OPERACIÓN</span>
+                                <input type="text" id="valoperacion" name="valoperacion" value ="" class="form-control form-control-sm" readonly>
+                            </div>
                         </div>
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> OPERACIÓN: </span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">COLONIA</span>
+                                <input type="text" id="valcolonia" name="valcolonia" value="" class="form-control form-control-sm" readonly>
+                            </div>
                         </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_operacion"></span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">ASESOR</span>
+                                <input type="text" name="valasesor" id="valasesor" value ="" class="form-control form-control-sm text-uppercase" readonly>
+                            </div>
                         </div>
-
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> COLONIA: </span>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <span class="font-weight-bold small">PRECIO</span>
+                                <input type="text" name="valprecio" id="valprecio" value="" class="form-control form-control-sm" readonly>
+                            </div>
                         </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_colonia"></span>
-                        </div>
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> ASESOR: </span>
-                        </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_asesor"></span>
-                        </div>
-
-                        <div class="col-5 col-md-2">
-                            <span class="font-weight-bold small"> PRECIO: </span>
-                        </div>
-                        <div class="col-7 col-md-4">
-                            <span class="small text-uppercase" id="val_precio"></span>
-                        </div>
-                    </div>
-
+                    </div>                 
                     <div class="row mt-3">
                         <div class="col-12">
                             <span class="font-weight-bold">COMPLEMENTARIO</span>

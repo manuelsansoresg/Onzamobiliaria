@@ -1,3 +1,4 @@
+
 @foreach(config('adminlte.plugins') as $plugin)
     @if($plugin['active'])
         @foreach($plugin['files'] as $file)

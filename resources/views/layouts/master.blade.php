@@ -8,11 +8,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- Font Awesome -->
+    <link rel="icon"   href="{{ asset('img/logo.png') }}" type="image/png" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/css/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor_assets/DataTables/Buttons-1.6.1/css/buttons.dataTables.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
     @yield('css')
@@ -56,11 +58,16 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('vendor_assets/sark-decimal/sark-decimal.js') }}"></script>
+
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('vendor_assets/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/js/dataTables.jqueryui.min.js') }}"></script>
     <script src="{{ asset('vendor_assets/DataTables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendor_assets/DataTables/Buttons-1.6.1/js/dataTables.buttons.js') }}"></script>   
 
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+   
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
     <script src="{{ asset('vendor_assets/jquery.infiniteScroll.js') }}"></script>
 

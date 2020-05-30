@@ -157,19 +157,33 @@ class Property_assigment extends Model
                 $diff     = $date1->diff($date2);
                 $dias     = $diff->format('%d');
                 $alert    = '';
+                $qobserv ='';
+                $cont = 1 ;
 
+                $historiasllamadas = HistoricAssigment::where('property_assignment_id', $property->assignment_id)->get();
+                
                 if ($dias > 0 && $llamadas == 0) {
-                    $alert = '<button type="button" class="btn btn-danger">NO</button>';
+                    $alert = '<label class="btn btn-danger">NO</label>';
 
 
                 }else{
                     $assigment = Property_assigment::find($property->assignment_id);
                     $assigment->is_seguimiento = 1;
                     $assigment->update();
-                    $alert = '<button type="button" class="btn btn-success">SÍ</button>';
+                    $alert = '<label class="btn btn-success">SÍ</label>';
                  }
-
-
+                
+                if ($llamadas > 0 ) {
+                    foreach ($historiasllamadas as $historiallamada) {
+                        if ($qobserv == ""){
+                            $qobserv = $cont."-. ".$historiallamada->observacion1;
+                        }else{
+                            $qobserv .="</br>".$cont."-. ".$historiallamada->observacion1;
+                        }
+                        
+                        $cont = $cont + 1;
+                    }
+                }
 
                 if ($user_role == 'admin') {
 
@@ -222,11 +236,12 @@ class Property_assigment extends Model
                     $td_option = '';
                     $table[] = array(
                         $alert,
-                        date('Y-m-d', strtotime( $property->date_assignment)),
+                        $property->date_assignment,
                         $property->nombre_prospecto,
                         $property->telefono,
                         $property->asesor,
                         self::getStatysAssigmentId($property->assignment_id),
+                        $qobserv,
                         "<a onclick=\"viewMore('".$property->assignment_id."')\" class=\"btn btn-primary text-white\"> <i class=\"fas fa-plus-square\"></i> </a>".
                         '<a href="/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-secondary ml-md-1  text-white"> <i class="fas fa-edit"></i> </a>'.
                         '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-success text-white ml-md-1"> <i class="fas fa-phone"></i> </a>'
@@ -238,10 +253,11 @@ class Property_assigment extends Model
                     if ($dias < 1 || $llamadas > 0) {
 
                         $table[] = array(
-                            date('Y-m-d', strtotime( $property->date_assignment)),
+                            $property->date_assignment,
                             $property->nombre_prospecto,
                             $property->telefono,
                             self::getStatysAssigmentId($property->assignment_id),
+                            $qobserv,
                             "<a onclick=\"viewMore('".$property->assignment_id."')\" class=\"btn btn-primary text-white\"> <i class=\"fas fa-plus-square\"></i> </a>".
                             '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-success text-white ml-md-1"> <i class="fas fa-phone"></i> </a>'
 
