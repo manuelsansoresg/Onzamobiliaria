@@ -44,26 +44,42 @@ class Property_assigment extends Model
 
     public static function getAllAssigment()
     {
-        $user      = User::find(Auth::id());
-        $user_role = $user->getRoleNames()->first();
+        try{
+            $user      = User::find(Auth::id());
+            $user_role = $user->getRoleNames()->first();
+            $status     = (isset($_GET['filtro'])) ? $_GET['filtro'] : '';     
 
-        $property_assigment = Property_assigment::select(
-                                        'property_assignment.id as assignment_id',
-                                        'property_assignment.created_at',
-                                         'property_assignment.nombre as nombre_prospecto',
-                                        'property_assignment.telefono',
-                                        'property_assignment.correo',
-                                        'property_assignment.date_assignment',
-                                        'users.name as asesor'
-                                        )
-                                ->join('properties', 'properties.id', '=', 'property_assignment.property_id')
-                                ->join('users', 'users.id', '=', 'property_assignment.asesor_id')
-                                ->where('properties.status', 1);
-        if ($user_role != 'admin') {
-            $property_assigment = $property_assigment->where('property_assignment.asesor_id', Auth::id());
+            $property_assigment = Property_assigment::select(
+                                            'property_assignment.id as assignment_id',
+                                            'property_assignment.created_at',
+                                            'property_assignment.nombre as nombre_prospecto',
+                                            'property_assignment.telefono',
+                                            'property_assignment.correo',
+                                            'property_assignment.date_assignment',
+                                            'users.name as asesor'
+                                            )
+                                    ->join('properties', 'properties.id', '=', 'property_assignment.property_id')
+                                    ->join('users', 'users.id', '=', 'property_assignment.asesor_id')
+                                    ->where('properties.status', 1);
+            
+            if ($status)
+            {
+                $property_assigment = $property_assigment->where('property_assignment.id',$status);
+            }
+                        //
+            if ($user_role != 'admin') {
+                $property_assigment = $property_assigment->where('property_assignment.asesor_id', Auth::id());
+            }
+            
+            $property_assigment = $property_assigment->get();
+            
+            //dd($property_assigment);
+            return $property_assigment;            
         }
-        $property_assigment = $property_assigment->get();
-        return $property_assigment;
+        catch(\Illuminate\Database\QueryException $ex){ 
+            dd($ex->getMessage()); 
+            // Note any method of class PDOException can be called on $ex.
+       }
     }
 
     static function getAll($assignment_id = "")
@@ -103,15 +119,16 @@ class Property_assigment extends Model
             ->join('operations', 'operations.id', '=', 'properties.operation_id')
             ->orderBy('property_assignment.date_assignment', 'desc')
             ->where('properties.status', 1);
-        if($assignment_id != ''){
-            $property = $property->where('property_assignment.id', $assignment_id);
+            
+        if($filtro != ''){
+            $property = $property->where('property_assignment.id', $filtro);
         }
 
         if ($user_role != 'admin') {
             $property = $property->where('property_assignment.asesor_id', Auth::id());
         }
 
-        /*if ($campo != '') {
+         /*if ($campo != '') {
             $property = $property->where(function ($q) use ($campo) {
                 $q->orWhere('pass_easy_broker', 'like', "%$campo%");
                 $q->orWhere('property_assignment.nombre', 'like', "%$campo%");
@@ -134,20 +151,21 @@ class Property_assigment extends Model
             }
         } else {
             $properties = $property;
-        }*/
-
+        }*/       
         return $property;
     }
 
     static function getAllTable()
     {
         $properties = self::getAllAssigment();
-
         $table      = array();
         $user       = User::find(Auth::id());
-        $user_role  = $user->getRoleNames()->first();
+        $user_role  = $user->getRoleNames()->first();   
+        
+        $filtro = (isset($_GET['filtro']))?$_GET['filtro']: '';
+       
         $td_option  = '';
-
+               
         if ($properties) {
             foreach ($properties as $property) {
 

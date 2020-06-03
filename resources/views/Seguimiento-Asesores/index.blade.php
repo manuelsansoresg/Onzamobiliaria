@@ -26,21 +26,18 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row d-none">
+            <div class="row">
                 <div class="row mt-3 px-3 justify-content-end">
                     <form action="" method="GET" class="form-inline ">
-                        <label class="" for="inlineFormInputName2">Filtro: </label>
+                        <label class="" for="inlineFormInputName2">SELECCIONE EL CONCEPTO A BUSCAR : </label>
                         <select name="filtro" class="for-control form-control-sm mx-2">
+                            
                             <option value="TODOS">TODOS</option>
                             @foreach ($all_status as $status)
                             <option value="{{ $status->id }}" {{ (isset($_GET['filtro']) && $_GET['filtro'] == $status->id ) ? 'selected'  : '' }}> {{ $status->description }} </option>
                             @endforeach
-                        </select>
-                        <label class="mx-2" for="inlineFormInputGroupUsername2">Buscar</label>
-                        <input type="text" name="campo" value="{{ (isset($_GET['campo'])) ? $_GET['campo'] : '' }}" class="form-control form-control-sm">
-
-
-                        <button type="submit" class="btn btn-primary btn-sm mx-2"><i class="fas fa-search"></i> Buscar</button>
+                        </select>                        
+                        <button type="submit" class="btn btn-primary btn-sm mx-2"><i class="fas fa-search"></i> BUSCAR </button>
                     </form>
                 </div>
             </div>
@@ -49,29 +46,31 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="table_property_assigment" class="table dataTables_scrollBody" style="width:100%">
+                        <table id="table_property_assigment" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                             <thead>
-                            <tr>
-                                @role('admin')
-                                <th> <span class="small font-weight-bold"> SEGUIMIENTO </span> </th>
-                                @endrole
-                                <th> <span class="small font-weight-bold"> FECHA DE ASIG </span> </th>
-                                <th> <span class="small font-weight-bold"> NOMBRE </span> </th>
-                                <th> <span class="small font-weight-bold"> TELÉFONO </span> </th>
-                                @role('admin')
-                                <th> <span class="small font-weight-bold"> ASESOR </span> </th>
-                                @endrole
-                                <th> <span class="small font-weight-bold"> STATUS </span> </th>
-                                <th> <span class="small font-weight-bold"> OBSERVACIONES </span> </th>
+                                <tr>
+                                    @role('admin')
+                                    <th> <span class="small font-weight-bold"> SEGUIMIENTO </span> </th>
+                                    @endrole
+                                    <th> <span class="small font-weight-bold"> FECHA DE ASIG </span> </th>
+                                    <th> <span class="small font-weight-bold"> NOMBRE </span> </th>
+                                    <th> <span class="small font-weight-bold"> TELÉFONO </span> </th>
+                                    @role('admin')
+                                    <th> <span class="small font-weight-bold"> ASESOR </span> </th>
+                                    @endrole
+                                    <th> <span class="small font-weight-bold"> STATUS </span> </th>
+                                    <th> <span class="small font-weight-bold"> OBSERVACIONES </span> </th>
 
-                                <!-- <th>Llamadas</th> -->
-                                <th style="width: 180px;" class=""></th>
+                                    <!-- <th>Llamadas</th> -->
+                                    <th style="width: 180px;" class=""></th>
 
-                            </tr>
+                                </tr>
 
                             </thead>
-                            <tbody ></tbody>
-                            <tfoot>
+                            <tbody >
+
+                            </tbody>
+                            <!--<tfoot>
                             <tr>
 
 
@@ -83,7 +82,7 @@
                                 <th>STATUS</th>
                                 <th></th>
                             </tr>
-                            </tfoot>
+                            </tfoot>-->
                         </table>
                     </div>
                 </div>

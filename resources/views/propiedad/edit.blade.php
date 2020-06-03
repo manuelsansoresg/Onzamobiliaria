@@ -208,7 +208,7 @@
                                 @if ($property->is_avaluo == 1)
                                 <input type="text" name="Avaluo" value="{{ $property->Avaluo }}" id="Avaluo" class="form-control form-control-sm format_number">
                                 @else
-                                <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm format_number">
+                                <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm ">
 
                                 @endif
                                 @if($errors)
@@ -283,7 +283,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">PRECIO DESEABLE</label>
-                                <input name="price" data-behaviour="decimal" value="{{ $property->price }}" class="form-control form-control-sm format_number" type="text" required>
+                                <input name="price" id="price" value="{{ $property->price }}" class="form-control form-control-sm" type="text" required>
 
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
@@ -297,7 +297,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">SALDO</label>
-                                <input name="saldo" data-behaviour="decimal" value="{{ $property->saldo }}" class="form-control form-control-sm format_number" type="text">
+                                <input name="saldo" id="saldo" value="{{ $property->saldo }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -321,7 +321,7 @@
                                 $qcruzo2 = false;
                                 $qcruzo3 = false
                                 ?>
-                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple" >
+                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple" required >
 
 
                                     @foreach(explode(',',$property->documentname) as $row)
@@ -339,8 +339,8 @@
                                     @endif
                                     @endif
                                     @if ($qcruzo3 == false)
-                                    @if ($row =="COMPROBANTE DE ESTADO DE CUENTA BANCARIO")
-                                    <option value="COMPROBANTE DE ESTADO DE CUENTA BANCARIO" selected>COMPROBANTE DE ESTADO DE CUENTA BANCARIO</option>
+                                    @if ($row =="ESTADO DE CUENTA BANCARIO")
+                                    <option value="ESTADO DE CUENTA BANCARIO" selected>ESTADO DE CUENTA BANCARIO</option>
                                     <?php $qcruzo3 = true; ?>
                                     @endif
                                     @endif
@@ -357,7 +357,7 @@
                                     <option value="RECIBO DE LUZ FACTURADO">RECIBO DE LUZ FACTURADO</option>
                                     @endif
                                     @if ($qcruzo3 == false)
-                                    <option value="COMPROBANTE DE ESTADO DE CUENTA BANCARIO">COMPROBANTE DE ESTADO DE CUENTA BANCARIO</option>
+                                    <option value="ESTADO DE CUENTA BANCARIO">ESTADO DE CUENTA BANCARIO</option>
                                     @endif
                                 </select>
                             </div>
@@ -371,7 +371,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CUOTA DE MANTENIMIENTO </label>
-                                <input type="text" data-behaviour="decimal" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" class="form-control form-control-sm format_number">
+                                <input type="text" value="{{ precio($property->cuota_mantenimiento) }}" name="cuota_mantenimiento" id="cuota_mantenimiento" class="form-control form-control-sm">
                             </div>
                         </div>
 
@@ -769,6 +769,12 @@
         });
         $('.dataTables_filter input').addClass('form-control-sm');
     })
+</script>
+<script type="text/javascript">
+    $("#price").maskMoney();
+    $("#cuota_mantenimiento").maskMoney();
+    $("#saldo").maskMoney();
+    $("#Avaluo").maskMoney();
 </script>
 
 @endsection

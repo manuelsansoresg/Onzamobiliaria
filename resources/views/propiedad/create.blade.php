@@ -273,7 +273,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">* PRECIO DESEABLE</label>
-                                <input name="price" value="{{ old('price') }}" data-behaviour="decimal" class="form-control form-control-sm format_number" type="text" required>
+                                <input name="price"  id="price" value="{{ old('price') }}" class="form-control form-control-sm" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
@@ -286,7 +286,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">SALDO</label>
-                                <input name="saldo" value="{{ old('saldo') }}" data-behaviour="decimal" class="form-control form-control-sm format_number" type="text">
+                                <input name="saldo" id="saldo" value="{{ old('saldo') }}" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -305,13 +305,12 @@
                             <div class="form-group">
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR?</label>
                                 <input type="checkbox" name="document" value="1">
-                                <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple">                               
+                                <select name="documentname[]" id="documentname" class="form-control-sm multiple" multiple="multiple" required>                               
                                     <option value="INE">INE</option>
                                     <option value="RECIBO DE LUZ FACTURADO">RECIBO DE LUZ FACTURADO</option>
-                                    <option value="COMPROBANTE DE ESTADO DE CUENTA BANCARIO">COMPROBANTE DE ESTADO DE CUENTA BANCARIO</option>
+                                    <option value="ESTADO DE CUENTA BANCARIO">ESTADO DE CUENTA BANCARIO</option>
                                 </select>
-
-                            </div>
+                            </div>                            
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
@@ -322,7 +321,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">CUOTA DE MATENIMIENTO</label>
-                                <input data-msg="Debe ingresar un valor." data-behaviour="decimal" data-rule="required" type="" class="form-control form-control-sm format_number" name="cuota_mantenimiento" id="cuota_mantenimiento">
+                                <input data-msg="Debe ingresar un valor." data-rule="required" type="" class="form-control form-control-sm" name="cuota_mantenimiento" id="cuota_mantenimiento">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -602,6 +601,12 @@
         });
         $('.dataTables_filter input').addClass('form-control-sm');
     })
+</script>
+<script type="text/javascript">
+    $("#price").maskMoney();
+    $("#cuota_mantenimiento").maskMoney();
+    $("#saldo").maskMoney();
+    $("#Avaluo").maskMoney();
 </script>
 
 @endsection

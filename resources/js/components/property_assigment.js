@@ -23,12 +23,38 @@ $(document).ready(function () {
 
     /*setTimeout(getProperties(), 300);*/
 
-
+    $('#table_property_assigment thead tr').clone(true).appendTo( '#example thead' );
+    $('#table_property_assigment thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
 
     var table = $('#table_property_assigment').DataTable( {
-        "ajax":'/admin/property/getAll',
+        //"ajax":'/admin/property/getAll',
+        'ajax': {
+            'url':'/admin/property/getAll',
+            error: function(jqXHR, ajaxOptions, thrownError) {
+          alert(thrownError + "\r\n" + jqXHR.statusText + "\r\n" + jqXHR.responseText + "\r\n" + ajaxOptions.responseText);
+        }
+        },
 
         "order": [[ 1, 'desc' ]],
+        "columnDefs": [
+            {
+                "targets": [ 6 ],
+                "visible": false,
+                "searchable": false
+            }
+        ],
         scrollY: "400px",
         scrollX: true,
         scrollCollapse: true,
@@ -80,7 +106,7 @@ $(document).ready(function () {
             text:'<i class="fas fa-print"> IMPRIMIR</i>',
             className: 'btn btn-light',
         }
-        ],
+        ]/*,
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
@@ -100,8 +126,9 @@ $(document).ready(function () {
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
+                
             } );
-        }
+        }*/
 
     } );
 

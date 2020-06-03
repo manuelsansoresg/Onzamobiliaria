@@ -77,11 +77,12 @@ if ($("#frm_propiedad").length > 0) {
         templates: {
             li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
         },
-        nonSelectedText: 'Choose...',
+        nonSelectedText: 'SELECCIONE UN ELEMENTO...',
         selectedClass: 'bg-light',
         onInitialized: function (select, container) {
             // hide checkboxes
-            container.find('input').addClass('d-none');
+            //container.find('input').addClass('d-none');
+            container.find('input[type=radio]').addClass('d-none');
         }
     });    
 }
@@ -133,15 +134,16 @@ $(".format_number").on({
     "focus": function(event) {
       $(event.target).select();
     },
-    "keyup": function(event) {
+    "onblur": function(event) {
       // skip for arrow keys
         if(event.which >= 37 && event.which <= 40){
             event.preventDefault();
         }
       $(event.target).val(function(index, value) {
-        return value.replace(/\D/g, "")
-          .replace(/([0-9])([0-9]{2})$/, '$1.$2')
-          .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+        return value.replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+            //replace(/\D/g, "")
+            //.replace(/([0-9])([0-9]{2})$/, '$1.$2')
+          //.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
       });
     } 
   });
