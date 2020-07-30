@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <p>Los campos marcados con * son obligatorios</p>
+                            <p> LOS CAMPOS MARCADOS CON * SON OBLIGATORIOS</p>
                         </div>
                     </div>
                     <div class="row">
@@ -41,37 +41,29 @@
                                 <span class="text-danger"> {{$errors->first('cliente.nombre')}}</span>
                                 @endif
                             </div>
-
-
                         </div>
                         <div class="w-100"></div>
                         <div class="col-12 col-md-4">
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="input-group mb-2">
-                                        <label class="small">*CONTACTO</label>
+                                        <label class="small">* BUSCAR CONTACTO</label>
                                         <div class="w-100"></div>
                                         <input type="hidden" name="cve_int_cliente" id="cve_int_cliente" class="form-control form-control-sm">
                                         @if($errors)
-                                        <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
+                                            <span class="text-danger"> {{$errors->first('cve_int_cliente')}}</span>
                                         @endif
                                     </div>
-
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="input-group-prepend">
+                                    <div class="input-group-prepend">                                        
                                         <button type="button" data-toggle="modal" data-target="#clientModal" class="btn btn-info btn-sm"><i class="fas fa-search"></i> BUSCAR</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="small text-danger">
-                                Busque o agregue un nuevo contacto
-                            </div>
+                            <div class="small text-danger">BUSQUE O AGREGUE UN NUEVO CONTACTO</div>                            
                         </div>
-
-
-                    </div>
-
+                    </div>                    
                     <div class="row mt-3 mb-3">
                         <div class="col-12">
                             <span class="small font-weight-bold">DATOS DEL CONTACTO</span>
@@ -144,17 +136,11 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="row mt-3">
                         <div class="col-12">
                             <span class="small font-weight-bold">DATOS DE LA PROPIEDAD</span>
                         </div>
                     </div>
-
-
-
                     <div class="row mt-3">
                         <div class="col-12 col-md-4">
                             <div class="form-group">
@@ -203,7 +189,7 @@
                             <div class="form-group">
                                 <label class="small">AVALUO</label> &nbsp;
                                 <input type="checkbox" name="avaluo" id="is_avaluo" onchange="changeAvaluo()" value="activo">
-                                <input type="text" name="Avaluo" id="Avaluo" disabled class="form-control form-control-sm">
+                                <input type="text" name="Avaluo" id="Avaluo" placeholder="0.0" disabled class="form-control form-control-sm">
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('Avaluo')}}</span>
                                 @endif
@@ -266,39 +252,47 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">GRAVAMENES</label> &nbsp;
-                                <input type="checkbox" name="assessment" value="1">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
                                 <label class="small">* PRECIO DESEABLE</label>
-                                <input name="price"  id="price" value="{{ old('price') }}" class="form-control form-control-sm" type="text" required>
+                                <input name="price"  id="price" placeholder="0.0" class="form-control form-control-sm" type="text" required>
                                 @if($errors)
                                 <span class="text-danger"> {{$errors->first('price')}}</span>
                                 @endif
                                 <div class="invalid-feedback">
                                     El campo PRECIO DESEABLE es obligatorio
-                                </div>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group">
+                                <label class="small">GRAVAMENES</label> &nbsp;
+                                <input type="checkbox" name="assessment" value="1"></br>
+                                <label class="small">PREDIAL AL DÍA</label>
+                                <input name="is_predial" type="checkbox" value="1"></br>
+                                <label class="small">PRIVADA</label>
+                                <input type="checkbox" name="privada" value="1"></br>
+                                <label class="small">¿LA CASA SE ENCUENTRA HABITADA?</label> &nbsp;
+                                <input type="checkbox" name="habitar" value="1"></br>
+                                <label class="small">TÍTULO</label>
+                                <input type="checkbox" name="is_titulo" value="1">
                             </div>
                         </div>
 
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">SALDO</label>
-                                <input name="saldo" id="saldo" value="{{ old('saldo') }}" class="form-control form-control-sm" type="text">
+                                <input name="saldo" id="saldo" placeholder="0.0" class="form-control form-control-sm" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">PREDIAL AL DÍA</label>
-                                <input name="is_predial" type="checkbox" value="1">
+                            <label class="small">CUOTA DE MATENIMIENTO</label>
+                                <input data-msg="Debe ingresar un valor." data-rule="required" type="" placeholder ="0.0" class="form-control form-control-sm" name="cuota_mantenimiento" id="cuota_mantenimiento"> 
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label class="small">¿LA CASA SE ENCUENTRA HABITADA?</label> &nbsp;
-                                <input type="checkbox" name="habitar" value="1">
+                            <label class="small">COMISION</label>
+                                <input type="text" id="comision" name="comision" placeholder="0" class="form-control form-control-sm">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -306,40 +300,13 @@
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR?</label>
                                 <input type="checkbox" name="document" value="1">
                                 <select name="documentname[]" id="documentname" class="form-control-sm multiple" multiple="multiple" required>                               
+                                    <option value="NINGUNO" selected>NINGUNO</option>    
                                     <option value="INE">INE</option>
                                     <option value="RECIBO DE LUZ FACTURADO">RECIBO DE LUZ FACTURADO</option>
                                     <option value="ESTADO DE CUENTA BANCARIO">ESTADO DE CUENTA BANCARIO</option>
                                 </select>
                             </div>                            
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label class="small">PRIVADA</label>
-                                <input type="checkbox" name="privada" value="1">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label class="small">CUOTA DE MATENIMIENTO</label>
-                                <input data-msg="Debe ingresar un valor." data-rule="required" type="" class="form-control form-control-sm" name="cuota_mantenimiento" id="cuota_mantenimiento">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label class="small">TÍTULO</label>
-                                <input type="checkbox" name="is_titulo" value="1">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label class="small">COMISION</label>
-                                <input type="text" data-behaviour="decimal" name="comision" class="form-control form-control-sm">
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="w-100"></div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
@@ -508,7 +475,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -603,10 +569,11 @@
     })
 </script>
 <script type="text/javascript">
-    $("#price").maskMoney();
-    $("#cuota_mantenimiento").maskMoney();
-    $("#saldo").maskMoney();
-    $("#Avaluo").maskMoney();
+    $("#price").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
+    $("#cuota_mantenimiento").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
+    $("#saldo").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
+    $("#Avaluo").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
+    $("#comision").maskMoney({allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
 </script>
 
 @endsection

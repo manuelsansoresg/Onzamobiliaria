@@ -297,7 +297,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">SALDO</label>
-                                <input name="saldo" id="saldo" value="{{ $property->saldo }}" class="form-control form-control-sm" type="text">
+                                <input name="saldo" id="saldo" value="{{ $property->saldo }}" class="form-control form-control-sm format_number" type="text">
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -317,9 +317,10 @@
                                 <label class="small">¿CUENTAN CON DOCUMENTO PARA EXENTAR? </label>
                                 <input type="checkbox" {{ ($property->document == 1)? 'checked' : ''}} name="document" value="1">
                                 <?php
-                                $qcruzo1 = false;
-                                $qcruzo2 = false;
-                                $qcruzo3 = false
+                                    $qcruzo1 = false;
+                                    $qcruzo2 = false;
+                                    $qcruzo3 = false;
+                                    $qcruzo4 = false;
                                 ?>
                                 <select name="documentname[]" id="documentname" class="form-control form-control-sm multiple" multiple="multiple" required >
 
@@ -327,10 +328,10 @@
                                     @foreach(explode(',',$property->documentname) as $row)
 
                                     @if ($qcruzo1 == false)
-                                    @if ($row =="IFE")
-                                    <option value="INE" selected>INE</option>
-                                    <?php $qcruzo1 = true; ?>
-                                    @endif
+                                        @if ($row =="IFE")
+                                            <option value="INE" selected>INE</option>
+                                            <?php $qcruzo1 = true; ?>
+                                        @endif
                                     @endif
                                     @if ($qcruzo2 == false)
                                     @if ($row =="RECIBO DE LUZ FACTURADO")
@@ -344,12 +345,21 @@
                                     <?php $qcruzo3 = true; ?>
                                     @endif
                                     @endif
+                                    @if ($qcruzo4 == false)
+                                        @if ($row =="NINGUNO")
+                                            <option value="NINGUNO" selected>NINGUNO</option>
+                                            <?php $qcruzo4 = true; ?>
+                                        @endif
+                                    @endif
                                     <!-- 
                                         <option value="IFE" {{( $row =="IFE" )? 'selected' : ''}}>IFE</option>
                                         <option value="ACTA DE NACIMIENTO" {{( $row =="ACTA DE NACIMIENTO" )? 'selected' : ''}}>ACTA DE NACIMIENTO</option>
                                         <option value="PREDIAL" {{( $row =="PREDIAL" )? 'selected' : ''}}>PREDIAL</option>
                                       -->
                                     @endforeach
+                                    @if ($qcruzo4 == false)
+                                    <option value="NINGUNO">NINGUNO</option>
+                                    @endif
                                     @if ($qcruzo1 == false)
                                     <option value="INE">INE</option>
                                     @endif
@@ -388,7 +398,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label class="small">COMISION</label>
-                                <input type="text" data-behaviour="decimal" name="comision" class="form-control form-control-sm" value="{{ $property->comision }}">
+                                <input type="text" placeholder="0" name="comision" class="form-control form-control-sm" value="{{ $property->comision }}">
                             </div>
                         </div>
 

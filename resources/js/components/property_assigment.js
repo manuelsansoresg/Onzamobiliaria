@@ -23,10 +23,10 @@ $(document).ready(function () {
 
     /*setTimeout(getProperties(), 300);*/
 
-    $('#table_property_assigment thead tr').clone(true).appendTo( '#example thead' );
+    $('#table_property_assigment thead tr').clone(true).appendTo( '#table_property_assigment thead' );
     $('#table_property_assigment thead tr:eq(1) th').each( function (i) {
         var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        $(this).html( '<input type="text" class="form-control  form-control-sm" placeholder="'+title+'" />' );
  
         $( 'input', this ).on( 'keyup change', function () {
             if ( table.column(i).search() !== this.value ) {
@@ -43,12 +43,12 @@ $(document).ready(function () {
         'ajax': {
             'url':'/admin/property/getAll',
             error: function(jqXHR, ajaxOptions, thrownError) {
-          alert(thrownError + "\r\n" + jqXHR.statusText + "\r\n" + jqXHR.responseText + "\r\n" + ajaxOptions.responseText);
+            alert(thrownError + "\r\n" + jqXHR.statusText + "\r\n" + jqXHR.responseText + "\r\n" + ajaxOptions.responseText);
         }
         },
 
         "order": [[ 1, 'desc' ]],
-        "columnDefs": [
+        "columnDefs": [                      
             {
                 "targets": [ 6 ],
                 "visible": false,
@@ -58,10 +58,14 @@ $(document).ready(function () {
         scrollY: "400px",
         scrollX: true,
         scrollCollapse: true,
+        bProcessing: true,
         bAutoWidth: false,
+        responsive: true,
+        searching: true,
         lengthMenu: [100],
         orderCellsTop: true,
         fixedHeader: true,
+        lengthChange: false,
         dom: 'Bfrtip',
         buttons: [{
             extend: 'pdf',

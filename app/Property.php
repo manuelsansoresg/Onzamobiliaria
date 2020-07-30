@@ -206,6 +206,52 @@ class Property extends Model
             $property->is_new    = $n_client;
             $property->privada   = $privada;
             $property->is_titulo   = $is_titulo;
+
+            if ($request->saldo =='')
+            {
+                $property->saldo = 0;
+            }
+            else
+            {
+                $property->saldo = str_replace(',', '', $request->saldo);
+            }
+
+            if ($request->price =='')
+            {
+                $property->price = 0;
+            }
+            else
+            {
+                $property->price = str_replace(',', '', $request->price);
+            }
+            
+            if ($request->Avaluo =='')
+            {
+                $property->Avaluo = 0;
+            }
+            else
+            {
+                $property->Avaluo = str_replace(',', '', $request->Avaluo);
+            }
+            
+            if ($request->cuota_mantenimiento =='')
+            {
+                $property->cuota_mantenimiento = 0;
+            }
+            else
+            {
+                $property->cuota_mantenimiento = str_replace(',', '', $request->cuota_mantenimiento);
+            }
+
+            if ($request->comision =='')
+            {
+                $property->comision = 0;
+            }
+            else
+            {
+                $property->comision = str_replace(',', '', $request->comision);
+            }
+            
         
         }else{
             
@@ -240,11 +286,53 @@ class Property extends Model
             $property->privada   = $privada;
             $property->is_titulo   = $is_titulo;
             $property->name_property = $request->name_property;
-            $property->comision = $request->comision;
-            $property->cuota_mantenimiento = str_replace(',', '', $request->cuota_mantenimiento);
-            $property->saldo = str_replace(',', '', $request->saldo);
-            $property->price = str_replace(',', '', $request->price);
-            $property->Avaluo = str_replace(',', '', $request->Avaluo);
+            //$property->comision = $request->comision;
+
+            if ($request->comision =='')
+            {
+                $property->comision = 0;
+            }
+            else
+            {
+                $property->comision = str_replace(',', '', $request->comision);
+            }
+
+
+            if ($request->saldo =='')
+            {
+                $property->saldo = 0;
+            }
+            else
+            {
+                $property->saldo = str_replace(',', '', $request->saldo);
+            }
+
+            if ($request->price =='')
+            {
+                $property->price = 0;
+            }
+            else
+            {
+                $property->price = str_replace(',', '', $request->price);
+            }
+            
+            if ($request->Avaluo =='')
+            {
+                $property->Avaluo = 0;
+            }
+            else
+            {
+                $property->Avaluo = str_replace(',', '', $request->Avaluo);
+            }
+            
+            if ($request->cuota_mantenimiento =='')
+            {
+                $property->cuota_mantenimiento = 0;
+            }
+            else
+            {
+                $property->cuota_mantenimiento = str_replace(',', '', $request->cuota_mantenimiento);
+            }
 
             if ($n_client == 0) {
                 $property->client_id = $client->id;

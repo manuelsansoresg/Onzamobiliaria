@@ -17,6 +17,9 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/fontawesome-all.css') }}">
+
     <link  rel="icon"   href="{{ asset('img/logo.png') }}" type="image/png" />
 
     @include('adminlte::plugins', ['type' => 'css'])
@@ -40,78 +43,11 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <style type="text/css">
-/*
-Al cuerpo de la
-pagina se aplica el tamÃ±o de fuete
- */
-body{
-	font-size: 12px;
-}
-/**
- * se aplica el ancho, margen centrado
- * borde de un pixel con redondeao, y rellenado
- * a la izquierda y derecha
- */
-#Contenedor{
-	width: 400px;
-	margin: 50px auto;
-	background-color: #F3EDED;
-    border: 1px solid #ECE8E8;
-	height: 400px;
-	border-radius:8px;
-	padding: 0px 9px 0px 9px;
-}
-
-/**
- * Aplicando al icono de usuario el color de fondo,
- * rellenado de 20px y un redondeado de 120px en forma
- * de un circulo
- */
-.Icon span{
-background: #A8A6A6;
-padding: 20px;
-border-radius: 120px;
-}
-/**
- * Se aplica al cotenedor madre un margen de tamÃ±o 10px hacia la cabecera y pie,
- * color de fuente blanco,un tamÃ±o de fuente 50px y texto centrado.
- */
-.Icon{
-	margin-top: 10px;
-	margin-bottom:10px; 
-    color: #FFF;
-    font-size: 50px;
-    text-align: center;
-}
-/**
- * Se aplica al contenedor donde muetra
- * la opcion de olvidades tu contraseÃ±a
- */
-.opcioncontra{
-	text-align: center;
-	margin-top: 20px;
-	font-size: 14px;
-}
-
-/**
- * EN las siguientes lineas
- * se define el diseÃ±o en el que
- * se mostrara en los dispositivos moviles
- */
-
-
-
-
-</style>
 </head>
 
 <body >
     <div id="Contenedor">
-	    <div class="Icon">
-            <!--Icono de usuario-->
-            <span class="glyphicon glyphicon-user"></span>
-        </div>
+	   
         <div class="ContentForm">
             @yield('body')
 

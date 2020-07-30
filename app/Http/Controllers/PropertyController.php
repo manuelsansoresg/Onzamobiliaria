@@ -38,7 +38,11 @@ class PropertyController extends Controller
         
         return view('propiedad.index', compact('properties', 'users'));
     }
-
+    public function confirm($id)
+    {         
+        $property      = Property::getById($id);
+        return view('propiedad.confirm', compact('property'));
+    }
     public function addUser($property_id, $user_id)
     {
         $property = Property::addUserProperty($property_id, $user_id);
@@ -151,8 +155,7 @@ class PropertyController extends Controller
         return redirect('/admin/propiedad/'. $property->id. '/edit');
     }
 
-
-    
+       
 
     public function changeStatus($id, $status)
     {
@@ -179,7 +182,11 @@ class PropertyController extends Controller
     public function destroy($id)
     {
         Property::drop( $this->path_document, $id);
-        flash('Elemento borrado');
+        flash('Registro eliminado correctamente!!!');
         return redirect('/admin/propiedad/');
+
+      
+ 
     }
+   
 }

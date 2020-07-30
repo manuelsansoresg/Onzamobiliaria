@@ -50,7 +50,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'],   function () {
     Route::get('/destroy-document/{name_column}/{name}', 'PropertyController@destroyDocument');
     Route::get('/property/addUser/{id}/{user_id}', 'PropertyController@addUser');
     Route::get('/propiedad/search/easybroker/{easy_broker}', 'PropertyController@searchEasyBroker');
-
+    Route::get('/propiedad/{id}/confirm','PropertyController@confirm')->name('propiedad.confirm');
+    
     Route::get('/property_assignment/view_more/{property_assignment_id}', 'PropertyAssigmentController@viewMore');
 
     Route::resource('/postal', 'PostalController');
@@ -59,7 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'],   function () {
     Route::get('/prospecto/status/{id}/{status}', 'LeadController@changeStatus');
     Route::get('/prospecto/imagen/delete/{id}', 'LeadController@delete_image');
 
-
+    Route::get('delete/{id}', 'PropertyAssigmentController@destroy')->name('seguimiento-asesores.delete'); 
     Route::resource('/seguimiento-asesores', 'PropertyAssigmentController');
     Route::get('/seguimiento-asesores/status/{id}/{status}', 'PropertyAssigmentController@changeStatus');
 
@@ -72,6 +73,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'],   function () {
 
     Route::resource('/usuarios', 'UserController');
     Route::resource('/clientes', 'ClientController');
+
+    Route ::get('/cancelar',function(){ 
+        return redirect()->route('propiedad.index')->with('cancelar','Accion Cancelada!'); 
+    })->name('cancelar');
 
     Route::get('/catalogos', function () {
         return view('catalogos');

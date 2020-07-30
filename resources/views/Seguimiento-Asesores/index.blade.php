@@ -26,18 +26,17 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
+            <div class="row d-none">
                 <div class="row mt-3 px-3 justify-content-end">
                     <form action="" method="GET" class="form-inline ">
-                        <label class="" for="inlineFormInputName2">SELECCIONE EL CONCEPTO A BUSCAR : </label>
+                        <label class="" for="inlineFormInputName2">SELECCIONE UN ELEMENTO PARA FILTRAR : </label>
                         <select name="filtro" class="for-control form-control-sm mx-2">
-                            
                             <option value="TODOS">TODOS</option>
                             @foreach ($all_status as $status)
                             <option value="{{ $status->id }}" {{ (isset($_GET['filtro']) && $_GET['filtro'] == $status->id ) ? 'selected'  : '' }}> {{ $status->description }} </option>
                             @endforeach
-                        </select>                        
-                        <button type="submit" class="btn btn-primary btn-sm mx-2"><i class="fas fa-search"></i> BUSCAR </button>
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm mx-2"><i class="fas fa-search"></i> Buscar</button>
                     </form>
                 </div>
             </div>
@@ -51,18 +50,26 @@
                                 <tr>
                                     @role('admin')
                                     <th> <span class="small font-weight-bold"> SEGUIMIENTO </span> </th>
-                                    @endrole
                                     <th> <span class="small font-weight-bold"> FECHA DE ASIG </span> </th>
                                     <th> <span class="small font-weight-bold"> NOMBRE </span> </th>
                                     <th> <span class="small font-weight-bold"> TELÉFONO </span> </th>
-                                    @role('admin')
                                     <th> <span class="small font-weight-bold"> ASESOR </span> </th>
-                                    @endrole
                                     <th> <span class="small font-weight-bold"> STATUS </span> </th>
                                     <th> <span class="small font-weight-bold"> OBSERVACIONES </span> </th>
+                                    <th style="width: 180px;"></th>
+                                    
+                                    @endrole
 
-                                    <!-- <th>Llamadas</th> -->
-                                    <th style="width: 180px;" class=""></th>
+                                    @role('asesor')                                    
+                                    <th> <span class="small font-weight-bold"> FECHA DE ASIG </span> </th>
+                                    <th> <span class="small font-weight-bold"> NOMBRE </span> </th>
+                                    <th> <span class="small font-weight-bold"> TELÉFONO </span> </th>
+                                    <th> <span class="small font-weight-bold"> STATUS </span> </th>
+                                    <th style="width: 1px;"></th>                                    
+                                    <th style="width: 1px;"></th>
+                                    <th style="width: 1px;"></th>
+                                    <th style="width: 1px;"></th>
+                                    @endrole
 
                                 </tr>
 
@@ -70,19 +77,7 @@
                             <tbody >
 
                             </tbody>
-                            <!--<tfoot>
-                            <tr>
-
-
-                                <th>FECHA DE ASIG</th>
-                                <th>TELÉFONO</th>
-                                @role('admin')
-                                <th>ASESOR</th>
-                                @endrole
-                                <th>STATUS</th>
-                                <th></th>
-                            </tr>
-                            </tfoot>-->
+                            
                         </table>
                     </div>
                 </div>

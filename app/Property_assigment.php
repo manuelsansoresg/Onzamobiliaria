@@ -35,7 +35,7 @@ class Property_assigment extends Model
     {
 
 
-        $properties = self::getAll();
+        $properties = self::getAllTable();
 
 
         return $properties;
@@ -61,19 +61,19 @@ class Property_assigment extends Model
                                     ->join('properties', 'properties.id', '=', 'property_assignment.property_id')
                                     ->join('users', 'users.id', '=', 'property_assignment.asesor_id')
                                     ->where('properties.status', 1);
-            
-            if ($status)
-            {
+                                    
+
+            if ($status!= '' && $status != 'TODOS'){
                 $property_assigment = $property_assigment->where('property_assignment.id',$status);
             }
-                        //
+                                    
+                                //
             if ($user_role != 'admin') {
                 $property_assigment = $property_assigment->where('property_assignment.asesor_id', Auth::id());
             }
-            
             $property_assigment = $property_assigment->get();
             
-            //dd($property_assigment);
+            //dd($status);
             return $property_assigment;            
         }
         catch(\Illuminate\Database\QueryException $ex){ 
@@ -120,15 +120,15 @@ class Property_assigment extends Model
             ->orderBy('property_assignment.date_assignment', 'desc')
             ->where('properties.status', 1);
             
-        if($filtro != ''){
-            $property = $property->where('property_assignment.id', $filtro);
+        if($assignment_id != ''){
+            $property = $property->where('property_assignment.id', $assignment_id);
         }
 
         if ($user_role != 'admin') {
             $property = $property->where('property_assignment.asesor_id', Auth::id());
         }
 
-         /*if ($campo != '') {
+        /*if ($campo != '') {
             $property = $property->where(function ($q) use ($campo) {
                 $q->orWhere('pass_easy_broker', 'like', "%$campo%");
                 $q->orWhere('property_assignment.nombre', 'like', "%$campo%");
@@ -158,14 +158,13 @@ class Property_assigment extends Model
     static function getAllTable()
     {
         $properties = self::getAllAssigment();
+
         $table      = array();
         $user       = User::find(Auth::id());
-        $user_role  = $user->getRoleNames()->first();   
-        
-        $filtro = (isset($_GET['filtro']))?$_GET['filtro']: '';
+        $user_role  = $user->getRoleNames()->first();        
        
         $td_option  = '';
-               
+       
         if ($properties) {
             foreach ($properties as $property) {
 
@@ -181,14 +180,40 @@ class Property_assigment extends Model
                 $historiasllamadas = HistoricAssigment::where('property_assignment_id', $property->assignment_id)->get();
                 
                 if ($dias > 0 && $llamadas == 0) {
-                    $alert = '<label class="btn btn-danger">NO</label>';
+                    $alert = '<span style="box-shadow:inset 0px 1px 0px 0px #f5978e;
+                    background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+                    background-color:#f24537;
+                    border-radius:6px;
+                    border:1px solid #d02718;                    
+                    display:inline-block;
+                    cursor:pointer;
+                    color:#ffffff;
+                    font-family:Arial;
+                    font-size:13px;
+                    font-weight:bold;
+                    padding:6px 12px;
+                    text-decoration:none;
+                    text-shadow:0px 1px 0px #5b8a3c;">NO</span>';
 
 
                 }else{
                     $assigment = Property_assigment::find($property->assignment_id);
                     $assigment->is_seguimiento = 1;
                     $assigment->update();
-                    $alert = '<label class="btn btn-success">SÍ</label>';
+                    $alert = '<span style="box-shadow: 0px 10px 14px -7px #3e7327;
+                    background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+                    background-color:#77b55a;
+                    border-radius:4px;
+                    border:1px solid #4b8f29;
+                    display:inline-block;
+                    cursor:pointer;
+                    color:#ffffff;
+                    font-family:Arial;
+                    font-size:13px;
+                    font-weight:bold;
+                    padding:6px 12px;
+                    text-decoration:none;
+                    text-shadow:0px 1px 0px #5b8a3c;">SI</span>';
                  }
                 
                 if ($llamadas > 0 ) {
@@ -262,8 +287,9 @@ class Property_assigment extends Model
                         $qobserv,
                         "<a onclick=\"viewMore('".$property->assignment_id."')\" class=\"btn btn-primary text-white\"> <i class=\"fas fa-plus-square\"></i> </a>".
                         '<a href="/admin/seguimiento-asesores/'. $property->assignment_id.'/edit" class="btn btn-secondary ml-md-1  text-white"> <i class="fas fa-edit"></i> </a>'.
-                        '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-success text-white ml-md-1"> <i class="fas fa-phone"></i> </a>'
-
+                        '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-success text-white ml-md-1"> <i class="fas fa-phone"></i> </a>'.
+                        '<a href="{{route(seguimiento-asesores.delete,'.$property->assignment_id.')}}" class="btn btn-danger ml-1"><i class="fa fa-trash-alt"></i></a>'.
+                        "<a href=\"{{route('seguimiento-asesores.delete', $property->assignment_id)}}\">Eliminar</a>"
                     );
                 }else{
 
@@ -275,6 +301,8 @@ class Property_assigment extends Model
                             $property->nombre_prospecto,
                             $property->telefono,
                             self::getStatysAssigmentId($property->assignment_id),
+                            '',  
+                            '',                            
                             $qobserv,
                             "<a onclick=\"viewMore('".$property->assignment_id."')\" class=\"btn btn-primary text-white\"> <i class=\"fas fa-plus-square\"></i> </a>".
                             '<a href="/admin/historico-seguimiento/' . $property->assignment_id.'" class="btn btn-success text-white ml-md-1"> <i class="fas fa-phone"></i> </a>'
@@ -369,7 +397,7 @@ class Property_assigment extends Model
                                         ->orderBy('historic_assigments.created_at', 'desc')
                                         ->first();
         /*dd( DB::getQueryLog());*/
-        $status = 'disponible';
+        $status = 'DISPONIBLE';
 
         if(is_object($historic)){
             $status = ''.$historic->description.'';

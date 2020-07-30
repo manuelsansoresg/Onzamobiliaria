@@ -132,9 +132,10 @@
                                     </td>
                                     <td>
                                         @role('admin')
-                                        <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger ml-1">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
+                                        <a href="{{ route('propiedad.confirm', $property->id ) }}" class="btn btn-danger ml-1">
+                                        <i class="fa fa-trash-alt"></i>  
+                                        </a>
+                                        
                                         @endrole
                                         {{ Form::close() }}
                                     </td>
@@ -347,8 +348,10 @@
         })
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd',
+            language: "es",
             autoclose: true
         })
+            
 
     })
 </script>
